@@ -1,0 +1,1238 @@
+#+TITLE: EMACS Configuration
+#+AUTHOR: Amogh Jalihal
+* Package initialize
+#+BEGIN_SRC emacs-lisp
+;;(require 'package)
+;;(package-initialize)
+;;(require 'cl-lib)
+#+END_SRC
+* Emacs global setttings
+** Theme
++As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
++Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
+Reverted
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'gruvbox t) 
+  ;; (load-theme 'sexy-monochrome t)
+  ;; Modified on 2018-02-14
+  ;; (load-theme 'spacemacs-dark t)
+#+END_SRC
+** Window defaults
+#+BEGIN_SRC emacs-lisp
+(scroll-bar-mode 0)    ; Turn off scrollbars.
+(tool-bar-mode 0)      ; Turn off toolbars.
+(fringe-mode 0)        ; Turn off left and right fringe cols.
+(menu-bar-mode -1)      ; Turn off menus.
+
+
+(add-hook 'window-configuration-change-hook
+	  (lambda ()
+	    (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 2 2 )))
+#+END_SRC
+** Window Transparency
+#+BEGIN_SRC emacs-lisp
+  ;; set transparency
+  ;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  ;; (add-to-list 'default-frame-alist '(alpha 100 100))
+#+END_SRC
+** Color Aesthetics
+#+BEGIN_SRC emacs-lisp
+;; Disabled on <2018-02-28 Wed>
+  ;; (set-face-background 'mode-line "#332F59")
+  ;; (set-face-background 'mode-line-inactive "#8E2F59")
+  ;; (set-face-background 'fringe "#343434")
+#+END_SRC
+** Truncate lines
+#+BEGIN_SRC emacs-lisp
+  ;; (set-default 'truncate-lines t)
+#+END_SRC
+** Display time
+#+BEGIN_SRC emacs-lisp
+(setq display-time-day-and-date t
+ display-time-24hr-format t)
+(display-time)
+#+END_SRC
+(setq ae-keywords:tex-mode:list 
+      (list  '( comment "^\\s *\\(%.+$\\)" 'hi-pink)
+      ))
+(dolist (elt ae-keywords:tex-mode:list)
+  (font-lock-add-keywords nil (list (list (nth 1 elt) 1 (nth 2 elt) 'append)))
+  )
+** Make indirect buffer 
+#+BEGIN_SRC emacs-lisp
+(defun narrow-to-region-indirect (start end)
+  "Restrict editing in this buffer to the current region, indirectly."
+  (interactive "r")
+  (deactivate-mark)
+  (let ((buf (clone-indirect-buffer nil nil)))
+    (with-current-buffer buf
+      (narrow-to-region start end))
+      (switch-to-buffer buf)))
+#+END_SRC
+** Miscellaneous Keybindings
+#+BEGIN_SRC emacs-lisp
+(setq toggle-frame-fullscreen t)
+(global-set-key (kbd "C-x o") 'other-window)
+;;(global-set-key (kbd "C-c l") 
+;;                (lambda () (interactive) (find-file "~/orgs/research/LabNoteBook.org")))
+;; Other org mode mappings
+(global-set-key (kbd "C-c l") 'org-store-link)
+;;(define-key global-map "\C-c l" 'org-store-link)
+(setq org-log-done t)
+
+(setq org-todo-keywords
+  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+#+END_SRC
+** Downloaded themes
+#+BEGIN_SRC elisp
+  ;; (add-to-list 'custom-theme-load-path
+  ;;              (file-name-as-directory "./replace-colorthemes/"))
+  ;; (load-theme 'retro-orange-theme t)
+  ;; (enable-theme 'retro-orange-theme)
+#+END_SRC
+** Backup directory
+<2018-01-04 Thu>
+Copied from [[http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html][here]]
+#+BEGIN_SRC emacs-lisp
+;; make backup to a designated dir, mirroring the full path
+
+(defun my-backup-file-name (fpath)
+  "Return a new file path of a given file path.
+If the new path's directories does not exist, create them."
+  (let* (
+        (backupRootDir "~/orgs/.emacs-backup/")
+        (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path, for example, “C:”
+        (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") ))
+        )
+    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
+    backupFilePath
+  )
+)
+
+(setq make-backup-file-name-function 'my-backup-file-name)
+
+#+END_SRC
+** Clean Dired view by default
+   <2018-01-07 Sun>
+   Answer [[https://emacs.stackexchange.com/a/27913][from SE]]
+   #+BEGIN_SRC emacs-lisp
+(add-hook 'dired-mode-hook
+      (lambda ()
+        (dired-hide-details-mode)))
+#+END_SRC
+** Theme Changer
+   <2018-01-07 Sun>
+#+BEGIN_SRC emacs-lisp
+  ;; (setq calendar-location-name "Blacksburg, VA") 
+  ;; (setq calendar-latitude 37.2296)
+  ;; (setq calendar-longitude 80.4139)
+  ;; (require 'theme-changer)
+  ;; (change-theme 'gruvbox-light-hard 'gruvbox)
+#+END_SRC
+** Show battery in modeline
+<2018-02-14 Wed>
+#+BEGIN_SRC emacs-lisp
+(display-battery-mode 1) 
+#+END_SRC
+** Helm
+*** Load helm
+ <2018-02-25 Sun>
+ #+BEGIN_SRC emacs-lisp
+     (require 'helm)
+    (global-set-key (kbd "M-x") 'helm-M-x)
+
+   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+    (helm-mode 1)
+ #+END_SRC
+*** Jeff's fix for the annoying TAB completion problem
+#+BEGIN_SRC emacs-lisp
+ ;; modify help so tab is autocomplete
+ (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+ (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+ (define-key helm-map (kbd "C-z") #'helm-select-action)
+#+END_SRC
+*** Helm-swoop configurations
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'helm-swoop)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+** Abbrev
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.d/lisp/aj-abbrev.el")
+#+END_SRC
+** Visual Regexp
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'visual-regexp)
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+#+END_SRC
+** YASnippet
+<2018-04-05 Thu>
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+#+END_SRC
+** Company
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'after-init-hook 'global-company-mode)
+  ;; (add-to-list 'company-backends 'company-ob-ipython) ;
+#+END_SRC
+** Annoying C-z
+<2018-04-27 Fri>
+Found it [[https://superuser.com/a/349997][on stackexhange]]
+#+BEGIN_SRC emacs-lisp
+(global-unset-key (kbd "C-z"))
+#+END_SRC
+** Fonts
+#+BEGIN_SRC emacs-lisp
+  ;; (when (window-system)
+  ;;   (set-frame-font "Fira Code"))
+  ;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+  ;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+  ;;                (36 . ".\\(?:>\\)")
+  ;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+  ;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+  ;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+  ;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+  ;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+  ;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+  ;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+  ;;                (48 . ".\\(?:x[a-zA-Z]\\)")
+  ;;                (58 . ".\\(?:::\\|[:=]\\)")
+  ;;                (59 . ".\\(?:;;\\|;\\)")
+  ;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+  ;;                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+  ;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+  ;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+  ;;                (91 . ".\\(?:]\\)")
+  ;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+  ;;                (94 . ".\\(?:=\\)")
+  ;;                (119 . ".\\(?:ww\\)")
+  ;;                (123 . ".\\(?:-\\)")
+  ;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+  ;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+  ;;                )
+  ;;              ))
+  ;;   (dolist (char-regexp alist)
+  ;;     (set-char-table-range composition-function-table (car char-regexp)
+  ;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+
+
+  ;; ;;; Fira code
+  ;; ;; This works when using emacs --daemon + emacsclient
+  ;; (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
+  ;; ;; This works when using emacs without server/client
+  ;; (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")
+  ;; ;; I haven't found one statement that makes both of the above situations work, so I use both for now
+
+  ;; (defconst fira-code-font-lock-keywords-alist
+  ;;   (mapcar (lambda (regex-char-pair)
+  ;;             `(,(car regex-char-pair)
+  ;;               (0 (prog1 ()
+  ;;                    (compose-region (match-beginning 1)
+  ;;                                    (match-end 1)
+  ;;                                    ;; The first argument to concat is a string containing a literal tab
+  ;;                                    ,(concat "	" (list (decode-char 'ucs (cadr regex-char-pair)))))))))
+  ;;           '(("\\(www\\)"                   #Xe100)
+  ;;             ("[^/]\\(\\*\\*\\)[^/]"        #Xe101)
+  ;;             ("\\(\\*\\*\\*\\)"             #Xe102)
+  ;;             ("\\(\\*\\*/\\)"               #Xe103)
+  ;;             ("\\(\\*>\\)"                  #Xe104)
+  ;;             ("[^*]\\(\\*/\\)"              #Xe105)
+  ;;             ("\\(\\\\\\\\\\)"              #Xe106)
+  ;;             ("\\(\\\\\\\\\\\\\\)"          #Xe107)
+  ;;             ("\\({-\\)"                    #Xe108)
+  ;;             ("\\(\\[\\]\\)"                #Xe109)
+  ;;             ("\\(::\\)"                    #Xe10a)
+  ;;             ("\\(:::\\)"                   #Xe10b)
+  ;;             ("[^=]\\(:=\\)"                #Xe10c)
+  ;;             ("\\(!!\\)"                    #Xe10d)
+  ;;             ("\\(!=\\)"                    #Xe10e)
+  ;;             ("\\(!==\\)"                   #Xe10f)
+  ;;             ("\\(-}\\)"                    #Xe110)
+  ;;             ("\\(--\\)"                    #Xe111)
+  ;;             ("\\(---\\)"                   #Xe112)
+  ;;             ("\\(-->\\)"                   #Xe113)
+  ;;             ("[^-]\\(->\\)"                #Xe114)
+  ;;             ("\\(->>\\)"                   #Xe115)
+  ;;             ("\\(-<\\)"                    #Xe116)
+  ;;             ("\\(-<<\\)"                   #Xe117)
+  ;;             ("\\(-~\\)"                    #Xe118)
+  ;;             ("\\(#{\\)"                    #Xe119)
+  ;;             ("\\(#\\[\\)"                  #Xe11a)
+  ;;             ("\\(##\\)"                    #Xe11b)
+  ;;             ("\\(###\\)"                   #Xe11c)
+  ;;             ("\\(####\\)"                  #Xe11d)
+  ;;             ("\\(#(\\)"                    #Xe11e)
+  ;;             ("\\(#\\?\\)"                  #Xe11f)
+  ;;             ("\\(#_\\)"                    #Xe120)
+  ;;             ("\\(#_(\\)"                   #Xe121)
+  ;;             ("\\(\\.-\\)"                  #Xe122)
+  ;;             ("\\(\\.=\\)"                  #Xe123)
+  ;;             ("\\(\\.\\.\\)"                #Xe124)
+  ;;             ("\\(\\.\\.<\\)"               #Xe125)
+  ;;             ("\\(\\.\\.\\.\\)"             #Xe126)
+  ;;             ("\\(\\?=\\)"                  #Xe127)
+  ;;             ("\\(\\?\\?\\)"                #Xe128)
+  ;;             ("\\(;;\\)"                    #Xe129)
+  ;;             ("\\(/\\*\\)"                  #Xe12a)
+  ;;             ("\\(/\\*\\*\\)"               #Xe12b)
+  ;;             ("\\(/=\\)"                    #Xe12c)
+  ;;             ("\\(/==\\)"                   #Xe12d)
+  ;;             ("\\(/>\\)"                    #Xe12e)
+  ;;             ("\\(//\\)"                    #Xe12f)
+  ;;             ("\\(///\\)"                   #Xe130)
+  ;;             ("\\(&&\\)"                    #Xe131)
+  ;;             ("\\(||\\)"                    #Xe132)
+  ;;             ("\\(||=\\)"                   #Xe133)
+  ;;             ("[^|]\\(|=\\)"                #Xe134)
+  ;;             ("\\(|>\\)"                    #Xe135)
+  ;;             ("\\(\\^=\\)"                  #Xe136)
+  ;;             ("\\(\\$>\\)"                  #Xe137)
+  ;;             ("\\(\\+\\+\\)"                #Xe138)
+  ;;             ("\\(\\+\\+\\+\\)"             #Xe139)
+  ;;             ("\\(\\+>\\)"                  #Xe13a)
+  ;;             ("\\(=:=\\)"                   #Xe13b)
+  ;;             ("[^!/]\\(==\\)[^>]"           #Xe13c)
+  ;;             ("\\(===\\)"                   #Xe13d)
+  ;;             ("\\(==>\\)"                   #Xe13e)
+  ;;             ("[^=]\\(=>\\)"                #Xe13f)
+  ;;             ("\\(=>>\\)"                   #Xe140)
+  ;;             ("\\(<=\\)"                    #Xe141)
+  ;;             ("\\(=<<\\)"                   #Xe142)
+  ;;             ("\\(=/=\\)"                   #Xe143)
+  ;;             ("\\(>-\\)"                    #Xe144)
+  ;;             ("\\(>=\\)"                    #Xe145)
+  ;;             ("\\(>=>\\)"                   #Xe146)
+  ;;             ("[^-=]\\(>>\\)"               #Xe147)
+  ;;             ("\\(>>-\\)"                   #Xe148)
+  ;;             ("\\(>>=\\)"                   #Xe149)
+  ;;             ("\\(>>>\\)"                   #Xe14a)
+  ;;             ("\\(<\\*\\)"                  #Xe14b)
+  ;;             ("\\(<\\*>\\)"                 #Xe14c)
+  ;;             ("\\(<|\\)"                    #Xe14d)
+  ;;             ("\\(<|>\\)"                   #Xe14e)
+  ;;             ("\\(<\\$\\)"                  #Xe14f)
+  ;;             ("\\(<\\$>\\)"                 #Xe150)
+  ;;             ("\\(<!--\\)"                  #Xe151)
+  ;;             ("\\(<-\\)"                    #Xe152)
+  ;;             ("\\(<--\\)"                   #Xe153)
+  ;;             ("\\(<->\\)"                   #Xe154)
+  ;;             ("\\(<\\+\\)"                  #Xe155)
+  ;;             ("\\(<\\+>\\)"                 #Xe156)
+  ;;             ("\\(<=\\)"                    #Xe157)
+  ;;             ("\\(<==\\)"                   #Xe158)
+  ;;             ("\\(<=>\\)"                   #Xe159)
+  ;;             ("\\(<=<\\)"                   #Xe15a)
+  ;;             ("\\(<>\\)"                    #Xe15b)
+  ;;             ("[^-=]\\(<<\\)"               #Xe15c)
+  ;;             ("\\(<<-\\)"                   #Xe15d)
+  ;;             ("\\(<<=\\)"                   #Xe15e)
+  ;;             ("\\(<<<\\)"                   #Xe15f)
+  ;;             ("\\(<~\\)"                    #Xe160)
+  ;;             ("\\(<~~\\)"                   #Xe161)
+  ;;             ("\\(</\\)"                    #Xe162)
+  ;;             ("\\(</>\\)"                   #Xe163)
+  ;;             ("\\(~@\\)"                    #Xe164)
+  ;;             ("\\(~-\\)"                    #Xe165)
+  ;;             ("\\(~=\\)"                    #Xe166)
+  ;;             ("\\(~>\\)"                    #Xe167)
+  ;;             ("[^<]\\(~~\\)"                #Xe168)
+  ;;             ("\\(~~>\\)"                   #Xe169)
+  ;;             ("\\(%%\\)"                    #Xe16a)
+  ;;             ;;("\\(x\\)"                     #Xe16b)
+  ;;             ("[^:=]\\(:\\)[^:=]"           #Xe16c)
+  ;;             ("[^\\+<>]\\(\\+\\)[^\\+<>]"   #Xe16d)
+  ;;             ("[^\\*/<>]\\(\\*\\)[^\\*/<>]" #Xe16f))))
+
+  ;; (defun add-fira-code-symbol-keywords ()
+  ;;   (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
+
+  ;; (add-hook 'prog-mode-hook
+  ;;           #'add-fira-code-symbol-keywords)
+
+      ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
+      ;; (add-to-list 'load-path
+      ;;              "~/.emacs.d/lisp/")
+      ;; (load "~/.emacs.d/lisp/symbols.el")
+#+END_SRC
+** Rectangular select regep operations
+<2018-05-10 Thu>
+Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
+#+BEGIN_SRC emacs-lisp
+(require 'rect)
+
+(defun my-search-replace-in-rectangle
+  (start end search-pattern replacement search-function literal)
+  "Replace all instances of SEARCH-PATTERN (as found by SEARCH-FUNCTION)
+with REPLACEMENT, in each line of the rectangle established by the START
+and END buffer positions.
+
+SEARCH-FUNCTION should take the same BOUND and NOERROR arguments as
+`search-forward' and `re-search-forward'.
+
+The LITERAL argument is passed to `replace-match' during replacement.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (apply-on-rectangle
+   (lambda (start-col end-col search-function search-pattern replacement)
+     (move-to-column start-col)
+     (let ((bound (min (+ (point) (- end-col start-col))
+                       (line-end-position)))
+           (fixedcase (not case-replace)))
+       (while (funcall search-function search-pattern bound t)
+         (replace-match replacement fixedcase literal))))
+   start end search-function search-pattern replacement))
+
+(defun my-replace-regexp-rectangle-read-args (regexp-flag)
+  "Interactively read arguments for `my-replace-regexp-rectangle'
+or `my-replace-string-rectangle' (depending upon REGEXP-FLAG)."
+  (let ((args (query-replace-read-args
+               (concat "Replace"
+                       (if current-prefix-arg " word" "")
+                       (if regexp-flag " regexp" " string"))
+               regexp-flag)))
+    (list (region-beginning) (region-end)
+          (nth 0 args) (nth 1 args) (nth 2 args))))
+
+(defun my-replace-regexp-rectangle
+  (start end regexp to-string &optional delimited)
+  "Perform a regexp search and replace on each line of a rectangle
+established by START and END (interactively, the marked region),
+similar to `replace-regexp'.
+
+Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+replace only matches surrounded by word boundaries.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (interactive (my-replace-regexp-rectangle-read-args t))
+  (when delimited
+    (setq regexp (concat "\\b" regexp "\\b")))
+  (my-search-replace-in-rectangle
+   start end regexp to-string 're-search-forward nil))
+
+(defun my-replace-string-rectangle
+  (start end from-string to-string &optional delimited)
+  "Perform a string search and replace on each line of a rectangle
+established by START and END (interactively, the marked region),
+similar to `replace-string'.
+
+Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+replace only matches surrounded by word boundaries.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (interactive (my-replace-regexp-rectangle-read-args nil))
+  (let ((search-function 'search-forward))
+    (when delimited
+      (setq search-function 're-search-forward
+            from-string (concat "\\b" (regexp-quote from-string) "\\b")))
+    (my-search-replace-in-rectangle
+     start end from-string to-string search-function t)))
+
+(global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
+(global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
+#+END_SRC
+* Python
+** Setting to use shell arguments?
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Python setup to use the shell python variable for emacs, so uses conda
+(defun set-exec-path-from-shell-PATH ()
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string "^.*\n.*shell\n" "" (shell-command-to-string "$SHELL --login -i -\
+c 'echo $PATH'"))))
+  (setenv "PATH" path-from-shell)                                                                                    
+(setq exec-path (split-string path-from-shell path-separator))))
+(set-exec-path-from-shell-PATH)  
+#+END_SRC
+
+** Elpy 
+<2018-03-17 Sat>
+#+BEGIN_SRC emacs-lisp
+  ;; (elpy-enable)
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+** OB-Ipython
+*** Basic setup
+ <2018-04-05 Thu>
+ #+BEGIN_SRC emacs-lisp
+   (add-to-list 'load-path
+                "~/.emacs.d/elpa/ob-ipython/")
+   (require 'ob-ipython)
+
+   (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
+
+   ;;; display/update images in the buffer after I evaluate
+   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+ #+END_SRC
+*** Inline figures
+<2018-04-06 Fri>
+From [[http://kitchingroup.cheme.cmu.edu/blog/2017/01/29/ob-ipython-and-inline-figures-in-org-mode/][John Kitchin's blog]]
+#+BEGIN_SRC emacs-lisp
+  ;; (defun ob-ipython-inline-image (b64-string)
+  ;;   "Write the b64-string to a temporary file.
+  ;; Returns an org-link to the file."
+  ;;   (let* ((tfile (make-temp-file "ob-ipython-" nil ".png"))
+  ;;          (link (format "[[file:%s]]" tfile)))
+  ;;     (ob-ipython--write-base64-string tfile b64-string)
+  ;;     link))
+
+
+  ;; (defun org-babel-execute:ipython (body params)
+  ;;   "Execute a block of IPython code with Babel.
+  ;; This function is called by `org-babel-execute-src-block'."
+  ;;   (let* ((file (cdr (assoc :file params)))
+  ;;          (session (cdr (assoc :session params)))
+  ;;          (result-type (cdr (assoc :result-type params))))
+  ;;     (org-babel-ipython-initiate-session session params)
+  ;;     (-when-let (ret (ob-ipython--eval
+  ;;                      (ob-ipython--execute-request
+  ;;                       (org-babel-expand-body:generic (encode-coding-string body 'utf-8)
+  ;;                                                      params (org-babel-variable-assignments:python params))
+  ;;                       (ob-ipython--normalize-session session))))
+  ;;       (let ((result (cdr (assoc :result ret)))
+  ;;             (output (cdr (assoc :output ret))))
+  ;;         (if (eq result-type 'output)
+  ;;             (concat
+  ;;              output 
+  ;;              (format "%s"
+  ;;                      (mapconcat 'identity
+  ;;                                 (loop for res in result
+  ;;                                       if (eq 'image/png (car res))
+  ;;                                       collect (ob-ipython-inline-image (cdr res)))
+  ;;                                 "\n")))
+  ;;           (ob-ipython--create-stdout-buffer output)
+  ;;           (cond ((and file (string= (f-ext file) "png"))
+  ;;                  (->> result (assoc 'image/png) cdr (ob-ipython--write-base64-string file)))
+  ;;                 ((and file (string= (f-ext file) "svg"))
+  ;;                  (->> result (assoc 'image/svg+xml) cdr (ob-ipython--write-string-to-file file)))
+  ;;                 (file (error "%s is currently an unsupported file extension." (f-ext file)))
+  ;;                 (t (->> result (assoc 'text/plain) cdr))))))))
+
+#+END_SRC
+*** Ensure error messages are opened in new window
+<2018-04-09 Mon>
+From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-buffer-to-open-in-a-new-window][here]]
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'display-buffer-alist
+                 '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
+                                        ((inhibit-same-window . t)))))
+#+END_SRC
+* Julia
+** Emacs Speaks Statistics
+<2018-04-09 Mon>
+I installed emacs-ess on Fedora using sudo dnf install emacs-ess
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'ess-site)
+#+END_SRC
+** Ob-julia
+#+BEGIN_SRC emacs-lisp
+(setq  inferior-julia-program-name "/usr/bin/julia")
+(load "~/.emacs.d/elpa/ob-julia/ob-julia.el")
+#+END_SRC
+* Org-mode
+** Enable org-mode
+#+BEGIN_SRC emacs-lisp
+;;;;org-mode configuration
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(require 'org)
+(define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+** Setting timestamp when TODO state changes to DONE
+#+BEGIN_SRC emacs-lisp
+(setq org-log-done 'time)
+#+END_SRC   
+** Open PDFs in evince
+#+BEGIN_SRC emacs-lisp
+;; PDFs visited in Org-mode are opened in Evince (and not in the default choice) http://stackoverflow.com/a/8836108/789593
+(add-hook 'org-mode-hook
+      '(lambda ()
+         (delete '("\\.pdf\\'" . default) org-file-apps)
+         (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
+#+END_SRC
+** Org-PDF-Tools
+As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package because it is causing problems in simmons
+#+BEGIN_SRC emacs-lisp
+  ;;;; pdf-tools-org
+  ;; (add-to-list 'load-path "~/.emacs.d/pdf-tools-org")
+  ;; (require 'pdf-tools-org)
+#+END_SRC
+** Org-Babel setup
+
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+`org-babel-load-languages
+ `((dot . t)
+ (shell . t)
+ (python . t)
+ (ditaa . t)
+ (latex . t)
+ (ipython . t)
+ (R . t)
+(julia . t)
+))
+#+END_SRC
+
+** Export
+*** Org-beamer
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'ox-latex)
+  ;; (add-to-list 'org-latex-classes
+  ;;              '("beamer"
+  ;;                "\\documentclass\[presentation\]\{beamer\}"
+  ;;                ("\\section\{%s\}" . "\\section*\{%s\}")
+  ;;                ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+  ;;                ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+#+END_SRC
+** Org-capture
+*** Setup
+#+BEGIN_SRC emacs-lisp
+;; Org-capture setup
+(define-key global-map "\C-cc" 'org-capture)
+#+END_SRC
+*** Capture Templates
+#+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+      '(("w" "work" entry (file+datetree "~/orgs/diary.org")
+	 "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
+	("T" "Task/Idea" entry (file org-default-notes-file)
+	 "* TODO %?  \n%t" )
+	("t" "TA" entry (file+datetree "~/orgs/diary.org")
+	 "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
+	;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
+	;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
+	("c" "class" entry (file+datetree "~/orgs/diary.org")
+	 "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
+	("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
+	 "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
+	;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+	 ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+	("p" "Personal" entry (file+datetree "~/orgs/diary.org")
+	 "* %?\n%U\n" :clock-in t :clock-resume t)
+	;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+	 ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+	;;("i" "Idea" entry (file org-default-notes-file)
+	;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+	("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+	"* %U
+     :PROPERTIES:
+     :immediate-finish:
+     :Water:    %^{Drank?(y/n)|Y|N}
+     :Attention: %^{_f_ocussed/_d_istracted|F|D}
+     :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+     :END:")
+	("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+	"*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+	")
+	 ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+	;;	 "** NEXT %? \nDEADLINE: %t")
+	))
+
+;;(setq org-capture-templates
+;;             '("w" "Web site" entry 
+;;              "* %?\n%c\n%:initial" :clock-in t))
+
+;; Allow creation of new parent nodes
+(setq org-refile-allow-creating-parent-nodes `confirm)
+;; Look up to three levels deep
+(setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+#+END_SRC
+*** Capture from browser
+#+BEGIN_SRC emacs-lisp
+;; Commented the following 4 lines because I don't use them anymore
+;; (server-start)
+;; (require 'org-protocol) 
+;; (add-to-list 'load-path "~/.emacs.d/org-protocol-capture-html/")
+;; (require 'org-protocol-capture-html)
+;; SOURCE: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
+#+END_SRC
+** Org-Agenda
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+      ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
+      '((" " "Agenda"
+         ((agenda "" nil)
+          ;; All headings with the "cs6824" tag
+          (tags-todo "work"
+		     ((org-agenda-overriding-header "Research Related Tasks")))
+          (tags-todo "class"
+		     ((org-agenda-overriding-header "Homeworks and Reading")))
+          (tags-todo "literature"
+		     ((org-agenda-overriding-header "Literature Related")))
+          (tags-todo "document"
+		     ((org-agenda-overriding-header "Documentation Tasks")))
+	  (tags-todo "cteseminar"
+		     ((org-agenda-overriding-header "Seminar Organization Tasks")))
+	  (tags-todo "personal"
+		     ((org-agenda-overriding-header "Personal Tasks")))
+	  (todo "TODO"
+		((org-agenda-overriding-header "Task list")
+                 ;; sort by time, priority, and category
+                 (org-agenda-sorting-strategy
+                  '(time-up priority-down effort-up)))) ;; category-keepx
+	  ;; Everything on hold
+	  ;; All "WAITING" items
+	  (todo "WAITING"
+                ((org-agenda-overriding-header "Future Tasks")))
+	  )
+         )))
+#+END_SRC
+** Org Publishing
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;; Publishing with org-mode
+;; (require 'ox-publish)
+;; (setq org-publish-project-alist
+;;       '(("org-notes"
+;;  :base-directory "~/public_html_generator/"
+;;  :base-extension "org"
+;;  :publishing-directory "~/public_html/"
+;;  :recursive t
+;;  :publishing-function org-html-publish-to-html
+;;  :headline-levels 4             ; Just the default for this project.
+;;  :auto-preamble t
+;;  )
+;; 	("org-static"
+;;  :base-directory "~/public_html_generator/"
+;;  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+;;  :publishing-directory "~/public_html/"
+;;  :recursive t
+;;  :publishing-function org-publish-attachment
+;;  )
+;; 	("org" :components ("org-notes" "org-static"))))
+#+END_SRC
+
+** Inline Image setting for Org-mode
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Targets include this file and any file contributing to the agenda - up to 5 levels deep
+(setq org-image-actual-width nil)
+(setq org-toggle-inline-images t)
+#+END_SRC
+** Org-git-link
+#+BEGIN_SRC emacs-lisp
+(load-file "~/.emacs.d/org-git-link.el")
+#+END_SRC
+** Org-reports
+Does this do anything?
+#+BEGIN_SRC emacs-lisp
+  ;;; customizing org-reports table
+  ;; (defun org-dblock-write:rangereport (params)
+  ;;   "Display day-by-day time reports."
+  ;;   (let* ((ts (plist-get params :tstart))
+  ;;          (te (plist-get params :tend))
+  ;;          (start (time-to-seconds
+  ;;                  (apply 'encode-time (org-parse-time-string ts))))
+  ;;          (end (time-to-seconds
+  ;;                (apply 'encode-time (org-parse-time-string te))))
+  ;;          day-numbers)
+  ;;     (setq params (plist-put params :tstart nil))
+  ;;     (setq params (plist-put params :end nil))
+  ;;     (while (<= start end)
+  ;;       (save-excursion
+  ;;         (insert "\n\n"
+  ;;                 (format-time-string (car org-time-stamp-formats)
+  ;;                                     (seconds-to-time start))
+  ;;                 "----------------\n")
+  ;;         (org-dblock-write:clocktable
+  ;;          (plist-put
+  ;;           (plist-put
+  ;;            params
+  ;;            :tstart
+  ;;            (format-time-string (car org-time-stamp-formats)
+  ;;                                (seconds-to-time start)))
+  ;;           :tend
+  ;;           (format-time-string (car org-time-stamp-formats)
+  ;;                               (seconds-to-time end))))
+  ;;         (setq start (+ 86400 start))))))
+
+#+END_SRC
+** Org-ref
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/org-ref/") 
+  (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
+
+  (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
+	org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
+  ;;      org-ref-default-bibliography '("~/Unison/YeastNutBib.bib")
+	org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
+(require 'org-ref)
+#+END_SRC
+*** Some shortcuts
+**** Crossref-add-bib-entry
+<2018-01-16 Tue>
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c b") 'crossref-add-bibtex-entry)
+#+END_SRC
+** Comment blocks in Org-mode
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
+#+END_SRC
+** Org-Edna
+#+BEGIN_SRC emacs-lisp
+;;(org-edna-load)
+#+END_SRC
+** Org-Notify
+#+BEGIN_SRC emacs-lisp
+;; (add-to-list 'load-path "~/.emacs.d/elpa/")
+;; (require 'org-notify)
+#+END_SRC
+** Calfw: Calender Framework
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'calfw)
+  ;; (require 'calfw-org)
+  ;; (setq cfw:org-overwrite-default-keybinding t)
+  ;; (global-set-key (kbd "M-C") 'cfw:open-org-calendar)
+#+END_SRC   
+** Effort Estimates and agenda options
+<2018-01-04 Thu>
+#+BEGIN_SRC emacs-lisp
+(setq org-global-properties
+    '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 3:00 4:00 8:00")))
+#+END_SRC   
+** Appointment notifications in org-mode
+<2018-01-04 Thu>
+From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org/][here]] 
+#+BEGIN_SRC emacs-lisp
+   ;; Make appt aware of appointments from the agenda
+  ;; (defun org-agenda-to-appt ()
+  ;;   "Activate appointments found in `org-agenda-files'."
+  ;;   (interactive)
+  ;;   (require 'org)
+  ;;   (let* ((today (org-date-to-gregorian
+  ;; 		 (time-to-days (current-time))))
+  ;; 	 (files org-agenda-files) entries file)
+  ;;     (while (setq file (pop files))
+  ;;       (setq entries (append entries (org-agenda-get-day-entries
+  ;; 				     file today :timestamp))))
+  ;;     (setq entries (delq nil entries))
+  ;;     (mapc (lambda(x)
+  ;; 	    (let* ((event (org-trim (get-text-property 1 'txt x)))
+  ;; 		   (time-of-day (get-text-property 1 'time-of-day x)) tod)
+  ;; 	      (when time-of-day
+  ;; 		(setq tod (number-to-string time-of-day)
+  ;; 		      tod (when (string-match
+  ;; 				  "\\([0-9]\\{1,2\\}\\)\\([0-9]\\{2\\}\\)" tod)
+  ;; 			     (concat (match-string 1 tod) ":"
+  ;; 				     (match-string 2 tod))))
+  ;; 		(if tod (appt-add tod event))))) entries)))
+
+  ;; (org-agenda-to-appt)
+#+END_SRC
+** Org-brain
+#+BEGIN_SRC emacs-lisp
+(use-package org-brain :ensure t
+  :init
+  (setq org-brain-path "~/orgs/brain/")
+  ;; For Evil users
+  ;  (eval-after-load 'evil
+;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  :config
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12))
+#+END_SRC
+** Org-dashboard
+<2018-01-06 Sat>
+- Configured to stop displaying completed projects
+#+BEGIN_SRC emacs-lisp
+   (defun my/org-dashboard-filter (entry)
+     (and ;;(> (plist-get entry :progress-percent) 0)
+          (< (plist-get entry :progress-percent) 100)
+          (not (member "archive" (plist-get entry :tags)))))
+
+   (setq org-dashboard-filter 'my/org-dashboard-filter)
+
+#+END_SRC
+** Org-bullets
+<2018-01-07 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+END_SRC
+** Org clock
+*** Custom Shortcuts
+<2018-01-17 Wed>
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c j") 'org-clock-jump-to-current-clock)
+#+END_SRC
+** Inline latex highlighting
+<2018-02-14 Wed>
+#+BEGIN_SRC emacs-lisp
+(setq org-highlight-latex-and-related '(latex))
+#+END_SRC
+** Larger inline latex
+#+BEGIN_SRC emacs-lisp
+(plist-put org-format-latex-options :scale 1.5)
+#+END_SRC
+** Org-drill
+
+<2018-03-10 Sat>
+#+BEGIN_SRC emacs-lisp
+;;(require 'org-drill)
+#+END_SRC
+** Org-advance
+#+BEGIN_SRC emacs-lisp
+(defun org-advance ()
+  (interactive)
+  (when (buffer-narrowed-p)
+  (beginning-of-buffer)
+  (widen)
+  (org-forward-heading-same-level 1))
+    (org-narrow-to-subtree))
+(global-set-key (kbd "C-x n f") 'org-advance)
+(defun org-retreat ()
+  (interactive)
+  (when (buffer-narrowed-p)
+    (beginning-of-buffer)
+    (widen)
+   (org-backward-heading-same-level 1))
+   (org-narrow-to-subtree))
+(global-set-key (kbd "C-x n k") 'org-retreat)
+#+END_SRC
+** Ox-latex
+#+BEGIN_SRC emacs-lisp
+(require 'ox-latex)
+(setq org-latex-listings 'minted)
+(add-to-list 'org-latex-minted-langs '(ipython "python"))
+#+END_SRC
+** Ox-ipynb
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
+  (require 'ox-ipynb)
+#+END_SRC
+** Org notmuch
+<2018-04-23 Mon>
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "/usr/share/org-mode/lisp")
+(require 'org-notmuch)
+#+END_SRC
+* Autocomplete
+** Require auto-complete
+#+BEGIN_SRC emacs-lisp
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+#+END_SRC
+** Special autocomplete modes
+*** Latex
+#+BEGIN_SRC emacs-lisp
+(require 'ac-math) 
+(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+
+ (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
+   (setq ac-sources
+         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+                 ac-sources))
+   )
+(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
+;(global-auto-complete-mode t)
+ 
+(setq ac-math-unicode-in-math-p t)
+(setq ac-math-unicode-in-math-p t)
+#+END_SRC
+* RSS feeds in emacs
+<2018-02-08 Thu>
+Source: http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/
+#+BEGIN_SRC emacs-lisp
+(require 'elfeed)
+(global-set-key (kbd "C-x w") 'elfeed)
+
+;; use an org file to organise feeds
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/orgs/elfeed.org")))
+#+END_SRC
+Some bookmarks
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; elfeed feed reader                                                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;shortcut functions
+(defun bjm/elfeed-show-all ()
+(interactive)
+(bookmark-maybe-load-default-file)
+(bookmark-jump "elfeed-all"))
+(defun bjm/elfeed-show-science ()
+(interactive)
+(bookmark-maybe-load-default-file)
+(bookmark-jump "elfeed-science"))
+(defun bjm/elfeed-show-daily ()
+(interactive)
+(bookmark-maybe-load-default-file)
+(bookmark-jump "elfeed-software"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package elfeed
+    :ensure t
+    :bind (:map elfeed-search-mode-map
+		("A" . bjm/elfeed-show-all)
+		("S" . bjm/elfeed-show-science)
+		("O" . bjm/elfeed-show-software)))
+		;; ("D" . bjm/elfeed-show-daily)
+		;; ("q" . bjm/elfeed-save-db-and-bury)))
+#+END_SRC
+* EIN setup
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;EIN setup;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;(require 'ein)
+  ;;(setq ein:use-auto-complete t)
+  ;;(setenv "PYTHONPATH""/home/ajalihal/anaconda3/bin/python")
+
+  ;; Current setup
+  ;; (setq python-shell-interpreter "/home/ajalihal/anaconda3/bin/python3.4")
+  ;; (add-hook 'python-mode-hook 'run-python)
+#+END_SRC
+
+* Latex
+** Syntax Highlighting for code Export
+#+BEGIN_SRC emacs-lisp
+;; Add minted to the defaults packages to include when exporting.
+;;(add-to-list 'org-latex-packages-alist '("" "minted"))
+;; Tell the latex export to use the minted package for source
+;; code coloration.
+;;(setq org-latex-listings 'minted)
+;; Let the exporter use the -shell-escape option to let latex
+;; execute external programs.
+;; This obviously and can be dangerous to activate!
+;; When using minted, use this:
+;;(setq org-latex-pdf-process
+;; (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
+#+END_SRC
+** PDFLATEX command execution order
+#+BEGIN_SRC emacs-lisp
+(setq org-latex-pdf-process
+ (quote ("pdflatex  %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
+#+END_SRC
+* Common Lisp
+** Require
+#+BEGIN_SRC emacs-lisp
+(require 'cl)
+#+END_SRC
+** PDF-tools
++Deleted package on <2018-01-02 Tue>+
+Reinstalling on cerevisaj on <2018-01-02 Tue>
+#+BEGIN_SRC emacs-lisp
+  ;; installation for pdf-tools
+  ;;(pdf-tools-install)
+#+END_SRC
+** Visible Bell
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell 1)
+#+END_SRC
+* Utilities
+** Neotree
+#+BEGIN_SRC emacs-lisp
+  ;; Neotree directory browser
+  ;;(require 'neotree)
+  ;; (global-set-key [f8] 'neotree-toggle)
+#+END_SRC
+** Magit
+<2018-04-04 Wed>
+#+BEGIN_SRC emacs-lisp
+  (require 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status)
+#+END_SRC   
+** Pomodoro
+#+BEGIN_SRC emacs-lisp
+  ;; (gtk-pomodoro-indicator
+  ;;  (cl-case state
+  ;;    (:pomodoro "p 25")
+  ;;    (:short-break "b 5")
+  ;;    (:long-break "b 20")
+  ;;    (t (error "unexpected"))))
+  ;; (require 'pomodoro)
+#+END_SRC
+** Evil mode
+#+BEGIN_SRC emacs-lisp
+;;(require 'evil)
+;;(evil-mode 1)
+#+END_SRC
+** XPP-mode
+#+BEGIN_SRC emacs-lisp
+  ;; (autoload 'xpp-mode "xpp" "Enter XPP mode." t)
+  ;; (setq auto-mode-alist (cons '("\\.ode\\'" . xpp-mode) auto-mode-alist))
+#+END_SRC
+** Fonts?
+#+BEGIN_SRC emacs-lisp
+  ;; (add-to-list 'bdf-directory-list "/usr/share/emacs/fonts/bdf")
+#+END_SRC
+
+* Unsorted
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package ox-latex-subfigure
+  ;; :init
+  ;;   (setq org-latex-caption-above nil
+  ;;         org-latex-prefer-user-labels t)
+  ;;   :load-path "~/.emacs.d/elpa/ox-latex-subfigure/"
+  ;;   :config (require 'ox-latex-subfigure))
+  (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
+  ;;;;; move between buffers using shift arrows
+  ;;(when (fboundp 'windmove-default-keybindings)
+  ;;  (windmove-default-keybindings))
+
+  ;; Currently replaced ^ keybinding with the switch-window setting. Might change back if that is too distracting
+  ;; Disable the splash screen (to enable it agin, replace the t with 0)
+  (setq inhibit-splash-screen t)
+
+  ;; Enable transient mark mode
+  (transient-mark-mode 1)
+
+
+
+
+  ;; Customizing LaTeX export to include bibtex processing
+
+
+  ;;(custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   ;;'(auth-source-save-behavior nil)
+   ;;'(custom-enabled-themes (quote (cyberpunk)))
+   ;;'(custom-safe-themes (quote ("1b11d9a97be35737f88fc15ca833f09de68829416e79994c634d6a0be3eab79e" "a9f4aeb4f8b4672acec6c75e0be5684c79a00509f458fe43dee4dcd5893ccd3f" default))))
+  ;;(custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+  ;; '(default ((t (:inherit nil :stipple nil :background "#11181f" :foreground "#949494" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 132 :width normal :foundry "unknown" :family "Ubuntu Mono")))))
+
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
+#+END_SRC
+* EMMS
+** Basics
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'emms-setup)
+  ;;         (emms-standard)
+  ;;         (emms-default-players)
+#+END_SRC
+* Twittering mode
+<2018-04-21 Sat>
+#+BEGIN_SRC emacs-lisp
+(require 'twittering-mode)
+#+END_SRC
+* Popwin
+Required for offlineimap buffer?
+#+BEGIN_SRC emacs-lisp
+(require 'popwin)
+(popwin-mode 1)
+#+END_SRC
+* Notmuch
+Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
+<2018-04-22 Sun>
+** Notmuch setup
+ #+BEGIN_SRC emacs-lisp
+   (autoload 'notmuch "notmuch" "notmuch mail" t)
+   (require 'notmuch)
+   ;; setup the mail address and use name
+   (setq mail-user-agent 'message-user-agent)
+   (setq user-mail-address "amogh.jalihal@gmail.com"
+         user-full-name "Amogh Jalihal")
+   ;; smtp config
+   (setq smtpmail-smtp-server "smtp.gmail.com"
+         message-send-mail-function 'message-smtpmail-send-it)
+
+   ;; report problems with the smtp server
+   (setq smtpmail-debug-info t)
+   ;; add Cc and Bcc headers to the message buffer
+   (setq message-default-mail-headers "Cc: \nBcc: \n")
+   ;; postponed message is put in the following draft directory
+   (setq message-auto-save-directory "~/mail/draft")
+   (setq message-kill-buffer-on-exit t)
+   ;; change the directory to store the sent mail
+   (setq message-directory "~/mail/")
+
+
+   (defun notmuch-exec-offlineimap ()
+       "execute offlineimap"
+       (interactive)
+       (set-process-sentinel
+        (start-process-shell-command "offlineimap"
+                                     "*offlineimap*"
+                                     "offlineimap -o")
+        '(lambda (process event)
+           (notmuch-refresh-all-buffers)
+           (let ((w (get-buffer-window "*offlineimap*")))
+             (when w
+               (with-selected-window w (recenter (window-end)))))))
+       (popwin:display-buffer "*offlineimap*"))
+
+   (add-to-list 'popwin:special-display-config
+                '("*offlineimap*" :dedicated t :position bottom :stick t
+                  :height 0.4 :noselect t))
+ #+END_SRC
+** Sending email
+#+BEGIN_SRC emacs-lisp
+  (setq mail-user-agent 'message-user-agent)
+
+  (setq user-mail-address "amogh.jalihal@gmail.com"
+        user-full-name "Amogh Jalihal")
+
+  (setq smtpmail-stream-type 'ssl
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 465)
+#+END_SRC
+** Custom Keybindings
+From the notmuch emacs page
+#+BEGIN_SRC emacs-lisp
+   (define-key notmuch-show-mode-map "d"
+     (lambda ()
+       "move message to deleted"
+       (interactive)
+       (notmuch-show-tag (list "+deleted" "-inbox"))))
+
+  ;;    ;; (define-key notmuch-show-mode-map "d"
+  ;;    ;;   (lambda ()
+  ;;    ;;     "toggle deleted tag for message"
+  ;;    ;;     (interactive)
+  ;;    ;;     (if (member "deleted" (notmuch-show-get-tags))
+  ;;    ;;         (notmuch-show-tag (list "-deleted"))
+  ;;    ;;       (notmuch-show-tag (list "+deleted")))))
+#+END_SRC
+
+* Miscellaneous
+Current font:
+
+#+BEGIN_EXAMPLE
+name (opened by): -PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1
+       full name: DejaVu Sans Mono:pixelsize=13:foundry=PfEd:weight=normal:slant=normal:width=normal:spacing=100:scalable=true
+       file name: /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+            size: 13
+          height: 17
+ baseline-offset:  0
+relative-compose:  0
+  default-ascent:  0
+          ascent: 13
+         descent:  4
+   average-width:  8
+     space-width:  8
+       max-width:  8
+
+#+END_EXAMPLE
+* Tidal
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/projects/tidal")
+(require 'haskell-mode)
+(require 'tidal)
+#+END_SRC
