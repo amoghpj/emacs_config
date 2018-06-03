@@ -1,5 +1,19 @@
 #+TITLE: EMACS Configuration
 #+AUTHOR: Amogh Jalihal
+
+* Preliminaries
+This is an org-mode file with tangled lisp code with my configurations. There is nothing smart about this setup beyond the accompanying init file which contains the following lines which extracts the babel source blocks and loads the resulting .el file.
+
+#+BEGIN_EXAMPLE
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/") t)
+(require 'package)
+(package-initialize)
+
+(org-babel-load-file "~/.emacs.d/config.org")
+#+END_EXAMPLE
+
+I would love to hear your feedback on this setup!
 * Package initialize
 #+BEGIN_SRC emacs-lisp
 ;;(require 'package)
