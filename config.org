@@ -2,7 +2,7 @@
 #+AUTHOR: Amogh Jalihal
 
 * Preliminaries
-This is an org-mode file with tangled lisp code with my configurations. There is nothing smart about this setup beyond the accompanying init file which contains the following lines which extracts the babel source blocks and loads the resulting .el file.
+  This is an org-mode file with tangled lisp code with my configurations. There is nothing smart about this setup beyond the accompanying init file which contains the following lines which extracts the babel source blocks and loads the resulting .el file.
 
 #+BEGIN_EXAMPLE
 (add-to-list 'package-archives
@@ -58,7 +58,7 @@ Reverted
 #+END_SRC
 ** Truncate lines
 #+BEGIN_SRC emacs-lisp
-  ;; (set-default 'truncate-lines t)
+  (set-default 'truncate-lines t)
 #+END_SRC
 ** Display time
 #+BEGIN_SRC emacs-lisp
@@ -152,18 +152,20 @@ If the new path's directories does not exist, create them."
 *** Load helm
  <2018-02-25 Sun>
  #+BEGIN_SRC emacs-lisp
-     (require 'helm)
-    (global-set-key (kbd "M-x") 'helm-M-x)
+   (require 'helm)
+(add-to-list 'load-path "~/.emacs.d/elpa/helm") ; facultative when installed with make install
+(require 'helm-config)
+   (global-set-key (kbd "M-x") 'helm-M-x)
 
    ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-    (helm-mode 1)
+   (helm-mode 1)
  #+END_SRC
 *** Jeff's fix for the annoying TAB completion problem
 #+BEGIN_SRC emacs-lisp
- ;; modify help so tab is autocomplete
- (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
- (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
- (define-key helm-map (kbd "C-z") #'helm-select-action)
+  ;; modify help so tab is autocomplete
+  ;; (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "C-z") #'helm-select-action)
 #+END_SRC
 *** Helm-swoop configurations
 <2018-02-25 Sun>
@@ -379,7 +381,7 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
       ;; (load "~/.emacs.d/lisp/symbols.el")
 #+END_SRC
 ** Rectangular select regep operations
-<2018-05-10 Thu>
+   <2018-05-10 Thu>
 Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
 #+BEGIN_SRC emacs-lisp
 (require 'rect)
@@ -453,6 +455,12 @@ If `case-replace' is nil, do not alter case of replacement text."
 
 (global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
 (global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
+#+END_SRC
+** Auto fill mode
+<2018-06-08 Fri>
+Set autofill mode by default for all major modes
+#+BEGIN_SRC emacs-lisp
+(setq-default auto-fill-function 'do-auto-fill)
 #+END_SRC
 * Python
 ** Setting to use shell arguments?
@@ -617,8 +625,8 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 (setq org-capture-templates
       '(("w" "work" entry (file+datetree "~/orgs/diary.org")
 	 "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("T" "Task/Idea" entry (file org-default-notes-file)
-	 "* TODO %?  \n%t" )
+	("T" "Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+	 "** TODO %?  %^g\n%u\n%a" )
 	("t" "TA" entry (file+datetree "~/orgs/diary.org")
 	 "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
 	;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
@@ -1157,44 +1165,44 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 <2018-04-22 Sun>
 ** Notmuch setup
  #+BEGIN_SRC emacs-lisp
-   (autoload 'notmuch "notmuch" "notmuch mail" t)
-   (require 'notmuch)
-   ;; setup the mail address and use name
-   (setq mail-user-agent 'message-user-agent)
-   (setq user-mail-address "amogh.jalihal@gmail.com"
-         user-full-name "Amogh Jalihal")
-   ;; smtp config
-   (setq smtpmail-smtp-server "smtp.gmail.com"
-         message-send-mail-function 'message-smtpmail-send-it)
+   ;; (autoload 'notmuch "notmuch" "notmuch mail" t)
+   ;; (require 'notmuch)
+   ;; ;; setup the mail address and use name
+   ;; (setq mail-user-agent 'message-user-agent)
+   ;; (setq user-mail-address "amogh.jalihal@gmail.com"
+   ;;       user-full-name "Amogh Jalihal")
+   ;; ;; smtp config
+   ;; (setq smtpmail-smtp-server "smtp.gmail.com"
+   ;;       message-send-mail-function 'message-smtpmail-send-it)
 
-   ;; report problems with the smtp server
-   (setq smtpmail-debug-info t)
-   ;; add Cc and Bcc headers to the message buffer
-   (setq message-default-mail-headers "Cc: \nBcc: \n")
-   ;; postponed message is put in the following draft directory
-   (setq message-auto-save-directory "~/mail/draft")
-   (setq message-kill-buffer-on-exit t)
-   ;; change the directory to store the sent mail
-   (setq message-directory "~/mail/")
+   ;; ;; report problems with the smtp server
+   ;; (setq smtpmail-debug-info t)
+   ;; ;; add Cc and Bcc headers to the message buffer
+   ;; (setq message-default-mail-headers "Cc: \nBcc: \n")
+   ;; ;; postponed message is put in the following draft directory
+   ;; (setq message-auto-save-directory "~/mail/draft")
+   ;; (setq message-kill-buffer-on-exit t)
+   ;; ;; change the directory to store the sent mail
+   ;; (setq message-directory "~/mail/")
 
 
-   (defun notmuch-exec-offlineimap ()
-       "execute offlineimap"
-       (interactive)
-       (set-process-sentinel
-        (start-process-shell-command "offlineimap"
-                                     "*offlineimap*"
-                                     "offlineimap -o")
-        '(lambda (process event)
-           (notmuch-refresh-all-buffers)
-           (let ((w (get-buffer-window "*offlineimap*")))
-             (when w
-               (with-selected-window w (recenter (window-end)))))))
-       (popwin:display-buffer "*offlineimap*"))
+   ;; (defun notmuch-exec-offlineimap ()
+   ;;     "execute offlineimap"
+   ;;     (interactive)
+   ;;     (set-process-sentinel
+   ;;      (start-process-shell-command "offlineimap"
+   ;;                                   "*offlineimap*"
+   ;;                                   "offlineimap -o")
+   ;;      '(lambda (process event)
+   ;;         (notmuch-refresh-all-buffers)
+   ;;         (let ((w (get-buffer-window "*offlineimap*")))
+   ;;           (when w
+   ;;             (with-selected-window w (recenter (window-end)))))))
+   ;;     (popwin:display-buffer "*offlineimap*"))
 
-   (add-to-list 'popwin:special-display-config
-                '("*offlineimap*" :dedicated t :position bottom :stick t
-                  :height 0.4 :noselect t))
+   ;; (add-to-list 'popwin:special-display-config
+   ;;              '("*offlineimap*" :dedicated t :position bottom :stick t
+   ;;                :height 0.4 :noselect t))
  #+END_SRC
 ** Sending email
 #+BEGIN_SRC emacs-lisp
@@ -1210,11 +1218,11 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 ** Custom Keybindings
 From the notmuch emacs page
 #+BEGIN_SRC emacs-lisp
-   (define-key notmuch-show-mode-map "d"
-     (lambda ()
-       "move message to deleted"
-       (interactive)
-       (notmuch-show-tag (list "+deleted" "-inbox"))))
+   ;; (define-key notmuch-show-mode-map "d"
+   ;;   (lambda ()
+   ;;     "move message to deleted"
+   ;;     (interactive)
+   ;;     (notmuch-show-tag (list "+deleted" "-inbox"))))
 
   ;;    ;; (define-key notmuch-show-mode-map "d"
   ;;    ;;   (lambda ()
@@ -1244,9 +1252,16 @@ relative-compose:  0
        max-width:  8
 
 #+END_EXAMPLE
-* Tidal
+* TidalCycles
+<2018-05-24 Thu>
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "~/projects/tidal")
 (require 'haskell-mode)
 (require 'tidal)
 #+END_SRC
+<2018-06-04 Mon>
+- Start SuperCollider using scide
+- Start the server using SuperDirt.start
+- Start a tidal repl using C-c C-s
+- Algorave!
+
