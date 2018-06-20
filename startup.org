@@ -11,6 +11,9 @@ file:~/jalihal_projects/Research/data/ModelAnalysis
 Group Folder
 file:~/group/amogh-jalihal
 
+Emacs
+file:~/.emacs.d/
+
 Documents if you ever want to go there...
 file:~/Documents
 
