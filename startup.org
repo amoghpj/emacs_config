@@ -1,0 +1,19 @@
+Hi there!
+
+Quicklinks:
+
+Lab notebook: 
+file:~/jalihal_projects/Research/LabNoteBook.org
+
+Nutrient Signaling Model repo:
+file:~/jalihal_projects/Research/data/ModelAnalysis
+
+Group Folder
+file:~/group/amogh-jalihal
+
+Documents if you ever want to go there...
+file:~/Documents
+
+... and the depths of Downloads...
+file:~/Downloads
+
