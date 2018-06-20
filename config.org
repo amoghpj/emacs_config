@@ -32,6 +32,17 @@ Reverted
   ;; Modified on 2018-02-14
   ;; (load-theme 'spacemacs-dark t)
 #+END_SRC
+<2018-06-20 Wed>
+From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
+#+BEGIN_SRC emacs-lisp
+  ;; (defadvice load-theme (before theme-dont-propagate activate)
+  ;; (mapcar #'disable-theme custom-enabled-themes))
+
+#+END_SRC
+
+#+RESULTS:
+: load-theme
+
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
@@ -1092,8 +1103,8 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 ** Magit
 <2018-04-04 Wed>
 #+BEGIN_SRC emacs-lisp
-  ;; (require 'magit)
-  ;; (global-set-key (kbd "C-x g") 'magit-status)
+  (require 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC   
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
