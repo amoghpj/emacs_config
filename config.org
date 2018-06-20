@@ -1,3 +1,4 @@
+
 #+TITLE: EMACS Configuration
 #+AUTHOR: Amogh Jalihal
 
@@ -26,8 +27,8 @@ I would love to hear your feedback on this setup!
 +Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
 Reverted
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'gruvbox t) 
-  ;; (load-theme 'sexy-monochrome t)
+  ;;(load-theme 'gruvbox t) 
+  (load-theme 'sexy-monochrome t)
   ;; Modified on 2018-02-14
   ;; (load-theme 'spacemacs-dark t)
 #+END_SRC
@@ -460,7 +461,13 @@ If `case-replace' is nil, do not alter case of replacement text."
 <2018-06-08 Fri>
 Set autofill mode by default for all major modes
 #+BEGIN_SRC emacs-lisp
-(setq-default auto-fill-function 'do-auto-fill)
+;; This becomes annoying in shell and org buffers
+;;(setq-default auto-fill-function 'do-auto-fill)
+#+END_SRC
+** My macros
+#+BEGIN_SRC emacs-lisp
+(fset 'mydb
+   [?\C-x ?3 ?\C-x ?\C-f ?~ ?/ ?. ?e ?m tab ?. tab ?s ?t ?a ?r tab ?. ?o tab return ?\C-c ?a ?  ?\C-x ?- ?\C-x ?\C-- ?\C-x ?o ?\C-x ?2 ?\C-x ?\C-b])
 #+END_SRC
 * Python
 ** Setting to use shell arguments?
@@ -486,14 +493,14 @@ c 'echo $PATH'"))))
 *** Basic setup
  <2018-04-05 Thu>
  #+BEGIN_SRC emacs-lisp
-   (add-to-list 'load-path
-                "~/.emacs.d/elpa/ob-ipython/")
-   (require 'ob-ipython)
+   ;; (add-to-list 'load-path
+   ;;              "~/.emacs.d/elpa/ob-ipython/")
+   ;; (require 'ob-ipython)
 
-   (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
+   ;; (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
 
-   ;;; display/update images in the buffer after I evaluate
-   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+   ;; ;;; display/update images in the buffer after I evaluate
+   ;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
  #+END_SRC
 *** Inline figures
 <2018-04-06 Fri>
@@ -544,9 +551,9 @@ From [[http://kitchingroup.cheme.cmu.edu/blog/2017/01/29/ob-ipython-and-inline-f
 <2018-04-09 Mon>
 From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-buffer-to-open-in-a-new-window][here]]
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'display-buffer-alist
-                 '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
-                                        ((inhibit-same-window . t)))))
+  ;; (add-to-list 'display-buffer-alist
+  ;;                  '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
+  ;;                                         ((inhibit-same-window . t)))))
 #+END_SRC
 * Julia
 ** Emacs Speaks Statistics
@@ -597,7 +604,7 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
  (python . t)
  (ditaa . t)
  (latex . t)
- (ipython . t)
+;; (ipython . t)
  (R . t)
 (julia . t)
 ))
@@ -678,34 +685,38 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 #+END_SRC
 ** Org-Agenda
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-      ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
-      '((" " "Agenda"
-         ((agenda "" nil)
-          ;; All headings with the "cs6824" tag
-          (tags-todo "work"
-		     ((org-agenda-overriding-header "Research Related Tasks")))
-          (tags-todo "class"
-		     ((org-agenda-overriding-header "Homeworks and Reading")))
-          (tags-todo "literature"
-		     ((org-agenda-overriding-header "Literature Related")))
-          (tags-todo "document"
-		     ((org-agenda-overriding-header "Documentation Tasks")))
-	  (tags-todo "cteseminar"
-		     ((org-agenda-overriding-header "Seminar Organization Tasks")))
-	  (tags-todo "personal"
-		     ((org-agenda-overriding-header "Personal Tasks")))
-	  (todo "TODO"
-		((org-agenda-overriding-header "Task list")
-                 ;; sort by time, priority, and category
-                 (org-agenda-sorting-strategy
-                  '(time-up priority-down effort-up)))) ;; category-keepx
-	  ;; Everything on hold
-	  ;; All "WAITING" items
-	  (todo "WAITING"
-                ((org-agenda-overriding-header "Future Tasks")))
-	  )
-         )))
+  (setq org-agenda-custom-commands
+        ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
+        '((" " "Agenda"
+           ((agenda "" nil)
+            ;; All headings with the "cs6824" tag
+
+            (tags-todo "paper"
+                       ((org-agenda-overriding-header "Paper")))
+            (tags-todo "NutSig"
+                       ((org-agenda-overriding-header "Model building")))
+            (tags-todo "scripting"
+                       ((org-agenda-overriding-header "Scripting")))
+
+            (tags-todo "literature"
+                       ((org-agenda-overriding-header "Literature")))
+            (tags-todo "work"
+                       ((org-agenda-overriding-header "All Research")))
+            ;; (tags-todo ""
+            ;;            ((org-agenda-overriding-header "Seminar Organization Tasks")))
+            ;; (tags-todo "personal"
+            ;;            ((org-agenda-overriding-header "Personal Tasks")))
+            (todo "TODO"
+                  ((org-agenda-overriding-header "Task list")
+                   ;; sort by time, priority, and category
+                   (org-agenda-sorting-strategy
+                    '(time-up priority-down effort-up)))) ;; category-keepx
+            ;; Everything on hold
+            ;; All "WAITING" items
+            (todo "WAITING"
+                  ((org-agenda-overriding-header "Future Tasks")))
+            )
+           )))
 #+END_SRC
 ** Org Publishing
 #+BEGIN_SRC emacs-lisp
@@ -941,6 +952,13 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 (add-to-list 'load-path "/usr/share/org-mode/lisp")
 (require 'org-notmuch)
 #+END_SRC
+** Org-habit
+<2018-06-11 Mon>
+Playing around with org-habit to help Sumanth get the consistency
+graph working
+#+BEGIN_SRC emacs-lisp
+(require 'org-habit)
+#+END_SRC
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1068,8 +1086,8 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 ** Magit
 <2018-04-04 Wed>
 #+BEGIN_SRC emacs-lisp
-  (require 'magit)
-  (global-set-key (kbd "C-x g") 'magit-status)
+  ;; (require 'magit)
+  ;; (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC   
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
