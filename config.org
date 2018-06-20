@@ -175,6 +175,12 @@ If the new path's directories does not exist, create them."
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 #+END_SRC
+*** Reconfiguring helm-bibtex
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path
+              "~/.emacs.d/elpa/helm-bibtex")
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+#+END_SRC
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -941,6 +947,11 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 (add-to-list 'load-path "/usr/share/org-mode/lisp")
 (require 'org-notmuch)
 #+END_SRC
+** Org- habit
+<2018-06-11 Mon>
+#+BEGIN_SRC emacs-lisp
+(require 'org-habit)
+#+END_SRC
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1165,44 +1176,44 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 <2018-04-22 Sun>
 ** Notmuch setup
  #+BEGIN_SRC emacs-lisp
-   ;; (autoload 'notmuch "notmuch" "notmuch mail" t)
-   ;; (require 'notmuch)
-   ;; ;; setup the mail address and use name
-   ;; (setq mail-user-agent 'message-user-agent)
-   ;; (setq user-mail-address "amogh.jalihal@gmail.com"
-   ;;       user-full-name "Amogh Jalihal")
-   ;; ;; smtp config
-   ;; (setq smtpmail-smtp-server "smtp.gmail.com"
-   ;;       message-send-mail-function 'message-smtpmail-send-it)
+   (autoload 'notmuch "notmuch" "notmuch mail" t)
+   (require 'notmuch)
+   ;; setup the mail address and use name
+   (setq mail-user-agent 'message-user-agent)
+   (setq user-mail-address "amogh.jalihal@gmail.com"
+         user-full-name "Amogh Jalihal")
+   ;; smtp config
+   (setq smtpmail-smtp-server "smtp.gmail.com"
+         message-send-mail-function 'message-smtpmail-send-it)
 
-   ;; ;; report problems with the smtp server
-   ;; (setq smtpmail-debug-info t)
-   ;; ;; add Cc and Bcc headers to the message buffer
-   ;; (setq message-default-mail-headers "Cc: \nBcc: \n")
-   ;; ;; postponed message is put in the following draft directory
-   ;; (setq message-auto-save-directory "~/mail/draft")
-   ;; (setq message-kill-buffer-on-exit t)
-   ;; ;; change the directory to store the sent mail
-   ;; (setq message-directory "~/mail/")
+   ;; report problems with the smtp server
+   (setq smtpmail-debug-info t)
+   ;; add Cc and Bcc headers to the message buffer
+   (setq message-default-mail-headers "Cc: \nBcc: \n")
+   ;; postponed message is put in the following draft directory
+   (setq message-auto-save-directory "~/mail/draft")
+   (setq message-kill-buffer-on-exit t)
+   ;; change the directory to store the sent mail
+   (setq message-directory "~/mail/")
 
 
-   ;; (defun notmuch-exec-offlineimap ()
-   ;;     "execute offlineimap"
-   ;;     (interactive)
-   ;;     (set-process-sentinel
-   ;;      (start-process-shell-command "offlineimap"
-   ;;                                   "*offlineimap*"
-   ;;                                   "offlineimap -o")
-   ;;      '(lambda (process event)
-   ;;         (notmuch-refresh-all-buffers)
-   ;;         (let ((w (get-buffer-window "*offlineimap*")))
-   ;;           (when w
-   ;;             (with-selected-window w (recenter (window-end)))))))
-   ;;     (popwin:display-buffer "*offlineimap*"))
+   (defun notmuch-exec-offlineimap ()
+       "execute offlineimap"
+       (interactive)
+       (set-process-sentinel
+        (start-process-shell-command "offlineimap"
+                                     "*offlineimap*"
+                                     "offlineimap -o")
+        '(lambda (process event)
+           (notmuch-refresh-all-buffers)
+           (let ((w (get-buffer-window "*offlineimap*")))
+             (when w
+               (with-selected-window w (recenter (window-end)))))))
+       (popwin:display-buffer "*offlineimap*"))
 
-   ;; (add-to-list 'popwin:special-display-config
-   ;;              '("*offlineimap*" :dedicated t :position bottom :stick t
-   ;;                :height 0.4 :noselect t))
+   (add-to-list 'popwin:special-display-config
+                '("*offlineimap*" :dedicated t :position bottom :stick t
+                  :height 0.4 :noselect t))
  #+END_SRC
 ** Sending email
 #+BEGIN_SRC emacs-lisp
@@ -1218,11 +1229,11 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 ** Custom Keybindings
 From the notmuch emacs page
 #+BEGIN_SRC emacs-lisp
-   ;; (define-key notmuch-show-mode-map "d"
-   ;;   (lambda ()
-   ;;     "move message to deleted"
-   ;;     (interactive)
-   ;;     (notmuch-show-tag (list "+deleted" "-inbox"))))
+   (define-key notmuch-show-mode-map "d"
+     (lambda ()
+       "move message to deleted"
+       (interactive)
+       (notmuch-show-tag (list "+deleted" "-inbox"))))
 
   ;;    ;; (define-key notmuch-show-mode-map "d"
   ;;    ;;   (lambda ()
