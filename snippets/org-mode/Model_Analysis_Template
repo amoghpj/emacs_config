@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Model Analysis Template
+# key: modantemp
+# --
+* META 
+Name: Amogh Jalihal
+Date: `(current-time-string)`
+
+** Import Headers
+
+#+BEGIN_SRC ipython :session :exports both :results raw drawer :async t
+%matplotlib inline
+import sys
+import os
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams['axes.facecolor'] = (1,1,1,0)
+PATH = "/jalihal_projects/Research/data/ModelAnalysis/"
+HOME = os.path.expanduser("~")
+
+sys.path.append(HOME + PATH)
+os.chdir(HOME + PATH)
+import modelreader as md
+import simulator as sim
+#+END_SRC
+* Analysis
+** Objective

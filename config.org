@@ -647,50 +647,54 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 #+END_SRC
 *** Capture Templates
 #+BEGIN_SRC emacs-lisp
-(setq org-capture-templates
-      '(("w" "work" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("T" "Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-	 "** TODO %?  %^g\n%u\n%a" )
-	("t" "TA" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
-	;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
-	;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("c" "class" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
-	;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-	 ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-	("p" "Personal" entry (file+datetree "~/orgs/diary.org")
-	 "* %?\n%U\n" :clock-in t :clock-resume t)
-	;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-	 ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
-	;;("i" "Idea" entry (file org-default-notes-file)
-	;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-	("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-	"* %U
-     :PROPERTIES:
-     :immediate-finish:
-     :Water:    %^{Drank?(y/n)|Y|N}
-     :Attention: %^{_f_ocussed/_d_istracted|F|D}
-     :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-     :END:")
-	("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-	"*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-	")
-	 ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-	;;	 "** NEXT %? \nDEADLINE: %t")
-	))
+  (setq org-capture-templates
+        '(("w" "work" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("T" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+           "** TODO %?  %^g\n%u\n%a" )
 
-;;(setq org-capture-templates
-;;             '("w" "Web site" entry 
-;;              "* %?\n%c\n%:initial" :clock-in t))
+          ("t" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+           "** TODO %?  %^g\n%u\n%a" )
 
-;; Allow creation of new parent nodes
-(setq org-refile-allow-creating-parent-nodes `confirm)
-;; Look up to three levels deep
-(setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+          ;; ("t" "TA" entry (file+datetree "~/orgs/diary.org")
+          ;;  "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
+          ;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("c" "class" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("p" "Personal" entry (file+datetree "~/orgs/diary.org")
+           "* %?\n%U\n" :clock-in t :clock-resume t)
+          ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+           ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+          ;;("i" "Idea" entry (file org-default-notes-file)
+          ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+          ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+          "* %U
+       :PROPERTIES:
+       :immediate-finish:
+       :Water:    %^{Drank?(y/n)|Y|N}
+       :Attention: %^{_f_ocussed/_d_istracted|F|D}
+       :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+       :END:")
+          ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+          "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+          ")
+           ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+          ;;	 "** NEXT %? \nDEADLINE: %t")
+          ))
+
+  ;;(setq org-capture-templates
+  ;;             '("w" "Web site" entry 
+  ;;              "* %?\n%c\n%:initial" :clock-in t))
+
+  ;; Allow creation of new parent nodes
+  (setq org-refile-allow-creating-parent-nodes `confirm)
+  ;; Look up to three levels deep
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp

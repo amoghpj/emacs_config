@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Model Analysis Template
+# key: analysistemp
+# --
+* META 
+Name: Amogh Jalihal
+Date: `(current-time-string)`
+
+** Import Headers
+
+#+BEGIN_SRC ipython :session :exports both :results raw drawer :async t
+%matplotlib inline
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams['axes.facecolor'] = (1,1,1,0)
+#+END_SRC
+* Analysis
+** Objective
