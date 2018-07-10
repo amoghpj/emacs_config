@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Model Analysis Template
-# key: modantemp
+# key: modantemppy
 # --
 * META 
 Name: Amogh Jalihal
@@ -8,8 +8,7 @@ Date: `(current-time-string)`
 
 ** Import Headers
 
-#+BEGIN_SRC ipython :session :exports both :results raw drawer :async t
-%matplotlib inline
+#+BEGIN_SRC python :session :exports both :results raw drawer :async t
 import sys
 import os
 import matplotlib.pyplot as plt

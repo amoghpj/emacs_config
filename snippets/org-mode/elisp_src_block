@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: elispsrc block
+# key: elispsrc
+# --
+#+BEGIN_SRC emacs-lisp :results raw
+
+#+END_SRC

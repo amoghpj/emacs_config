@@ -32,6 +32,17 @@ Reverted
   ;; Modified on 2018-02-14
   ;; (load-theme 'spacemacs-dark t)
 #+END_SRC
+<2018-06-20 Wed>
+From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
+#+BEGIN_SRC emacs-lisp
+  ;; (defadvice load-theme (before theme-dont-propagate activate)
+  ;; (mapcar #'disable-theme custom-enabled-themes))
+
+#+END_SRC
+
+#+RESULTS:
+: load-theme
+
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
@@ -175,6 +186,12 @@ If the new path's directories does not exist, create them."
 (global-set-key (kbd "M-i") 'helm-swoop)
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+*** Reconfiguring helm-bibtex
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path
+              "~/.emacs.d/elpa/helm-bibtex")
+(autoload 'helm-bibtex "helm-bibtex" "" t)
 #+END_SRC
 ** Abbrev
 <2018-02-25 Sun>
@@ -630,50 +647,54 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 #+END_SRC
 *** Capture Templates
 #+BEGIN_SRC emacs-lisp
-(setq org-capture-templates
-      '(("w" "work" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("T" "Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-	 "** TODO %?  %^g\n%u\n%a" )
-	("t" "TA" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
-	;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
-	;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("c" "class" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
-	("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
-	 "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
-	;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-	 ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-	("p" "Personal" entry (file+datetree "~/orgs/diary.org")
-	 "* %?\n%U\n" :clock-in t :clock-resume t)
-	;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-	 ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
-	;;("i" "Idea" entry (file org-default-notes-file)
-	;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-	("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-	"* %U
-     :PROPERTIES:
-     :immediate-finish:
-     :Water:    %^{Drank?(y/n)|Y|N}
-     :Attention: %^{_f_ocussed/_d_istracted|F|D}
-     :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-     :END:")
-	("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-	"*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-	")
-	 ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-	;;	 "** NEXT %? \nDEADLINE: %t")
-	))
+  (setq org-capture-templates
+        '(("w" "work" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("T" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+           "** TODO %?  %^g\n%u\n%a" )
 
-;;(setq org-capture-templates
-;;             '("w" "Web site" entry 
-;;              "* %?\n%c\n%:initial" :clock-in t))
+          ("t" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+           "** TODO %?  %^g\n%u\n%a" )
 
-;; Allow creation of new parent nodes
-(setq org-refile-allow-creating-parent-nodes `confirm)
-;; Look up to three levels deep
-(setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+          ;; ("t" "TA" entry (file+datetree "~/orgs/diary.org")
+          ;;  "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
+          ;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("c" "class" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("p" "Personal" entry (file+datetree "~/orgs/diary.org")
+           "* %?\n%U\n" :clock-in t :clock-resume t)
+          ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+           ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+          ;;("i" "Idea" entry (file org-default-notes-file)
+          ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+          ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+          "* %U
+       :PROPERTIES:
+       :immediate-finish:
+       :Water:    %^{Drank?(y/n)|Y|N}
+       :Attention: %^{_f_ocussed/_d_istracted|F|D}
+       :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+       :END:")
+          ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+          "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+          ")
+           ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+          ;;	 "** NEXT %? \nDEADLINE: %t")
+          ))
+
+  ;;(setq org-capture-templates
+  ;;             '("w" "Web site" entry 
+  ;;              "* %?\n%c\n%:initial" :clock-in t))
+
+  ;; Allow creation of new parent nodes
+  (setq org-refile-allow-creating-parent-nodes `confirm)
+  ;; Look up to three levels deep
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp
@@ -1087,8 +1108,8 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 ** Magit
 <2018-04-04 Wed>
 #+BEGIN_SRC emacs-lisp
-  ;; (require 'magit)
-  ;; (global-set-key (kbd "C-x g") 'magit-status)
+  (require 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC   
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
@@ -1184,44 +1205,44 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 <2018-04-22 Sun>
 ** Notmuch setup
  #+BEGIN_SRC emacs-lisp
-   ;; (autoload 'notmuch "notmuch" "notmuch mail" t)
-   ;; (require 'notmuch)
-   ;; ;; setup the mail address and use name
-   ;; (setq mail-user-agent 'message-user-agent)
-   ;; (setq user-mail-address "amogh.jalihal@gmail.com"
-   ;;       user-full-name "Amogh Jalihal")
-   ;; ;; smtp config
-   ;; (setq smtpmail-smtp-server "smtp.gmail.com"
-   ;;       message-send-mail-function 'message-smtpmail-send-it)
+   (autoload 'notmuch "notmuch" "notmuch mail" t)
+   (require 'notmuch)
+   ;; setup the mail address and use name
+   (setq mail-user-agent 'message-user-agent)
+   (setq user-mail-address "amogh.jalihal@gmail.com"
+         user-full-name "Amogh Jalihal")
+   ;; smtp config
+   (setq smtpmail-smtp-server "smtp.gmail.com"
+         message-send-mail-function 'message-smtpmail-send-it)
 
-   ;; ;; report problems with the smtp server
-   ;; (setq smtpmail-debug-info t)
-   ;; ;; add Cc and Bcc headers to the message buffer
-   ;; (setq message-default-mail-headers "Cc: \nBcc: \n")
-   ;; ;; postponed message is put in the following draft directory
-   ;; (setq message-auto-save-directory "~/mail/draft")
-   ;; (setq message-kill-buffer-on-exit t)
-   ;; ;; change the directory to store the sent mail
-   ;; (setq message-directory "~/mail/")
+   ;; report problems with the smtp server
+   (setq smtpmail-debug-info t)
+   ;; add Cc and Bcc headers to the message buffer
+   (setq message-default-mail-headers "Cc: \nBcc: \n")
+   ;; postponed message is put in the following draft directory
+   (setq message-auto-save-directory "~/mail/draft")
+   (setq message-kill-buffer-on-exit t)
+   ;; change the directory to store the sent mail
+   (setq message-directory "~/mail/")
 
 
-   ;; (defun notmuch-exec-offlineimap ()
-   ;;     "execute offlineimap"
-   ;;     (interactive)
-   ;;     (set-process-sentinel
-   ;;      (start-process-shell-command "offlineimap"
-   ;;                                   "*offlineimap*"
-   ;;                                   "offlineimap -o")
-   ;;      '(lambda (process event)
-   ;;         (notmuch-refresh-all-buffers)
-   ;;         (let ((w (get-buffer-window "*offlineimap*")))
-   ;;           (when w
-   ;;             (with-selected-window w (recenter (window-end)))))))
-   ;;     (popwin:display-buffer "*offlineimap*"))
+   (defun notmuch-exec-offlineimap ()
+       "execute offlineimap"
+       (interactive)
+       (set-process-sentinel
+        (start-process-shell-command "offlineimap"
+                                     "*offlineimap*"
+                                     "offlineimap -o")
+        '(lambda (process event)
+           (notmuch-refresh-all-buffers)
+           (let ((w (get-buffer-window "*offlineimap*")))
+             (when w
+               (with-selected-window w (recenter (window-end)))))))
+       (popwin:display-buffer "*offlineimap*"))
 
-   ;; (add-to-list 'popwin:special-display-config
-   ;;              '("*offlineimap*" :dedicated t :position bottom :stick t
-   ;;                :height 0.4 :noselect t))
+   (add-to-list 'popwin:special-display-config
+                '("*offlineimap*" :dedicated t :position bottom :stick t
+                  :height 0.4 :noselect t))
  #+END_SRC
 ** Sending email
 #+BEGIN_SRC emacs-lisp
@@ -1237,11 +1258,11 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 ** Custom Keybindings
 From the notmuch emacs page
 #+BEGIN_SRC emacs-lisp
-   ;; (define-key notmuch-show-mode-map "d"
-   ;;   (lambda ()
-   ;;     "move message to deleted"
-   ;;     (interactive)
-   ;;     (notmuch-show-tag (list "+deleted" "-inbox"))))
+   (define-key notmuch-show-mode-map "d"
+     (lambda ()
+       "move message to deleted"
+       (interactive)
+       (notmuch-show-tag (list "+deleted" "-inbox"))))
 
   ;;    ;; (define-key notmuch-show-mode-map "d"
   ;;    ;;   (lambda ()
