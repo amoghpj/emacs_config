@@ -2,6 +2,12 @@
 # name: pysrc
 # key: pysrc
 # --
+<<<<<<< HEAD
 #+BEGIN_SRC python :session :exports results :results raw drawer :async t
   $0
+=======
+
+#+BEGIN_SRC python :results output :session :async t
+$0
+>>>>>>> f3e7726a876f65b3032e519711bd4a8be8a79f3a
 #+END_SRC
