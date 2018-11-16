@@ -2,6 +2,6 @@
 # name: ipython block
 # key: ipy
 # --
-#+BEGIN_SRC ipython :session :exports both :results raw drawer :async t
+#+BEGIN_SRC ipython :session :exports results :results raw drawer :async t
   $0
 #+END_SRC
