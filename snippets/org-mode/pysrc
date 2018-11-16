@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pysrc
+# key: pysrc
+# --
+#+BEGIN_SRC python :session :exports results :results raw drawer :async t
+  $0
+#+END_SRC
