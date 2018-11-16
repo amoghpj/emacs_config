@@ -1,4 +1,3 @@
-
 #+TITLE: EMACS Configuration
 #+AUTHOR: Amogh Jalihal
 
@@ -70,7 +69,7 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 #+END_SRC
 ** Truncate lines
 #+BEGIN_SRC emacs-lisp
-  (set-default 'truncate-lines t)
+  (setq-default truncate-lines t)
 #+END_SRC
 ** Display time
 #+BEGIN_SRC emacs-lisp
@@ -196,7 +195,7 @@ If the new path's directories does not exist, create them."
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
-(load "~/.emacs.d/lisp/aj-abbrev.el")
+  ;; (load "~/.emacs.d/lisp/aj-abbrev.el")   
 #+END_SRC
 ** Visual Regexp
 <2018-02-25 Sun>
@@ -208,11 +207,18 @@ If the new path's directories does not exist, create them."
 ** YASnippet
 <2018-04-05 Thu>
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 1)
+  (add-to-list 'load-path
+                "~/.emacs.d/plugins/yasnippet")
+  (require 'yasnippet)
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets/org-mode/")
+        )
+  (yas-global-mode 1)
 #+END_SRC
+
+#+RESULTS:
+: t
+
 ** Company
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook 'global-company-mode)
@@ -479,8 +485,13 @@ If `case-replace' is nil, do not alter case of replacement text."
 Set autofill mode by default for all major modes
 #+BEGIN_SRC emacs-lisp
 ;; This becomes annoying in shell and org buffers
-;;(setq-default auto-fill-function 'do-auto-fill)
+;;(setq-default auto-fill-function 'do-autoill)
 #+END_SRC
+** Auto reload files
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode t)
+#+END_SRC
+
 ** My macros
 #+BEGIN_SRC emacs-lisp
 (fset 'mydb
@@ -511,14 +522,14 @@ c 'echo $PATH'"))))
 *** Basic setup
  <2018-04-05 Thu>
  #+BEGIN_SRC emacs-lisp
-   ;; (add-to-list 'load-path
-   ;;              "~/.emacs.d/elpa/ob-ipython/")
-   ;; (require 'ob-ipython)
+   (add-to-list 'load-path
+                "~/.emacs.d/elpa/ob-ipython/")
+   (require 'ob-ipython)
 
-   ;; (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
+   (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
 
-   ;; ;;; display/update images in the buffer after I evaluate
-   ;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+   ;;; display/update images in the buffer after I evaluate
+   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
  #+END_SRC
 *** Inline figures
 <2018-04-06 Fri>
@@ -569,9 +580,9 @@ From [[http://kitchingroup.cheme.cmu.edu/blog/2017/01/29/ob-ipython-and-inline-f
 <2018-04-09 Mon>
 From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-buffer-to-open-in-a-new-window][here]]
 #+BEGIN_SRC emacs-lisp
-  ;; (add-to-list 'display-buffer-alist
-  ;;                  '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
-  ;;                                         ((inhibit-same-window . t)))))
+  (add-to-list 'display-buffer-alist
+                   '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
+                                          ((inhibit-same-window . t)))))
 #+END_SRC
 * Julia
 ** Emacs Speaks Statistics
@@ -615,17 +626,17 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 ** Org-Babel setup
 
 #+BEGIN_SRC emacs-lisp
-(org-babel-do-load-languages
-`org-babel-load-languages
- `((dot . t)
- (shell . t)
- (python . t)
- (ditaa . t)
- (latex . t)
-;; (ipython . t)
- (R . t)
-(julia . t)
-))
+  (org-babel-do-load-languages
+  `org-babel-load-languages
+   `((dot . t)
+   (shell . t)
+   (python . t)
+   (ditaa . t)
+   (latex . t)
+  (ipython . t)
+   (R . t)
+  (julia . t)
+  ))
 #+END_SRC
 
 ** Export
@@ -648,42 +659,59 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 *** Capture Templates
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
-        '(("w" "work" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
-          ("T" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-           "** TODO %?  %^g\n%u\n%a" )
+        '(
+          ("t" "Tasks")
+          ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+           "** TODO %?  %^g\n%u
+    :PROPERTIES:
+    :BLOCKER:
+    :TRIGGER:
+    :END:" )
 
-          ("t" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-           "** TODO %?  %^g\n%u\n%a" )
+          ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+           "** TODO %?  %^g\n%u" )
 
           ;; ("t" "TA" entry (file+datetree "~/orgs/diary.org")
           ;;  "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
-          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
+                                          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
           ;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
-          ("c" "class" entry (file+datetree "~/orgs/diary.org")
+          ("c" "Clock tasks")
+          ("cw" "work" entry (file+datetree "~/orgs/diary.org")
+           "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("cc" "class" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
-          ("m" "Meeting" entry (file+datetree "~/orgs/diary.org")
+          ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-          ("p" "Personal" entry (file+datetree "~/orgs/diary.org")
+          ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
            "* %?\n%U\n" :clock-in t :clock-resume t)
+          ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
+           "* \n
+    ,#+BEGIN_EXPORT html
+    <div class=\"container\">
+    ,#+END_EXPORT\n
+    %U\n\n%?\n
+    ,#+BEGIN_EXPORT html
+    </div>
+    ,#+END_EXPORT" :prepend t :empty-lines 1)
+
           ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-           ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+          ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
           ;;("i" "Idea" entry (file org-default-notes-file)
           ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
           ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-          "* %U
-       :PROPERTIES:
-       :immediate-finish:
-       :Water:    %^{Drank?(y/n)|Y|N}
-       :Attention: %^{_f_ocussed/_d_istracted|F|D}
-       :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-       :END:")
+           "* %U
+           :PROPERTIES:
+           :immediate-finish:
+           :Water:    %^{Drank?(y/n)|Y|N}
+           :Attention: %^{_f_ocussed/_d_istracted|F|D}
+           :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+           :END:")
           ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-          "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-          ")
-           ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+           "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+              ")
+          ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
           ;;	 "** NEXT %? \nDEADLINE: %t")
           ))
 
@@ -722,6 +750,9 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 
             (tags-todo "literature"
                        ((org-agenda-overriding-header "Literature")))
+            (tags-todo "personal"
+                       ((org-agenda-overriding-header "All personal tasks")))
+                       
             (tags-todo "work"
                        ((org-agenda-overriding-header "All Research")))
             ;; (tags-todo ""
@@ -833,7 +864,7 @@ Does this do anything?
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
-;;(org-edna-load)
+(org-edna-load)
 #+END_SRC
 ** Org-Notify
 #+BEGIN_SRC emacs-lisp
@@ -914,8 +945,8 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ** Org-bullets
 <2018-01-07 Sun>
 #+BEGIN_SRC emacs-lisp
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  ;; (require 'org-bullets)
+  ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+END_SRC
 ** Org clock
 *** Custom Shortcuts
@@ -960,8 +991,8 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ** Ox-latex
 #+BEGIN_SRC emacs-lisp
 (require 'ox-latex)
-(setq org-latex-listings 'minted)
-(add-to-list 'org-latex-minted-langs '(ipython "python"))
+;;(setq org-latex-listings 'minted)
+;;(add-to-list 'org-latex-minted-langs '(ipython "python"))
 #+END_SRC
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
@@ -981,6 +1012,278 @@ graph working
 #+BEGIN_SRC emacs-lisp
 (require 'org-habit)
 #+END_SRC
+** Org-gnome
+#+BEGIN_SRC emacs-lisp
+(require 'org-gnome) 
+(setq org-gnome-integrate-with-calendar t)
+(org-gnome-turn-on)
+#+END_SRC
+** Org-mode Tufte theme
+#+BEGIN_SRC elisp
+  ;; (use-package org
+  ;;   :ensure org-plus-contrib
+  ;;   :mode ("\\.org\\'" . org-mode)
+  ;;   :bind
+  ;;   (("C-c l" . org-store-link)
+  ;;    ("C-c a" . org-agenda)
+  ;;    ("C-c b" . org-iswitchb)
+  ;;    ("C-c c" . org-capture))
+  ;;   :bind
+  ;;   (:map org-mode-map
+  ;;         ("M-n" . outline-next-visible-heading)
+  ;;         ("M-p" . outline-previous-visible-heading))
+  ;;   :custom
+  ;;   (org-return-follows-link t)
+  ;;   (org-agenda-diary-file "~/.org/diary.org")
+  ;;   (org-babel-load-languages
+  ;;    '((emacs-lisp . t)
+  ;;      (python . t)))
+  ;;   :custom-face
+  ;;   (variable-pitch ((t (:family "ETBembo"))))
+  ;;   (org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
+  ;;   (org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
+  ;;   (org-headline-done ((t (:foreground "#171717" :strike-through t))))
+  ;;   (org-level-1 ((t (:foreground "#090909" :weight bold :height 1.3))))
+  ;;   (org-level-2 ((t (:foreground "#090909" :weight normal :height 1.2))))
+  ;;   (org-level-3 ((t (:foreground "#090909" :weight normal :height 1.1))))
+  ;;   (org-image-actual-width '(600))
+  ;;   :config
+  ;;   (add-to-list 'org-structure-template-alist '("el" "#+BEGIN_SRC emacs-lisp :tangle yes?\n\n#+END_SRC")))
+
+  ;; (add-hook 'org-mode-hook
+  ;;           '(lambda ()
+  ;;              (setq line-spacing 0.2) ;; Add more line padding for readability
+  ;;              (variable-pitch-mode 1) ;; All fonts with variable pitch.
+  ;;              (mapc
+  ;;               (lambda (face) ;; Other fonts with fixed-pitch.
+  ;;                 (set-face-attribute face nil :inherit 'fixed-pitch))
+  ;;               (list 'org-code
+  ;;                     'org-link
+  ;;                     'org-block
+  ;;                     'org-table
+  ;;                     'org-verbatim
+  ;;                     'org-block-begin-line
+  ;;                     'org-block-end-line
+  ;;                     'org-meta-line
+  ;;                     'org-document-info-keyword))))
+
+  ;;  (org-document-title
+  ;;    (:inherit variable-pitch
+  ;;              :height 1.3
+  ;;              :weight normal
+  ;;              :foreground ,gray)
+  ;;    (:inherit nil
+  ;;              :family ,et-font
+  ;;              :height 1.8
+  ;;              :foreground ,bg-dark
+  ;;              :underline nil))
+  ;;   (org-document-info
+  ;;    (:foreground ,gray
+  ;;                 :slant italic)
+  ;;    (:height 1.2
+  ;;             :slant italic))
+  ;;   (org-level-1
+  ;;    (:inherit variable-pitch
+  ;;              :height 1.3
+  ;;              :weight bold
+  ;;              :foreground ,keyword
+  ;;              :background ,bg-dark)
+  ;;    (:inherit nil
+  ;;              :family ,et-font
+  ;;              :height 1.6
+  ;;              :weight normal
+  ;;              :slant normal
+  ;;              :foreground ,bg-dark))
+  ;;   (org-level-2
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.2
+  ;;              :foreground ,gray
+  ;;              :background ,bg-dark)
+  ;;    (:inherit nil
+  ;;              :family ,et-font
+  ;;              :weight normal
+  ;;              :height 1.3
+  ;;              :slant italic
+  ;;              :foreground ,bg-dark))
+  ;;   (org-level-3
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    (:inherit nil
+  ;;              :family ,et-font
+  ;;              :weight normal
+  ;;              :slant italic
+  ;;              :height 1.2
+  ;;              :foreground ,bg-dark))
+  ;;   (org-level-4
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    (:inherit nil
+  ;;              :family ,et-font
+  ;;              :weight normal
+  ;;              :slant italic
+  ;;              :height 1.1
+  ;;              :foreground ,bg-dark))
+  ;;   (org-level-5
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-level-6
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-level-7
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-level-8
+  ;;    (:inherit variable-pitch
+  ;;              :weight bold
+  ;;              :height 1.1
+  ;;              :foreground ,slate
+  ;;              :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-headline-done
+  ;;    (:strike-through t)
+  ;;    (:family ,et-font
+  ;;             :strike-through t))
+  ;;   (org-quote
+  ;;    (:background ,bg-dark)
+  ;;    nil)
+  ;;   (org-block
+  ;;    (:background ,bg-dark)
+  ;;    (:background nil
+  ;;                 :foreground ,bg-dark))
+  ;;   (org-block-begin-line
+  ;;    (:background ,bg-dark)
+  ;;    (:background nil
+  ;;                 :height 0.8
+  ;;                 :family ,sans-mono-font
+  ;;                 :foreground ,slate))
+  ;;   (org-block-end-line
+  ;;    (:background ,bg-dark)
+  ;;    (:background nil
+  ;;                 :height 0.8
+  ;;                 :family ,sans-mono-font
+  ;;                 :foreground ,slate))
+  ;;   (org-document-info-keyword
+  ;;    (:foreground ,comment)
+  ;;    (:height 0.8
+  ;;             :foreground ,gray))
+  ;;   (org-link
+  ;;    (:underline nil
+  ;;                :weight normal
+  ;;                :foreground ,slate)
+  ;;    (:foreground ,bg-dark))
+  ;;   (org-special-keyword
+  ;;    (:height 0.9
+  ;;             :foreground ,comment)
+  ;;    (:family ,sans-mono-font
+  ;;             :height 0.8))
+  ;;   (org-todo
+  ;;    (:foreground ,builtin
+  ;;                 :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-done
+  ;;    (:inherit variable-pitch
+  ;;              :foreground ,dark-cyan
+  ;;              :background ,bg-dark)
+  ;;    nil)
+  ;;   (org-agenda-current-time
+  ;;    (:foreground ,slate)
+  ;;    nil)
+  ;;   (org-hide
+  ;;    nil
+  ;;    (:foreground ,bg-white))
+  ;;   (org-indent
+  ;;    (:inherit org-hide)
+  ;;    (:inherit (org-hide fixed-pitch)))
+  ;;   (org-time-grid
+  ;;    (:foreground ,comment)
+  ;;    nil)
+  ;;   (org-warning
+  ;;    (:foreground ,builtin)
+  ;;    nil)
+  ;;   (org-date
+  ;;    nil
+  ;;    (:family ,sans-mono-font
+  ;;             :height 0.8))
+  ;;   (org-agenda-structure
+  ;;    (:height 1.3
+  ;;             :foreground ,doc
+  ;;             :weight normal
+  ;;             :inherit variable-pitch)
+  ;;    nil)
+  ;;   (org-agenda-date
+  ;;    (:foreground ,doc
+  ;;                 :inherit variable-pitch)
+  ;;    (:inherit variable-pitch
+  ;;              :height 1.1))
+  ;;   (org-agenda-date-today
+  ;;    (:height 1.5
+  ;;             :foreground ,keyword
+  ;;             :inherit variable-pitch)
+  ;;    nil)
+  ;;   (org-agenda-date-weekend
+  ;;    (:inherit org-agenda-date)
+  ;;    nil)
+  ;;   (org-scheduled
+  ;;    (:foreground ,gray)
+  ;;    nil)
+  ;;   (org-upcoming-deadline
+  ;;    (:foreground ,keyword)
+  ;;    nil)
+  ;;   (org-scheduled-today
+  ;;    (:foreground ,fg-white)
+  ;;    nil)
+  ;;   (org-scheduled-previously
+  ;;    (:foreground ,slate)
+  ;;    nil)
+  ;;   (org-agenda-done
+  ;;    (:inherit nil
+  ;;              :strike-through t
+  ;;              :foreground ,doc)
+  ;;    (:strike-through t
+  ;;                     :foreground ,doc))
+  ;;   (org-ellipsis
+  ;;    (:underline nil
+  ;;                :foreground ,comment)
+  ;;    (:underline nil
+  ;;                :foreground ,comment))
+  ;;   (org-tag
+  ;;    (:foreground ,doc)
+  ;;    (:foreground ,doc))
+  ;;   (org-table
+  ;;    (:background nil)
+  ;;    (:family ,serif-mono-font
+  ;;             :height 0.9
+  ;;             :background ,bg-white))
+  ;;   (org-code
+  ;;    (:inherit font-lock-builtin-face)
+  ;;    (:inherit nil
+  ;;              :family ,serif-mono-font
+  ;;              :foreground ,comment
+  ;; :height 0.9))
+#+END_SRC
+
+#+RESULTS:
+| (lambda nil (setq line-spacing 0.2) (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-verbatim) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | org-ref-org-menu | (lambda nil (delete (quote (\.pdf\' . default)) org-file-apps) (add-to-list (quote org-file-apps) (quote (\.pdf\' . evince %s)))) | ob-ipython-auto-configure-kernels | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-block-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
+
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1066,15 +1369,15 @@ Some bookmarks
 ** Syntax Highlighting for code Export
 #+BEGIN_SRC emacs-lisp
 ;; Add minted to the defaults packages to include when exporting.
-;;(add-to-list 'org-latex-packages-alist '("" "minted"))
+;; (add-to-list 'org-latex-packages-alist '("" "minted"))
 ;; Tell the latex export to use the minted package for source
 ;; code coloration.
-;;(setq org-latex-listings 'minted)
+;; (setq org-latex-listings 'minted)
 ;; Let the exporter use the -shell-escape option to let latex
 ;; execute external programs.
 ;; This obviously and can be dangerous to activate!
 ;; When using minted, use this:
-;;(setq org-latex-pdf-process
+;; (setq org-latex-pdf-process
 ;; (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
 #+END_SRC
 ** PDFLATEX command execution order
@@ -1155,28 +1458,6 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 
   ;; Enable transient mark mode
   (transient-mark-mode 1)
-
-
-
-
-  ;; Customizing LaTeX export to include bibtex processing
-
-
-  ;;(custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   ;;'(auth-source-save-behavior nil)
-   ;;'(custom-enabled-themes (quote (cyberpunk)))
-   ;;'(custom-safe-themes (quote ("1b11d9a97be35737f88fc15ca833f09de68829416e79994c634d6a0be3eab79e" "a9f4aeb4f8b4672acec6c75e0be5684c79a00509f458fe43dee4dcd5893ccd3f" default))))
-  ;;(custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-  ;; '(default ((t (:inherit nil :stipple nil :background "#11181f" :foreground "#949494" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 132 :width normal :foundry "unknown" :family "Ubuntu Mono")))))
-
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
   (add-to-list 'load-path "~/.emacs.d/lisp/")
@@ -1304,4 +1585,11 @@ relative-compose:  0
 - Start the server using SuperDirt.start
 - Start a tidal repl using C-c C-s
 - Algorave!
+* COMMENT Hydras
 
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c e") (lambda()
+                                  (call-process-shell-command "/home/jalihal/.emacs.d/src/pmt.sh")
+                                  )
+                  )
+#+END_SRC
