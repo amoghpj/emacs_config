@@ -697,6 +697,21 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
            "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
           ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("e" "Entry")
+          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
+           "** Meeting on %U
+  ,#+BIND: org-export-use-babel nil
+  ,#+STARTUP: beamer
+  ,#+OPTIONS: H:1 toc:nil
+  ,#+AUTHOR: Amogh Jalihal
+  ,#+TITLE: Meeting on %U
+  ,#+EXPORT_FILE_NAME: 
+  ,#+LATEX_HEADER: \\usetheme{metropolis}
+  %?" :prepend t :empty-lines 1)
+          ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
+           "** Meeting on %U
+  - %?" :prepend t :empty-lines 1)        
+        
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
@@ -895,9 +910,14 @@ Does this do anything?
 #+END_SRC
 ** Org-Notify
 #+BEGIN_SRC emacs-lisp
-;; (add-to-list 'load-path "~/.emacs.d/elpa/")
-;; (require 'org-notify)
+ (add-to-list 'load-path "~/.emacs.d/elpa/")
+ (require 'org-notify)
+;; (org-notify)
 #+END_SRC
+
+#+RESULTS:
+: org-notify
+
 ** Calfw: Calender Framework
 #+BEGIN_SRC emacs-lisp
   ;; (require 'calfw)
@@ -942,21 +962,25 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 #+END_SRC
 ** Org-brain
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package org-brain :ensure t
-  ;;   :init
-  ;;   (setq org-brain-path "~/orgs/brain/")
-  ;;   ;; For Evil users
-  ;;   ;  (eval-after-load 'evil
-  ;; ;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  ;;   :config
-  ;;   (setq org-id-track-globally t)
-  ;;   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  ;;   (push '("b" "Brain" plain (function org-brain-goto-end)
-  ;;           "* %i%?" :empty-lines 1)
-  ;;         org-capture-templates)
-  ;;   (setq org-brain-visualize-default-choices 'all)
-  ;;   (setq org-brain-title-max-length 12))
+  (use-package org-brain :ensure t
+    :init
+    (setq org-brain-path "~/orgs/brain/")
+    ;; For Evil users
+    ;  (eval-after-load 'evil
+  ;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+    :config
+    (setq org-id-track-globally t)
+    (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+    (push '("b" "Brain" plain (function org-brain-goto-end)
+            "* %i%?" :empty-lines 1)
+          org-capture-templates)
+    (setq org-brain-visualize-default-choices 'all)
+    (setq org-brain-title-max-length 75))
 #+END_SRC
+
+#+RESULTS:
+: t
+
 ** Org-dashboard
 <2018-01-06 Sat>
 - Configured to stop displaying completed projects
@@ -1377,11 +1401,11 @@ Source: http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed
   (global-set-key (kbd "C-x w") 'elfeed)
 
   ;; use an org file to organise feeds
-  ;; (use-package elfeed-org
-  ;;   :ensure t
-  ;;   :config
-  ;;   (elfeed-org)
-  ;;   (setq rmh-elfeed-org-files (list "~/orgs/elfeed.org")))
+  (use-package elfeed-org
+    :ensure t
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/orgs/elfeed.org")))
 #+END_SRC
 Some bookmarks
 #+BEGIN_SRC emacs-lisp
