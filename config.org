@@ -509,6 +509,33 @@ Set autofill mode by default for all major modes
 
 #+RESULTS:
 : -lt
+** Clean up modeline
+<2018-11-21 Wed>
+#+BEGIN_SRC elisp
+(diminish 'company-mode)
+(diminish 'yas-minor-mode)
+(diminish 'eldoc-mode)
+(diminish 'helm-mode)
+(diminish 'org)
+#+END_SRC
+
+#+RESULTS:
+** Olivetti mode - turn on C-c ] binding
+<2018-11-24 Sat>
+#+BEGIN_SRC elisp
+(eval-after-load "olivetti-mode"
+  '(define-key olivetti-mode-map (kbd "C-c ]") nil))
+#+END_SRC
+
+#+RESULTS:
+** Get Shell-Command to recognize bash aliases
+#+BEGIN_SRC elisp
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
+#+END_SRC
+
+#+RESULTS:
+: -ic
 
 * Python
 ** Setting to use shell arguments?
@@ -716,6 +743,13 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
            "* %?\n%U\n" :clock-in t :clock-resume t)
+           ("d" "dump org capture" entry
+    	   (file+headline "~/orgs/dump.org" "Unsorted")
+    	   "* %?%:description Added %U
+    #+BEGIN_QUOTE
+    %x
+    #+END_QUOTE" :immediate-finish t)
+
           ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
            "* \n
     ,#+BEGIN_EXPORT html
@@ -754,6 +788,10 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
   ;; Look up to three levels deep
   (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
+
+#+RESULTS:
+: ((org-agenda-files :maxlevel . 4))
+
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp
 ;; Commented the following 4 lines because I don't use them anymore
@@ -1053,9 +1091,13 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ** Org notmuch
 <2018-04-23 Mon>
 #+BEGIN_SRC emacs-lisp
-  ;; (add-to-list 'load-path "/usr/share/org-mode/lisp")
-  ;; (require 'org-notmuch)
+  (add-to-list 'load-path "/usr/share/org-mode/lisp")
+  (require 'org-notmuch)
 #+END_SRC
+
+#+RESULTS:
+: org-notmuch
+
 ** Org-habit
 <2018-06-11 Mon>
 Playing around with org-habit to help Sumanth get the consistency
@@ -1475,7 +1517,7 @@ Some bookmarks
 #+BEGIN_SRC emacs-lisp
 (require 'cl)
 #+END_SRC
-** PDF-tools
+* PDF-tools
 +Deleted package on <2018-01-02 Tue>+
 Reinstalling on cerevisaj on <2018-01-02 Tue>
 #+BEGIN_SRC emacs-lisp
@@ -1576,44 +1618,44 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 <2018-04-22 Sun>
 ** Notmuch setup
  #+BEGIN_SRC emacs-lisp
-   ;; (autoload 'notmuch "notmuch" "notmuch mail" t)
-   ;; (require 'notmuch)
-   ;; ;; setup the mail address and use name
-   ;; (setq mail-user-agent 'message-user-agent)
-   ;; (setq user-mail-address "amogh.jalihal@gmail.com"
-   ;;       user-full-name "Amogh Jalihal")
-   ;; ;; smtp config
-   ;; (setq smtpmail-smtp-server "smtp.gmail.com"
-   ;;       message-send-mail-function 'message-smtpmail-send-it)
+   (autoload 'notmuch "notmuch" "notmuch mail" t)
+   (require 'notmuch)
+   ;; setup the mail address and use name
+   (setq mail-user-agent 'message-user-agent)
+   (setq user-mail-address "amogh.jalihal@gmail.com"
+         user-full-name "Amogh Jalihal")
+   ;; smtp config
+   (setq smtpmail-smtp-server "smtp.gmail.com"
+         message-send-mail-function 'message-smtpmail-send-it)
 
-   ;; ;; report problems with the smtp server
-   ;; (setq smtpmail-debug-info t)
-   ;; ;; add Cc and Bcc headers to the message buffer
-   ;; (setq message-default-mail-headers "Cc: \nBcc: \n")
-   ;; ;; postponed message is put in the following draft directory
-   ;; (setq message-auto-save-directory "~/mail/draft")
-   ;; (setq message-kill-buffer-on-exit t)
-   ;; ;; change the directory to store the sent mail
-   ;; (setq message-directory "~/mail/")
+   ;; report problems with the smtp server
+   (setq smtpmail-debug-info t)
+   ;; add Cc and Bcc headers to the message buffer
+   (setq message-default-mail-headers "Cc: \nBcc: \n")
+   ;; postponed message is put in the following draft directory
+   (setq message-auto-save-directory "~/mail/draft")
+   (setq message-kill-buffer-on-exit t)
+   ;; change the directory to store the sent mail
+   (setq message-directory "~/mail/")
 
 
-   ;; (defun notmuch-exec-offlineimap ()
-   ;;     "execute offlineimap"
-   ;;     (interactive)
-   ;;     (set-process-sentinel
-   ;;      (start-process-shell-command "offlineimap"
-   ;;                                   "*offlineimap*"
-   ;;                                   "offlineimap -o")
-   ;;      '(lambda (process event)
-   ;;         (notmuch-refresh-all-buffers)
-   ;;         (let ((w (get-buffer-window "*offlineimap*")))
-   ;;           (when w
-   ;;             (with-selected-window w (recenter (window-end)))))))
-   ;;     (popwin:display-buffer "*offlineimap*"))
+   (defun notmuch-exec-offlineimap ()
+       "execute offlineimap"
+       (interactive)
+       (set-process-sentinel
+        (start-process-shell-command "offlineimap"
+                                     "*offlineimap*"
+                                     "offlineimap -o")
+        '(lambda (process event)
+           (notmuch-refresh-all-buffers)
+           (let ((w (get-buffer-window "*offlineimap*")))
+             (when w
+               (with-selected-window w (recenter (window-end)))))))
+       (popwin:display-buffer "*offlineimap*"))
 
-   ;; (add-to-list 'popwin:special-display-config
-   ;;              '("*offlineimap*" :dedicated t :position bottom :stick t
-   ;;                :height 0.4 :noselect t))
+   (add-to-list 'popwin:special-display-config
+                '("*offlineimap*" :dedicated t :position bottom :stick t
+                  :height 0.4 :noselect t))
  #+END_SRC
 ** Sending email
 #+BEGIN_SRC emacs-lisp
@@ -1629,11 +1671,11 @@ Setup from https://kkatsuyuki.github.io/notmuch-conf/#orgeb16d6a
 ** Custom Keybindings
 From the notmuch emacs page
 #+BEGIN_SRC emacs-lisp
-   ;; (define-key notmuch-show-mode-map "d"
-   ;;   (lambda ()
-   ;;     "move message to deleted"
-   ;;     (interactive)
-   ;;     (notmuch-show-tag (list "+deleted" "-inbox"))))
+   (define-key notmuch-show-mode-map "d"
+     (lambda ()
+       "move message to deleted"
+       (interactive)
+       (notmuch-show-tag (list "+deleted" "-inbox"))))
 
   ;;    ;; (define-key notmuch-show-mode-map "d"
   ;;    ;;   (lambda ()
@@ -1675,11 +1717,57 @@ relative-compose:  0
 - Start the server using SuperDirt.start
 - Start a tidal repl using C-c C-s
 - Algorave!
-* COMMENT Hydras
+* Playground
+** Generate report
+ #+BEGIN_SRC elisp
+   (defun aj/generate-org-reports ()
+     (interactive)
+     (shell-command "~/src/org-report-processing.sh"))
 
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c e") (lambda()
-                                  (call-process-shell-command "/home/jalihal/.emacs.d/src/pmt.sh")
-                                  )
-                  )
-#+END_SRC
+ #+END_SRC
+
+ #+RESULTS:
+ : aj/generate-org-reports
+
+** Keyboard shortcuts related to website
+ <2018-11-25 Sun>
+ #+BEGIN_SRC elisp
+   (defun aj/update-coffee-cups ()
+     (interactive)
+     (shell-command "~/src/updatecups.sh"))
+  ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
+ #+END_SRC
+
+ #+RESULTS:
+ : aj/update-coffee-cups
+** Hydras
+ <2018-11-25 Sun>
+ A wrapper around my org-mode based crutches.
+ #+BEGIN_SRC elisp
+   (require 'hydra)
+
+   (defhydra hydra-shell (:color pink)
+   "
+
+   ^What would you like to do?^
+   ...........................
+   _g_enerate reports
+   _u_pdate coffee consumption
+
+   "
+     ("g" aj/generate-org-reports "generate" )
+     ("u" aj/update-coffee-cups "coffee")
+     ("q" nil "quit")
+     )
+     ;; Note that these are org-mode specific!!
+     (define-key org-mode-map (kbd "C-c h") 'hydra-shell/body)
+     ;; h for hydra!!
+   ;;(hydra-set-property 'hydra-shell :verbosity 1)
+
+
+ #+END_SRC
+
+ #+RESULTS:
+ : hydra-shell/body
+
+

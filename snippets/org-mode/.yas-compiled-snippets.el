@@ -2,6 +2,7 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'org-mode
+
                      '(("pysrc" "#+BEGIN_SRC python :results output :session :async t\n$0\n#+END_SRC" "pysrc" nil nil nil "/home/jamogh/.emacs.d/snippets/org-mode/pysrc" nil nil)
                        ("ipy" "#+BEGIN_SRC ipython :session :exports both :results raw drawer :async t\n  $0\n#+END_SRC" "ipython block" nil nil nil "/home/jamogh/.emacs.d/snippets/org-mode/ipython" nil nil)
                        ("elispsrc" "#+BEGIN_SRC emacs-lisp :results raw\n\n#+END_SRC" "elispsrc block" nil nil nil "/home/jamogh/.emacs.d/snippets/org-mode/elisp_src_block" nil nil)
