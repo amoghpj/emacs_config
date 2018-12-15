@@ -539,7 +539,7 @@ c 'echo $PATH'"))))
  (ditaa . t)
  (latex . t)
  (R . t)
-(julia . t)
+;;(julia . t)
 (screen . t)
 ))
 #+END_SRC

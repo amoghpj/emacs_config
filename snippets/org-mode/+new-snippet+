@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Relative File Path
-# key: relfilepath
-# --
-`(concat "~" (string-remove-prefix  (getenv "PWD") default-directory))`
