@@ -137,14 +137,46 @@ If the new path's directories does not exist, create them."
 (setq make-backup-file-name-function 'my-backup-file-name)
 
 #+END_SRC
-** Clean Dired view by default
-   <2018-01-07 Sun>
-   Answer [[https://emacs.stackexchange.com/a/27913][from SE]]
-   #+BEGIN_SRC emacs-lisp
+** Dired
+[2018-12-14 Fri]
+Load dired x
+#+BEGIN_SRC emacs-lisp
+  (autoload 'dired-jump "dired-x"
+    "Jump to Dired buffer corresponding to current buffer." t)
+
+  (autoload 'dired-jump-other-window "dired-x"
+    "Like \\[dired-jump] (dired-jump) but in other window." t)
+
+  (define-key global-map "\C-x\C-j" 'dired-jump)
+  (define-key global-map "\C-x4\C-j" 'dired-jump-other-window)
+
+
+  (add-hook 'dired-load-hook
+            (lambda ()
+              (load "dired-x")
+              ;; Set dired-x global variables here.  For example:
+              ;; (setq dired-guess-shell-gnutar "gtar")
+              ;; (setq dired-x-hands-off-my-keys nil)
+              ))
+  (add-hook 'dired-mode-hook
+            (lambda ()
+              ;; Set dired-x buffer-local variables here.  For example:
+  (setq-default dired-omit-files-p t) ; Buffer-local variable
+              ;; (dired-omit-mode 1)
+              ))
 (add-hook 'dired-mode-hook
       (lambda ()
         (dired-hide-details-mode)))
+
 #+END_SRC
+
+#+RESULTS:
+| (lambda nil (setq-default dired-omit-files-p t) (dired-omit-mode 1)) | (lambda nil (setq-default dired-omit-files-p t) (setq dired-omit-files (concat dired-omit-files \ | ^\..+$)) (dired-omit-mode 1)) | (lambda nil (dired-omit-mode 1)) | dired-extra-startup | (lambda nil (dired-hide-details-mode)) | (lambda nil) |
+
+| lambda | nil | (dired-hide-details-mode) |
+#+BEGIN_EXAMPLE
+^\.?#\|^\.$\|^\.\.$
+#+END_EXAMPLE
 ** Theme Changer
    <2018-01-07 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -517,6 +549,7 @@ Set autofill mode by default for all major modes
 (diminish 'eldoc-mode)
 (diminish 'helm-mode)
 (diminish 'org)
+(diminish 'org-agenda-mode)
 #+END_SRC
 
 #+RESULTS:
@@ -536,6 +569,17 @@ Set autofill mode by default for all major modes
 
 #+RESULTS:
 : -ic
+
+** Ace links
+[2018-12-14 Fri]
+#+BEGIN_SRC elisp
+(ace-link-setup-default)
+(define-key org-mode-map (kbd "M-o") 'ace-link-org)
+;;(define-key help-mode-map (kbd "M-o") 'ace-link-help)
+#+END_SRC
+
+#+RESULTS:
+: ace-link-org
 
 * Python
 ** Setting to use shell arguments?
@@ -704,11 +748,11 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
         '(
           ("t" "Tasks")
           ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-           "** TODO %?  %^g\n%u
+           "** TODO %?  %^g
     :PROPERTIES:
     :BLOCKER:
     :TRIGGER:
-    :END:" )
+    :END:\n%u" )
 
           ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
            "** TODO %?  %^g\n%u" )
@@ -807,8 +851,9 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
         ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
         '((" " "Agenda"
            ((agenda "" nil)
-            ;; All headings with the "cs6824" tag
+           ;;
 
+           ;;
             (tags-todo "paper"
                        ((org-agenda-overriding-header "Paper")))
             (tags-todo "presentation"
@@ -823,7 +868,7 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
                        ((org-agenda-overriding-header "Literature")))
             (tags-todo "personal"
                        ((org-agenda-overriding-header "All personal tasks")))
-                       
+
             (tags-todo "work"
                        ((org-agenda-overriding-header "All Research")))
             ;; (tags-todo ""
@@ -840,8 +885,33 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
             (todo "WAITING"
                   ((org-agenda-overriding-header "Future Tasks")))
             )
-           )))
+            )
+            ;; ("x" "With deadline columns" agenda* ""
+            ;; ((org-agenda-overriding-columns-format "%45ITEM %EFFORT %CLOCKSUM")
+            ;; (org-agenda-view-columns-initially t)))
+            )
+            )
 #+END_SRC
+
+#+RESULTS:
+|   | Agenda | ((agenda  nil) (tags-todo paper ((org-agenda-overriding-header Paper))) (tags-todo presentation ((org-agenda-overriding-header Presentations))) (tags-todo NutSig ((org-agenda-overriding-header Model building))) (tags-todo scripting ((org-agenda-overriding-header Scripting))) (tags-todo literature ((org-agenda-overriding-header Literature))) (tags-todo personal ((org-agenda-overriding-header All personal tasks))) (tags-todo work ((org-agenda-overriding-header All Research))) (todo TODO ((org-agenda-overriding-header Task list) (org-agenda-sorting-strategy (quote (time-up priority-down effort-up))))) (todo WAITING ((org-agenda-overriding-header Future Tasks)))) |
+
+*** Org agenda column view
+[2018-12-02 Sun]
+#+BEGIN_SRC elisp
+;; format string used when creating CLOCKSUM lines and when generating a
+;; time duration (avoid showing days)
+(setq org-time-clocksum-format
+      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+#+END_SRC
+
+#+RESULTS:
+| :hours | %d | :require-hours | t | :minutes | :%02d | :require-minutes | t |
+
+  
+#+RESULTS:
+| ((org-agenda-overriding-columns-format %50ITEM %EFFORT %CLOCKSUM)) |
+
 ** Org Publishing
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1410,6 +1480,31 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 #+RESULTS:
 | f-ediff-org-fold-tree |
+** Org download
+<2018-11-28 Wed>
+#+begin_src elisp
+    (setq-default org-download-image-dir "~/orgs/downloads/")
+(add-hook 'dired-mode-hook 'org-download-enable)
+#+end_src  
+
+#+RESULTS:
+| org-download-enable | (lambda nil (dired-hide-details-mode)) |
+** Save all org buffers after refile
+#+BEGIN_SRC elisp
+(advice-add 'org-refile :after 'org-save-all-org-buffers)
+#+END_SRC
+
+#+RESULTS:
+** Customizing org-todo keywords
+#+BEGIN_SRC elisp
+  (setq org-todo-keyword-faces
+        '(("TODO" . org-warning) ("FAILED" . "yellow")
+          ("CANCELED" . "yellow")
+          ("IN-PROGRESS" . (:foreground "blue"))))
+#+END_SRC
+
+#+RESULTS:
+: ((TODO . org-warning) (FAILED . yellow) (CANCELED . yellow) (IN-PROGRESS :foreground blue))
 
 * Autocomplete
 ** Require auto-complete
@@ -1719,7 +1814,7 @@ relative-compose:  0
 - Algorave!
 * Playground
 ** Generate report
- #+BEGIN_SRC elisp
+ #+BEGIN_SRC emacs-lisp
    (defun aj/generate-org-reports ()
      (interactive)
      (shell-command "~/src/org-report-processing.sh"))
@@ -1731,7 +1826,7 @@ relative-compose:  0
 
 ** Keyboard shortcuts related to website
  <2018-11-25 Sun>
- #+BEGIN_SRC elisp
+ #+BEGIN_SRC emacs-lisp
    (defun aj/update-coffee-cups ()
      (interactive)
      (shell-command "~/src/updatecups.sh"))
@@ -1740,27 +1835,41 @@ relative-compose:  0
 
  #+RESULTS:
  : aj/update-coffee-cups
+** When was the last time I had coffee?
+ #+BEGIN_SRC emacs-lisp
+   (defun aj/when-was-my-last-coffee ()
+     (interactive)
+     (shell-command "~/src/when-was-my-last-coffee.sh"))
+  ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
+ #+END_SRC
+
+ #+RESULTS:
+ : aj/when-was-my-last-coffee
+
 ** Hydras
  <2018-11-25 Sun>
  A wrapper around my org-mode based crutches.
- #+BEGIN_SRC elisp
+ #+BEGIN_SRC emacs-lisp
    (require 'hydra)
 
-   (defhydra hydra-shell (:color pink)
+   (defhydra aj/hydra-shell (:color blue)
    "
 
    ^What would you like to do?^
    ...........................
    _g_enerate reports
-   _u_pdate coffee consumption
-
+   c_u_p of coffee?
+   _v_isualize brain
+   _l_ast coffee
    "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
+     ("v" org-brain-visualize "visualize")
+     ("l" aj/when-was-my-last-coffee "last?")
      ("q" nil "quit")
      )
      ;; Note that these are org-mode specific!!
-     (define-key org-mode-map (kbd "C-c h") 'hydra-shell/body)
+     (define-key org-mode-map (kbd "C-c h") 'aj/hydra-shell/body)
      ;; h for hydra!!
    ;;(hydra-set-property 'hydra-shell :verbosity 1)
 
@@ -1768,6 +1877,29 @@ relative-compose:  0
  #+END_SRC
 
  #+RESULTS:
- : hydra-shell/body
+ : aj/hydra-shell/body
 
+ [2018-12-14 Fri]
+From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
+#+BEGIN_SRC emacs-lisp
+(defhydra aj/hydra-elfeed ()
+"filter"
+("b" (elfeed-search-set-filter "@6-months-ago +biology") "biology")
+("h" (elfeed-search-set-filter "@6-months-ago +philosophy") "philosophy")
+("p" (elfeed-search-set-filter "@6-months-ago +politics") "politics")
+("y" (elfeed-search-set-filter "@6-months-ago +physics") "physics")
+("j" (elfeed-search-set-filter "@6-months-ago +journals") "journals")
+("s" (elfeed-search-set-filter "@6-months-ago +software") "software")
+("i" (elfeed-search-set-filter "@6-months-ago +indic") "indic")
+("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+("M" elfeed-toggle-star "Mark")
+("A" (elfeed-search-set-filter "@6-months-ago") "All")
+("T" (elfeed-search-set-filter "@1-day-ago") "Today")
+("Q" bjm/elfeed-save-db-and-bury "Quit Elfeed" :color blue)
+("q" nil "quit" :color blue)
+)
+(define-key elfeed-search-mode-map (kbd "C-c h") 'aj/hydra-elfeed/body)
+#+END_SRC
 
+#+RESULTS:
+: aj/hydra-elfeed/body
