@@ -543,12 +543,12 @@ Set autofill mode by default for all major modes
 : -lt
 ** Clean up modeline
 <2018-11-21 Wed>
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (diminish 'company-mode)
 (diminish 'yas-minor-mode)
 (diminish 'eldoc-mode)
 (diminish 'helm-mode)
-(diminish 'org)
+(diminish 'org-mode)
 (diminish 'org-agenda-mode)
 #+END_SRC
 
@@ -736,6 +736,42 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
   ;;                ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
   ;;                ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
 #+END_SRC
+*** Org-Rss
+[2018-12-17 Mon]
+This is such a cool idea!!
+#+BEGIN_SRC emacs-lisp
+(require 'ox-rss)
+(add-to-list 'org-publish-project-alist
+             '("blog-rss"
+		:base-directory "~/public_html/"
+		:base-extension "org"
+		:publishing-directory "~/public_html/"
+		:publishing-function (org-rss-publish-to-rss)
+		:html-link-home "http://amoghjalihal.com/"
+		:html-link-use-abs-url t
+		:exclude ".*"
+		:include ("social_1.org")))
+
+
+(setq org-publish-project-alist
+      '(("blog"
+         :base-directory "~/public_html/"
+         :html-extension "html"
+         :base-extension "org"
+         :publishing-directory "~/public_html/"
+         :publishing-function (org-html-publish-to-html)
+         :html-preamble nil
+         :html-postamble nil
+         :html-head-extra
+         "<link rel=\"alternate\" type=\"application/rss+xml\"
+                href=\"http://amoghjalihal.org/my-blog.xml\"
+                title=\"RSS feed for amoghjalihal.org\">")))
+
+#+END_SRC
+
+#+RESULTS:
+| blog | :base-directory | ~/public_html/ | :html-extension | html | :base-extension | org | :publishing-directory | ~/public_html/ | :publishing-function | (org-html-publish-to-html) | :html-preamble | nil | :html-postamble | nil | :html-head-extra | <link rel="alternate" type="application/rss+xml" |
+
 ** Org-capture
 *** Setup
 #+BEGIN_SRC emacs-lisp
@@ -750,16 +786,22 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
           ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
            "** TODO %?  %^g
     :PROPERTIES:
+    :CREATED: %U
     :BLOCKER:
     :TRIGGER:
-    :END:\n%u" )
+    :END:\n" )
 
           ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-           "** TODO %?  %^g\n%u" )
+           "** TODO %?  %^g
+    :PROPERTIES:
+    :CREATED: %U
+    :BLOCKER:
+    :TRIGGER:
+    :END:\n" )
 
           ;; ("t" "TA" entry (file+datetree "~/orgs/diary.org")
           ;;  "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
-                                          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
+          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
           ;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
           ("c" "Clock tasks")
           ("cw" "work" entry (file+datetree "~/orgs/diary.org")
@@ -782,17 +824,17 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
           ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
            "** Meeting on %U
   - %?" :prepend t :empty-lines 1)        
-        
+
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
            "* %?\n%U\n" :clock-in t :clock-resume t)
            ("d" "dump org capture" entry
-    	   (file+headline "~/orgs/dump.org" "Unsorted")
-    	   "* %?%:description Added %U
-    #+BEGIN_QUOTE
+           (file+headline "~/orgs/dump.org" "Unsorted")
+           "* %?%:description Added %U
+    ,#+BEGIN_QUOTE
     %x
-    #+END_QUOTE" :immediate-finish t)
+    ,#+END_QUOTE" :immediate-finish t)
 
           ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
            "* \n
@@ -819,8 +861,6 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
           ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
            "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
               ")
-          ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-          ;;	 "** NEXT %? \nDEADLINE: %t")
           ))
 
   ;;(setq org-capture-templates
@@ -1505,7 +1545,11 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 #+RESULTS:
 : ((TODO . org-warning) (FAILED . yellow) (CANCELED . yellow) (IN-PROGRESS :foreground blue))
-
+** Ox-rst
+[2018-12-16 Sun]
+#+BEGIN_SRC emac-lisp
+(require 'ox-rst)
+#+END_SRC
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
