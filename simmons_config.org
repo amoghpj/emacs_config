@@ -578,6 +578,10 @@ c 'echo $PATH'"))))
           ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
            "** Meeting on %U
   - %?" :prepend t :empty-lines 1)        
+          ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
+           "* %?
+  %U")        
+
         
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
