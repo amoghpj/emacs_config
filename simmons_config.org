@@ -542,9 +542,15 @@ c 'echo $PATH'"))))
 ;;(julia . t)
 (screen . t)
 ))
+
+ (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
+   ;; ;;; display/update images in the buffer after I evaluate
+ (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
 #+END_SRC
 
 #+RESULTS:
+| org-display-inline-images |
 
 ** Org-capture
 *** Setup
@@ -558,11 +564,11 @@ c 'echo $PATH'"))))
         '(
           ("t" "Tasks")
           ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-           "** TODO %?  %^g\n%u
+           "** TODO %?  %^g
     :PROPERTIES:
     :BLOCKER:
     :TRIGGER:
-    :END:" )
+    :END:\n%u" )
 
           ("e" "Entry")
           ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
@@ -602,6 +608,10 @@ c 'echo $PATH'"))))
   ;; Look up to three levels deep
   (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
+
+#+RESULTS:
+: ((org-agenda-files :maxlevel . 4))
+
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp
 ;; Commented the following 4 lines because I don't use them anymore
@@ -683,12 +693,33 @@ Refresh inline display
 	org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
 (require 'org-ref)
 #+END_SRC
+
 *** Some shortcuts
 **** Crossref-add-bib-entry
 <2018-01-16 Tue>
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c b") 'crossref-add-bibtex-entry)
+  (global-set-key (kbd "C-c b") 'crossref-add-bibtex-entry)
+  (global-set-key (kbd "C-c ]") 'org-ref-helm-insert-cite-link)
 #+END_SRC
+
+#+RESULTS:
+: org-ref-helm-insert-cite-link
+
+*** Customizing bibkeys
+<2018-11-30 Fri>
+#+BEGIN_SRC elisp
+  (setq bibtex-autokey-year-length 4
+        bibtex-autokey-name-year-separator "_"
+        bibtex-autokey-year-title-separator "_"
+        bibtex-autokey-titlewords 3
+        bibtex-autokey-titlewords-length 20
+        bibtex-autokey-name-case-convert-function 'capitalize
+        )
+#+END_SRC
+
+#+RESULTS:
+: capitalize
+
 ** Comment blocks in Org-mode
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
@@ -785,9 +816,9 @@ graph working
 #+END_SRC
 ** Org-gnome
 #+BEGIN_SRC emacs-lisp
-(require 'org-gnome) 
-(setq org-gnome-integrate-with-calendar t)
-(org-gnome-turn-on)
+  ;; (require 'org-gnome) 
+  ;; (setq org-gnome-integrate-with-calendar t)
+  ;; (org-gnome-turn-on)
 #+END_SRC
 ** Org-babel-screen
 #+BEGIN_SRC elisp
