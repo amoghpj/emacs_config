@@ -41,6 +41,33 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 
 #+RESULTS:
 : load-theme
+** Poet Theme customizations
+[2019-01-02 Wed]
+#+begin_src emacs-lisp
+
+  ;; (add-hook 'text-mode-hook
+  ;;             (lambda ()
+  ;;               (variable-pitch-mode 1)))
+
+  ;; (set-face-attribute 'default nil :family "Iosevka" :height 130)
+  ;; (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+  ;; (set-face-attribute 'variable-pitch nil :family "Baskerville")
+  ;; ;; (olivetti-mode 1)        ;; Centers text in the buffer
+  ;; (flyspell-mode 1)        ;; Catch Spelling mistakes
+  ;; (typo-mode 1)            ;; Good for symbols like em-dash
+
+  ;; (blink-cursor-mode 0)    ;; Reduce visual noise
+  ;; (linum-mode 0)           ;; No line numbers for pros
+
+  ;; (require 'org-bullets)
+  ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+  ;;   (setq org-bullets-bullet-list
+  ;;       '("◉" "○"))
+  ;;   (org-bullets 1)
+#+end_src
+
+#+RESULTS:
 
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
@@ -140,38 +167,41 @@ If the new path's directories does not exist, create them."
 ** Dired
 [2018-12-14 Fri]
 Load dired x
+(Keybindings are from https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/)
 #+BEGIN_SRC emacs-lisp
-  (autoload 'dired-jump "dired-x"
-    "Jump to Dired buffer corresponding to current buffer." t)
+    (autoload 'dired-jump "dired-x"
+      "Jump to Dired buffer corresponding to current buffer." t)
 
-  (autoload 'dired-jump-other-window "dired-x"
-    "Like \\[dired-jump] (dired-jump) but in other window." t)
+    (autoload 'dired-jump-other-window "dired-x"
+      "Like \\[dired-jump] (dired-jump) but in other window." t)
 
-  (define-key global-map "\C-x\C-j" 'dired-jump)
-  (define-key global-map "\C-x4\C-j" 'dired-jump-other-window)
+    (define-key global-map "\C-x\C-j" 'dired-jump)
+    (define-key global-map "\C-x4\C-j" 'dired-jump-other-window)
 
 
-  (add-hook 'dired-load-hook
-            (lambda ()
-              (load "dired-x")
-              ;; Set dired-x global variables here.  For example:
-              ;; (setq dired-guess-shell-gnutar "gtar")
-              ;; (setq dired-x-hands-off-my-keys nil)
-              ))
-  (add-hook 'dired-mode-hook
-            (lambda ()
-              ;; Set dired-x buffer-local variables here.  For example:
-  (setq-default dired-omit-files-p t) ; Buffer-local variable
-              ;; (dired-omit-mode 1)
-              ))
-(add-hook 'dired-mode-hook
-      (lambda ()
-        (dired-hide-details-mode)))
+    (add-hook 'dired-load-hook
+              (lambda ()
+                (load "dired-x")
+                ;; Set dired-x global variables here.  For example:
+                ;; (setq dired-guess-shell-gnutar "gtar")
+                ;; (setq dired-x-hands-off-my-keys nil)
+                ))
+
+  (with-eval-after-load 'dired
+    (require 'dired-x)
+    (setq-default dired-omit-files-p t)
+    ;;(setq dired-listing-switches "-alhv")
+    ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+    (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+    ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
+    (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
+    ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
+    )
 
 #+END_SRC
 
 #+RESULTS:
-| (lambda nil (setq-default dired-omit-files-p t) (dired-omit-mode 1)) | (lambda nil (setq-default dired-omit-files-p t) (setq dired-omit-files (concat dired-omit-files \ | ^\..+$)) (dired-omit-mode 1)) | (lambda nil (dired-omit-mode 1)) | dired-extra-startup | (lambda nil (dired-hide-details-mode)) | (lambda nil) |
+: dired-omit-mode
 
 | lambda | nil | (dired-hide-details-mode) |
 #+BEGIN_EXAMPLE
@@ -431,10 +461,10 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
   ;; (add-hook 'prog-mode-hook
   ;;           #'add-fira-code-symbol-keywords)
 
-      ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
-      ;; (add-to-list 'load-path
-      ;;              "~/.emacs.d/lisp/")
-      ;; (load "~/.emacs.d/lisp/symbols.el")
+  ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
+  ;; (add-to-list 'load-path
+  ;;              "~/.emacs.d/lisp/")
+  ;; (load "~/.emacs.d/lisp/symbols.el")
 #+END_SRC
 ** Rectangular select regep operations
    <2018-05-10 Thu>
@@ -543,12 +573,12 @@ Set autofill mode by default for all major modes
 : -lt
 ** Clean up modeline
 <2018-11-21 Wed>
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 (diminish 'company-mode)
 (diminish 'yas-minor-mode)
 (diminish 'eldoc-mode)
 (diminish 'helm-mode)
-(diminish 'org)
+(diminish 'org-mode)
 (diminish 'org-agenda-mode)
 #+END_SRC
 
@@ -580,6 +610,30 @@ Set autofill mode by default for all major modes
 
 #+RESULTS:
 : ace-link-org
+
+** Parenthesis Handling
+** Parenthesis and autocomplete
+[2018-12-21 Fri]
+#+BEGIN_SRC emacs-lisp
+(load-file "~/.emacs.d/parenthesis.el")
+(require 'parenthesis)
+(parenthesis-init)  
+(add-hook 'org-mode-hook '(lambda ()
+                           (progn
+                           ; other stuff
+                           (parenthesis-register-keys "[($~" org-mode-map))))
+(add-hook 'python-mode-hook '(lambda ()
+                           (progn
+                           ; other stuff
+                           (parenthesis-register-keys "[({\'\"" python-mode-map))))
+#+END_SRC
+
+#+RESULTS:
+| lambda | nil | (progn (parenthesis-register-keys [('"{ python-mode-map)) |
+| lambda | nil | (progn (parenthesis-register-keys [({" python-mode-map))  |
+| lambda | nil | (progn (parenthesis-register-keys [({'" python-mode-map)) |
+| lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
+| lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
 
 * Python
 ** Setting to use shell arguments?
@@ -736,6 +790,42 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
   ;;                ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
   ;;                ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
 #+END_SRC
+*** Org-Rss
+[2018-12-17 Mon]
+This is such a cool idea!!
+#+BEGIN_SRC emacs-lisp
+(require 'ox-rss)
+(add-to-list 'org-publish-project-alist
+             '("blog-rss"
+		:base-directory "~/public_html/"
+		:base-extension "org"
+		:publishing-directory "~/public_html/"
+		:publishing-function (org-rss-publish-to-rss)
+		:html-link-home "http://amoghjalihal.com/"
+		:html-link-use-abs-url t
+		:exclude ".*"
+		:include ("social_1.org")))
+
+
+(setq org-publish-project-alist
+      '(("blog"
+         :base-directory "~/public_html/"
+         :html-extension "html"
+         :base-extension "org"
+         :publishing-directory "~/public_html/"
+         :publishing-function (org-html-publish-to-html)
+         :html-preamble nil
+         :html-postamble nil
+         :html-head-extra
+         "<link rel=\"alternate\" type=\"application/rss+xml\"
+                href=\"http://amoghjalihal.org/my-blog.xml\"
+                title=\"RSS feed for amoghjalihal.org\">")))
+
+#+END_SRC
+
+#+RESULTS:
+| blog | :base-directory | ~/public_html/ | :html-extension | html | :base-extension | org | :publishing-directory | ~/public_html/ | :publishing-function | (org-html-publish-to-html) | :html-preamble | nil | :html-postamble | nil | :html-head-extra | <link rel="alternate" type="application/rss+xml" |
+
 ** Org-capture
 *** Setup
 #+BEGIN_SRC emacs-lisp
@@ -750,25 +840,32 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
           ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
            "** TODO %?  %^g
     :PROPERTIES:
+    :CREATED: %U
     :BLOCKER:
     :TRIGGER:
-    :END:\n%u" )
+    :END:\n" )
 
           ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-           "** TODO %?  %^g\n%u" )
+           "** TODO %?  %^g
+    :PROPERTIES:
+    :CREATED: %U
+    :BLOCKER:
+    :TRIGGER:
+    :END:\n" )
 
-          ;; ("t" "TA" entry (file+datetree "~/orgs/diary.org")
-          ;;  "* IN-PROGRESS %? :ISC:\n%u\n%a\n" :clock-in t :clock-resume t)
-                                          ;("s" "simulation" entry (file+datetree "~/orgs/diary.org")
-          ;; "* IN-PROGRESS %? :work:\n%u\n%a\n" :clock-in t :clock-resume t)
           ("c" "Clock tasks")
           ("cw" "work" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? %^g:work:\n%u\n%a\n" :clock-in t :clock-resume t)
+           "* IN-PROGRESS %? %^g:work:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("cc" "class" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? :class:\n%u\n%a\n" :clock-in t :clock-resume t)
+           "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS Meeting %? :MEETING:\n%t" :clock-in t :clock-resume t)
+           "* IN-PROGRESS Meeting %? :MEETING:\n%U" :clock-in t :clock-resume t)
+
           ("e" "Entry")
+          ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
+           "* %?
+  %U")        
+
           ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
            "** Meeting on %U
   ,#+BIND: org-export-use-babel nil
@@ -779,20 +876,31 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
   ,#+EXPORT_FILE_NAME: 
   ,#+LATEX_HEADER: \\usetheme{metropolis}
   %?" :prepend t :empty-lines 1)
-          ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
+          ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
            "** Meeting on %U
   - %?" :prepend t :empty-lines 1)        
-        
+          ("eM" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
+           "** With %?
+    :PROPERTIES:
+    :CREATED: %U
+    :END:
+     - "  :empty-lines 1)
+          ("er" "Reading list " entry (file+olp "~/orgs/AllNotes.org" "Reading List")
+           "**  %?
+    :PROPERTIES:
+    :CREATED: %U
+    :CONTEXT: %^{CONTEXT}
+    :END:")
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
            "* %?\n%U\n" :clock-in t :clock-resume t)
            ("d" "dump org capture" entry
-    	   (file+headline "~/orgs/dump.org" "Unsorted")
-    	   "* %?%:description Added %U
-    #+BEGIN_QUOTE
+           (file+headline "~/orgs/dump.org" "Unsorted")
+           "* %?%:description Added %U
+    ,#+BEGIN_QUOTE
     %x
-    #+END_QUOTE" :immediate-finish t)
+    ,#+END_QUOTE" :immediate-finish t)
 
           ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
            "* \n
@@ -816,11 +924,9 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
            :Attention: %^{_f_ocussed/_d_istracted|F|D}
            :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
            :END:")
-          ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-           "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-              ")
-          ;;("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-          ;;	 "** NEXT %? \nDEADLINE: %t")
+          ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+          ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+          ;;     ")
           ))
 
   ;;(setq org-capture-templates
@@ -1010,7 +1116,7 @@ Does this do anything?
 #+END_SRC
 ** Comment blocks in Org-mode
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
+;;(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
@@ -1111,8 +1217,14 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 *** Custom Shortcuts
 <2018-01-17 Wed>
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c j") 'org-clock-jump-to-current-clock)
+;;(global-set-key (kbd "C-c j") 'org-clock-jump-to-current-clock)
+;; Changed in Org 9
+(global-set-key (kbd "C-c j") 'org-clock-goto)
 #+END_SRC
+
+#+RESULTS:
+: org-clock-goto
+
 ** Inline latex highlighting
 <2018-02-14 Wed>
 #+BEGIN_SRC emacs-lisp
@@ -1153,6 +1265,37 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ;;(setq org-latex-listings 'minted)
 ;;(add-to-list 'org-latex-minted-langs '(ipython "python"))
 #+END_SRC
+[2019-01-03 Thu]
+From John Kitchin’s blog
+#+begin_src emacs-lisp
+  (org-add-link-type
+   "comment"
+   (lambda (linkstring)
+     (let ((elm (org-element-context))
+           (use-dialog-box nil))
+       (when (y-or-n-p "Delete comment? ")
+         (setf (buffer-substring
+                (org-element-property :begin elm)
+                (org-element-property :end elm))
+               (cond
+                ((org-element-property :contents-begin elm)
+                 (buffer-substring
+                  (org-element-property :contents-begin elm)
+                  (org-element-property :contents-end elm)))
+                (t
+                 ""))))))
+   (lambda (keyword desc format)
+     (cond
+      ((eq format 'html)
+       (format "<font color=\"red\"><abbr title=\"%s\" color=\"red\">COMMENT</abbr></font> %s" keyword (or desc "")))
+      ((eq format 'latex)
+      ;; AJ: Ignore the description, format the link part inline
+      (format "%% %s\n" keyword)))))
+#+end_src
+
+#+RESULTS:
+: Created comment link.
+
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
@@ -1505,7 +1648,11 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 #+RESULTS:
 : ((TODO . org-warning) (FAILED . yellow) (CANCELED . yellow) (IN-PROGRESS :foreground blue))
-
+** Ox-rst
+[2018-12-16 Sun]
+#+BEGIN_SRC emac-lisp
+(require 'ox-rst)
+#+END_SRC
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1591,22 +1738,21 @@ Some bookmarks
 ** Syntax Highlighting for code Export
 #+BEGIN_SRC emacs-lisp
 ;; Add minted to the defaults packages to include when exporting.
-;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+(add-to-list 'org-latex-packages-alist '("" "minted"))
 ;; Tell the latex export to use the minted package for source
 ;; code coloration.
-;; (setq org-latex-listings 'minted)
+(setq org-latex-listings 'minted)
 ;; Let the exporter use the -shell-escape option to let latex
 ;; execute external programs.
 ;; This obviously and can be dangerous to activate!
 ;; When using minted, use this:
-;; (setq org-latex-pdf-process
-;; (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
-#+END_SRC
-** PDFLATEX command execution order
-#+BEGIN_SRC emacs-lisp
 (setq org-latex-pdf-process
- (quote ("pdflatex  %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
+(quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
 #+END_SRC
+
+#+RESULTS:
+| pdflatex -shell-escape -interaction nonstopmode %f | bibtex %b | bibtex %b | pdflatex -shell-escape -interaction nonstopmode %f | pdflatex -shell-escape -interaction nonstopmode %f |
+
 * Common Lisp
 ** Require
 #+BEGIN_SRC emacs-lisp
@@ -1845,6 +1991,47 @@ relative-compose:  0
 
  #+RESULTS:
  : aj/when-was-my-last-coffee
+** Recording secrets
+   [2018-12-21 Fri]
+#+BEGIN_SRC emacs-lisp
+  (defun aj/success-secrets ()
+    (interactive)
+    (shell-command "~/src/success.sh"))
+  (defun aj/fail-secrets ()
+    (interactive)
+    (shell-command "~/src/fail.sh"))
+
+  (defhydra aj/secrets (:color blue)
+    ("s" aj/success-secrets "success")
+    ("f" aj/fail-secrets "fail"))
+
+#+END_SRC
+
+#+RESULTS:
+: aj/secrets/body
+** Dired quicklinks
+[2018-12-26 Wed]
+#+BEGIN_SRC emacs-lisp
+  (defhydra aj/dired-links (:color blue)
+  "
+                                      Quick Links to various directories
+                                      ..................................
+                                      _r_esearch      _d_ownloads      _e_macs     
+                                      _m_odel         _D_ocuments      e_l_feed
+  "
+    ("r" (dired "~/jalihal_projects/Research/" ) "research")
+    ("d" (dired "~/Downloads/" ) "downloads")
+    ("D" (dired "~/Documents/" ) "documents")
+    ("m" (dired "~/jalihal_projects/Research/data/ModelAnalysis/" ) "model")
+    ("e" (dired "~/.emacs.d" ) "emacs config")
+    ("l" (dired "~/orgs/elfeed.org" ) "elfeed config")
+    ("q" nil "quit")
+)
+
+#+END_SRC
+
+#+RESULTS:
+: aj/dired-links/body
 
 ** Hydras
  <2018-11-25 Sun>
@@ -1852,32 +2039,34 @@ relative-compose:  0
  #+BEGIN_SRC emacs-lisp
    (require 'hydra)
 
-   (defhydra aj/hydra-shell (:color blue)
+   (defhydra aj/hydra-interface (:color blue)
    "
 
-   ^What would you like to do?^
-   ...........................
-   _g_enerate reports
-   c_u_p of coffee?
-   _v_isualize brain
-   _l_ast coffee
+                                                     ^What would you like to do?^                         
+                                                     ...........................                          
+                                          ^Org^                ^Coffee Tracker^      ^Misc^               ^Quick Links^
+                                          ^---^                ^--------------^      ^----^               ^-----------^
+                                         _v_isualize brain     _l_ast coffee         _s_ecrets           _C_onfig.org
+                                         _g_enerate reports    c_u_p of coffee?      _d_ired links       _L_abnotebook
+   
    "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
      ("v" org-brain-visualize "visualize")
      ("l" aj/when-was-my-last-coffee "last?")
+     ("s" aj/secrets/body "secrets")
+     ("d" aj/dired-links/body "dired")
+     ("C" (find-file "~/.emacs.d/config.org"))
+     ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org"))
      ("q" nil "quit")
      )
-     ;; Note that these are org-mode specific!!
-     (define-key org-mode-map (kbd "C-c h") 'aj/hydra-shell/body)
+     (define-key global-map (kbd "C-c h") 'aj/hydra-interface/body)
      ;; h for hydra!!
-   ;;(hydra-set-property 'hydra-shell :verbosity 1)
-
 
  #+END_SRC
 
  #+RESULTS:
- : aj/hydra-shell/body
+ : aj/hydra-interface/body
 
  [2018-12-14 Fri]
 From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
