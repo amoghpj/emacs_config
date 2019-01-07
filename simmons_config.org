@@ -722,7 +722,7 @@ Refresh inline display
 
 ** Comment blocks in Org-mode
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
+;;(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
