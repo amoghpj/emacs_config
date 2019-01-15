@@ -508,6 +508,23 @@ c 'echo $PATH'"))))
   ;; (elpy-enable)
   (setq-default indent-tabs-mode nil)
 #+END_SRC
+** Virtual environments
+#+begin_src emacs-lisp
+(require 'virtualenvwrapper)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+;;(venv-initialize-eshell) ;; if you want eshell support
+;; note that setting `venv-location` is not necessary if you
+;; use the default location (`~/.virtualenvs`), or if the
+;; the environment variable `WORKON_HOME` points to the right place
+(setq venv-location "~/jalihal_projects/Research/data/ModelAnalysis/nutsig")
+(venv-workon "local")
+#+end_src
+
+#+RESULTS:
+
+To activate the venv, type =M-x venv-workon= and select a venv
+
+To deactivate, type =M-x venv-deactivate=
 * Org-mode
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
@@ -722,7 +739,7 @@ Refresh inline display
 
 ** Comment blocks in Org-mode
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
+;;(add-to-list 'org-structure-template-alist '("C" "#+begin_comment\n?\n#+end_comment"))
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
@@ -802,6 +819,37 @@ Refresh inline display
 ;;(setq org-latex-listings 'minted)
 ;;(add-to-list 'org-latex-minted-langs '(ipython "python"))
 #+END_SRC
+[2019-01-03 Thu]
+From John Kitchin’s blog
+#+begin_src emacs-lisp
+  (org-add-link-type
+   "comment"
+   (lambda (linkstring)
+     (let ((elm (org-element-context))
+           (use-dialog-box nil))
+       (when (y-or-n-p "Delete comment? ")
+         (setf (buffer-substring
+                (org-element-property :begin elm)
+                (org-element-property :end elm))
+               (cond
+                ((org-element-property :contents-begin elm)
+                 (buffer-substring
+                  (org-element-property :contents-begin elm)
+                  (org-element-property :contents-end elm)))
+                (t
+                 ""))))))
+   (lambda (keyword desc format)
+     (cond
+      ((eq format 'html)
+       (format "<font color=\"red\"><abbr title=\"%s\" color=\"red\">COMMENT</abbr></font> %s" keyword (or desc "")))
+      ((eq format 'latex)
+      ;; AJ: Ignore the description, format the link part inline
+      (format "%% %s\n" keyword)))))
+#+end_src
+
+#+RESULTS:
+: Created comment link.
+
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
@@ -878,22 +926,34 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 (setq ac-math-unicode-in-math-p t)
 (setq ac-math-unicode-in-math-p t)
 #+END_SRC
+[2019-01-07 Mon]
+#+begin_src emacs-lisp
+(setq org-latex-pdf-process
+(quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
+#+end_src
+
+#+RESULTS:
+| pdflatex -shell-escape -interaction nonstopmode %f | bibtex %b | bibtex %b | pdflatex -shell-escape -interaction nonstopmode %f | pdflatex -shell-escape -interaction nonstopmode %f |
 
 * Latex
 ** Syntax Highlighting for code Export
 #+BEGIN_SRC emacs-lisp
 ;; Add minted to the defaults packages to include when exporting.
-;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+(add-to-list 'org-latex-packages-alist '("" "minted"))
 ;; Tell the latex export to use the minted package for source
 ;; code coloration.
-;; (setq org-latex-listings 'minted)
+ (setq org-latex-listings 'minted)
 ;; Let the exporter use the -shell-escape option to let latex
 ;; execute external programs.
 ;; This obviously and can be dangerous to activate!
 ;; When using minted, use this:
-;; (setq org-latex-pdf-process
-;; (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
+ (setq org-latex-pdf-process
+ (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
 #+END_SRC
+
+#+RESULTS:
+| pdflatex -shell-escape -interaction nonstopmode %f | bibtex %b | bibtex %b | pdflatex -shell-escape -interaction nonstopmode %f | pdflatex -shell-escape -interaction nonstopmode %f |
+
 ** PDFLATEX command execution order
 #+BEGIN_SRC emacs-lisp
 (setq org-latex-pdf-process
