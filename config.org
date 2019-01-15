@@ -635,6 +635,22 @@ Set autofill mode by default for all major modes
 | lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
 | lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
 
+** Open with external programs
+[2019-01-14 Mon]
+#+begin_src emacs-lisp
+  ;; (require 'openwith)
+  ;; (openwith-mode t)
+  ;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+#+end_src
+
+#+RESULTS:
+| \.pdf\' | evince | (file) |
+
+** Visible Bell
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell 1)
+#+END_SRC
+
 * Python
 ** Setting to use shell arguments?
 #+BEGIN_SRC emacs-lisp
@@ -747,19 +763,19 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 #+END_SRC   
 ** Open PDFs in evince
 #+BEGIN_SRC emacs-lisp
-;; PDFs visited in Org-mode are opened in Evince (and not in the default choice) http://stackoverflow.com/a/8836108/789593
-(add-hook 'org-mode-hook
-      '(lambda ()
-         (delete '("\\.pdf\\'" . default) org-file-apps)
-         (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
+  ;; PDFs visited in Org-mode are opened in Evince (and not in the default choice) http://stackoverflow.com/a/8836108/789593
+  ;; (add-hook 'org-mode-hook
+  ;;       '(lambda ()
+  ;;          (delete '("\\.pdf\\'" . default) org-file-apps)
+  ;;          (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
 #+END_SRC
 ** Org-PDF-Tools
 As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package because it is causing problems in simmons
 #+BEGIN_SRC emacs-lisp
-  ;;;; pdf-tools-org
+  ;; ;; pdf-tools-org
   ;; (add-to-list 'load-path "~/.emacs.d/pdf-tools-org")
   ;; (require 'pdf-tools-org)
-#+END_SRC
+#+end_SRC
 ** Org-Babel setup
 
 #+BEGIN_SRC emacs-lisp
@@ -859,7 +875,9 @@ This is such a cool idea!!
           ("cc" "class" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS Meeting %? :MEETING:\n%U" :clock-in t :clock-resume t)
+           "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-resume t)
+          ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
+           "* %?\n%U\n" :clock-in t :clock-resume t)
 
           ("e" "Entry")
           ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
@@ -867,14 +885,15 @@ This is such a cool idea!!
   %U")        
 
           ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
-           "** Meeting on %U
+           "** Meeting -  %U
   ,#+BIND: org-export-use-babel nil
   ,#+STARTUP: beamer
   ,#+OPTIONS: H:1 toc:nil
   ,#+AUTHOR: Amogh Jalihal
-  ,#+TITLE: Meeting on %U
+  ,#+TITLE: Meeting on %^u
   ,#+EXPORT_FILE_NAME: 
   ,#+LATEX_HEADER: \\usetheme{metropolis}
+   #+LATEX_HEADER: \setbeamercolor{background canvas}{bg=white}
   %?" :prepend t :empty-lines 1)
           ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
            "** Meeting on %U
@@ -893,8 +912,6 @@ This is such a cool idea!!
     :END:")
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-          ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
-           "* %?\n%U\n" :clock-in t :clock-resume t)
            ("d" "dump org capture" entry
            (file+headline "~/orgs/dump.org" "Unsorted")
            "* %?%:description Added %U
@@ -1653,6 +1670,16 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 #+BEGIN_SRC emac-lisp
 (require 'ox-rst)
 #+END_SRC
+** Org noter
+[2019-01-14 Mon]
+#+begin_src emacs-lisp
+  ;; (setq ;;org-noter-property-doc-file "~/orgs/org-noter-notes/"
+  ;;       org-noter-property-note-location "~/orgs/org-noter-notes/")
+  ;; (org-noter) 
+#+end_src
+
+#+RESULTS:
+
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1763,11 +1790,7 @@ Some bookmarks
 Reinstalling on cerevisaj on <2018-01-02 Tue>
 #+BEGIN_SRC emacs-lisp
   ;; installation for pdf-tools
-  ;;(pdf-tools-install)
-#+END_SRC
-** Visible Bell
-#+BEGIN_SRC emacs-lisp
-(setq visible-bell 1)
+  (pdf-tools-install)
 #+END_SRC
 * Utilities
 ** Neotree
@@ -2033,6 +2056,37 @@ relative-compose:  0
 #+RESULTS:
 : aj/dired-links/body
 
+** Create Analysis
+[2019-01-14 Mon]
+#+begin_src emacs-lisp
+  (defun aj/create-new-analysis ()
+    "Prompts user for key words and creates a folder and org file using this name"
+    (interactive)
+    (setq analysisfolder "~/jalihal_projects/Research/Analysis/")
+    (setq analysisname  (concat
+                         (format-time-string "%F")
+                         "-"
+                         (replace-regexp-in-string "\\( \\)" "-" (read-string "Key words: "))))
+  
+    (make-directory (concat analysisfolder analysisname))
+    (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
+    (message (concat "creating" fpath))
+    (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
+    (write-region (concat "#+PROPERTY: header-args:python :session "
+                          sessionname
+                          " :tangle yes :comment link\n"
+                          "#+BEGIN_SRC python\n"
+                          "import numpy as np\n"
+                          "import matplotlib.pyplot as plt\n"
+                          "import pandas as pd\n"
+                          "#+END_SRC ")
+                  nil fpath)
+    (switch-to-buffer (find-file fpath)))
+#+end_src
+
+#+RESULTS:
+: aj/create-new-analysis
+
 ** Hydras
  <2018-11-25 Sun>
  A wrapper around my org-mode based crutches.
@@ -2048,16 +2102,18 @@ relative-compose:  0
                                           ^---^                ^--------------^      ^----^               ^-----------^
                                          _v_isualize brain     _l_ast coffee         _s_ecrets           _C_onfig.org
                                          _g_enerate reports    c_u_p of coffee?      _d_ired links       _L_abnotebook
+                                         _A_nalysis
    
    "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
      ("v" org-brain-visualize "visualize")
+     ("A" aj/create-new-analysis "Analyis")
      ("l" aj/when-was-my-last-coffee "last?")
      ("s" aj/secrets/body "secrets")
      ("d" aj/dired-links/body "dired")
-     ("C" (find-file "~/.emacs.d/config.org"))
-     ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org"))
+     ("C" (find-file "~/.emacs.d/config.org") "config.org")
+     ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org") "labnotebook.org")
      ("q" nil "quit")
      )
      (define-key global-map (kbd "C-c h") 'aj/hydra-interface/body)
