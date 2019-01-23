@@ -1139,3 +1139,96 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
   (add-to-list 'load-path "~/.emacs.d/lisp/")
 #+END_SRC
+* Personal lisp code
+** Create Analysis
+[2019-01-21 Mon]
+ #+begin_src emacs-lisp
+   (defun aj/create-new-analysis ()
+     "Prompts user for key words and creates a folder and org file using this name"
+     (interactive)
+     (setq analysisfolder "~/jalihal_projects/Research/Analysis/")
+     (setq analysisname  (concat
+                          (format-time-string "%F")
+                          "-"
+                          ;; This line prompts user for some keywords and replaces
+                          ;; the spaces with hyphens
+                          (replace-regexp-in-string "\\( \\)" "-" (read-string "Key words: "))))
+
+     (make-directory (concat analysisfolder analysisname))
+     (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
+     (message (concat "creating" fpath))
+     (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
+     (write-region (concat "#+PROPERTY: header-args:python :session "
+                           sessionname
+                           " :tangle yes :comment link\n"
+                           "#+LATEX_HEADER: \usemintedstyle{tango}%colorful\n"
+                           "#+LATEX_HEADER: \usepackage{xcolor}\n"
+                           "#+LATEX_HEADER: \definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                           "#+LATEX_HEADER: \setminted{linenos=True,bgcolor=bg}\n"
+                           "#+LATEX_HEADER: \usepackage[bottom=0.5in,margin=1in]{geometry}"
+                           "#+BEGIN_SRC python\n"
+                           "import numpy as np\n"
+                           "import matplotlib.pyplot as plt\n"
+                           "import pandas as pd\n"
+                           "#+END_SRC ")
+                   nil fpath)
+     (switch-to-buffer (find-file fpath)))
+ #+end_src
+
+ #+RESULTS:
+ : aj/create-new-analysis
+
+** Dired quicklinks
+[2018-12-26 Wed]
+#+BEGIN_SRC emacs-lisp
+  (defhydra aj/dired-links (:color blue)
+  "
+                                      Quick Links to various directories
+                                      ..................................
+                                      _r_esearch      _d_ownloads      _e_macs     
+                                      _m_odel         _D_ocuments      e_l_feed
+  "
+    ("r" (dired "~/jalihal_projects/Research/" ) "research")
+    ("d" (dired "~/Downloads/" ) "downloads")
+    ("D" (dired "~/Documents/" ) "documents")
+    ("m" (dired "~/jalihal_projects/Research/data/ModelAnalysis/" ) "model")
+    ("e" (dired "~/.emacs.d" ) "emacs config")
+    ("l" (dired "~/orgs/elfeed.org" ) "elfeed config")
+    ("q" nil "quit")
+)
+
+#+END_SRC
+
+#+RESULTS:
+: aj/dired-links/body
+
+** Hydras
+[2019-01-21 Mon]
+ #+BEGIN_SRC emacs-lisp
+   (require 'hydra)
+
+   (defhydra aj/hydra-interface (:color blue)
+   "
+
+                                                     ^What would you like to do?^                         
+                                                     ...........................                          
+                                          ^Org^                 ^Quick Links^
+                                          ^---^                 ^-----------^
+                                         _A_nalysis            _C_onfig.org
+                                                               _L_abnotebook
+                                         
+   
+   "
+     ("A" aj/create-new-analysis "Analyis")
+     ("d" aj/dired-links/body "dired")
+     ("C" (find-file "~/.emacs.d/simmons_config.org") "config.org")
+     ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org") "labnotebook.org")
+     ("q" nil "quit")
+     )
+     (define-key global-map (kbd "C-c h") 'aj/hydra-interface/body)
+     ;; h for hydra!!
+
+ #+END_SRC
+
+ #+RESULTS:
+ : aj/hydra-interface/body
