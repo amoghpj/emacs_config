@@ -2116,15 +2116,20 @@ relative-compose:  0
     (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
     (message (concat "creating" fpath))
     (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
-    (write-region (concat "#+PROPERTY: header-args:python :session "
-                          sessionname
-                          " :tangle yes :comment link\n"
-                          "#+BEGIN_SRC python\n"
-                          "import numpy as np\n"
-                          "import matplotlib.pyplot as plt\n"
-                          "import pandas as pd\n"
-                          "#+END_SRC ")
-                  nil fpath)
+     (write-region (concat "#+PROPERTY: header-args:python :session "
+                           sessionname
+                           " :tangle yes :comment link\n"
+                           "#+LATEX_HEADER: \usemintedstyle{tango}%colorful\n"
+                           "#+LATEX_HEADER: \usepackage{xcolor}\n"
+                           "#+LATEX_HEADER: \definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                           "#+LATEX_HEADER: \setminted{linenos=True,bgcolor=bg}\n"
+                           "#+LATEX_HEADER: \usepackage[bottom=0.5in,margin=1in]{geometry}"
+                           "#+BEGIN_SRC python\n"
+                           "import numpy as np\n"
+                           "import matplotlib.pyplot as plt\n"
+                           "import pandas as pd\n"
+                           "#+END_SRC ")
+                   nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
 
