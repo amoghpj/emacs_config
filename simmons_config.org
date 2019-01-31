@@ -1098,11 +1098,52 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 #+RESULTS:
 | pdflatex -shell-escape -interaction nonstopmode %f | bibtex %b | bibtex %b | pdflatex -shell-escape -interaction nonstopmode %f | pdflatex -shell-escape -interaction nonstopmode %f |
 
-** PDFLATEX command execution order
+** PDFLATEX command execution order in org mode export
 #+BEGIN_SRC emacs-lisp
 (setq org-latex-pdf-process
  (quote ("pdflatex  %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
 #+END_SRC
+** Auctex latex export style
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+(setq LaTeX-command-style '(("" "%(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout)")))
+#+end_src
+
+#+RESULTS:
+|   | %(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout) |
+** Synctex
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+
+   (setq TeX-source-correlate-method (quote synctex))
+   (setq TeX-source-correlate-mode t)
+   (setq TeX-source-correlate-start-server t)
+   (setq TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
+   ;;(setq TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
+#+end_src
+
+#+RESULTS:
+| Okular | okular --unique %o#src:%n%b |
+
+** My customizations
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+
+
+   (setq TeX-auto-save t)
+   (setq TeX-parse-self t)
+   (setq-default TeX-master nil)
+
+   (require 'reftex)
+   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+
+    (add-to-list 'load-path "~/.emacs.d/lisp/")
+   (require 'company-auctex)
+  (company-auctex-init)
+#+end_src
+
+#+RESULTS:
+| (company-auctex-macros company-auctex-symbols company-auctex-environments) | company-auctex-bibs | company-auctex-labels | company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev |
 
 * Utilities
 ** Magit
@@ -1161,11 +1202,11 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
      (write-region (concat "#+PROPERTY: header-args:python :session "
                            sessionname
                            " :tangle yes :comment link\n"
-                           "#+LATEX_HEADER: \usemintedstyle{tango}%colorful\n"
-                           "#+LATEX_HEADER: \usepackage{xcolor}\n"
+                           "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
+                           "#+LATEX_HEADER: \\usepackage{xcolor}\n"
                            "#+LATEX_HEADER: \definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
                            "#+LATEX_HEADER: \setminted{linenos=True,bgcolor=bg}\n"
-                           "#+LATEX_HEADER: \usepackage[bottom=0.5in,margin=1in]{geometry}"
+                           "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}"
                            "#+BEGIN_SRC python\n"
                            "import numpy as np\n"
                            "import matplotlib.pyplot as plt\n"
@@ -1232,3 +1273,27 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
  #+RESULTS:
  : aj/hydra-interface/body
+[2019-01-28 Mon]
+Latex helpers
+#+begin_src emacs-lisp
+  (defhydra aj/tex-interface (:color blue)
+  "
+
+  ^What would you like to do?^                         
+  ...........................                          
+   _t_oc                   
+   _v_ariable pitch
+   _p_review buffer
+  "
+    ("t" reftex-toc "TOC")
+    ("v" variable-pitch-mode "variable")
+    ("p" preview-buffer "preview")
+    ("q" nil "quit")
+    )
+    (define-key LaTeX-mode-map (kbd "C-c t") 'aj/tex-interface/body)
+    ;; h for hydra!!
+
+#+end_src
+
+#+RESULTS:
+: aj/tex-interface/body
