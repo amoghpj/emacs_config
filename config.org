@@ -20,6 +20,32 @@ I would love to hear your feedback on this setup!
 ;;(package-initialize)
 ;;(require 'cl-lib)
 #+END_SRC
+* Where to look for packages
+[2019-01-31 Thu]
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               "~/.emacs.d/elpa/helm") ; facultative when installed with make install
+
+  (add-to-list 'load-path
+               "~/.emacs.d/elpa/helm-bibtex")
+
+  (add-to-list 'load-path
+               "~/.emacs.d/plugins/yasnippet")
+
+  (add-to-list 'load-path
+               "~/.emacs.d/lisp/")
+
+   (add-to-list 'load-path
+                "~/.emacs.d/elpa/ob-ipython/")
+
+   (add-to-list 'load-path
+                "~/.emacs.d/elpa/ox-ipynb/")
+
+  (add-to-list 'load-path
+               "~/projects/tidal")
+  (add-to-list 'load-path "/usr/share/org-mode/lisp")
+
+#+end_src
 * Emacs global setttings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
@@ -265,7 +291,7 @@ Load dired x
  <2018-02-25 Sun>
  #+BEGIN_SRC emacs-lisp
    (require 'helm)
-(add-to-list 'load-path "~/.emacs.d/elpa/helm") ; facultative when installed with make install
+
 (require 'helm-config)
    (global-set-key (kbd "M-x") 'helm-M-x)
 
@@ -289,8 +315,7 @@ Load dired x
 #+END_SRC
 *** Reconfiguring helm-bibtex
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path
-              "~/.emacs.d/elpa/helm-bibtex")
+
 (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+END_SRC
 ** Abbrev
@@ -308,8 +333,6 @@ Load dired x
 ** YASnippet
 <2018-04-05 Thu>
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
@@ -501,8 +524,6 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
   ;;           #'add-fira-code-symbol-keywords)
 
   ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
-  ;; (add-to-list 'load-path
-  ;;              "~/.emacs.d/lisp/")
   ;; (load "~/.emacs.d/lisp/symbols.el")
 #+END_SRC
 ** Rectangular select regep operations
@@ -715,8 +736,6 @@ c 'echo $PATH'"))))
 *** Basic setup
  <2018-04-05 Thu>
  #+BEGIN_SRC emacs-lisp
-   (add-to-list 'load-path
-                "~/.emacs.d/elpa/ob-ipython/")
    (require 'ob-ipython)
 
    (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
@@ -1156,7 +1175,7 @@ Does this do anything?
 #+END_SRC
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/org-ref/") 
+  ;;(add-to-list 'load-path "~/.emacs.d/org-ref/") 
   (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
 
   (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
@@ -1181,7 +1200,7 @@ Does this do anything?
 #+END_SRC
 ** Org-Notify
 #+BEGIN_SRC emacs-lisp
- (add-to-list 'load-path "~/.emacs.d/elpa/")
+ ;;(add-to-list 'load-path "~/.emacs.d/elpa/")
  (require 'org-notify)
 ;; (org-notify)
 #+END_SRC
@@ -1355,13 +1374,12 @@ From John Kitchin's blog
 
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
+
   (require 'ox-ipynb)
 #+END_SRC
 ** Org notmuch
 <2018-04-23 Mon>
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "/usr/share/org-mode/lisp")
   (require 'org-notmuch)
 #+END_SRC
 
@@ -1853,26 +1871,27 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 * Latex
 ** Org-latex: Syntax Highlighting for code Export
 #+BEGIN_SRC emacs-lisp
-;; Add minted to the defaults packages to include when exporting.
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-;; Tell the latex export to use the minted package for source
-;; code coloration.
-(setq org-latex-listings 'minted)
-;; Let the exporter use the -shell-escape option to let latex
-;; execute external programs.
-;; This obviously and can be dangerous to activate!
-;; When using minted, use this:
-(setq org-latex-pdf-process
-(quote ("pdflatex -shell-escape -synctex=1 -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
-(load "~/.emacs.d/lisp/ox-synctex.el")
-(ox-synctex-activate)
+  ;; Add minted to the defaults packages to include when exporting.
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; Tell the latex export to use the minted package for source
+  ;; code coloration.
+  (setq org-latex-listings 'minted)
+  ;; Let the exporter use the -shell-escape option to let latex
+  ;; execute external programs.
+  ;; This obviously and can be dangerous to activate!
+  ;; When using minted, use this:
+  (setq org-latex-pdf-process
+  (quote ("pdflatex -shell-escape -synctex=1 -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
+  ;; The following file seems to slow down startup .
+  ;; (load "~/.emacs.d/lisp/ox-synctex.el")
+  ;; (ox-synctex-activate)
 #+END_SRC
 
 #+RESULTS:
 ** Auctex synctex configuration
 #+begin_src emacs-lisp
   ;; Use pdf-tools to open PDF files
-(server-start)
+;;(server-start)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
 
      (setq TeX-source-correlate-method 'synctex)
@@ -1978,8 +1997,6 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
   ;; Enable transient mark mode
   (transient-mark-mode 1)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
 #+END_SRC
 * EMMS
 ** Basics
@@ -2095,7 +2112,7 @@ relative-compose:  0
 * TidalCycles
 <2018-05-24 Thu>
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/projects/tidal")
+
 (require 'haskell-mode)
 (require 'tidal)
 #+END_SRC
