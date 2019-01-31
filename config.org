@@ -46,6 +46,11 @@ I would love to hear your feedback on this setup!
   (add-to-list 'load-path "/usr/share/org-mode/lisp")
 
 #+end_src
+* Common Lisp
+** Require
+#+BEGIN_SRC emacs-lisp
+(require 'cl)
+#+END_SRC
 * Emacs global setttings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
@@ -963,6 +968,13 @@ This is such a cool idea!!
     :CREATED: %U
     :END:
      - "  :empty-lines 1)
+          ;; Hard coded
+          ;; * Classes
+          ;; ** Spring 2019
+          ;; *** Population Genomics
+          ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
+           "** %U
+     - %?"  :empty-lines 1)
           ("er" "Reading list " entry (file+olp "~/orgs/AllNotes.org" "Reading List")
            "**  %?
     :PROPERTIES:
@@ -1888,7 +1900,47 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 #+END_SRC
 
 #+RESULTS:
-** Auctex synctex configuration
+** Auctex latex export style
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+(setq LaTeX-command-style '(("" "%(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout)")))
+#+end_src
+
+#+RESULTS:
+|   | %(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout) |
+** Synctex
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+
+   (setq TeX-source-correlate-method (quote synctex))
+   (setq TeX-source-correlate-mode t)
+   (setq TeX-source-correlate-start-server t)
+   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+   (add-hook 'TeX-after-compilation-finished-functions
+   #'TeX-revert-document-buffer)
+
+   ;;(setq TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
+   ;;(setq TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
+#+end_src
+
+#+RESULTS:
+| Okular | okular --unique %o#src:%n%b |
+
+** My customizations
+[2019-01-28 Mon]
+#+begin_src emacs-lisp
+   (setq TeX-auto-save t)
+   (setq TeX-parse-self t)
+   (setq-default TeX-master nil)
+
+   (require 'reftex)
+   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+
+   (require 'company-auctex)
+  (company-auctex-init)
+#+end_src
+
+** COMMENT Auctex synctex configuration
 #+begin_src emacs-lisp
   ;; Use pdf-tools to open PDF files
 ;;(server-start)
@@ -1910,11 +1962,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 #+RESULTS:
 | TeX-revert-document-buffer |
 
-* Common Lisp
-** Require
-#+BEGIN_SRC emacs-lisp
-(require 'cl)
-#+END_SRC
 * PDF-tools
 +Deleted package on <2018-01-02 Tue>+
 Reinstalling on cerevisaj on <2018-01-02 Tue>
