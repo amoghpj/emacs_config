@@ -2266,9 +2266,9 @@ relative-compose:  0
                            " :tangle yes :comment link\n"
                            "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
                            "#+LATEX_HEADER: \\usepackage{xcolor}\n"
-                           "#+LATEX_HEADER: \definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
-                           "#+LATEX_HEADER: \setminted{linenos=True,bgcolor=bg}\n"
-                           "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}"
+                           "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                           "#+LATEX_HEADER: \\setminted{linenos=True,bgcolor=bg}\n"
+                           "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}\n"
                            "#+BEGIN_SRC python\n"
                            "import numpy as np\n"
                            "import matplotlib.pyplot as plt\n"
@@ -2280,6 +2280,15 @@ relative-compose:  0
 
 #+RESULTS:
 : aj/create-new-analysis
+
+** Enable devanagari mode
+[2019-02-03 Sun]
+#+begin_src emacs-lisp
+  (load-file "~/.emacs.d/lisp/devanagari-mode.el")
+#+end_src
+
+#+RESULTS:
+: t
 
 ** Hydras
  <2018-11-25 Sun>
