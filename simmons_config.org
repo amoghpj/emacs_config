@@ -1101,8 +1101,12 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** PDFLATEX command execution order in org mode export
 #+BEGIN_SRC emacs-lisp
 (setq org-latex-pdf-process
- (quote ("pdflatex  %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
+ (quote ("pdflatex  --shell-escape %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
 #+END_SRC
+
+#+RESULTS:
+| pdflatex  --shell-escape %f | bibtex %b | bibtex %b | pdflatex  %f | pdflatex %f |
+
 ** Auctex latex export style
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
