@@ -19,6 +19,15 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 
 #+RESULTS:
 : load-theme
+[2019-02-21 Thu]
+New cyberpunk theme!
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+(load-theme 'cyberpunk-2019 t)
+#+end_src
+
+#+RESULTS:
+: t
 
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
@@ -32,6 +41,41 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 	  (lambda ()
 	    (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 2 2 )))
 #+END_SRC
+[2019-02-22 Fri]
+
+[[https://emacs-doctor.com/emacs-strip-tease.html][Naked emacs!]]
+
+#+begin_src emacs-lisp
+(defvar-local hidden-mode-line-mode nil)
+(defvar-local hide-mode-line nil)
+
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global nil
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+;; Activate hidden-mode-line-mode
+(add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+(hidden-mode-line-mode 1)
+#+end_src
 ** Window Transparency
 #+BEGIN_SRC emacs-lisp
   ;; set transparency
@@ -1072,7 +1116,7 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 #+END_SRC
 [2019-01-07 Mon]
 #+begin_src emacs-lisp
-(setq org-latex-pdf-process
+(setq-default org-latex-pdf-process
 (quote ("pdflatex -shell-escape -interaction nonstopmode %f" "bibtex %b" "bibtex %b" "pdflatex -shell-escape -interaction nonstopmode %f" "pdflatex -shell-escape -interaction nonstopmode %f")))
 #+end_src
 
@@ -1132,18 +1176,16 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** My customizations
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+     (setq-default TeX-master nil)
 
-
-   (setq TeX-auto-save t)
-   (setq TeX-parse-self t)
-   (setq-default TeX-master nil)
-
-   (require 'reftex)
-   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
-
-    (add-to-list 'load-path "~/.emacs.d/lisp/")
-   (require 'company-auctex)
-  (company-auctex-init)
+     (require 'reftex)
+     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+  (setq reftex-plug-into-AUCTeX t)
+      (add-to-list 'load-path "~/.emacs.d/lisp/")
+     (require 'company-auctex)
+    (company-auctex-init)
 #+end_src
 
 #+RESULTS:
@@ -1257,17 +1299,18 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
                                                      ^What would you like to do?^                         
                                                      ...........................                          
-                                          ^Org^                 ^Quick Links^
-                                          ^---^                 ^-----------^
-                                         _A_nalysis            _C_onfig.org
-                                                               _L_abnotebook
-                                         
-   
+                                          ^Org^                 ^Quick Links^           ^Emacs^
+                                          ^---^                 ^-----------^           ^-----^
+                                         _A_nalysis            _C_onfig.org             _m_odeline toggle 
+                                                             _L_abnotebook
+
+
    "
      ("A" aj/create-new-analysis "Analyis")
      ("d" aj/dired-links/body "dired")
      ("C" (find-file "~/.emacs.d/simmons_config.org") "config.org")
      ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org") "labnotebook.org")
+     ("m" hidden-mode-line-mode "hide modeline")
      ("q" nil "quit")
      )
      (define-key global-map (kbd "C-c h") 'aj/hydra-interface/body)
