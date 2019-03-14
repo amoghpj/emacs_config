@@ -85,12 +85,15 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 [2019-02-21 Thu 20:42]
 Cyberpunk theme!
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
-(load-theme 'cyberpunk-2019 t)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+  (load-theme 'cyberpunk-2019 t)
+
+  (require 'powerline)
+  (powerline-default-theme)
 #+end_src
 
 #+RESULTS:
-: t
+| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line-buffer-id (if active (quote mode-line-buffer-id) (quote mode-line-buffer-id-inactive))) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face0 (if active (quote powerline-active0) (quote powerline-inactive0))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s (powerline-current-separator) (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s (powerline-current-separator) (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* face0 (quote l)) (when powerline-display-buffer-size (powerline-buffer-size face0 (quote l))) (when powerline-display-mule-info (powerline-raw mode-line-mule-info face0 (quote l))) (powerline-buffer-id (` (mode-line-buffer-id (, face0))) (quote l)) (when (and (boundp (quote which-func-mode)) which-func-mode) (powerline-raw which-func-format face0 (quote l))) (powerline-raw   face0) (funcall separator-left face0 face1) (when (and (boundp (quote erc-track-minor-mode)) erc-track-minor-mode) (powerline-raw erc-modified-channels-object face1 (quote l))) (powerline-major-mode face1 (quote l)) (powerline-process face1) (powerline-minor-modes face1 (quote l)) (powerline-narrow face1 (quote l)) (powerline-raw   face1) (funcall separator-left face1 face2) (powerline-vc face2 (quote r)) (when (bound-and-true-p nyan-mode) (powerline-raw (list (nyan-create)) face2 (quote l))))) (rhs (list (powerline-raw global-mode-string face2 (quote r)) (funcall separator-right face2 face1) (unless window-system (powerline-raw (char-to-string 57505) face1 (quote l))) (powerline-raw %4l face1 (quote l)) (powerline-raw : face1 (quote l)) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 face0) (powerline-raw   face0) (powerline-raw %6p face0 (quote r)) (when powerline-display-hud (powerline-hud face0 face2)) (powerline-fill face0 0)))) (concat (powerline-render lhs) (powerline-fill face2 (powerline-width rhs)) (powerline-render rhs)))) |
 
 ** Poet Theme customizations
 [2019-01-02 Wed]
@@ -416,11 +419,6 @@ Load dired x
 #+RESULTS:
 : t
 
-** Company
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'after-init-hook 'global-company-mode)
-  ;; (add-to-list 'company-backends 'company-ob-ipython) ;
-#+END_SRC
 ** Annoying C-z
 <2018-04-27 Fri>
 Found it [[https://superuser.com/a/349997][on stackexhange]]
@@ -723,9 +721,11 @@ Set autofill mode by default for all major modes
 (diminish 'helm-mode)
 (diminish 'org-mode)
 (diminish 'org-agenda-mode)
+(diminish 'projectile-mode)
 #+END_SRC
 
 #+RESULTS:
+|   |
 ** Olivetti mode - turn on C-c ] binding
 <2018-11-24 Sat>
 #+BEGIN_SRC elisp
@@ -812,6 +812,43 @@ Update: This is proving to be very annoying
 #+RESULTS:
 | %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
 
+* All the icons
+[2019-03-14 Thu]
+#+begin_src emacs-lisp
+  (require 'all-the-icons)
+#+end_src
+
+#+RESULTS:
+: all-the-icons
+
+* Company
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (with-eval-after-load 'company 
+    (add-to-list 'company-backends 'company-jedi 'company-math-symbols-latex))
+  ;; (add-to-list 'company-backends 'company-ob-ipython) ;
+
+#+END_SRC
+
+#+RESULTS:
+| company-bbdb | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev | company-jedi |
+
+[2019-03-14 Thu]
+#+begin_src emacs-lisp
+  (eval-after-load 'company
+    '(progn
+       (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+       ))
+
+  ;;(company-quickhelp-mode)
+(require 'company-box)
+(add-hook 'company-mode-hook 'company-box-mode)
+#+end_src
+
+#+RESULTS:
+| company-box-mode | company-mode-set-explicitly |
+
 * Python
 ** Setting to use shell arguments?
 #+BEGIN_SRC emacs-lisp
@@ -832,6 +869,26 @@ c 'echo $PATH'"))))
   ;; (elpy-enable)
   (setq-default indent-tabs-mode nil)
 #+END_SRC
+** Jedi
+#+begin_src emacs-lisp
+(add-hook 'python-mode-hook 'jedi:setup)
+#+end_src
+
+#+RESULTS:
+| jedi:setup | my/python-mode-hook |
+
+** Company jedi
+[2019-03-14 Thu]
+#+begin_src emacs-lisp
+  ;; (defun my/python-mode-hook ()
+  ;; )
+
+  ;;   (add-hook 'python-mode-hook 'my/python-mode-hook)
+#+end_src
+
+#+RESULTS:
+| my/python-mode-hook |
+
 ** OB-Ipython
 *** Basic setup
  <2018-04-05 Thu>
@@ -897,31 +954,37 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                                           ((inhibit-same-window . t)))))
 #+END_SRC
 * Projectile
-[2019-03-14 Thu]
+  [2019-03-14 Thu]
 #+begin_src emacs-lisp
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (projectile-mode +1))
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    (projectile-mode +1))
 
-  (setq projectile-project-search-path '("~/jalihal_projects/Research/data/ModelAnalysis/" "~/group/amogh-jalihal/" "~/orgs/"))
+  (setq projectile-project-search-path
+        '("~/jalihal_projects/Research/data/ModelAnalysis/"
+          "~/group/amogh-jalihal/"
+          "~/group/amogh-jalihal/proposals/2019-Prelims/"
+          "~/orgs/"))
+  (setq projectile-indexing-method 'native) ;; otherwise it doesn't respect .projectile
 #+end_src
 
 #+RESULTS:
-| ~/jalihal_projects/Research/data/ModelAnalysis/ | ~/group/amogh-jalihal/ | ~/orgs/ |
+: native
 * Nswbuff
 [2019-03-14 Thu 04:30]
 #+begin_src emacs-lisp
-    (use-package nswbuff
-      :ensure t
-      :config
-      (nswbuff-mode +1))
-    (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
-    (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
-  (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
-  (setq nswbuff-display-intermediate-buffers t)
-  (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
+      (use-package nswbuff
+        :ensure t
+        ;; :config
+        ;; (nswbuff-mode +1)
+  )
+      (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
+      (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
+    (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
+    (setq nswbuff-display-intermediate-buffers t)
+    (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
 
 #+end_src
 
@@ -1908,26 +1971,26 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+  ;; (require 'auto-complete)
+  ;; (require 'auto-complete-config)
+  ;; (ac-config-default)
 #+END_SRC
 ** Special autocomplete modes
 *** Latex
 #+BEGIN_SRC emacs-lisp
-(require 'ac-math) 
-(add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
+  ;; (require 'ac-math) 
+  ;; (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
- (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
-   (setq ac-sources
-         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
-                 ac-sources))
-   )
-(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
-;(global-auto-complete-mode t)
+  ;;  (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
+  ;;    (setq ac-sources
+  ;;          (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+  ;;                  ac-sources))
+  ;;    )
+  ;; (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
+  ;; ;(global-auto-complete-mode t)
  
-(setq ac-math-unicode-in-math-p t)
-(setq ac-math-unicode-in-math-p t)
+  ;; (setq ac-math-unicode-in-math-p t)
+  ;; (setq ac-math-unicode-in-math-p t)
 #+END_SRC
 * RSS feeds in emacs
 <2018-02-08 Thu>
@@ -2092,7 +2155,7 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   (company-auctex-init)
 #+end_src
 
-** COMMENT Auctex synctex configuration
+** Auctex synctex configuration
 #+begin_src emacs-lisp
   ;; Use pdf-tools to open PDF files
 ;;(server-start)
