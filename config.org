@@ -67,7 +67,7 @@ I would love to hear your feedback on this setup!
 Reverted
 #+BEGIN_SRC emacs-lisp
   ;;(load-theme 'gruvbox t) 
-  (load-theme 'sexy-monochrome t)
+  ;;(load-theme 'sexy-monochrome t)
   ;; Modified on 2018-02-14
   ;; (load-theme 'spacemacs-dark t)
 #+END_SRC
@@ -171,6 +171,54 @@ Cyberpunk theme!
 	  (lambda ()
 	    (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 2 2 )))
 #+END_SRC
+[2019-02-22 Fri]
+
+[[https://emacs-doctor.com/emacs-strip-tease.html][Naked emacs!]]
+
+#+begin_src emacs-lisp
+(defvar-local hidden-mode-line-mode nil)
+(defvar-local hide-mode-line nil)
+
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global nil
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+;; Activate hidden-mode-line-mode
+;;(add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+ (defvar-local header-line-format nil)
+ (defun mode-line-in-header ()
+   (interactive)
+   (if (not header-line-format)
+       (setq header-line-format mode-line-format
+             mode-line-format nil)
+     (setq mode-line-format header-line-format
+           header-line-format nil))
+   (set-window-buffer nil (current-buffer)))
+;; (hidden-mode-line-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Window Transparency
 #+BEGIN_SRC emacs-lisp
   ;; set transparency
@@ -848,6 +896,38 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                    '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
                                           ((inhibit-same-window . t)))))
 #+END_SRC
+* Projectile
+[2019-03-14 Thu]
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (projectile-mode +1))
+
+  (setq projectile-project-search-path '("~/jalihal_projects/Research/data/ModelAnalysis/" "~/group/amogh-jalihal/" "~/orgs/"))
+#+end_src
+
+#+RESULTS:
+| ~/jalihal_projects/Research/data/ModelAnalysis/ | ~/group/amogh-jalihal/ | ~/orgs/ |
+* Nswbuff
+[2019-03-14 Thu 04:30]
+#+begin_src emacs-lisp
+    (use-package nswbuff
+      :ensure t
+      :config
+      (nswbuff-mode +1))
+    (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
+    (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
+  (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
+  (setq nswbuff-display-intermediate-buffers t)
+  (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
+
+#+end_src
+
+#+RESULTS:
+| ^ .* | ^\*.*\* |
+
 * Julia
 ** Emacs Speaks Statistics
 <2018-04-09 Mon>
@@ -2040,6 +2120,7 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 #+BEGIN_SRC emacs-lisp
   ;; installation for pdf-tools
   ;;(pdf-tools-install)
+  (setq-default pdf-view-midnight-colors '("#d4d4d6" . "#000000")) ;;'( "#00E3FF" . "#372963" );;
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf\\'" . pdf-tools-install)
@@ -2047,7 +2128,9 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
   :defer t
   :config
   (setq mouse-wheel-follow-mouse t)
-  (setq pdf-view-resize-factor 1.10))
+  (setq pdf-view-resize-factor 1.10)
+
+)  ;; "#313133")) 
 #+END_SRC
 
 #+RESULTS:
@@ -2055,7 +2138,7 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 [2019-02-20 Wed]
 Customizing midnight mode colors
 #+begin_src emacs-lisp
-(setq-default pdf-view-midnight-colors '("#d4d4d6" . "#000000"));; "#313133")) 
+
 #+end_src
 
 #+RESULTS:
@@ -2078,7 +2161,17 @@ Customizing midnight mode colors
 <2018-09-10 Mon>
 #+BEGIN_SRC elisp
 (require 'magit-todos)
+
 #+END_SRC
+** Forge
+#+begin_src emacs-lisp
+  ;; (use-package forge
+  ;;   :after magit)
+#+end_src
+
+#+RESULTS:
+: t
+
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
   ;; (gtk-pomodoro-indicator
@@ -2384,11 +2477,12 @@ relative-compose:  0
 
                                                      ^What would you like to do?^                         
                                                      ...........................                          
-                                          ^Org^                ^Coffee Tracker^      ^Misc^               ^Quick Links^
-                                          ^---^                ^--------------^      ^----^               ^-----------^
-                                         _v_isualize brain     _l_ast coffee         _s_ecrets           _C_onfig.org
-                                         _g_enerate reports    c_u_p of coffee?      _d_ired links       _L_abnotebook
-                                         _A_nalysis                                _R_eload init
+                                          ^Org^                ^Misc^               ^Quick Links^       ^   Personal   ^     
+                                          ^---^                ^----^               ^-----------^       ^--------------^     
+                                         _v_isualize brain     _m_odeline?            _C_onfig.org      _l_ast coffee        
+                                         _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
+                                         _A_nalysis            _R_eload init                          _s_ecrets            
+                                                               _h_eader modeline
    
    "
      ("g" aj/generate-org-reports "generate" )
@@ -2397,9 +2491,11 @@ relative-compose:  0
      ("A" aj/create-new-analysis "Analyis")
      ("l" aj/when-was-my-last-coffee "last?")
      ("s" aj/secrets/body "secrets")
+     ("m" hidden-mode-line-mode "modeline?")
      ("d" aj/dired-links/body "dired")
      ("C" (find-file "~/.emacs.d/config.org") "config.org")
      ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org") "labnotebook.org")
+     ("h" mode-line-in-header)
      ("R" (load-file "~/.emacs.d/init.el") "reload")
      ("q" nil "quit")
      )
