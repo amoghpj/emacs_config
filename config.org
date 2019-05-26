@@ -716,6 +716,7 @@ Set autofill mode by default for all major modes
 <2018-11-21 Wed>
 #+BEGIN_SRC emacs-lisp
 (diminish 'company-mode)
+(diminish 'company-box-mode)
 (diminish 'yas-minor-mode)
 (diminish 'eldoc-mode)
 (diminish 'helm-mode)
@@ -1414,10 +1415,10 @@ Does this do anything?
 [2019-02-07 Thu]
 - Shows TODO items for the day every 5 minutes.
 #+begin_src emacs-lisp
-  (require 'org-alert)
-  (setq alert-default-style 'libnotify)
-  (setq org-alert-interval 3600)
-  (org-alert-enable)
+  ;; (require 'org-alert)
+  ;; (setq alert-default-style 'libnotify)
+  ;; (setq org-alert-interval 3600)
+  ;; (org-alert-enable)
 #+end_src
 
 #+RESULTS:
@@ -2407,6 +2408,27 @@ relative-compose:  0
 - Start the server using SuperDirt.start
 - Start a tidal repl using C-c C-s
 - Algorave!
+* Flycheck mode
+** flycheck
+#+begin_src emacs-lisp
+    (use-package flycheck
+      :ensure t
+      :init (global-flycheck-mode))
+#+end_src
+
+#+RESULTS:
+
+** Flycheck pos
+#+begin_src emacs-lisp
+(use-package flycheck-posframe
+  :ensure t
+  :after flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+#+end_src
+
+#+RESULTS:
+: t
+
 * Playground
 ** Generate report
  #+BEGIN_SRC emacs-lisp
@@ -2519,6 +2541,42 @@ relative-compose:  0
 
 #+RESULTS:
 : aj/create-new-analysis
+** Create analysis template for personal experiments
+#+begin_src emacs-lisp
+  (defun aj/create-new-experiment ()
+    "Prompts user for key words and creates a folder and org file using this name"
+    (interactive)
+    (setq analysisfolder "~/Documents/experiments/")
+    (setq analysisname  (concat
+                         (format-time-string "%F")
+                         "-"
+                         ;; This line prompts user for some keywords and replaces
+                         ;; the spaces with hyphens
+                         (replace-regexp-in-string "\\( \\)" "-" (read-string "Key words: "))))
+  
+    (make-directory (concat analysisfolder analysisname))
+    (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
+    (message (concat "creating" fpath))
+    (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
+     (write-region (concat "#+PROPERTY: header-args:python :session "
+                           sessionname
+                           " :tangle yes :comment link \n"
+                           "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
+                           "#+LATEX_HEADER: \\usepackage{xcolor}\n"
+                           "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                           "#+LATEX_HEADER: \\setminted{linenos=True,bgcolor=bg}\n"
+                           "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}\n"
+                           "#+BEGIN_SRC python\n"
+                           "import numpy as np\n"
+                           "import matplotlib.pyplot as plt\n"
+                           "import pandas as pd\n"
+                           "#+END_SRC ")
+                   nil fpath)
+    (switch-to-buffer (find-file fpath)))
+#+end_src
+
+#+RESULTS:
+: aj/create-new-experiment
 
 ** Enable devanagari mode
 [2019-02-03 Sun]
@@ -2537,21 +2595,19 @@ relative-compose:  0
 
    (defhydra aj/hydra-interface (:color blue)
    "
-
-                                                     ^What would you like to do?^                         
-                                                     ...........................                          
-                                          ^Org^                ^Misc^               ^Quick Links^       ^   Personal   ^     
-                                          ^---^                ^----^               ^-----------^       ^--------------^     
-                                         _v_isualize brain     _m_odeline?            _C_onfig.org      _l_ast coffee        
-                                         _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
-                                         _A_nalysis            _R_eload init                          _s_ecrets            
-                                                               _h_eader modeline
-   
-   "
+                                                                        -----------------------------------------------------------------------------
+                                                                        ^Org^                ^Misc^               ^Quick Links^       ^   Personal   ^     
+                                                                        ^----------------------------------------------------------------------------^     
+                                                                       _v_isualize brain     _m_odeline?            _C_onfig.org      _l_ast coffee        
+                                                                       _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
+                                                                       _A_nalysis            _R_eload init                          _s_ecrets            
+                                                                       _E_xperiment          _h_eader modeline
+"
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
      ("v" org-brain-visualize "visualize")
      ("A" aj/create-new-analysis "Analyis")
+     ("E" aj/create-new-experiment "Experiment")
      ("l" aj/when-was-my-last-coffee "last?")
      ("s" aj/secrets/body "secrets")
      ("m" hidden-mode-line-mode "modeline?")
@@ -2595,3 +2651,13 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 #+RESULTS:
 : aj/hydra-elfeed/body
 
+** Pos frame for hydra
+[2019-05-22 Wed]
+#+begin_src emacs-lisp
+(use-package hydra-posframe
+  :load-path "~/.emacs.d/elpa/hydra-posframe"
+  :hook (after-init . hydra-posframe-enable))
+#+end_src
+
+#+RESULTS:
+| hydra-posframe-enable | global-company-mode | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
