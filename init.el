@@ -9,3 +9,5 @@
 (package-initialize)
 
 (org-babel-load-file "~/.emacs.d/config.org")
+;; To debug, fix el file and load it
+;; (load-file "~/.emacs.d/config.el")

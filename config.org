@@ -14,12 +14,6 @@
 #+END_EXAMPLE
 
 I would love to hear your feedback on this setup!
-* Package initialize
-#+BEGIN_SRC emacs-lisp
-;;(require 'package)
-;;(package-initialize)
-;;(require 'cl-lib)
-#+END_SRC
 * Where to look for packages
 [2019-01-31 Thu]
 #+begin_src emacs-lisp
@@ -58,760 +52,12 @@ I would love to hear your feedback on this setup!
 * Common Lisp
 ** Require
 #+BEGIN_SRC emacs-lisp
-(require 'cl)
-#+END_SRC
-* Emacs global setttings
-** Theme
-+As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
-+Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
-Reverted
-#+BEGIN_SRC emacs-lisp
-  ;;(load-theme 'gruvbox t) 
-  ;;(load-theme 'sexy-monochrome t)
-  ;; Modified on 2018-02-14
-  ;; (load-theme 'spacemacs-dark t)
-#+END_SRC
-<2018-06-20 Wed>
-From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
-#+BEGIN_SRC emacs-lisp
-  ;; (defadvice load-theme (before theme-dont-propagate activate)
-  ;; (mapcar #'disable-theme custom-enabled-themes))
-
+  (require 'cl)
+  (setq inferior-lisp-program (executable-find "sbcl"))
+  (slime-setup '(slime-fancy slime-quicklisp slime-asdf))
 #+END_SRC
 
 #+RESULTS:
-: load-theme
-
-[2019-02-21 Thu 20:42]
-Cyberpunk theme!
-#+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
-  (load-theme 'cyberpunk-2019 t)
-
-  (require 'powerline)
-  (powerline-default-theme)
-#+end_src
-
-#+RESULTS:
-| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line-buffer-id (if active (quote mode-line-buffer-id) (quote mode-line-buffer-id-inactive))) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face0 (if active (quote powerline-active0) (quote powerline-inactive0))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s (powerline-current-separator) (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s (powerline-current-separator) (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* face0 (quote l)) (when powerline-display-buffer-size (powerline-buffer-size face0 (quote l))) (when powerline-display-mule-info (powerline-raw mode-line-mule-info face0 (quote l))) (powerline-buffer-id (` (mode-line-buffer-id (, face0))) (quote l)) (when (and (boundp (quote which-func-mode)) which-func-mode) (powerline-raw which-func-format face0 (quote l))) (powerline-raw   face0) (funcall separator-left face0 face1) (when (and (boundp (quote erc-track-minor-mode)) erc-track-minor-mode) (powerline-raw erc-modified-channels-object face1 (quote l))) (powerline-major-mode face1 (quote l)) (powerline-process face1) (powerline-minor-modes face1 (quote l)) (powerline-narrow face1 (quote l)) (powerline-raw   face1) (funcall separator-left face1 face2) (powerline-vc face2 (quote r)) (when (bound-and-true-p nyan-mode) (powerline-raw (list (nyan-create)) face2 (quote l))))) (rhs (list (powerline-raw global-mode-string face2 (quote r)) (funcall separator-right face2 face1) (unless window-system (powerline-raw (char-to-string 57505) face1 (quote l))) (powerline-raw %4l face1 (quote l)) (powerline-raw : face1 (quote l)) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 face0) (powerline-raw   face0) (powerline-raw %6p face0 (quote r)) (when powerline-display-hud (powerline-hud face0 face2)) (powerline-fill face0 0)))) (concat (powerline-render lhs) (powerline-fill face2 (powerline-width rhs)) (powerline-render rhs)))) |
-
-** Poet Theme customizations
-[2019-01-02 Wed]
-#+begin_src emacs-lisp
-  ;;   (let* ((variable-tuple
-  ;;           (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-  ;;                 ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-  ;;                 ((x-list-fonts "Verdana")         '(:font "Verdana"))
-  ;;                 ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-  ;;                 (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-  ;;          (base-font-color     (face-foreground 'default nil 'default))
-  ;;          (headline           `(:inherit default :weight bold )))
-
-  ;;     (custom-theme-set-faces
-  ;;      'user
-  ;;      `(org-level-8 ((t (,@headline ,@variable-tuple))))
-  ;;      `(org-level-7 ((t (,@headline ,@variable-tuple))))
-  ;;      `(org-level-6 ((t (,@headline ,@variable-tuple))))
-  ;;      `(org-level-5 ((t (,@headline ,@variable-tuple))))
-  ;;      `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-  ;;      `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
-  ;;      `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
-  ;;      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
-  ;;      `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
-  ;; (custom-theme-set-faces
-  ;;  'user
-  ;;  '(variable-pitch ((t (:family "Segoe UI Semibold-9" :height 180 :weight light))))
-  ;;  '(fixed-pitch ((t ( :family "Inconsolata" :slant normal :weight normal :height 1.0 :width normal)))))
-  ;;     ;; (add-hook 'org-mode-hook
-  ;;     ;;             '(lambda ()
-  ;;     ;;                (variable-pitch-mode 1)
-  ;;     ;;                (mapc
-  ;;     ;;                 (lambda (face)
-  ;;     ;;                   (set-face-attribute face nil :inherit 'fixed-pitch))
-  ;;     ;;                 (list 'org-code
-  ;;     ;;                       'org-link 
-  ;;     ;;                       'org-block
-  ;;     ;;                       'org-table
-  ;;     ;;                       'org-block-begin-line
-  ;;     ;;                       'org-block-end-line
-  ;;     ;;                       'org-meta-line
-  ;;     ;;                       'org-document-info-keyword))))
-  ;;       ;; (add-hook 'text-mode-hook
-  ;;       ;;             (lambda ()
-  ;;       ;;               (variable-pitch-mode 1)))
-  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-          ;;(set-face-attribute 'variable-pitch nil :family "Baskerville")
-        ;; (set-face-attribute 'default nil :family "Iosevka" :height 130)
-        ;; (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-        ;; (set-face-attribute 'variable-pitch nil :family "Baskerville")
-        ;; ;; (olivetti-mode 1)        ;; Centers text in the buffer
-        ;; (flyspell-mode 1)        ;; Catch Spelling mistakes
-        ;; (typo-mode 1)            ;; Good for symbols like em-dash
-
-        ;; (blink-cursor-mode 0)    ;; Reduce visual noise
-        ;; (linum-mode 0)           ;; No line numbers for pros
-
-        ;; (require 'org-bullets)
-        ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-        ;;   (setq org-bullets-bullet-list
-        ;;       '("◉" "○"))
-        ;;   (org-bullets 1)
-#+end_src
-
-#+RESULTS:
-| variable-pitch-mode | (lambda nil (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | org-ref-org-menu | ob-ipython-auto-configure-kernels | (lambda nil (progn (parenthesis-register-keys [($~ org-mode-map))) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
-
-** Window defaults
-#+BEGIN_SRC emacs-lisp
-(scroll-bar-mode 0)    ; Turn off scrollbars.
-(tool-bar-mode 0)      ; Turn off toolbars.
-(fringe-mode 0)        ; Turn off left and right fringe cols.
-(menu-bar-mode -1)      ; Turn off menus.
-
-
-(add-hook 'window-configuration-change-hook
-	  (lambda ()
-	    (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 2 2 )))
-#+END_SRC
-[2019-02-22 Fri]
-
-[[https://emacs-doctor.com/emacs-strip-tease.html][Naked emacs!]]
-
-#+begin_src emacs-lisp
-(defvar-local hidden-mode-line-mode nil)
-(defvar-local hide-mode-line nil)
-
-(define-minor-mode hidden-mode-line-mode
-  "Minor mode to hide the mode-line in the current buffer."
-  :init-value nil
-  :global nil
-  :variable hidden-mode-line-mode
-  :group 'editing-basics
-  (if hidden-mode-line-mode
-      (setq hide-mode-line mode-line-format
-            mode-line-format nil)
-    (setq mode-line-format hide-mode-line
-          hide-mode-line nil))
-  (force-mode-line-update)
-  ;; Apparently force-mode-line-update is not always enough to
-  ;; redisplay the mode-line
-  (redraw-display)
-  (when (and (called-interactively-p 'interactive)
-             hidden-mode-line-mode)
-    (run-with-idle-timer
-     0 nil 'message
-     (concat "Hidden Mode Line Mode enabled.  "
-             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
-
-;; Activate hidden-mode-line-mode
-;;(add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
-
- (defvar-local header-line-format nil)
- (defun mode-line-in-header ()
-   (interactive)
-   (if (not header-line-format)
-       (setq header-line-format mode-line-format
-             mode-line-format nil)
-     (setq mode-line-format header-line-format
-           header-line-format nil))
-   (set-window-buffer nil (current-buffer)))
-;; (hidden-mode-line-mode 1)
-#+end_src
-
-#+RESULTS:
-: t
-
-** Window Transparency
-#+BEGIN_SRC emacs-lisp
-  ;; set transparency
-  ;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
-  ;; (add-to-list 'default-frame-alist '(alpha 100 100))
-#+END_SRC
-** Color Aesthetics
-#+BEGIN_SRC emacs-lisp
-;; Disabled on <2018-02-28 Wed>
-  ;; (set-face-background 'mode-line "#332F59")
-  ;; (set-face-background 'mode-line-inactive "#8E2F59")
-  ;; (set-face-background 'fringe "#343434")
-#+END_SRC
-** Truncate lines
-#+BEGIN_SRC emacs-lisp
-  (setq-default truncate-lines t)
-#+END_SRC
-** Display time
-#+BEGIN_SRC emacs-lisp
-(setq display-time-day-and-date t
- display-time-24hr-format t)
-(display-time)
-#+END_SRC
-(setq ae-keywords:tex-mode:list 
-      (list  '( comment "^\\s *\\(%.+$\\)" 'hi-pink)
-      ))
-(dolist (elt ae-keywords:tex-mode:list)
-  (font-lock-add-keywords nil (list (list (nth 1 elt) 1 (nth 2 elt) 'append)))
-  )
-** Make indirect buffer 
-#+BEGIN_SRC emacs-lisp
-(defun narrow-to-region-indirect (start end)
-  "Restrict editing in this buffer to the current region, indirectly."
-  (interactive "r")
-  (deactivate-mark)
-  (let ((buf (clone-indirect-buffer nil nil)))
-    (with-current-buffer buf
-      (narrow-to-region start end))
-      (switch-to-buffer buf)))
-#+END_SRC
-** Miscellaneous Keybindings
-#+BEGIN_SRC emacs-lisp
-(setq toggle-frame-fullscreen t)
-(global-set-key (kbd "C-x o") 'other-window)
-;;(global-set-key (kbd "C-c l") 
-;;                (lambda () (interactive) (find-file "~/orgs/research/LabNoteBook.org")))
-;; Other org mode mappings
-(global-set-key (kbd "C-c l") 'org-store-link)
-;;(define-key global-map "\C-c l" 'org-store-link)
-(setq org-log-done t)
-
-(setq org-todo-keywords
-  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
-#+END_SRC
-** Downloaded themes
-#+BEGIN_SRC elisp
-  ;; (add-to-list 'custom-theme-load-path
-  ;;              (file-name-as-directory "./replace-colorthemes/"))
-  ;; (load-theme 'retro-orange-theme t)
-  ;; (enable-theme 'retro-orange-theme)
-#+END_SRC
-** Backup directory
-<2018-01-04 Thu>
-Copied from [[http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html][here]]
-#+BEGIN_SRC emacs-lisp
-;; make backup to a designated dir, mirroring the full path
-
-(defun my-backup-file-name (fpath)
-  "Return a new file path of a given file path.
-If the new path's directories does not exist, create them."
-  (let* (
-        (backupRootDir "~/orgs/.emacs-backup/")
-        (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path, for example, "C:"
-        (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") ))
-        )
-    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
-    backupFilePath
-  )
-)
-
-(setq make-backup-file-name-function 'my-backup-file-name)
-
-#+END_SRC
-** Dired
-[2018-12-14 Fri]
-Load dired x
-(Keybindings are from https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/)
-#+BEGIN_SRC emacs-lisp
-    (autoload 'dired-jump "dired-x"
-      "Jump to Dired buffer corresponding to current buffer." t)
-
-    (autoload 'dired-jump-other-window "dired-x"
-      "Like \\[dired-jump] (dired-jump) but in other window." t)
-
-    (define-key global-map "\C-x\C-j" 'dired-jump)
-    (define-key global-map "\C-x4\C-j" 'dired-jump-other-window)
-
-
-    (add-hook 'dired-load-hook
-              (lambda ()
-                (load "dired-x")
-                ;; Set dired-x global variables here.  For example:
-                ;; (setq dired-guess-shell-gnutar "gtar")
-                ;; (setq dired-x-hands-off-my-keys nil)
-                ))
-
-  (with-eval-after-load 'dired
-    (require 'dired-x)
-    (setq-default dired-omit-files-p t)
-    ;;(setq dired-listing-switches "-alhv")
-    ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
-    (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
-    ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
-    )
-
-#+END_SRC
-
-#+RESULTS:
-: dired-omit-mode
-
-| lambda | nil | (dired-hide-details-mode) |
-#+BEGIN_EXAMPLE
-^\.?#\|^\.$\|^\.\.$
-#+END_EXAMPLE
-** Theme Changer
-   <2018-01-07 Sun>
-#+BEGIN_SRC emacs-lisp
-  ;; (setq calendar-location-name "Blacksburg, VA") 
-  ;; (setq calendar-latitude 37.2296)
-  ;; (setq calendar-longitude 80.4139)
-  ;; (require 'theme-changer)
-  ;; (change-theme 'gruvbox-light-hard 'gruvbox)
-#+END_SRC
-** Show battery in modeline
-<2018-02-14 Wed>
-#+BEGIN_SRC emacs-lisp
-(display-battery-mode 1) 
-#+END_SRC
-** Helm
-*** Load helm
- <2018-02-25 Sun>
- #+BEGIN_SRC emacs-lisp
-   (require 'helm)
-
-(require 'helm-config)
-   (global-set-key (kbd "M-x") 'helm-M-x)
-
-   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-   (helm-mode 1)
- #+END_SRC
-*** Jeff's fix for the annoying TAB completion problem
-#+BEGIN_SRC emacs-lisp
-  ;; modify help so tab is autocomplete
-  ;; (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
-  ;; (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
-  ;; (define-key helm-map (kbd "C-z") #'helm-select-action)
-#+END_SRC
-*** Helm-swoop configurations
-<2018-02-25 Sun>
-#+BEGIN_SRC emacs-lisp
-(require 'helm-swoop)
-(global-set-key (kbd "M-i") 'helm-swoop)
-(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-#+END_SRC
-*** Reconfiguring helm-bibtex
-#+BEGIN_SRC emacs-lisp
-
-(autoload 'helm-bibtex "helm-bibtex" "" t)
-#+END_SRC
-** Abbrev
-<2018-02-25 Sun>
-#+BEGIN_SRC emacs-lisp
-  ;; (load "~/.emacs.d/lisp/aj-abbrev.el")   
-#+END_SRC
-** Visual Regexp
-<2018-02-25 Sun>
-#+BEGIN_SRC emacs-lisp
-(require 'visual-regexp)
-(define-key global-map (kbd "C-c r") 'vr/replace)
-(define-key global-map (kbd "C-c q") 'vr/query-replace)
-#+END_SRC
-** YASnippet
-<2018-04-05 Thu>
-#+BEGIN_SRC emacs-lisp
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-        ))
-(yas-global-mode 1)
-#+END_SRC
-
-#+RESULTS:
-: t
-
-** Annoying C-z
-<2018-04-27 Fri>
-Found it [[https://superuser.com/a/349997][on stackexhange]]
-#+BEGIN_SRC emacs-lisp
-(global-unset-key (kbd "C-z"))
-#+END_SRC
-** Fonts
-[2019-02-20 Wed]
-#+begin_src emacs-lisp
-  ;; From https://github.com/andirueckel/undefined-medium
-  ;;(set-face-attribute 'default nil :font "Undefined"  )
-  ;; Default
-  (set-face-attribute 'default nil :font "Iosevka"  )
-#+end_src
-
-#+RESULTS:
-
-#+BEGIN_SRC emacs-lisp
-  ;; (when (window-system)
-  ;;   (set-frame-font "Fira Code"))
-  ;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-  ;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-  ;;                (36 . ".\\(?:>\\)")
-  ;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-  ;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-  ;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-  ;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-  ;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-  ;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-  ;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-  ;;                (48 . ".\\(?:x[a-zA-Z]\\)")
-  ;;                (58 . ".\\(?:::\\|[:=]\\)")
-  ;;                (59 . ".\\(?:;;\\|;\\)")
-  ;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-  ;;                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-  ;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-  ;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-  ;;                (91 . ".\\(?:]\\)")
-  ;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-  ;;                (94 . ".\\(?:=\\)")
-  ;;                (119 . ".\\(?:ww\\)")
-  ;;                (123 . ".\\(?:-\\)")
-  ;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-  ;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-  ;;                )
-  ;;              ))
-  ;;   (dolist (char-regexp alist)
-  ;;     (set-char-table-range composition-function-table (car char-regexp)
-  ;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
-
-
-
-  ;; ;;; Fira code
-  ;; ;; This works when using emacs --daemon + emacsclient
-  ;; (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
-  ;; ;; This works when using emacs without server/client
-  ;; (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")
-  ;; ;; I haven't found one statement that makes both of the above situations work, so I use both for now
-
-  ;; (defconst fira-code-font-lock-keywords-alist
-  ;;   (mapcar (lambda (regex-char-pair)
-  ;;             `(,(car regex-char-pair)
-  ;;               (0 (prog1 ()
-  ;;                    (compose-region (match-beginning 1)
-  ;;                                    (match-end 1)
-  ;;                                    ;; The first argument to concat is a string containing a literal tab
-  ;;                                    ,(concat "	" (list (decode-char 'ucs (cadr regex-char-pair)))))))))
-  ;;           '(("\\(www\\)"                   #Xe100)
-  ;;             ("[^/]\\(\\*\\*\\)[^/]"        #Xe101)
-  ;;             ("\\(\\*\\*\\*\\)"             #Xe102)
-  ;;             ("\\(\\*\\*/\\)"               #Xe103)
-  ;;             ("\\(\\*>\\)"                  #Xe104)
-  ;;             ("[^*]\\(\\*/\\)"              #Xe105)
-  ;;             ("\\(\\\\\\\\\\)"              #Xe106)
-  ;;             ("\\(\\\\\\\\\\\\\\)"          #Xe107)
-  ;;             ("\\({-\\)"                    #Xe108)
-  ;;             ("\\(\\[\\]\\)"                #Xe109)
-  ;;             ("\\(::\\)"                    #Xe10a)
-  ;;             ("\\(:::\\)"                   #Xe10b)
-  ;;             ("[^=]\\(:=\\)"                #Xe10c)
-  ;;             ("\\(!!\\)"                    #Xe10d)
-  ;;             ("\\(!=\\)"                    #Xe10e)
-  ;;             ("\\(!==\\)"                   #Xe10f)
-  ;;             ("\\(-}\\)"                    #Xe110)
-  ;;             ("\\(--\\)"                    #Xe111)
-  ;;             ("\\(---\\)"                   #Xe112)
-  ;;             ("\\(-->\\)"                   #Xe113)
-  ;;             ("[^-]\\(->\\)"                #Xe114)
-  ;;             ("\\(->>\\)"                   #Xe115)
-  ;;             ("\\(-<\\)"                    #Xe116)
-  ;;             ("\\(-<<\\)"                   #Xe117)
-  ;;             ("\\(-~\\)"                    #Xe118)
-  ;;             ("\\(#{\\)"                    #Xe119)
-  ;;             ("\\(#\\[\\)"                  #Xe11a)
-  ;;             ("\\(##\\)"                    #Xe11b)
-  ;;             ("\\(###\\)"                   #Xe11c)
-  ;;             ("\\(####\\)"                  #Xe11d)
-  ;;             ("\\(#(\\)"                    #Xe11e)
-  ;;             ("\\(#\\?\\)"                  #Xe11f)
-  ;;             ("\\(#_\\)"                    #Xe120)
-  ;;             ("\\(#_(\\)"                   #Xe121)
-  ;;             ("\\(\\.-\\)"                  #Xe122)
-  ;;             ("\\(\\.=\\)"                  #Xe123)
-  ;;             ("\\(\\.\\.\\)"                #Xe124)
-  ;;             ("\\(\\.\\.<\\)"               #Xe125)
-  ;;             ("\\(\\.\\.\\.\\)"             #Xe126)
-  ;;             ("\\(\\?=\\)"                  #Xe127)
-  ;;             ("\\(\\?\\?\\)"                #Xe128)
-  ;;             ("\\(;;\\)"                    #Xe129)
-  ;;             ("\\(/\\*\\)"                  #Xe12a)
-  ;;             ("\\(/\\*\\*\\)"               #Xe12b)
-  ;;             ("\\(/=\\)"                    #Xe12c)
-  ;;             ("\\(/==\\)"                   #Xe12d)
-  ;;             ("\\(/>\\)"                    #Xe12e)
-  ;;             ("\\(//\\)"                    #Xe12f)
-  ;;             ("\\(///\\)"                   #Xe130)
-  ;;             ("\\(&&\\)"                    #Xe131)
-  ;;             ("\\(||\\)"                    #Xe132)
-  ;;             ("\\(||=\\)"                   #Xe133)
-  ;;             ("[^|]\\(|=\\)"                #Xe134)
-  ;;             ("\\(|>\\)"                    #Xe135)
-  ;;             ("\\(\\^=\\)"                  #Xe136)
-  ;;             ("\\(\\$>\\)"                  #Xe137)
-  ;;             ("\\(\\+\\+\\)"                #Xe138)
-  ;;             ("\\(\\+\\+\\+\\)"             #Xe139)
-  ;;             ("\\(\\+>\\)"                  #Xe13a)
-  ;;             ("\\(=:=\\)"                   #Xe13b)
-  ;;             ("[^!/]\\(==\\)[^>]"           #Xe13c)
-  ;;             ("\\(===\\)"                   #Xe13d)
-  ;;             ("\\(==>\\)"                   #Xe13e)
-  ;;             ("[^=]\\(=>\\)"                #Xe13f)
-  ;;             ("\\(=>>\\)"                   #Xe140)
-  ;;             ("\\(<=\\)"                    #Xe141)
-  ;;             ("\\(=<<\\)"                   #Xe142)
-  ;;             ("\\(=/=\\)"                   #Xe143)
-  ;;             ("\\(>-\\)"                    #Xe144)
-  ;;             ("\\(>=\\)"                    #Xe145)
-  ;;             ("\\(>=>\\)"                   #Xe146)
-  ;;             ("[^-=]\\(>>\\)"               #Xe147)
-  ;;             ("\\(>>-\\)"                   #Xe148)
-  ;;             ("\\(>>=\\)"                   #Xe149)
-  ;;             ("\\(>>>\\)"                   #Xe14a)
-  ;;             ("\\(<\\*\\)"                  #Xe14b)
-  ;;             ("\\(<\\*>\\)"                 #Xe14c)
-  ;;             ("\\(<|\\)"                    #Xe14d)
-  ;;             ("\\(<|>\\)"                   #Xe14e)
-  ;;             ("\\(<\\$\\)"                  #Xe14f)
-  ;;             ("\\(<\\$>\\)"                 #Xe150)
-  ;;             ("\\(<!--\\)"                  #Xe151)
-  ;;             ("\\(<-\\)"                    #Xe152)
-  ;;             ("\\(<--\\)"                   #Xe153)
-  ;;             ("\\(<->\\)"                   #Xe154)
-  ;;             ("\\(<\\+\\)"                  #Xe155)
-  ;;             ("\\(<\\+>\\)"                 #Xe156)
-  ;;             ("\\(<=\\)"                    #Xe157)
-  ;;             ("\\(<==\\)"                   #Xe158)
-  ;;             ("\\(<=>\\)"                   #Xe159)
-  ;;             ("\\(<=<\\)"                   #Xe15a)
-  ;;             ("\\(<>\\)"                    #Xe15b)
-  ;;             ("[^-=]\\(<<\\)"               #Xe15c)
-  ;;             ("\\(<<-\\)"                   #Xe15d)
-  ;;             ("\\(<<=\\)"                   #Xe15e)
-  ;;             ("\\(<<<\\)"                   #Xe15f)
-  ;;             ("\\(<~\\)"                    #Xe160)
-  ;;             ("\\(<~~\\)"                   #Xe161)
-  ;;             ("\\(</\\)"                    #Xe162)
-  ;;             ("\\(</>\\)"                   #Xe163)
-  ;;             ("\\(~@\\)"                    #Xe164)
-  ;;             ("\\(~-\\)"                    #Xe165)
-  ;;             ("\\(~=\\)"                    #Xe166)
-  ;;             ("\\(~>\\)"                    #Xe167)
-  ;;             ("[^<]\\(~~\\)"                #Xe168)
-  ;;             ("\\(~~>\\)"                   #Xe169)
-  ;;             ("\\(%%\\)"                    #Xe16a)
-  ;;             ;;("\\(x\\)"                     #Xe16b)
-  ;;             ("[^:=]\\(:\\)[^:=]"           #Xe16c)
-  ;;             ("[^\\+<>]\\(\\+\\)[^\\+<>]"   #Xe16d)
-  ;;             ("[^\\*/<>]\\(\\*\\)[^\\*/<>]" #Xe16f))))
-
-  ;; (defun add-fira-code-symbol-keywords ()
-  ;;   (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
-
-  ;; (add-hook 'prog-mode-hook
-  ;;           #'add-fira-code-symbol-keywords)
-
-  ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
-  ;; (load "~/.emacs.d/lisp/symbols.el")
-#+END_SRC
-** Rectangular select regep operations
-   <2018-05-10 Thu>
-Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
-#+BEGIN_SRC emacs-lisp
-(require 'rect)
-
-(defun my-search-replace-in-rectangle
-  (start end search-pattern replacement search-function literal)
-  "Replace all instances of SEARCH-PATTERN (as found by SEARCH-FUNCTION)
-with REPLACEMENT, in each line of the rectangle established by the START
-and END buffer positions.
-
-SEARCH-FUNCTION should take the same BOUND and NOERROR arguments as
-`search-forward' and `re-search-forward'.
-
-The LITERAL argument is passed to `replace-match' during replacement.
-
-If `case-replace' is nil, do not alter case of replacement text."
-  (apply-on-rectangle
-   (lambda (start-col end-col search-function search-pattern replacement)
-     (move-to-column start-col)
-     (let ((bound (min (+ (point) (- end-col start-col))
-                       (line-end-position)))
-           (fixedcase (not case-replace)))
-       (while (funcall search-function search-pattern bound t)
-         (replace-match replacement fixedcase literal))))
-   start end search-function search-pattern replacement))
-
-(defun my-replace-regexp-rectangle-read-args (regexp-flag)
-  "Interactively read arguments for `my-replace-regexp-rectangle'
-or `my-replace-string-rectangle' (depending upon REGEXP-FLAG)."
-  (let ((args (query-replace-read-args
-               (concat "Replace"
-                       (if current-prefix-arg " word" "")
-                       (if regexp-flag " regexp" " string"))
-               regexp-flag)))
-    (list (region-beginning) (region-end)
-          (nth 0 args) (nth 1 args) (nth 2 args))))
-
-(defun my-replace-regexp-rectangle
-  (start end regexp to-string &optional delimited)
-  "Perform a regexp search and replace on each line of a rectangle
-established by START and END (interactively, the marked region),
-similar to `replace-regexp'.
-
-Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
-replace only matches surrounded by word boundaries.
-
-If `case-replace' is nil, do not alter case of replacement text."
-  (interactive (my-replace-regexp-rectangle-read-args t))
-  (when delimited
-    (setq regexp (concat "\\b" regexp "\\b")))
-  (my-search-replace-in-rectangle
-   start end regexp to-string 're-search-forward nil))
-
-(defun my-replace-string-rectangle
-  (start end from-string to-string &optional delimited)
-  "Perform a string search and replace on each line of a rectangle
-established by START and END (interactively, the marked region),
-similar to `replace-string'.
-
-Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
-replace only matches surrounded by word boundaries.
-
-If `case-replace' is nil, do not alter case of replacement text."
-  (interactive (my-replace-regexp-rectangle-read-args nil))
-  (let ((search-function 'search-forward))
-    (when delimited
-      (setq search-function 're-search-forward
-            from-string (concat "\\b" (regexp-quote from-string) "\\b")))
-    (my-search-replace-in-rectangle
-     start end from-string to-string search-function t)))
-
-(global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
-(global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
-#+END_SRC
-** Auto fill mode
-<2018-06-08 Fri>
-Set autofill mode by default for all major modes
-#+BEGIN_SRC emacs-lisp
-;; This becomes annoying in shell and org buffers
-;;(setq-default auto-fill-function 'do-autoill)
-#+END_SRC
-** Auto reload files
-#+BEGIN_SRC emacs-lisp
-(global-auto-revert-mode t)
-#+END_SRC
-** Auto reload files
-#+BEGIN_SRC emacs-lisp
-(global-auto-revert-mode t)
-#+END_SRC
-** My macros
-#+BEGIN_SRC emacs-lisp
-(fset 'mydb
-   [?\C-x ?1 ?\C-x ?3 ?\C-x ?\C-f ?~ ?/ ?. ?e ?m tab ?. tab ?s ?t ?a ?r tab ?. ?o tab return ?\C-c ?a ?  ?\C-x ?- ?\C-x ?\C-- ?\C-x ?o ?\C-x ?2 ?\C-x ?\C-b])
-(global-set-key (kbd "C-c d") 'mydb)
-#+END_SRC
-** Dired listing chronological instead of alphabetical
-#+BEGIN_SRC emacs-lisp
-(setq dired-listing-switches "-lt")
-
-#+END_SRC
-
-#+RESULTS:
-: -lt
-** Clean up modeline
-<2018-11-21 Wed>
-#+BEGIN_SRC emacs-lisp
-(diminish 'company-mode)
-(diminish 'company-box-mode)
-(diminish 'yas-minor-mode)
-(diminish 'eldoc-mode)
-(diminish 'helm-mode)
-(diminish 'org-mode)
-(diminish 'org-agenda-mode)
-(diminish 'projectile-mode)
-#+END_SRC
-
-#+RESULTS:
-|   |
-** Olivetti mode - turn on C-c ] binding
-<2018-11-24 Sat>
-#+BEGIN_SRC elisp
-(eval-after-load "olivetti-mode"
-  '(define-key olivetti-mode-map (kbd "C-c ]") nil))
-#+END_SRC
-
-#+RESULTS:
-** Get Shell-Command to recognize bash aliases
-#+BEGIN_SRC elisp
-(setq shell-file-name "bash")
-(setq shell-command-switch "-ic")
-#+END_SRC
-
-#+RESULTS:
-: -ic
-
-** Ace links
-[2018-12-14 Fri]
-#+BEGIN_SRC elisp
-(ace-link-setup-default)
-(define-key org-mode-map (kbd "M-o") 'ace-link-org)
-;;(define-key help-mode-map (kbd "M-o") 'ace-link-help)
-#+END_SRC
-
-#+RESULTS:
-: ace-link-org
-
-** Parenthesis and autocomplete
-[2018-12-21 Fri]
-#+BEGIN_SRC emacs-lisp
-  ;; (load-file "~/.emacs.d/parenthesis.el")
-  ;; (require 'parenthesis)
-  ;; (parenthesis-init)  
-  ;; (add-hook 'org-mode-hook '(lambda ()
-  ;;                            (progn
-  ;;                            ; other stuff
-  ;;                            (parenthesis-register-keys "[($~" org-mode-map))))
-  ;; (add-hook 'python-mode-hook '(lambda ()
-  ;;                            (progn
-  ;;                            ; other stuff
-  ;;                            (parenthesis-register-keys "[({\'\"" python-mode-map))))
-#+END_SRC
-
-[2019-01-25 Fri]
-Update: This is proving to be very annoying
-#+RESULTS:
-| lambda | nil | (progn (parenthesis-register-keys [('"{ python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({" python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({'" python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
-
-** Open with external programs
-[2019-01-14 Mon]
-#+begin_src emacs-lisp
-  ;; (require 'openwith)
-  ;; (openwith-mode t)
-  ;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
-#+end_src
-
-#+RESULTS:
-| \.pdf\' | evince | (file) |
-
-** Visible Bell
-#+BEGIN_SRC emacs-lisp
-(setq visible-bell 1)
-#+END_SRC
-
-** Customizing modeline
-#+begin_src emacs-lisp
-  ;; (setq aj-sec (with-temp-buffer
-  ;;              (insert-file-contents "~/orgs/secrets")
-  ;;              ;;(buffer-string))
-  ;;             (replace-regexp-in-string "[ \t \n]*" "" (buffer-string))))
-
-  ;; (setq mode-line-format
-  ;;       (append
-  ;;        mode-line-format
-  ;;        '(" <<" 'aj-sec ">> " )))
-
-#+end_src
-
-#+RESULTS:
-| %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
 
 * All the icons
 [2019-03-14 Thu]
@@ -890,6 +136,17 @@ c 'echo $PATH'"))))
 #+RESULTS:
 | my/python-mode-hook |
 
+** Sphinx-doc
+[2019-06-15 Sat]
+#+begin_src emacs-lisp
+ (add-hook 'python-mode-hook (lambda ()
+ (require 'sphinx-doc)
+ (sphinx-doc-mode t)))
+#+end_src
+
+#+RESULTS:
+| (lambda nil (require (quote sphinx-doc)) (sphinx-doc-mode t)) | outshine-mode | jedi:setup |
+
 ** OB-Ipython
 *** Basic setup
  <2018-04-05 Thu>
@@ -954,6 +211,17 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                    '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
                                           ((inhibit-same-window . t)))))
 #+END_SRC
+* Outshine
+[2019-06-10 Mon]
+#+begin_src emacs-lisp
+(defvar outline-minor-mode-prefix "\M-#")
+(add-hook 'python-mode-hook 'outshine-mode)
+(add-hook 'python-mode-hook 'outshine-mode)
+#+end_src
+
+#+RESULTS:
+| outshine-mode | jedi:setup |
+
 * Projectile
   [2019-03-14 Thu]
 #+begin_src emacs-lisp
@@ -1043,6 +311,7 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
  (latex . t)
 ;; (ipython . t)
  (R . t)
+ (C . t)
 (julia . t)
 (screen . t)
 ))
@@ -1150,7 +419,7 @@ This is such a cool idea!!
   ,#+LATEX_HEADER: \\usetheme{metropolis}
    #+LATEX_HEADER: \setbeamercolor{background canvas}{bg=white}
   %?" :prepend t :empty-lines 1)
-          ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
+          ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
            "** Meeting: %? - %U
     :PROPERTIES:
     :CREATED: %U
@@ -2409,6 +1678,7 @@ relative-compose:  0
 - Start a tidal repl using C-c C-s
 - Algorave!
 * Flycheck mode
+
 ** flycheck
 #+begin_src emacs-lisp
     (use-package flycheck
@@ -2428,6 +1698,24 @@ relative-compose:  0
 
 #+RESULTS:
 : t
+
+* Hyperspace
+#+begin_src emacs-lisp
+    ;; (eval-after-load "hyperspace"
+    ;;   (define-key hyperspace-minor-mode-map "\C-cs" #'hyperspace))
+  ;;   (defun hyperspace-action->elfeed (&optional query)
+  ;;     "Load elfeed, optionally searching for QUERY."
+  ;;     (elfeed)
+  ;;     (if query
+  ;;         (elfeed-search-set-filter query)
+  ;;       (elfeed-search-fetch nil)))
+  ;;       (setq hyperspace-actions )
+  ;; (lf . hyperspace-action->elfeed)
+
+#+end_src
+
+#+RESULTS:
+: hyperspace-action->elfeed
 
 * Playground
 ** Generate report
@@ -2480,6 +1768,24 @@ relative-compose:  0
 
 #+RESULTS:
 : aj/secrets/body
+** Readable regex
+#+begin_src emacs-lisp
+  (defun aj/regexp ()
+    "Create regular expression.
+  Asks for user input and converts it into Emacs regexp syntax"
+    (interactive)
+    (setq element-list (split-string 
+                        (read-string "Type regex: ")))
+    (setq i 0)                    
+    (while (< i (length element-list))
+      (print (nth i element-list)
+      (setq i (incf i)))))
+
+#+end_src
+
+#+RESULTS:
+: aj/regexp
+
 ** Dired quicklinks
 [2018-12-26 Wed]
 #+BEGIN_SRC emacs-lisp
@@ -2560,7 +1866,7 @@ relative-compose:  0
     (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
      (write-region (concat "#+PROPERTY: header-args:python :session "
                            sessionname
-                           " :tangle yes :comment link \n"
+                           " :tangle yes :comments link \n"
                            "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
                            "#+LATEX_HEADER: \\usepackage{xcolor}\n"
                            "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
@@ -2601,7 +1907,7 @@ relative-compose:  0
                                                                        _v_isualize brain     _m_odeline?            _C_onfig.org      _l_ast coffee        
                                                                        _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
                                                                        _A_nalysis            _R_eload init                          _s_ecrets            
-                                                                       _E_xperiment          _h_eader modeline
+                                                                       _E_xperiment          _h_perspace
 "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
@@ -2614,7 +1920,8 @@ relative-compose:  0
      ("d" aj/dired-links/body "dired")
      ("C" (find-file "~/.emacs.d/config.org") "config.org")
      ("L" (find-file "~/jalihal_projects/Research/LabNoteBook.org") "labnotebook.org")
-     ("h" mode-line-in-header)
+     ;;("h" mode-line-in-header)
+     ("h" hyperspace)
      ("R" (load-file "~/.emacs.d/init.el") "reload")
      ("q" nil "quit")
      )
@@ -2661,3 +1968,759 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 
 #+RESULTS:
 | hydra-posframe-enable | global-company-mode | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
+
+* Emacs global setttings
+** Theme
++As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
++Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
+Reverted
+#+BEGIN_SRC emacs-lisp
+  ;;(load-theme 'gruvbox t) 
+  ;;(load-theme 'sexy-monochrome t)
+  ;; Modified on 2018-02-14
+  ;; (load-theme 'spacemacs-dark t)
+#+END_SRC
+<2018-06-20 Wed>
+From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
+#+BEGIN_SRC emacs-lisp
+  ;; (defadvice load-theme (before theme-dont-propagate activate)
+  ;; (mapcar #'disable-theme custom-enabled-themes))
+
+#+END_SRC
+
+#+RESULTS:
+: load-theme
+
+[2019-02-21 Thu 20:42]
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+  (load-theme 'gruvbox t)
+
+  ;; (require 'powerline)
+  ;; (powerline-default-theme)
+#+end_src
+
+#+RESULTS:
+| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line-buffer-id (if active (quote mode-line-buffer-id) (quote mode-line-buffer-id-inactive))) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face0 (if active (quote powerline-active0) (quote powerline-inactive0))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s (powerline-current-separator) (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s (powerline-current-separator) (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* face0 (quote l)) (when powerline-display-buffer-size (powerline-buffer-size face0 (quote l))) (when powerline-display-mule-info (powerline-raw mode-line-mule-info face0 (quote l))) (powerline-buffer-id (` (mode-line-buffer-id (, face0))) (quote l)) (when (and (boundp (quote which-func-mode)) which-func-mode) (powerline-raw which-func-format face0 (quote l))) (powerline-raw   face0) (funcall separator-left face0 face1) (when (and (boundp (quote erc-track-minor-mode)) erc-track-minor-mode) (powerline-raw erc-modified-channels-object face1 (quote l))) (powerline-major-mode face1 (quote l)) (powerline-process face1) (powerline-minor-modes face1 (quote l)) (powerline-narrow face1 (quote l)) (powerline-raw   face1) (funcall separator-left face1 face2) (powerline-vc face2 (quote r)) (when (bound-and-true-p nyan-mode) (powerline-raw (list (nyan-create)) face2 (quote l))))) (rhs (list (powerline-raw global-mode-string face2 (quote r)) (funcall separator-right face2 face1) (unless window-system (powerline-raw (char-to-string 57505) face1 (quote l))) (powerline-raw %4l face1 (quote l)) (powerline-raw : face1 (quote l)) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 face0) (powerline-raw   face0) (powerline-raw %6p face0 (quote r)) (when powerline-display-hud (powerline-hud face0 face2)) (powerline-fill face0 0)))) (concat (powerline-render lhs) (powerline-fill face2 (powerline-width rhs)) (powerline-render rhs)))) |
+
+** Poet Theme customizations
+[2019-01-02 Wed]
+#+begin_src emacs-lisp
+  ;;   (let* ((variable-tuple
+  ;;           (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+  ;;                 ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+  ;;                 ((x-list-fonts "Verdana")         '(:font "Verdana"))
+  ;;                 ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+  ;;                 (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+  ;;          (base-font-color     (face-foreground 'default nil 'default))
+  ;;          (headline           `(:inherit default :weight bold )))
+
+  ;;     (custom-theme-set-faces
+  ;;      'user
+  ;;      `(org-level-8 ((t (,@headline ,@variable-tuple))))
+  ;;      `(org-level-7 ((t (,@headline ,@variable-tuple))))
+  ;;      `(org-level-6 ((t (,@headline ,@variable-tuple))))
+  ;;      `(org-level-5 ((t (,@headline ,@variable-tuple))))
+  ;;      `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+  ;;      `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+  ;;      `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+  ;;      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+  ;;      `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  '(variable-pitch ((t (:family "Segoe UI Semibold-9" :height 180 :weight light))))
+  ;;  '(fixed-pitch ((t ( :family "Inconsolata" :slant normal :weight normal :height 1.0 :width normal)))))
+  ;;     ;; (add-hook 'org-mode-hook
+  ;;     ;;             '(lambda ()
+  ;;     ;;                (variable-pitch-mode 1)
+  ;;     ;;                (mapc
+  ;;     ;;                 (lambda (face)
+  ;;     ;;                   (set-face-attribute face nil :inherit 'fixed-pitch))
+  ;;     ;;                 (list 'org-code
+  ;;     ;;                       'org-link 
+  ;;     ;;                       'org-block
+  ;;     ;;                       'org-table
+  ;;     ;;                       'org-block-begin-line
+  ;;     ;;                       'org-block-end-line
+  ;;     ;;                       'org-meta-line
+  ;;     ;;                       'org-document-info-keyword))))
+  ;;       ;; (add-hook 'text-mode-hook
+  ;;       ;;             (lambda ()
+  ;;       ;;               (variable-pitch-mode 1)))
+  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+          ;;(set-face-attribute 'variable-pitch nil :family "Baskerville")
+        ;; (set-face-attribute 'default nil :family "Iosevka" :height 130)
+        ;; (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+        ;; (set-face-attribute 'variable-pitch nil :family "Baskerville")
+        ;; ;; (olivetti-mode 1)        ;; Centers text in the buffer
+        ;; (flyspell-mode 1)        ;; Catch Spelling mistakes
+        ;; (typo-mode 1)            ;; Good for symbols like em-dash
+
+        ;; (blink-cursor-mode 0)    ;; Reduce visual noise
+        ;; (linum-mode 0)           ;; No line numbers for pros
+
+        ;; (require 'org-bullets)
+        ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+        ;;   (setq org-bullets-bullet-list
+        ;;       '("◉" "○"))
+        ;;   (org-bullets 1)
+#+end_src
+
+#+RESULTS:
+| variable-pitch-mode | (lambda nil (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | org-ref-org-menu | ob-ipython-auto-configure-kernels | (lambda nil (progn (parenthesis-register-keys [($~ org-mode-map))) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
+
+** Window defaults
+#+BEGIN_SRC emacs-lisp
+(scroll-bar-mode 0)    ; Turn off scrollbars.
+(tool-bar-mode 0)      ; Turn off toolbars.
+(fringe-mode 0)        ; Turn off left and right fringe cols.
+(menu-bar-mode -1)      ; Turn off menus.
+
+
+(add-hook 'window-configuration-change-hook
+	  (lambda ()
+	    (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 2 2 )))
+#+END_SRC
+[2019-02-22 Fri]
+
+[[https://emacs-doctor.com/emacs-strip-tease.html][Naked emacs!]]
+
+#+begin_src emacs-lisp
+(defvar-local hidden-mode-line-mode nil)
+(defvar-local hide-mode-line nil)
+
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global nil
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+;; Activate hidden-mode-line-mode
+;;(add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+ (defvar-local header-line-format nil)
+ (defun mode-line-in-header ()
+   (interactive)
+   (if (not header-line-format)
+       (setq header-line-format mode-line-format
+             mode-line-format nil)
+     (setq mode-line-format header-line-format
+           header-line-format nil))
+   (set-window-buffer nil (current-buffer)))
+;; (hidden-mode-line-mode 1)
+#+end_src
+
+#+RESULTS:
+: t
+
+** Window Transparency
+#+BEGIN_SRC emacs-lisp
+  ;; set transparency
+  ;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  ;; (add-to-list 'default-frame-alist '(alpha 100 100))
+#+END_SRC
+** Color Aesthetics
+#+BEGIN_SRC emacs-lisp
+;; Disabled on <2018-02-28 Wed>
+  ;; (set-face-background 'mode-line "#332F59")
+  ;; (set-face-background 'mode-line-inactive "#8E2F59")
+  ;; (set-face-background 'fringe "#343434")
+#+END_SRC
+** Truncate lines
+#+BEGIN_SRC emacs-lisp
+  (setq-default truncate-lines t)
+#+END_SRC
+** Display time
+#+BEGIN_SRC emacs-lisp
+(setq display-time-day-and-date t
+ display-time-24hr-format t)
+(display-time)
+#+END_SRC
+(setq ae-keywords:tex-mode:list 
+      (list  '( comment "^\\s *\\(%.+$\\)" 'hi-pink)
+      ))
+(dolist (elt ae-keywords:tex-mode:list)
+  (font-lock-add-keywords nil (list (list (nth 1 elt) 1 (nth 2 elt) 'append)))
+  )
+** Make indirect buffer 
+#+BEGIN_SRC emacs-lisp
+(defun narrow-to-region-indirect (start end)
+  "Restrict editing in this buffer to the current region, indirectly."
+  (interactive "r")
+  (deactivate-mark)
+  (let ((buf (clone-indirect-buffer nil nil)))
+    (with-current-buffer buf
+      (narrow-to-region start end))
+      (switch-to-buffer buf)))
+#+END_SRC
+** Miscellaneous Keybindings
+#+BEGIN_SRC emacs-lisp
+(setq toggle-frame-fullscreen t)
+(global-set-key (kbd "C-x o") 'other-window)
+;;(global-set-key (kbd "C-c l") 
+;;                (lambda () (interactive) (find-file "~/orgs/research/LabNoteBook.org")))
+;; Other org mode mappings
+(global-set-key (kbd "C-c l") 'org-store-link)
+;;(define-key global-map "\C-c l" 'org-store-link)
+(setq org-log-done t)
+
+(setq org-todo-keywords
+  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+#+END_SRC
+** Downloaded themes
+#+BEGIN_SRC elisp
+  ;; (add-to-list 'custom-theme-load-path
+  ;;              (file-name-as-directory "./replace-colorthemes/"))
+  ;; (load-theme 'retro-orange-theme t)
+  ;; (enable-theme 'retro-orange-theme)
+#+END_SRC
+** Backup directory
+<2018-01-04 Thu>
+Copied from [[http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html][here]]
+#+BEGIN_SRC emacs-lisp
+;; make backup to a designated dir, mirroring the full path
+
+(defun my-backup-file-name (fpath)
+  "Return a new file path of a given file path.
+If the new path's directories does not exist, create them."
+  (let* (
+        (backupRootDir "~/orgs/.emacs-backup/")
+        (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path, for example, "C:"
+        (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") ))
+        )
+    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
+    backupFilePath
+  )
+)
+
+(setq make-backup-file-name-function 'my-backup-file-name)
+
+#+END_SRC
+** Dired
+[2018-12-14 Fri]
+Load dired x
+(Keybindings are from https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/)
+#+BEGIN_SRC emacs-lisp
+    (autoload 'dired-jump "dired-x"
+      "Jump to Dired buffer corresponding to current buffer." t)
+
+    (autoload 'dired-jump-other-window "dired-x"
+      "Like \\[dired-jump] (dired-jump) but in other window." t)
+
+    (define-key global-map "\C-x\C-j" 'dired-jump)
+    (define-key global-map "\C-x4\C-j" 'dired-jump-other-window)
+
+
+    (add-hook 'dired-load-hook
+              (lambda ()
+                (load "dired-x")
+                ;; Set dired-x global variables here.  For example:
+                ;; (setq dired-guess-shell-gnutar "gtar")
+                ;; (setq dired-x-hands-off-my-keys nil)
+                ))
+
+  (with-eval-after-load 'dired
+    (require 'dired-x)
+    (setq-default dired-omit-files-p t)
+    ;;(setq dired-listing-switches "-alhv")
+    ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+    (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+    ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
+    (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
+    ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
+    )
+
+#+END_SRC
+
+#+RESULTS:
+: dired-omit-mode
+
+| lambda | nil | (dired-hide-details-mode) |
+#+BEGIN_EXAMPLE
+^\.?#\|^\.$\|^\.\.$
+#+END_EXAMPLE
+** Theme Changer
+   <2018-01-07 Sun>
+#+BEGIN_SRC emacs-lisp
+  ;; (setq calendar-location-name "Blacksburg, VA") 
+  ;; (setq calendar-latitude 37.2296)
+  ;; (setq calendar-longitude 80.4139)
+  ;; (require 'theme-changer)
+  ;; (change-theme 'gruvbox-light-hard 'gruvbox)
+#+END_SRC
+** Show battery in modeline
+<2018-02-14 Wed>
+#+BEGIN_SRC emacs-lisp
+(display-battery-mode 1) 
+#+END_SRC
+** Helm
+*** Load helm
+ <2018-02-25 Sun>
+ #+BEGIN_SRC emacs-lisp
+   (require 'helm)
+
+(require 'helm-config)
+   (global-set-key (kbd "M-x") 'helm-M-x)
+
+   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+   (helm-mode 1)
+ #+END_SRC
+*** Jeff's fix for the annoying TAB completion problem
+#+BEGIN_SRC emacs-lisp
+  ;; modify help so tab is autocomplete
+  ;; (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "C-z") #'helm-select-action)
+#+END_SRC
+*** Helm-swoop configurations
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'helm-swoop)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+*** Reconfiguring helm-bibtex
+#+BEGIN_SRC emacs-lisp
+
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+#+END_SRC
+** Abbrev
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+  ;; (load "~/.emacs.d/lisp/aj-abbrev.el")   
+#+END_SRC
+** Visual Regexp
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'visual-regexp)
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+#+END_SRC
+** YASnippet
+<2018-04-05 Thu>
+#+BEGIN_SRC emacs-lisp
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+        ))
+(yas-global-mode 1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Annoying C-z
+<2018-04-27 Fri>
+Found it [[https://superuser.com/a/349997][on stackexhange]]
+#+BEGIN_SRC emacs-lisp
+(global-unset-key (kbd "C-z"))
+#+END_SRC
+** Fonts
+[2019-02-20 Wed]
+#+begin_src emacs-lisp
+  ;; From https://github.com/andirueckel/undefined-medium
+  ;;(set-face-attribute 'default nil :font "Undefined"  )
+  ;; Default
+  (set-face-attribute 'default nil :font "Iosevka"  )
+#+end_src
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp
+  ;; (when (window-system)
+  ;;   (set-frame-font "Fira Code"))
+  ;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+  ;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+  ;;                (36 . ".\\(?:>\\)")
+  ;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+  ;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+  ;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+  ;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+  ;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+  ;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+  ;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+  ;;                (48 . ".\\(?:x[a-zA-Z]\\)")
+  ;;                (58 . ".\\(?:::\\|[:=]\\)")
+  ;;                (59 . ".\\(?:;;\\|;\\)")
+  ;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+  ;;                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+  ;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+  ;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+  ;;                (91 . ".\\(?:]\\)")
+  ;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+  ;;                (94 . ".\\(?:=\\)")
+  ;;                (119 . ".\\(?:ww\\)")
+  ;;                (123 . ".\\(?:-\\)")
+  ;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+  ;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+  ;;                )
+  ;;              ))
+  ;;   (dolist (char-regexp alist)
+  ;;     (set-char-table-range composition-function-table (car char-regexp)
+  ;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+
+
+  ;; ;;; Fira code
+  ;; ;; This works when using emacs --daemon + emacsclient
+  ;; (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
+  ;; ;; This works when using emacs without server/client
+  ;; (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")
+  ;; ;; I haven't found one statement that makes both of the above situations work, so I use both for now
+
+  ;; (defconst fira-code-font-lock-keywords-alist
+  ;;   (mapcar (lambda (regex-char-pair)
+  ;;             `(,(car regex-char-pair)
+  ;;               (0 (prog1 ()
+  ;;                    (compose-region (match-beginning 1)
+  ;;                                    (match-end 1)
+  ;;                                    ;; The first argument to concat is a string containing a literal tab
+  ;;                                    ,(concat "	" (list (decode-char 'ucs (cadr regex-char-pair)))))))))
+  ;;           '(("\\(www\\)"                   #Xe100)
+  ;;             ("[^/]\\(\\*\\*\\)[^/]"        #Xe101)
+  ;;             ("\\(\\*\\*\\*\\)"             #Xe102)
+  ;;             ("\\(\\*\\*/\\)"               #Xe103)
+  ;;             ("\\(\\*>\\)"                  #Xe104)
+  ;;             ("[^*]\\(\\*/\\)"              #Xe105)
+  ;;             ("\\(\\\\\\\\\\)"              #Xe106)
+  ;;             ("\\(\\\\\\\\\\\\\\)"          #Xe107)
+  ;;             ("\\({-\\)"                    #Xe108)
+  ;;             ("\\(\\[\\]\\)"                #Xe109)
+  ;;             ("\\(::\\)"                    #Xe10a)
+  ;;             ("\\(:::\\)"                   #Xe10b)
+  ;;             ("[^=]\\(:=\\)"                #Xe10c)
+  ;;             ("\\(!!\\)"                    #Xe10d)
+  ;;             ("\\(!=\\)"                    #Xe10e)
+  ;;             ("\\(!==\\)"                   #Xe10f)
+  ;;             ("\\(-}\\)"                    #Xe110)
+  ;;             ("\\(--\\)"                    #Xe111)
+  ;;             ("\\(---\\)"                   #Xe112)
+  ;;             ("\\(-->\\)"                   #Xe113)
+  ;;             ("[^-]\\(->\\)"                #Xe114)
+  ;;             ("\\(->>\\)"                   #Xe115)
+  ;;             ("\\(-<\\)"                    #Xe116)
+  ;;             ("\\(-<<\\)"                   #Xe117)
+  ;;             ("\\(-~\\)"                    #Xe118)
+  ;;             ("\\(#{\\)"                    #Xe119)
+  ;;             ("\\(#\\[\\)"                  #Xe11a)
+  ;;             ("\\(##\\)"                    #Xe11b)
+  ;;             ("\\(###\\)"                   #Xe11c)
+  ;;             ("\\(####\\)"                  #Xe11d)
+  ;;             ("\\(#(\\)"                    #Xe11e)
+  ;;             ("\\(#\\?\\)"                  #Xe11f)
+  ;;             ("\\(#_\\)"                    #Xe120)
+  ;;             ("\\(#_(\\)"                   #Xe121)
+  ;;             ("\\(\\.-\\)"                  #Xe122)
+  ;;             ("\\(\\.=\\)"                  #Xe123)
+  ;;             ("\\(\\.\\.\\)"                #Xe124)
+  ;;             ("\\(\\.\\.<\\)"               #Xe125)
+  ;;             ("\\(\\.\\.\\.\\)"             #Xe126)
+  ;;             ("\\(\\?=\\)"                  #Xe127)
+  ;;             ("\\(\\?\\?\\)"                #Xe128)
+  ;;             ("\\(;;\\)"                    #Xe129)
+  ;;             ("\\(/\\*\\)"                  #Xe12a)
+  ;;             ("\\(/\\*\\*\\)"               #Xe12b)
+  ;;             ("\\(/=\\)"                    #Xe12c)
+  ;;             ("\\(/==\\)"                   #Xe12d)
+  ;;             ("\\(/>\\)"                    #Xe12e)
+  ;;             ("\\(//\\)"                    #Xe12f)
+  ;;             ("\\(///\\)"                   #Xe130)
+  ;;             ("\\(&&\\)"                    #Xe131)
+  ;;             ("\\(||\\)"                    #Xe132)
+  ;;             ("\\(||=\\)"                   #Xe133)
+  ;;             ("[^|]\\(|=\\)"                #Xe134)
+  ;;             ("\\(|>\\)"                    #Xe135)
+  ;;             ("\\(\\^=\\)"                  #Xe136)
+  ;;             ("\\(\\$>\\)"                  #Xe137)
+  ;;             ("\\(\\+\\+\\)"                #Xe138)
+  ;;             ("\\(\\+\\+\\+\\)"             #Xe139)
+  ;;             ("\\(\\+>\\)"                  #Xe13a)
+  ;;             ("\\(=:=\\)"                   #Xe13b)
+  ;;             ("[^!/]\\(==\\)[^>]"           #Xe13c)
+  ;;             ("\\(===\\)"                   #Xe13d)
+  ;;             ("\\(==>\\)"                   #Xe13e)
+  ;;             ("[^=]\\(=>\\)"                #Xe13f)
+  ;;             ("\\(=>>\\)"                   #Xe140)
+  ;;             ("\\(<=\\)"                    #Xe141)
+  ;;             ("\\(=<<\\)"                   #Xe142)
+  ;;             ("\\(=/=\\)"                   #Xe143)
+  ;;             ("\\(>-\\)"                    #Xe144)
+  ;;             ("\\(>=\\)"                    #Xe145)
+  ;;             ("\\(>=>\\)"                   #Xe146)
+  ;;             ("[^-=]\\(>>\\)"               #Xe147)
+  ;;             ("\\(>>-\\)"                   #Xe148)
+  ;;             ("\\(>>=\\)"                   #Xe149)
+  ;;             ("\\(>>>\\)"                   #Xe14a)
+  ;;             ("\\(<\\*\\)"                  #Xe14b)
+  ;;             ("\\(<\\*>\\)"                 #Xe14c)
+  ;;             ("\\(<|\\)"                    #Xe14d)
+  ;;             ("\\(<|>\\)"                   #Xe14e)
+  ;;             ("\\(<\\$\\)"                  #Xe14f)
+  ;;             ("\\(<\\$>\\)"                 #Xe150)
+  ;;             ("\\(<!--\\)"                  #Xe151)
+  ;;             ("\\(<-\\)"                    #Xe152)
+  ;;             ("\\(<--\\)"                   #Xe153)
+  ;;             ("\\(<->\\)"                   #Xe154)
+  ;;             ("\\(<\\+\\)"                  #Xe155)
+  ;;             ("\\(<\\+>\\)"                 #Xe156)
+  ;;             ("\\(<=\\)"                    #Xe157)
+  ;;             ("\\(<==\\)"                   #Xe158)
+  ;;             ("\\(<=>\\)"                   #Xe159)
+  ;;             ("\\(<=<\\)"                   #Xe15a)
+  ;;             ("\\(<>\\)"                    #Xe15b)
+  ;;             ("[^-=]\\(<<\\)"               #Xe15c)
+  ;;             ("\\(<<-\\)"                   #Xe15d)
+  ;;             ("\\(<<=\\)"                   #Xe15e)
+  ;;             ("\\(<<<\\)"                   #Xe15f)
+  ;;             ("\\(<~\\)"                    #Xe160)
+  ;;             ("\\(<~~\\)"                   #Xe161)
+  ;;             ("\\(</\\)"                    #Xe162)
+  ;;             ("\\(</>\\)"                   #Xe163)
+  ;;             ("\\(~@\\)"                    #Xe164)
+  ;;             ("\\(~-\\)"                    #Xe165)
+  ;;             ("\\(~=\\)"                    #Xe166)
+  ;;             ("\\(~>\\)"                    #Xe167)
+  ;;             ("[^<]\\(~~\\)"                #Xe168)
+  ;;             ("\\(~~>\\)"                   #Xe169)
+  ;;             ("\\(%%\\)"                    #Xe16a)
+  ;;             ;;("\\(x\\)"                     #Xe16b)
+  ;;             ("[^:=]\\(:\\)[^:=]"           #Xe16c)
+  ;;             ("[^\\+<>]\\(\\+\\)[^\\+<>]"   #Xe16d)
+  ;;             ("[^\\*/<>]\\(\\*\\)[^\\*/<>]" #Xe16f))))
+
+  ;; (defun add-fira-code-symbol-keywords ()
+  ;;   (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
+
+  ;; (add-hook 'prog-mode-hook
+  ;;           #'add-fira-code-symbol-keywords)
+
+  ;; (set-face-font 'default "-CYEL-Iosevka-normal-normal-normal-*-16-*-*-*-d-0-iso10646-1")
+  ;; (load "~/.emacs.d/lisp/symbols.el")
+#+END_SRC
+** Rectangular select regep operations
+   <2018-05-10 Thu>
+Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
+#+BEGIN_SRC emacs-lisp
+(require 'rect)
+
+(defun my-search-replace-in-rectangle
+  (start end search-pattern replacement search-function literal)
+  "Replace all instances of SEARCH-PATTERN (as found by SEARCH-FUNCTION)
+with REPLACEMENT, in each line of the rectangle established by the START
+and END buffer positions.
+
+SEARCH-FUNCTION should take the same BOUND and NOERROR arguments as
+`search-forward' and `re-search-forward'.
+
+The LITERAL argument is passed to `replace-match' during replacement.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (apply-on-rectangle
+   (lambda (start-col end-col search-function search-pattern replacement)
+     (move-to-column start-col)
+     (let ((bound (min (+ (point) (- end-col start-col))
+                       (line-end-position)))
+           (fixedcase (not case-replace)))
+       (while (funcall search-function search-pattern bound t)
+         (replace-match replacement fixedcase literal))))
+   start end search-function search-pattern replacement))
+
+(defun my-replace-regexp-rectangle-read-args (regexp-flag)
+  "Interactively read arguments for `my-replace-regexp-rectangle'
+or `my-replace-string-rectangle' (depending upon REGEXP-FLAG)."
+  (let ((args (query-replace-read-args
+               (concat "Replace"
+                       (if current-prefix-arg " word" "")
+                       (if regexp-flag " regexp" " string"))
+               regexp-flag)))
+    (list (region-beginning) (region-end)
+          (nth 0 args) (nth 1 args) (nth 2 args))))
+
+(defun my-replace-regexp-rectangle
+  (start end regexp to-string &optional delimited)
+  "Perform a regexp search and replace on each line of a rectangle
+established by START and END (interactively, the marked region),
+similar to `replace-regexp'.
+
+Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+replace only matches surrounded by word boundaries.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (interactive (my-replace-regexp-rectangle-read-args t))
+  (when delimited
+    (setq regexp (concat "\\b" regexp "\\b")))
+  (my-search-replace-in-rectangle
+   start end regexp to-string 're-search-forward nil))
+
+(defun my-replace-string-rectangle
+  (start end from-string to-string &optional delimited)
+  "Perform a string search and replace on each line of a rectangle
+established by START and END (interactively, the marked region),
+similar to `replace-string'.
+
+Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+replace only matches surrounded by word boundaries.
+
+If `case-replace' is nil, do not alter case of replacement text."
+  (interactive (my-replace-regexp-rectangle-read-args nil))
+  (let ((search-function 'search-forward))
+    (when delimited
+      (setq search-function 're-search-forward
+            from-string (concat "\\b" (regexp-quote from-string) "\\b")))
+    (my-search-replace-in-rectangle
+     start end from-string to-string search-function t)))
+
+(global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
+(global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
+#+END_SRC
+** Auto fill mode
+<2018-06-08 Fri>
+Set autofill mode by default for all major modes
+#+BEGIN_SRC emacs-lisp
+;; This becomes annoying in shell and org buffers
+;;(setq-default auto-fill-function 'do-autoill)
+#+END_SRC
+** Auto reload files
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode t)
+#+END_SRC
+** Auto reload files
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode t)
+#+END_SRC
+** My macros
+#+BEGIN_SRC emacs-lisp
+(fset 'mydb
+   [?\C-x ?1 ?\C-x ?3 ?\C-x ?\C-f ?~ ?/ ?. ?e ?m tab ?. tab ?s ?t ?a ?r tab ?. ?o tab return ?\C-c ?a ?  ?\C-x ?- ?\C-x ?\C-- ?\C-x ?o ?\C-x ?2 ?\C-x ?\C-b])
+(global-set-key (kbd "C-c d") 'mydb)
+#+END_SRC
+** Dired listing chronological instead of alphabetical
+#+BEGIN_SRC emacs-lisp
+(setq dired-listing-switches "-lt")
+
+#+END_SRC
+
+#+RESULTS:
+: -lt
+
+#+RESULTS:
+|   |
+** Olivetti mode - turn on C-c ] binding
+<2018-11-24 Sat>
+#+BEGIN_SRC elisp
+(eval-after-load "olivetti-mode"
+  '(define-key olivetti-mode-map (kbd "C-c ]") nil))
+#+END_SRC
+
+#+RESULTS:
+** Get Shell-Command to recognize bash aliases
+#+BEGIN_SRC elisp
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
+#+END_SRC
+
+#+RESULTS:
+: -ic
+
+** Ace links
+[2018-12-14 Fri]
+#+BEGIN_SRC elisp
+(ace-link-setup-default)
+(define-key org-mode-map (kbd "M-o") 'ace-link-org)
+;;(define-key help-mode-map (kbd "M-o") 'ace-link-help)
+#+END_SRC
+
+#+RESULTS:
+: ace-link-org
+
+** Parenthesis and autocomplete
+[2018-12-21 Fri]
+#+BEGIN_SRC emacs-lisp
+  ;; (load-file "~/.emacs.d/parenthesis.el")
+  ;; (require 'parenthesis)
+  ;; (parenthesis-init)  
+  ;; (add-hook 'org-mode-hook '(lambda ()
+  ;;                            (progn
+  ;;                            ; other stuff
+  ;;                            (parenthesis-register-keys "[($~" org-mode-map))))
+  ;; (add-hook 'python-mode-hook '(lambda ()
+  ;;                            (progn
+  ;;                            ; other stuff
+  ;;                            (parenthesis-register-keys "[({\'\"" python-mode-map))))
+#+END_SRC
+
+[2019-01-25 Fri]
+Update: This is proving to be very annoying
+#+RESULTS:
+| lambda | nil | (progn (parenthesis-register-keys [('"{ python-mode-map)) |
+| lambda | nil | (progn (parenthesis-register-keys [({" python-mode-map))  |
+| lambda | nil | (progn (parenthesis-register-keys [({'" python-mode-map)) |
+| lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
+| lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
+
+** Open with external programs
+[2019-01-14 Mon]
+#+begin_src emacs-lisp
+  ;; (require 'openwith)
+  ;; (openwith-mode t)
+  ;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+#+end_src
+
+#+RESULTS:
+| \.pdf\' | evince | (file) |
+
+** Visible Bell
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell 1)
+#+END_SRC
+
+** Customizing modeline
+#+begin_src emacs-lisp
+  ;; (setq aj-sec (with-temp-buffer
+  ;;              (insert-file-contents "~/orgs/secrets")
+  ;;              ;;(buffer-string))
+  ;;             (replace-regexp-in-string "[ \t \n]*" "" (buffer-string))))
+
+  ;; (setq mode-line-format
+  ;;       (append
+  ;;        mode-line-format
+  ;;        '(" <<" 'aj-sec ">> " )))
+
+#+end_src
+
+#+RESULTS:
+| %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
+
+** Clean up modeline
+<2018-11-21 Wed>
+#+BEGIN_SRC emacs-lisp
+(require 'diminish)
+(diminish 'company-mode)
+(diminish 'company-box-mode)
+(diminish 'yas-minor-mode)
+(diminish 'eldoc-mode)
+(diminish 'helm-mode)
+(diminish 'org-mode)
+(diminish 'org-agenda-mode)
+(diminish 'projectile-mode)
+(diminish 'flycheck-mode)
+(diminish 'dired-mode)
+#+END_SRC
