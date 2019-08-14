@@ -1,12 +1,12 @@
 * Where to look for packages
 #+begin_src emacs-lisp
+  (require 'use-package)
   (add-to-list 'load-path
                "~/.emacs.d/elpa/nswbuff/")
 
 #+end_src
 
 #+RESULTS:
-| ~/.emacs.d/elpa/nswbuff/ | ~/.emacs.d/lisp/ | ~/.emacs.d/elpa/ox-ipynb/ | ~/.emacs.d/elpa/ | /home/jamogh/.emacs.d/elpa/org-ref-20180917.2018/citeproc/csl | /home/jamogh/.emacs.d/elpa/org-ref-20180917.2018/citeproc | ~/.emacs.d/org-ref/ | ~/.emacs.d/plugins/yasnippet | ~/.emacs.d/elpa/helm-bibtex | ~/.emacs.d/elpa/helm | /home/jamogh/.emacs.d/elpa/ac-math-20141116.2127 | /home/jamogh/.emacs.d/elpa/auctex-12.1.1/ | /home/jamogh/.emacs.d/elpa/auctex-12.1.1 | /home/jamogh/.emacs.d/elpa/calfw-20180118.45 | /home/jamogh/.emacs.d/elpa/calfw-org-20160303.258 | /home/jamogh/.emacs.d/elpa/captain-1.0.3 | /home/jamogh/.emacs.d/elpa/cdlatex-20140707.1126 | /home/jamogh/.emacs.d/elpa/chronos-20150602.1529 | /home/jamogh/.emacs.d/elpa/column-enforce-mode-20171030.1900 | /home/jamogh/.emacs.d/elpa/company-quickhelp-2.3.0 | /home/jamogh/.emacs.d/elpa/docker-20180927.751 | /home/jamogh/.emacs.d/elpa/docker-tramp-20170207.325 | /home/jamogh/.emacs.d/elpa/elfeed-org-20180129.1307 | /home/jamogh/.emacs.d/elpa/elfeed-20180916.1338 | /home/jamogh/.emacs.d/elpa/elpy-20180924.1634 | /home/jamogh/.emacs.d/elpa/company-20180913.2311 | /home/jamogh/.emacs.d/elpa/emms-20180927.1736 | /home/jamogh/.emacs.d/elpa/ess-18.10.2 | /home/jamogh/.emacs.d/elpa/evil-20180914.1216 | /home/jamogh/.emacs.d/elpa/find-file-in-project-20180912.1218 | /home/jamogh/.emacs.d/elpa/git-gutter-20161105.1356 | /home/jamogh/.emacs.d/elpa/git-timemachine-20180607.820 | /home/jamogh/.emacs.d/elpa/goto-chg-20180105.1833 | /home/jamogh/.emacs.d/elpa/gruvbox-theme-20180919.621 | /home/jamogh/.emacs.d/elpa/autothemer-20180920.923 | /home/jamogh/.emacs.d/elpa/helm-bibtexkey-20140214.1504 | /home/jamogh/.emacs.d/elpa/helm-cmd-t-20170125.1459 | /home/jamogh/.emacs.d/elpa/helm-swoop-20180215.1154 | /home/jamogh/.emacs.d/elpa/highlight-indentation-20171218.937 | /home/jamogh/.emacs.d/elpa/json-mode-20180718.809 | /home/jamogh/.emacs.d/elpa/json-reformat-20160212.853 | /home/jamogh/.emacs.d/elpa/json-snatcher-20150512.347 | /home/jamogh/.emacs.d/elpa/julia-mode-20180816.2117 | /home/jamogh/.emacs.d/elpa/kanban-20170418.810 | /home/jamogh/.emacs.d/elpa/magit-todos-20180910.628 | /home/jamogh/.emacs.d/elpa/magit-20180928.1153 | /home/jamogh/.emacs.d/elpa/magit-popup-20180726.2037 | /home/jamogh/.emacs.d/elpa/git-commit-20180912.1012 | /home/jamogh/.emacs.d/elpa/ghub-20180924.713 | /home/jamogh/.emacs.d/elpa/graphql-20180912.31 | /home/jamogh/.emacs.d/elpa/hl-todo-20180710.455 | /home/jamogh/.emacs.d/elpa/math-symbol-lists-20170221.1353 | /home/jamogh/.emacs.d/elpa/matlab-mode-20180928.1526 | /home/jamogh/.emacs.d/elpa/minimap-1.2 | /home/jamogh/.emacs.d/elpa/ob-async-1.0.0 | /home/jamogh/.emacs.d/elpa/ob-ipython-20180224.953 | /home/jamogh/.emacs.d/elpa/dash-functional-20180107.1618 | /home/jamogh/.emacs.d/elpa/olivetti-20180531.737 | /home/jamogh/.emacs.d/elpa/org-alert-20180524.133 | /home/jamogh/.emacs.d/elpa/alert-20180827.422 | /home/jamogh/.emacs.d/elpa/log4e-20170401.1304 | /home/jamogh/.emacs.d/elpa/gntp-20141025.250 | /home/jamogh/.emacs.d/elpa/org-brain-20180712.2110 | /home/jamogh/.emacs.d/elpa/org-bullets-20180208.2343/ | /home/jamogh/.emacs.d/elpa/org-dashboard-20171223.1924/ | /home/jamogh/.emacs.d/elpa/org-download-20180925.1528 | /home/jamogh/.emacs.d/elpa/org-drill-table-20180115.1009/ | /home/jamogh/.emacs.d/elpa/org-edna-1.0.1 | /home/jamogh/.emacs.d/elpa/org-plus-contrib-20190128 | /home/jamogh/.emacs.d/elpa/org-present-20180303.2330/ | /home/jamogh/.emacs.d/elpa/org-20190128 | /home/jamogh/.emacs.d/elpa/org-ref-20180917.2018 | /home/jamogh/.emacs.d/elpa/key-chord-20160227.1238 | /home/jamogh/.emacs.d/elpa/hydra-20180918.1529 | /home/jamogh/.emacs.d/elpa/ivy-20180926.1249 | /home/jamogh/.emacs.d/elpa/helm-bibtex-20180826.1548 | /home/jamogh/.emacs.d/elpa/biblio-20161014.2304 | /home/jamogh/.emacs.d/elpa/biblio-core-20160901.1815 | /home/jamogh/.emacs.d/elpa/helm-20181002.459 | /home/jamogh/.emacs.d/elpa/helm-core-20180826.515 | /home/jamogh/.emacs.d/elpa/htmlize-20180923.1829 | /home/jamogh/.emacs.d/elpa/parsebib-20180116.1427/ | /home/jamogh/.emacs.d/elpa/pcre2el-20161120.2103 | /home/jamogh/.emacs.d/elpa/pdf-tools-20180925.715 | /home/jamogh/.emacs.d/elpa/let-alist-1.0.5/ | /home/jamogh/.emacs.d/elpa/popwin-20150315.1300/ | /home/jamogh/.emacs.d/elpa/pos-tip-0.4.6 | /home/jamogh/.emacs.d/elpa/pretty-mode-20160614.1846/ | /home/jamogh/.emacs.d/elpa/projectile-2.0.0 | /home/jamogh/.emacs.d/elpa/pkg-info-0.6 | /home/jamogh/.emacs.d/elpa/epl-0.9 | /home/jamogh/.emacs.d/elpa/pyenv-mode-0.1.0 | /home/jamogh/.emacs.d/elpa/pythonic-0.1.1 | /home/jamogh/.emacs.d/elpa/f-20180106.922 | /home/jamogh/.emacs.d/elpa/pyvenv-20180831.847 | /home/jamogh/.emacs.d/elpa/sclang-extensions-20160509.338/ | /home/jamogh/.emacs.d/elpa/auto-complete-20170125.245 | /home/jamogh/.emacs.d/elpa/popup-20160709.1429/ | /home/jamogh/.emacs.d/elpa/seq-2.20/ | /home/jamogh/.emacs.d/elpa/sexy-monochrome-theme-20180526.808/ | /home/jamogh/.emacs.d/elpa/smart-mode-line-20180926.1036 | /home/jamogh/.emacs.d/elpa/rich-minority-20170813.1322/ | /home/jamogh/.emacs.d/elpa/spacemacs-theme-20180817.1304 | /home/jamogh/.emacs.d/elpa/ssh-20120904.2042/ | /home/jamogh/.emacs.d/elpa/tablist-20170220.335/ | /home/jamogh/.emacs.d/elpa/theme-changer-20171221.1927/ | /home/jamogh/.emacs.d/elpa/tidal-20180410.1945/ | /home/jamogh/.emacs.d/elpa/haskell-mode-20180917.923 | /home/jamogh/.emacs.d/elpa/treepy-20180724.656 | /home/jamogh/.emacs.d/elpa/twittering-mode-20180917.328 | /home/jamogh/.emacs.d/elpa/undo-tree-20170706.246 | /home/jamogh/.emacs.d/elpa/use-package-20180715.1801/ | /home/jamogh/.emacs.d/elpa/bind-key-20180513.430 | /home/jamogh/.emacs.d/elpa/virtualenvwrapper-0.1.0 | /home/jamogh/.emacs.d/elpa/s-20180406.808/ | /home/jamogh/.emacs.d/elpa/dash-20180910.1856 | /home/jamogh/.emacs.d/elpa/visual-fill-column-1.11 | /home/jamogh/.emacs.d/elpa/visual-regexp-20170301.116/ | /home/jamogh/.emacs.d/elpa/with-editor-20180726.2044/ | /home/jamogh/.emacs.d/elpa/async-20180527.1730 | /home/jamogh/.emacs.d/elpa/yasnippet-20180916.2115 | /etc/emacs25 | /etc/emacs | /usr/local/share/emacs/25.2/site-lisp | /usr/local/share/emacs/site-lisp | /usr/share/emacs25/site-lisp/dictionaries-common | /usr/share/emacs/site-lisp/autoconf | /usr/share/emacs/25.2/site-lisp | /usr/share/emacs/25.2/site-lisp/dictionaries-common | /usr/share/emacs/site-lisp | /usr/share/emacs/25.2/lisp | /usr/share/emacs/25.2/lisp/vc | /usr/share/emacs/25.2/lisp/url | /usr/share/emacs/25.2/lisp/textmodes | /usr/share/emacs/25.2/lisp/progmodes | /usr/share/emacs/25.2/lisp/play | /usr/share/emacs/25.2/lisp/org | /usr/share/emacs/25.2/lisp/nxml | /usr/share/emacs/25.2/lisp/net | /usr/share/emacs/25.2/lisp/mh-e | /usr/share/emacs/25.2/lisp/mail | /usr/share/emacs/25.2/lisp/leim | /usr/share/emacs/25.2/lisp/language | /usr/share/emacs/25.2/lisp/international | /usr/share/emacs/25.2/lisp/gnus | /usr/share/emacs/25.2/lisp/eshell | /usr/share/emacs/25.2/lisp/erc | /usr/share/emacs/25.2/lisp/emulation | /usr/share/emacs/25.2/lisp/emacs-lisp | /usr/share/emacs/25.2/lisp/cedet | /usr/share/emacs/25.2/lisp/calendar | /usr/share/emacs/25.2/lisp/calc | /usr/share/emacs/25.2/lisp/obsolete |
 
 * Emacs global setttings
 ** Theme
@@ -33,14 +33,20 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 New cyberpunk theme!
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+;;(use-package cyberpunk-2019-theme
+;;:ensure t
+;;:config
 (load-theme 'cyberpunk-2019 t)
+(use-package powerline
+:config
 (powerline-default-theme)
+:ensure t)
 #+end_src
 
 #+RESULTS:
 : t
 
-** Window defaults
+** COMMENT Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
 (tool-bar-mode 0)      ; Turn off toolbars.
@@ -93,6 +99,11 @@ New cyberpunk theme!
   ;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
   ;; (add-to-list 'default-frame-alist '(alpha 100 100))
 #+END_SRC
+** Visible Bell
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell 1)
+#+END_SRC
+
 ** Color Aesthetics
 #+BEGIN_SRC emacs-lisp
 ;; Disabled on <2018-02-28 Wed>
@@ -196,12 +207,11 @@ If the new path's directories does not exist, create them."
 *** Load helm
  <2018-02-25 Sun>
  #+BEGIN_SRC emacs-lisp
-   (require 'helm)
-(add-to-list 'load-path "~/.emacs.d/elpa/helm") ; facultative when installed with make install
-(require 'helm-config)
+   (use-package helm
+:ensure t)
+
    (global-set-key (kbd "M-x") 'helm-M-x)
 
-   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
    (helm-mode 1)
  #+END_SRC
 *** Jeff's fix for the annoying TAB completion problem
@@ -214,7 +224,8 @@ If the new path's directories does not exist, create them."
 *** Helm-swoop configurations
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
-(require 'helm-swoop)
+(use-package helm-swoop
+:ensure t)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
@@ -233,7 +244,8 @@ If the new path's directories does not exist, create them."
 ** Visual Regexp
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
-(require 'visual-regexp)
+(use-package visual-regexp
+:ensure t)
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 #+END_SRC
@@ -242,7 +254,9 @@ If the new path's directories does not exist, create them."
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path
               "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
+(use-package yasnippet
+:ensure t)
+
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
         ))
@@ -253,7 +267,7 @@ If the new path's directories does not exist, create them."
 : t
 
 ** Company
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (add-hook 'after-init-hook 'global-company-mode)
   ;; (add-to-list 'company-backends 'company-ob-ipython) ;
 #+END_SRC
@@ -437,81 +451,83 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
       ;;              "~/.emacs.d/lisp/")
       ;; (load "~/.emacs.d/lisp/symbols.el")
 #+END_SRC
-** Rectangular select regep operations
+**  Rectangular select regep operations
    <2018-05-10 Thu>
 Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
-#+BEGIN_SRC emacs-lisp
-(require 'rect)
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package rect
+               :ensure t)
 
-(defun my-search-replace-in-rectangle
-  (start end search-pattern replacement search-function literal)
-  "Replace all instances of SEARCH-PATTERN (as found by SEARCH-FUNCTION)
-with REPLACEMENT, in each line of the rectangle established by the START
-and END buffer positions.
 
-SEARCH-FUNCTION should take the same BOUND and NOERROR arguments as
-`search-forward' and `re-search-forward'.
+  (defun my-search-replace-in-rectangle
+    (start end search-pattern replacement search-function literal)
+    "Replace all instances of SEARCH-PATTERN (as found by SEARCH-FUNCTION)
+  with REPLACEMENT, in each line of the rectangle established by the START
+  and END buffer positions.
 
-The LITERAL argument is passed to `replace-match' during replacement.
+  SEARCH-FUNCTION should take the same BOUND and NOERROR arguments as
+  `search-forward' and `re-search-forward'.
 
-If `case-replace' is nil, do not alter case of replacement text."
-  (apply-on-rectangle
-   (lambda (start-col end-col search-function search-pattern replacement)
-     (move-to-column start-col)
-     (let ((bound (min (+ (point) (- end-col start-col))
-                       (line-end-position)))
-           (fixedcase (not case-replace)))
-       (while (funcall search-function search-pattern bound t)
-         (replace-match replacement fixedcase literal))))
-   start end search-function search-pattern replacement))
+  The LITERAL argument is passed to `replace-match' during replacement.
 
-(defun my-replace-regexp-rectangle-read-args (regexp-flag)
-  "Interactively read arguments for `my-replace-regexp-rectangle'
-or `my-replace-string-rectangle' (depending upon REGEXP-FLAG)."
-  (let ((args (query-replace-read-args
-               (concat "Replace"
-                       (if current-prefix-arg " word" "")
-                       (if regexp-flag " regexp" " string"))
-               regexp-flag)))
-    (list (region-beginning) (region-end)
-          (nth 0 args) (nth 1 args) (nth 2 args))))
+  If `case-replace' is nil, do not alter case of replacement text."
+    (apply-on-rectangle
+     (lambda (start-col end-col search-function search-pattern replacement)
+       (move-to-column start-col)
+       (let ((bound (min (+ (point) (- end-col start-col))
+                         (line-end-position)))
+             (fixedcase (not case-replace)))
+         (while (funcall search-function search-pattern bound t)
+           (replace-match replacement fixedcase literal))))
+     start end search-function search-pattern replacement))
 
-(defun my-replace-regexp-rectangle
-  (start end regexp to-string &optional delimited)
-  "Perform a regexp search and replace on each line of a rectangle
-established by START and END (interactively, the marked region),
-similar to `replace-regexp'.
+  (defun my-replace-regexp-rectangle-read-args (regexp-flag)
+    "Interactively read arguments for `my-replace-regexp-rectangle'
+  or `my-replace-string-rectangle' (depending upon REGEXP-FLAG)."
+    (let ((args (query-replace-read-args
+                 (concat "Replace"
+                         (if current-prefix-arg " word" "")
+                         (if regexp-flag " regexp" " string"))
+                 regexp-flag)))
+      (list (region-beginning) (region-end)
+            (nth 0 args) (nth 1 args) (nth 2 args))))
 
-Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
-replace only matches surrounded by word boundaries.
+  (defun my-replace-regexp-rectangle
+    (start end regexp to-string &optional delimited)
+    "Perform a regexp search and replace on each line of a rectangle
+  established by START and END (interactively, the marked region),
+  similar to `replace-regexp'.
 
-If `case-replace' is nil, do not alter case of replacement text."
-  (interactive (my-replace-regexp-rectangle-read-args t))
-  (when delimited
-    (setq regexp (concat "\\b" regexp "\\b")))
-  (my-search-replace-in-rectangle
-   start end regexp to-string 're-search-forward nil))
+  Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+  replace only matches surrounded by word boundaries.
 
-(defun my-replace-string-rectangle
-  (start end from-string to-string &optional delimited)
-  "Perform a string search and replace on each line of a rectangle
-established by START and END (interactively, the marked region),
-similar to `replace-string'.
-
-Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
-replace only matches surrounded by word boundaries.
-
-If `case-replace' is nil, do not alter case of replacement text."
-  (interactive (my-replace-regexp-rectangle-read-args nil))
-  (let ((search-function 'search-forward))
+  If `case-replace' is nil, do not alter case of replacement text."
+    (interactive (my-replace-regexp-rectangle-read-args t))
     (when delimited
-      (setq search-function 're-search-forward
-            from-string (concat "\\b" (regexp-quote from-string) "\\b")))
+      (setq regexp (concat "\\b" regexp "\\b")))
     (my-search-replace-in-rectangle
-     start end from-string to-string search-function t)))
+     start end regexp to-string 're-search-forward nil))
 
-(global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
-(global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
+  (defun my-replace-string-rectangle
+    (start end from-string to-string &optional delimited)
+    "Perform a string search and replace on each line of a rectangle
+  established by START and END (interactively, the marked region),
+  similar to `replace-string'.
+
+  Optional arg DELIMITED (prefix arg if interactive), if non-nil, means
+  replace only matches surrounded by word boundaries.
+
+  If `case-replace' is nil, do not alter case of replacement text."
+    (interactive (my-replace-regexp-rectangle-read-args nil))
+    (let ((search-function 'search-forward))
+      (when delimited
+        (setq search-function 're-search-forward
+              from-string (concat "\\b" (regexp-quote from-string) "\\b")))
+      (my-search-replace-in-rectangle
+       start end from-string to-string search-function t)))
+
+  (global-set-key (kbd "C-x r M-%") 'my-replace-string-rectangle)
+  (global-set-key (kbd "C-x r C-M-%") 'my-replace-regexp-rectangle)
 #+END_SRC
 ** Auto fill mode
 <2018-06-08 Fri>
@@ -565,7 +581,9 @@ c 'echo $PATH'"))))
 #+END_SRC
 ** Virtual environments
 #+begin_src emacs-lisp
-(require 'virtualenvwrapper)
+(use-package virtualenvwrapper
+:ensure t)
+
 (venv-initialize-interactive-shells) ;; if you want interactive shell support
 ;;(venv-initialize-eshell) ;; if you want eshell support
 ;; note that setting `venv-location` is not necessary if you
@@ -585,7 +603,9 @@ To deactivate, type =M-x venv-deactivate=
 #+BEGIN_SRC emacs-lisp
 ;;;;org-mode configuration
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(require 'org)
+(use-package org
+:ensure org-plus-contrib)
+
 (define-key global-map "\C-ca" 'org-agenda)
 #+END_SRC
 ** Setting timestamp when TODO state changes to DONE
@@ -600,6 +620,18 @@ To deactivate, type =M-x venv-deactivate=
          (delete '("\\.pdf\\'" . default) org-file-apps)
          (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
 #+END_SRC
+** Ob-ipython
+#+begin_src emacs-lisp
+(add-to-list 'load-path
+              "~/.emacs.d/elpa/ob-ipython/")
+
+(require 'ob-ipython)
+
+#+end_src
+
+#+RESULTS:
+: ob-ipython
+
 ** Org-Babel setup
 
 #+BEGIN_SRC emacs-lisp
@@ -610,9 +642,10 @@ To deactivate, type =M-x venv-deactivate=
  (python . t)
  (ditaa . t)
  (latex . t)
- (R . t)
+(ipython . t)
+;; (R . t)
 ;;(julia . t)
-(screen . t)
+;;(screen . t)
 ))
 
  (setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
@@ -626,11 +659,24 @@ To deactivate, type =M-x venv-deactivate=
 [2019-01-08 Tue]
 Async
 #+begin_src emacs-lisp
-(require 'ob-async)
+(use-package ob-async
+:ensure t)
+
 #+end_src
 
 #+RESULTS:
 : ob-async
+[2019-04-25 Thu 22:47]
+Export to IPYNB
+#+begin_src emacs-lisp
+(add-to-list 'load-path
+              "~/.emacs.d/elpa/ox-ipynb/")
+
+(require 'ox-ipynb)
+#+end_src
+
+#+RESULTS:
+: ox-ipynb
 
 ** Org-capture
 *** Setup
@@ -762,8 +808,32 @@ Refresh inline display
 #+BEGIN_SRC emacs-lisp
 (load-file "~/.emacs.d/org-git-link.el")
 #+END_SRC
+** Hydra
+[2019-04-20 Sat]
+Added this because hydra does not list lv as a dependency
+, but doesn;t include this anymore as of today. This might 
+change in the future.
+#+begin_src emacs-lisp
+    (add-to-list 'load-path "~/.emacs.d/lisp/") 
+(require 'lv)
+(use-package hydra
+:ensure t)
+#+end_src
+Hydra-posframe
+#+begin_src emacs-lisp
+  ;; (use-package hydra-posframe
+  ;;   :load-path "~/.emacs.d/elpa/hydra-posframe"
+  ;;   :hook (after-init . hydra-posframe-enable))
+#+end_src
+
+#+RESULTS:
+| hydra-posframe-enable | debian-ispell-set-default-dictionary | debian-ispell-set-startup-menu | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
+
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
+(use-package org-ref
+:ensure t)
+
     (add-to-list 'load-path "~/.emacs.d/org-ref/") 
     (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
 
@@ -772,11 +842,11 @@ Refresh inline display
     ;;      org-ref-default-bibliography '("~/Unison/YeastNutBib.bib")
           org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
 ;;(setq bibtex-autokey-edit-before-use t)
-  (require 'org-ref)
+
 #+END_SRC
 
 #+RESULTS:
-: org-ref
+: ~/jalihal_projects/bibtex-pdfs/
 
 *** Some shortcuts
 **** Crossref-add-bib-entry
@@ -942,12 +1012,17 @@ Refresh inline display
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
-(org-edna-load)
+(use-package org-edna
+:ensure t)
+;;(org-edna-load)
 #+END_SRC
 ** Org-Notify
 #+BEGIN_SRC emacs-lisp
- (add-to-list 'load-path "~/.emacs.d/elpa/")
- (require 'org-notify)
+;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+;; (use-package org-notify
+;; :ensure t)
+
+;; (require 'org-notify)
 ;; (org-notify)
 #+END_SRC
 
@@ -982,8 +1057,12 @@ Refresh inline display
 *** Custom Shortcuts
 <2018-01-17 Wed>
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c j") 'org-clock-jump-to-current-clock)
+(global-set-key (kbd "C-c j") 'org-clock-goto)
 #+END_SRC
+
+#+RESULTS:
+: org-clock-goto
+
 ** Inline latex highlighting
 <2018-02-14 Wed>
 #+BEGIN_SRC emacs-lisp
@@ -1014,7 +1093,10 @@ Refresh inline display
 #+END_SRC
 ** Ox-latex
 #+BEGIN_SRC emacs-lisp
-(require 'ox-latex)
+;;(use-package ox-latex
+;;:ensure t)
+
+;;(require 'ox-latex)
 ;;(setq org-latex-listings 'minted)
 ;;(add-to-list 'org-latex-minted-langs '(ipython "python"))
 #+END_SRC
@@ -1051,15 +1133,19 @@ From John Kitchin’s blog
 
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
-  (require 'ox-ipynb)
+  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/ox-ipynb/")
+  ;;  (use-package ox-ipynb
+  ;;  :ensure t)
+
+  ;;  (require 'ox-ipynb)
 #+END_SRC
 ** Org-habit
 <2018-06-11 Mon>
 Playing around with org-habit to help Sumanth get the consistency
 graph working
 #+BEGIN_SRC emacs-lisp
-(require 'org-habit)
+  ;; (use-package org-habit
+  ;; :ensure t)
 #+END_SRC
 ** Org-gnome
 #+BEGIN_SRC emacs-lisp
@@ -1069,7 +1155,7 @@ graph working
 #+END_SRC
 ** Org-babel-screen
 #+BEGIN_SRC elisp
-(require 'org-babel-screen) 
+;;(require 'org-babel-screen) 
 #+END_SRC
 ** Better Ediff for org-mode
 <2018-10-26 Fri>
@@ -1100,9 +1186,14 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 #+RESULTS:
 | f-ediff-org-fold-tree |
+
 * Company
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'after-init-hook 'global-company-mode)
+#+BEGIN_SRC emacs-lisp 
+(use-package company
+:ensure t
+:init (global-company-mode))
+
+;;  (add-hook 'after-init-hook 'global-company-mode)
 
   (with-eval-after-load 'company 
     (add-to-list 'company-backends 'company-jedi 'company-math-symbols-latex))
@@ -1114,14 +1205,14 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 | company-bbdb | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev | company-jedi |
 
 [2019-03-14 Thu]
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
   (eval-after-load 'company
     '(progn
        (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
        ))
-
-(company-quickhelp-mode)
-;;(require 'company-box)
+(use-package company-quickhelp
+:ensure t)
+;;(company-quickhelp-mode)
 ;;(add-hook 'company-mode-hook 'company-box-mode)
 #+end_src
 
@@ -1139,8 +1230,9 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
   (setq projectile-project-search-path
         '("~/jalihal_projects/Research/data/ModelAnalysis/"
-          "~/group/amogh-jalihal/"
+          ;;"~/group/amogh-jalihal/"
           "~/group/amogh-jalihal/proposals/2019-Prelims/"
+          "~/group/amogh-jalihal/papers/"
           "~/orgs/"))
   (setq projectile-indexing-method 'native) ;; otherwise it doesn't respect .projectile
 #+end_src
@@ -1151,17 +1243,21 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 * Nswbuff
 [2019-03-14 Thu 04:30]
 #+begin_src emacs-lisp
-    ;;     (use-package nswbuff
-    ;;       :ensure t
-  ;;       ;; :config
-    ;;       ;; (nswbuff-mode +1)
+      ;;     (use-package nswbuff
+      ;;       :ensure t
+    ;;       ;; :config
+      ;;       ;; (nswbuff-mode +1)
+  
     ;; )
-  (require 'nswbuff)
-        (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
-        (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
-      (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
-      (setq nswbuff-display-intermediate-buffers t)
-      (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
+  ;; (use-package nswbuff
+  ;; :ensure t)
+
+  ;;  (require 'nswbuff)
+          (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
+          (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
+        (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
+        (setq nswbuff-display-intermediate-buffers t)
+        (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
 
 #+end_src
 
@@ -1202,6 +1298,13 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 | pdflatex -shell-escape -interaction nonstopmode %f | bibtex %b | bibtex %b | pdflatex -shell-escape -interaction nonstopmode %f | pdflatex -shell-escape -interaction nonstopmode %f |
 
 * Latex
+** Auctex
+[2019-04-20 Sat]
+#+begin_src emacs-lisp
+(use-package auctex
+:defer t
+:ensure t)
+#+end_src
 ** Syntax Highlighting for code Export
 #+BEGIN_SRC emacs-lisp
 ;; Add minted to the defaults packages to include when exporting.
@@ -1222,8 +1325,8 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 ** PDFLATEX command execution order in org mode export
 #+BEGIN_SRC emacs-lisp
-(setq org-latex-pdf-process
- (quote ("pdflatex  --shell-escape %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
+  ;; (setq org-latex-pdf-process
+  ;;  (quote ("pdflatex  --shell-escape %f" "bibtex %b" "bibtex %b" "pdflatex  %f" "pdflatex %f")))
 #+END_SRC
 
 #+RESULTS:
@@ -1254,34 +1357,90 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** My customizations
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
-     (setq TeX-auto-save t)
-     (setq TeX-parse-self t)
-     (setq-default TeX-master nil)
+       (setq TeX-auto-save t)
+       (setq TeX-parse-self t)
+       (setq-default TeX-master nil)
 
-     (require 'reftex)
-     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
-  (setq reftex-plug-into-AUCTeX t)
-      (add-to-list 'load-path "~/.emacs.d/lisp/")
-     (require 'company-auctex)
-    (company-auctex-init)
+  (use-package reftex
+  :ensure t)
+
+       (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+    (setq reftex-plug-into-AUCTeX t)
+        (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+  ;; (use-package company-auctex
+  ;; :ensure t)
+
+  ;;     (require 'company-auctex)
+  ;;    (company-auctex-init)
 #+end_src
 
 #+RESULTS:
 | (company-auctex-macros company-auctex-symbols company-auctex-environments) | company-auctex-bibs | company-auctex-labels | company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev |
 
 * Utilities
-** Magit
-<2018-04-04 Wed>
-#+BEGIN_SRC emacs-lisp
-   (require 'magit)
-  (global-set-key (kbd "C-x g") 'magit-status)
-#+END_SRC
 ** Magit todos   
 <2018-09-10 Mon>
 #+BEGIN_SRC elisp
-(require 'magit-todos)
-(magit-todos-mode 1)
+(use-package magit-todos
+:ensure t)
+
+;;  (require 'magit-todos)
+  ;; (magit-todos-mode 1)
 #+END_SRC
+
+#+RESULTS:
+: t
+
+** Magit
+<2018-04-04 Wed>
+#+BEGIN_SRC emacs-lisp
+	  (use-package magit
+	    :ensure t)
+      (global-set-key (kbd "C-x g") 'magit-status)
+
+#+END_SRC
+
+#+RESULTS:
+: magit-status
+
+[2019-04-25 Thu]
+Show ignored files
+From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/28506#28506
+#+begin_src emacs-lisp
+;; Command to list ignored files:
+;; $ git ls-files --others --ignored --exclude-standard --directory
+(defun magit-ignored-files ()
+  (magit-git-items "ls-files" "--others" "--ignored" "--exclude-standard" "-z" "--directory"))
+
+(defun magit-insert-ignored-files ()
+  (-when-let (files (magit-ignored-files))
+    (magit-insert-section (ignored)
+      (magit-insert-heading "Ignored files:")
+      (magit-insert-un/tracked-files-1 files nil)
+      (insert ?\n))))
+#+end_src
+
+#+RESULTS:
+: magit-insert-ignored-files
+
+** Forge
+[2019-04-20 Sat]
+#+begin_src emacs-lisp
+  (use-package forge
+    :after magit
+    :ensure t)
+#+end_src
+** Keyfreq mode
+[2019-03-26 Tue]
+#+begin_src emacs-lisp
+(use-package keyfreq
+:ensure t)
+
+;;(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+#+end_src
 
 #+RESULTS:
 : t
@@ -1375,7 +1534,8 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** Hydras
 [2019-01-21 Mon]
  #+BEGIN_SRC emacs-lisp
-   (require 'hydra)
+
+;;   (require 'hydra)
 
    (defhydra aj/hydra-interface (:color blue)
    "
@@ -1421,7 +1581,7 @@ Latex helpers
     ("p" preview-buffer "preview")
     ("q" nil "quit")
     )
-    (define-key LaTeX-mode-map (kbd "C-c t") 'aj/tex-interface/body)
+    ;;(define-key LaTeX-mode-map (kbd "C-c t") 'aj/tex-interface/body)
     ;; h for hydra!!
 
 #+end_src
