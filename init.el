@@ -8,4 +8,4 @@
 (require 'package)
 (package-initialize)
 
-(org-babel-load-file "~/.emacs.d/config.org")
+(org-babel-load-file "~/.emacs.d/simmons_config.org")
