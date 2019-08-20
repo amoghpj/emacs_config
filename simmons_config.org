@@ -46,7 +46,7 @@ New cyberpunk theme!
 #+RESULTS:
 : t
 
-** COMMENT Window defaults
+** Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
 (tool-bar-mode 0)      ; Turn off toolbars.
@@ -127,6 +127,14 @@ New cyberpunk theme!
 (dolist (elt ae-keywords:tex-mode:list)
   (font-lock-add-keywords nil (list (list (nth 1 elt) 1 (nth 2 elt) 'append)))
   )
+** Shorten yes-or-no
+#+begin_src emacs-lisp
+    (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+#+RESULTS:
+: yes-or-no-p
+
 ** Make indirect buffer 
 #+BEGIN_SRC emacs-lisp
 (defun narrow-to-region-indirect (start end)
@@ -269,8 +277,26 @@ If the new path's directories does not exist, create them."
 ** Company
 #+BEGIN_SRC emacs-lisp :tangle no
   (add-hook 'after-init-hook 'global-company-mode)
+  (with-eval-after-load 'company 
+    (add-to-list 'company-backends 'company-jedi 'company-math-symbols-latex))
   ;; (add-to-list 'company-backends 'company-ob-ipython) ;
 #+END_SRC
+
+#+RESULTS:
+| company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev | company-jedi |
+
+[2019-03-14 Thu]
+#+begin_src emacs-lisp
+    (eval-after-load 'company
+      '(progn
+         (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+         ))
+
+    ;;(company-quickhelp-mode)
+  ;; (require 'company-box)
+  ;; (add-hook 'company-mode-hook 'company-box-mode)
+#+end_src
+
 ** Annoying C-z
 <2018-04-27 Fri>
 Found it [[https://superuser.com/a/349997][on stackexhange]]
@@ -451,7 +477,7 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
       ;;              "~/.emacs.d/lisp/")
       ;; (load "~/.emacs.d/lisp/symbols.el")
 #+END_SRC
-**  Rectangular select regep operations
+** Rectangular select regep operations
    <2018-05-10 Thu>
 Copied from [[https://stackoverflow.com/questions/11130546/search-and-replace-inside-a-rectangle-in-emacs][this Stackoverflow answer]]
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -559,6 +585,14 @@ Set autofill mode by default for all major modes
 #+RESULTS:
 : -lt
 
+** Avy for navigation
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-:") 'avy-goto-char)
+#+end_src
+
+#+RESULTS:
+: avy-goto-char
+
 * Python
 ** Setting to use shell arguments?
 #+BEGIN_SRC emacs-lisp
@@ -598,6 +632,14 @@ c 'echo $PATH'"))))
 To activate the venv, type =M-x venv-workon= and select a venv
 
 To deactivate, type =M-x venv-deactivate=
+** Jedi
+#+begin_src emacs-lisp
+(add-hook 'python-mode-hook 'jedi:setup)
+#+end_src
+
+#+RESULTS:
+| jedi:setup |
+
 * Org-mode
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
@@ -697,7 +739,7 @@ Export to IPYNB
     :END:\n%u" )
 
           ("e" "Entry")
-          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
+          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
            "** Meeting on %U
   ,#+BIND: org-export-use-babel nil
   ,#+STARTUP: beamer
@@ -707,14 +749,12 @@ Export to IPYNB
   ,#+EXPORT_FILE_NAME: 
   ,#+LATEX_HEADER: \\usetheme{metropolis}
   %?" :prepend t :empty-lines 1)
-          ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Meeting Notes")
+          ("em" "meeting" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
            "** Meeting on %U
   - %?" :prepend t :empty-lines 1)        
           ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
            "* %?
   %U")        
-
-        
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
@@ -1252,7 +1292,7 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
   ;; (use-package nswbuff
   ;; :ensure t)
 
-  ;;  (require 'nswbuff)
+    (require 'nswbuff)
           (define-key global-map (kbd "<C-tab>") 'nswbuff-switch-to-next-buffer)
           (define-key global-map (kbd "<C-S-iso-lefttab>") 'nswbuff-switch-to-previous-buffer)
         (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
@@ -1489,7 +1529,7 @@ From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/2
      (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
      (write-region (concat "#+PROPERTY: header-args:python :session "
                            sessionname
-                           " :tangle yes :comments link\n"
+                           " :tangle yes :comments link :results output\n"
                            "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
                            "#+LATEX_HEADER: \\usepackage{xcolor}\n"
                            "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
@@ -1506,6 +1546,27 @@ From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/2
 
  #+RESULTS:
  : aj/create-new-analysis
+
+** My regex                                                        :noexport:
+#+begin_src emacs-lisp
+  ;; (defun print-elements-of-list (list)
+  ;;       "Print each element of LIST on a line of its own."
+  ;;       (while list
+  ;;         (print (car list))
+  ;;         (setq list (cdr list))))
+  ;;    (defun aj/regex ()
+  ;;      "Simpler regex.
+  ;;    Parser string to create a regexp."
+  ;;      (interactive)
+  ;;      (setq raw-s (read-input "Enter regex: "))
+  ;;      (setq split-s  (split-string raw-s))
+  ;;      (setq split-s (make-list 1 split-s))
+  ;;      )
+  ;;    (aj/regex)
+#+end_src
+
+#+RESULTS:
+| aslk | las | lkas |
 
 ** Dired quicklinks
 [2018-12-26 Wed]

@@ -1,3 +1,4 @@
+init.el
 /.emacs.desktop
 /.org-id-locations
 /.ercrc.el
@@ -35,3 +36,4 @@ desktops/*
 /config.el
 /diredful-conf.el
 /diredful-customizations
+
