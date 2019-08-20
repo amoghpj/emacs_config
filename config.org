@@ -118,7 +118,7 @@ c 'echo $PATH'"))))
 #+END_SRC
 ** Jedi
 #+begin_src emacs-lisp
-(add-hook 'python-mode-hook 'jedi:setup)
+;;(add-hook 'python-mode-hook 'jedi:setup)
 #+end_src
 
 #+RESULTS:
@@ -211,6 +211,14 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                    '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
                                           ((inhibit-same-window . t)))))
 #+END_SRC
+** Black
+[2019-08-14 Wed]
+ #+begin_src emacs-lisp
+ (add-hook 'python-mode-hook 'blacken-mode)
+ #+end_src
+
+ #+RESULTS:
+
 * Outshine
 [2019-06-10 Mon]
 #+begin_src emacs-lisp
@@ -220,7 +228,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
 #+end_src
 
 #+RESULTS:
-| outshine-mode | jedi:setup |
 
 * Projectile
   [2019-03-14 Thu]
@@ -1238,6 +1245,15 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 #+RESULTS:
 : org-emms
 
+** Labels in org-latex
+<2019-08-15 Thu>
+#+begin_src emacs-lisp
+(setq org-latex-prefer-user-labels t)
+#+end_src
+
+#+RESULTS:
+: t
+
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1471,11 +1487,11 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 [2019-02-20 Wed]
 Customizing midnight mode colors
 #+begin_src emacs-lisp
-
+(setq pdf-view-max-image-width 1000)
 #+end_src
 
 #+RESULTS:
-: (#d4d4d6 . #000000)
+: 1000
 
 * Utilities
 ** Neotree
@@ -1876,6 +1892,9 @@ relative-compose:  0
                            "import numpy as np\n"
                            "import matplotlib.pyplot as plt\n"
                            "import pandas as pd\n"
+                           "plt.rcParams['axes.facecolor'] = 'black'\n"
+                           "f, ax = plt.subplots(1,1, figsize=(8,8))\n"
+                           "f.patch.set_facecolor('k')\n"
                            "#+END_SRC ")
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
@@ -2724,3 +2743,10 @@ Update: This is proving to be very annoying
 (diminish 'flycheck-mode)
 (diminish 'dired-mode)
 #+END_SRC
+** Shorten yes-no
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+#+RESULTS:
+: yes-or-no-p
