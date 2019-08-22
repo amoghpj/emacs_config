@@ -1254,6 +1254,14 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 #+RESULTS:
 : t
 
+** Save code blocks
+#+begin_src emacs-lisp
+(require 'code-library)
+#+end_src
+
+#+RESULTS:
+: code-library
+
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1684,7 +1692,6 @@ relative-compose:  0
 * TidalCycles
 <2018-05-24 Thu>
 #+BEGIN_SRC emacs-lisp
-
 (require 'haskell-mode)
 (require 'tidal)
 #+END_SRC
@@ -1739,7 +1746,6 @@ relative-compose:  0
    (defun aj/generate-org-reports ()
      (interactive)
      (shell-command "~/src/org-report-processing.sh"))
-
  #+END_SRC
 
  #+RESULTS:
@@ -2634,7 +2640,6 @@ Set autofill mode by default for all major modes
 ** Dired listing chronological instead of alphabetical
 #+BEGIN_SRC emacs-lisp
 (setq dired-listing-switches "-lt")
-
 #+END_SRC
 
 #+RESULTS:
@@ -2728,6 +2733,13 @@ Update: This is proving to be very annoying
 #+RESULTS:
 | %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
 
+** Shorten yes-no
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+#+RESULTS:
+: yes-or-no-p
 ** Clean up modeline
 <2018-11-21 Wed>
 #+BEGIN_SRC emacs-lisp
@@ -2743,10 +2755,3 @@ Update: This is proving to be very annoying
 (diminish 'flycheck-mode)
 (diminish 'dired-mode)
 #+END_SRC
-** Shorten yes-no
-#+begin_src emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-#+RESULTS:
-: yes-or-no-p
