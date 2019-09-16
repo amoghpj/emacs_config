@@ -43,11 +43,14 @@ I would love to hear your feedback on this setup!
   (add-to-list 'load-path
                "~/.emacs.d/plugins/org-alert")
 
+  (add-to-list 'load-path
+               "~/Documents/experiments/deqn-mode/")
+
 
 #+end_src
 
 #+RESULTS:
-| ~/.emacs.d/plugins/org-alert | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20190204 | /home/jalihal/.emacs.d/elpa/ace-link-20190127.1654 | /home/jalihal/.emacs.d/elpa/avy-20190204.1201 | /home/jalihal/.emacs.d/elpa/cdlatex-20190130.1419 | /home/jalihal/.emacs.d/elpa/company-20190205.1900 | /home/jalihal/.emacs.d/elpa/dash-20190128.1920 | /home/jalihal/.emacs.d/elpa/docker-20190104.1004 | /home/jalihal/.emacs.d/elpa/elpy-20190130.2109 | /home/jalihal/.emacs.d/elpa/emms-20190206.1537 | /home/jalihal/.emacs.d/elpa/evil-20190104.1026 | /home/jalihal/.emacs.d/elpa/f-20190109.906 | /home/jalihal/.emacs.d/elpa/ghub-20190127.2354 | /home/jalihal/.emacs.d/elpa/google-translate-20190206.1229 | /home/jalihal/.emacs.d/elpa/goto-chg-20190110.2114 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20190128.838 | /home/jalihal/.emacs.d/elpa/helm-20190206.659 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20190113.1845 | /home/jalihal/.emacs.d/elpa/helm-core-20190205.1337 | /home/jalihal/.emacs.d/elpa/hydra-20190206.1051 | /home/jalihal/.emacs.d/elpa/ivy-20190207.1146 | /home/jalihal/.emacs.d/elpa/json-mode-20190123.422 | /home/jalihal/.emacs.d/elpa/julia-mode-20190111.2044 | /home/jalihal/.emacs.d/elpa/magit-20190202.1535 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20190102.1831 | /home/jalihal/.emacs.d/elpa/org-20190204 | /home/jalihal/.emacs.d/elpa/org-brain-20190111.1227 | /home/jalihal/.emacs.d/elpa/org-download-20190114.1600 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.2 | /home/jalihal/.emacs.d/elpa/org-noter-20190121.2140 | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502/citeproc | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20190128.2051 | /home/jalihal/.emacs.d/elpa/pdf-tools-20190129.1822 | /home/jalihal/.emacs.d/elpa/php-mode-20190109.1320 | /home/jalihal/.emacs.d/elpa/poet-theme-20190127.2220 | /home/jalihal/.emacs.d/elpa/smartparens-20190128.1747 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20190116.2107 | /home/jalihal/.emacs.d/elpa/tablist-20190129.1813 | /home/jalihal/.emacs.d/elpa/tidal-20190108.1748 | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716/citeproc | /usr/share/org-mode/lisp | ~/projects/tidal | ~/.emacs.d/elpa/ox-ipynb/ | ~/.emacs.d/elpa/ob-ipython/ | ~/.emacs.d/lisp/ | ~/.emacs.d/plugins/yasnippet | ~/.emacs.d/elpa/helm-bibtex | ~/.emacs.d/elpa/helm | /home/jalihal/.emacs.d/elpa/ac-math-20141116.2127 | /home/jalihal/.emacs.d/elpa/ace-link-20181210.1454 | /home/jalihal/.emacs.d/elpa/auctex-12.1.1/ | /home/jalihal/.emacs.d/elpa/auctex-12.1.1 | /home/jalihal/.emacs.d/elpa/avy-20181126.1705 | /home/jalihal/.emacs.d/elpa/calfw-20180118.45 | /home/jalihal/.emacs.d/elpa/calfw-org-20160303.258 | /home/jalihal/.emacs.d/elpa/captain-1.0.3 | /home/jalihal/.emacs.d/elpa/cdlatex-20140707.1126 | /home/jalihal/.emacs.d/elpa/chronos-20150602.1529 | /home/jalihal/.emacs.d/elpa/column-enforce-mode-20171030.1900 | /home/jalihal/.emacs.d/elpa/dash-functional-20180107.1618 | /home/jalihal/.emacs.d/elpa/diminish-20170419.1736 | /home/jalihal/.emacs.d/elpa/docker-20181215.1826 | /home/jalihal/.emacs.d/elpa/docker-tramp-20170207.325 | /home/jalihal/.emacs.d/elpa/elfeed-org-20181015.1100 | /home/jalihal/.emacs.d/elpa/elfeed-20181127.1943 | /home/jalihal/.emacs.d/elpa/elpy-20181228.1721 | /home/jalihal/.emacs.d/elpa/company-20181221.1538 | /home/jalihal/.emacs.d/elpa/emms-20181122.1932 | /home/jalihal/.emacs.d/elpa/esup-20180727.342 | /home/jalihal/.emacs.d/elpa/evil-20181206.1209 | /home/jalihal/.emacs.d/elpa/find-file-in-project-20181217.246 | /home/jalihal/.emacs.d/elpa/ghub-20190102.109 | /home/jalihal/.emacs.d/elpa/git-gutter-20161105.1356 | /home/jalihal/.emacs.d/elpa/git-timemachine-20181204.1546 | /home/jalihal/.emacs.d/elpa/goto-chg-20181228.1303 | /home/jalihal/.emacs.d/elpa/graphql-20180912.31 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20181013.1144 | /home/jalihal/.emacs.d/elpa/autothemer-20180920.923 | /home/jalihal/.emacs.d/elpa/helm-cmd-t-20170125.1459 | /home/jalihal/.emacs.d/elpa/helm-swoop-20180215.1154 | /home/jalihal/.emacs.d/elpa/highlight-indentation-20181204.839 | /home/jalihal/.emacs.d/elpa/json-mode-20180718.809 | /home/jalihal/.emacs.d/elpa/json-reformat-20160212.853 | /home/jalihal/.emacs.d/elpa/json-snatcher-20150512.347 | /home/jalihal/.emacs.d/elpa/julia-mode-20180816.2117 | /home/jalihal/.emacs.d/elpa/kanban-20170418.810 | /home/jalihal/.emacs.d/elpa/magit-20190102.107 | /home/jalihal/.emacs.d/elpa/git-commit-20190102.107 | /home/jalihal/.emacs.d/elpa/magit-popup-20181204.2031 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20170221.1353 | /home/jalihal/.emacs.d/elpa/matlab-mode-20180928.1526 | /home/jalihal/.emacs.d/elpa/md4rd-20181209.512 | /home/jalihal/.emacs.d/elpa/hierarchy-20171221.1151 | /home/jalihal/.emacs.d/elpa/minimap-1.2 | /home/jalihal/.emacs.d/elpa/notify-2010.8.20 | /home/jalihal/.emacs.d/elpa/notmuch-20181208.1245 | /home/jalihal/.emacs.d/elpa/ob-translate-20170720.1919 | /home/jalihal/.emacs.d/elpa/google-translate-20181202.56 | /home/jalihal/.emacs.d/elpa/olivetti-20180531.737 | /home/jalihal/.emacs.d/elpa/openwith-20120531.2136 | /home/jalihal/.emacs.d/elpa/org-alert-20180524.133 | /home/jalihal/.emacs.d/elpa/org-brain-20181228.4 | /home/jalihal/.emacs.d/elpa/org-bullets-20180208.2343 | /home/jalihal/.emacs.d/elpa/org-dashboard-20171223.1924 | /home/jalihal/.emacs.d/elpa/org-download-20180925.1528 | /home/jalihal/.emacs.d/elpa/org-drill-table-20180115.1009 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.1 | /home/jalihal/.emacs.d/elpa/org-gnome-20150614.1457 | /home/jalihal/.emacs.d/elpa/gnome-calendar-20161110.1256 | /home/jalihal/.emacs.d/elpa/alert-20181022.1742 | /home/jalihal/.emacs.d/elpa/log4e-20170401.1304 | /home/jalihal/.emacs.d/elpa/gntp-20141025.250 | /home/jalihal/.emacs.d/elpa/org-noter-20181106.2341 | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20181230 | /home/jalihal/.emacs.d/elpa/org-present-20180303.2330 | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716 | /home/jalihal/.emacs.d/elpa/key-chord-20160227.1238 | /home/jalihal/.emacs.d/elpa/hydra-20181128.1716 | /home/jalihal/.emacs.d/elpa/ivy-20181223.2002 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20181030.2142 | /home/jalihal/.emacs.d/elpa/biblio-20161014.2304 | /home/jalihal/.emacs.d/elpa/biblio-core-20160901.1815 | /home/jalihal/.emacs.d/elpa/f-20180106.922 | /home/jalihal/.emacs.d/elpa/helm-20181222.848 | /home/jalihal/.emacs.d/elpa/helm-core-20181225.639 | /home/jalihal/.emacs.d/elpa/htmlize-20180923.1829 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20181206.1451 | /home/jalihal/.emacs.d/elpa/ox-rst-20180315.13 | /home/jalihal/.emacs.d/elpa/org-20181230 | /home/jalihal/.emacs.d/elpa/parsebib-20181219.928 | /home/jalihal/.emacs.d/elpa/pdf-tools-20181221.1913 | /home/jalihal/.emacs.d/elpa/php-mode-20181228.207 | /home/jalihal/.emacs.d/elpa/poet-theme-20190101.2245 | /home/jalihal/.emacs.d/elpa/popwin-20150315.1300 | /home/jalihal/.emacs.d/elpa/pretty-mode-20160614.1846 | /home/jalihal/.emacs.d/elpa/pyvenv-20181228.1722 | /home/jalihal/.emacs.d/elpa/request-20181129.1138 | /home/jalihal/.emacs.d/elpa/sclang-extensions-20160509.338 | /home/jalihal/.emacs.d/elpa/s-20180406.808 | /home/jalihal/.emacs.d/elpa/auto-complete-20170125.245 | /home/jalihal/.emacs.d/elpa/popup-20160709.1429 | /home/jalihal/.emacs.d/elpa/sexy-monochrome-theme-20180526.808 | /home/jalihal/.emacs.d/elpa/smart-mode-line-20180926.1036 | /home/jalihal/.emacs.d/elpa/rich-minority-20170813.1322 | /home/jalihal/.emacs.d/elpa/smartparens-20190112.1318 | /home/jalihal/.emacs.d/elpa/dash-20180910.1856 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20181107.1725 | /home/jalihal/.emacs.d/elpa/ssh-20120904.2042 | /home/jalihal/.emacs.d/elpa/tablist-20170220.335 | /home/jalihal/.emacs.d/elpa/telepathy-20131209.1258 | /home/jalihal/.emacs.d/elpa/tidal-20181219.900 | /home/jalihal/.emacs.d/elpa/haskell-mode-20181122.823 | /home/jalihal/.emacs.d/elpa/tree-mode-20151104.1331 | /home/jalihal/.emacs.d/elpa/treepy-20180724.656 | /home/jalihal/.emacs.d/elpa/twittering-mode-20181121.1402 | /home/jalihal/.emacs.d/elpa/typo-20171209.1023 | /home/jalihal/.emacs.d/elpa/undo-tree-20170706.246 | /home/jalihal/.emacs.d/elpa/use-package-20181119.2350 | /home/jalihal/.emacs.d/elpa/bind-key-20180513.430 | /home/jalihal/.emacs.d/elpa/visual-regexp-20170301.116 | /home/jalihal/.emacs.d/elpa/which-key-20181114.1432 | /home/jalihal/.emacs.d/elpa/with-editor-20181113.1845 | /home/jalihal/.emacs.d/elpa/async-20181224.454 | /home/jalihal/.emacs.d/elpa/yasnippet-20181015.1212 | /usr/local/share/emacs/26.1/site-lisp | /usr/local/share/emacs/site-lisp | /usr/local/share/emacs/site-lisp/helm | /usr/local/share/emacs/26.1/lisp | /usr/local/share/emacs/26.1/lisp/vc | /usr/local/share/emacs/26.1/lisp/url | /usr/local/share/emacs/26.1/lisp/textmodes | /usr/local/share/emacs/26.1/lisp/progmodes | /usr/local/share/emacs/26.1/lisp/play | /usr/local/share/emacs/26.1/lisp/org | /usr/local/share/emacs/26.1/lisp/nxml | /usr/local/share/emacs/26.1/lisp/net | /usr/local/share/emacs/26.1/lisp/mh-e | /usr/local/share/emacs/26.1/lisp/mail | /usr/local/share/emacs/26.1/lisp/leim | /usr/local/share/emacs/26.1/lisp/language | /usr/local/share/emacs/26.1/lisp/international | /usr/local/share/emacs/26.1/lisp/image | /usr/local/share/emacs/26.1/lisp/gnus | /usr/local/share/emacs/26.1/lisp/eshell | /usr/local/share/emacs/26.1/lisp/erc | /usr/local/share/emacs/26.1/lisp/emulation | /usr/local/share/emacs/26.1/lisp/emacs-lisp | /usr/local/share/emacs/26.1/lisp/cedet | /usr/local/share/emacs/26.1/lisp/calendar | /usr/local/share/emacs/26.1/lisp/calc | /usr/local/share/emacs/26.1/lisp/obsolete |
+| ~/Documents/experiments/deqn-mode/ | ~/.emacs.d/elpa/hydra-posframe | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327/citeproc | /home/jalihal/.emacs.d/elpa/slime-20190818.1634/contrib | ~/.emacs.d/plugins/org-alert | /usr/share/org-mode/lisp | ~/projects/tidal | ~/.emacs.d/elpa/ox-ipynb/ | ~/.emacs.d/elpa/ob-ipython/ | ~/.emacs.d/lisp/ | ~/.emacs.d/plugins/yasnippet | ~/.emacs.d/elpa/helm-bibtex | ~/.emacs.d/elpa/helm | /home/jalihal/.emacs.d/elpa/ac-math-20141116.2127 | /home/jalihal/.emacs.d/elpa/ace-link-20190716.920 | /home/jalihal/.emacs.d/elpa/all-the-icons-20190320.1809 | /home/jalihal/.emacs.d/elpa/annotate-20190519.706 | /home/jalihal/.emacs.d/elpa/arjen-grey-theme-20170522.2047 | /home/jalihal/.emacs.d/elpa/auctex-12.1.2/ | /home/jalihal/.emacs.d/elpa/auctex-12.1.2 | /home/jalihal/.emacs.d/elpa/avy-20190630.1538 | /home/jalihal/.emacs.d/elpa/blacken-20190521.841 | /home/jalihal/.emacs.d/elpa/calfw-20180118.45 | /home/jalihal/.emacs.d/elpa/calfw-org-20160303.258 | /home/jalihal/.emacs.d/elpa/cdlatex-20190130.1419 | /home/jalihal/.emacs.d/elpa/chronos-20150602.1529 | /home/jalihal/.emacs.d/elpa/code-library-20160426.1218 | /home/jalihal/.emacs.d/elpa/column-enforce-mode-20171030.1900 | /home/jalihal/.emacs.d/elpa/company-box-20190311.1745 | /home/jalihal/.emacs.d/elpa/company-jedi-20151217.321 | /home/jalihal/.emacs.d/elpa/company-math-20190507.2006 | /home/jalihal/.emacs.d/elpa/company-quickhelp-20180525.1003 | /home/jalihal/.emacs.d/elpa/dash-functional-20180107.1618 | /home/jalihal/.emacs.d/elpa/diminish-20170419.1736 | /home/jalihal/.emacs.d/elpa/diredful-20160529.2017 | /home/jalihal/.emacs.d/elpa/dmenu-20190706.951 | /home/jalihal/.emacs.d/elpa/docker-20190813.1431 | /home/jalihal/.emacs.d/elpa/docker-tramp-20170207.325 | /home/jalihal/.emacs.d/elpa/elfeed-org-20181015.1100 | /home/jalihal/.emacs.d/elpa/elfeed-20190809.1358 | /home/jalihal/.emacs.d/elpa/elpy-20190725.2259 | /home/jalihal/.emacs.d/elpa/company-20190821.658 | /home/jalihal/.emacs.d/elpa/emms-mode-line-cycle-20160221.1120 | /home/jalihal/.emacs.d/elpa/emms-20190620.1526 | /home/jalihal/.emacs.d/elpa/esup-20180727.342 | /home/jalihal/.emacs.d/elpa/evil-20190729.704 | /home/jalihal/.emacs.d/elpa/find-file-in-project-20190720.313 | /home/jalihal/.emacs.d/elpa/flucui-themes-20190321.2313 | /home/jalihal/.emacs.d/elpa/flycheck-posframe-20190712.515 | /home/jalihal/.emacs.d/elpa/flycheck-20190821.1725 | /home/jalihal/.emacs.d/elpa/forest-blue-theme-20160627.842 | /home/jalihal/.emacs.d/elpa/forge-20190820.826 | /home/jalihal/.emacs.d/elpa/closql-20190731.1450 | /home/jalihal/.emacs.d/elpa/emacsql-sqlite-20190727.1710 | /home/jalihal/.emacs.d/elpa/emacsql-20190625.1859 | /home/jalihal/.emacs.d/elpa/gist-20171128.406 | /home/jalihal/.emacs.d/elpa/gh-20180308.2138 | /home/jalihal/.emacs.d/elpa/git-gutter-20161105.1356 | /home/jalihal/.emacs.d/elpa/git-timemachine-20190730.849 | /home/jalihal/.emacs.d/elpa/gnome-calendar-20161110.1256 | /home/jalihal/.emacs.d/elpa/goto-chg-20190110.2114 | /home/jalihal/.emacs.d/elpa/graphql-20180912.31 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20190720.337 | /home/jalihal/.emacs.d/elpa/autothemer-20180920.923 | /home/jalihal/.emacs.d/elpa/helm-cmd-t-20170125.1459 | /home/jalihal/.emacs.d/elpa/helm-projectile-20190731.1538 | /home/jalihal/.emacs.d/elpa/helm-spotify-20160905.2147 | /home/jalihal/.emacs.d/elpa/helm-spotify-plus-20190807.2115 | /home/jalihal/.emacs.d/elpa/helm-swoop-20190814.1234 | /home/jalihal/.emacs.d/elpa/highlight-indentation-20181204.839 | /home/jalihal/.emacs.d/elpa/hyperspace-20190702.2331 | /home/jalihal/.emacs.d/elpa/jedi-20160426.456 | /home/jalihal/.emacs.d/elpa/jedi-core-20190620.1820 | /home/jalihal/.emacs.d/elpa/epc-20140610.534 | /home/jalihal/.emacs.d/elpa/ctable-20171006.11 | /home/jalihal/.emacs.d/elpa/concurrent-20161229.330 | /home/jalihal/.emacs.d/elpa/json-mode-20190123.422 | /home/jalihal/.emacs.d/elpa/json-reformat-20160212.853 | /home/jalihal/.emacs.d/elpa/json-snatcher-20150512.347 | /home/jalihal/.emacs.d/elpa/julia-mode-20190813.1326 | /home/jalihal/.emacs.d/elpa/logito-20120225.2055 | /home/jalihal/.emacs.d/elpa/magit-popup-20190223.2234 | /home/jalihal/.emacs.d/elpa/magit-todos-20190805.552 | /home/jalihal/.emacs.d/elpa/hl-todo-20190807.1831 | /home/jalihal/.emacs.d/elpa/magithub-20190512.2316 | /home/jalihal/.emacs.d/elpa/ghub+-20181113.32 | /home/jalihal/.emacs.d/elpa/apiwrap-20180602.2231 | /home/jalihal/.emacs.d/elpa/ghub-20190806.959 | /home/jalihal/.emacs.d/elpa/magit-20190819.1414 | /home/jalihal/.emacs.d/elpa/git-commit-20190717.29 | /home/jalihal/.emacs.d/elpa/markdown-mode-20190802.2215 | /home/jalihal/.emacs.d/elpa/marshal-20180124.1239 | /home/jalihal/.emacs.d/elpa/ht-20190611.2131 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20190605.2058 | /home/jalihal/.emacs.d/elpa/matlab-mode-20180928.1526 | /home/jalihal/.emacs.d/elpa/md4rd-20190313.240 | /home/jalihal/.emacs.d/elpa/hierarchy-20190425.842 | /home/jalihal/.emacs.d/elpa/memoize-20180614.1930 | /home/jalihal/.emacs.d/elpa/minimap-1.2 | /home/jalihal/.emacs.d/elpa/monochrome-theme-20140326.1050 | /home/jalihal/.emacs.d/elpa/multi-20131013.1544 | /home/jalihal/.emacs.d/elpa/notify-2010.8.20 | /home/jalihal/.emacs.d/elpa/notmuch-20190525.1602 | /home/jalihal/.emacs.d/elpa/nswbuff-20190320.740 | /home/jalihal/.emacs.d/elpa/ob-translate-20170720.1919 | /home/jalihal/.emacs.d/elpa/google-translate-20190620.1416 | /home/jalihal/.emacs.d/elpa/olivetti-20190519.1316 | /home/jalihal/.emacs.d/elpa/openwith-20120531.2136 | /home/jalihal/.emacs.d/elpa/org-alert-20180524.133 | /home/jalihal/.emacs.d/elpa/org-brain-20190813.1155 | /home/jalihal/.emacs.d/elpa/org-bullets-20190802.927 | /home/jalihal/.emacs.d/elpa/org-dashboard-20171223.1924 | /home/jalihal/.emacs.d/elpa/org-download-20190821.501 | /home/jalihal/.emacs.d/elpa/org-drill-table-20180115.1009 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.2 | /home/jalihal/.emacs.d/elpa/org-emms-20181010.1114 | /home/jalihal/.emacs.d/elpa/alert-20190816.2205 | /home/jalihal/.emacs.d/elpa/log4e-20170401.1304 | /home/jalihal/.emacs.d/elpa/gntp-20141025.250 | /home/jalihal/.emacs.d/elpa/org-noter-20190819.1842 | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20190819 | /home/jalihal/.emacs.d/elpa/org-present-20180303.2330 | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327 | /home/jalihal/.emacs.d/elpa/key-chord-20160227.1238 | /home/jalihal/.emacs.d/elpa/hydra-20190821.939 | /home/jalihal/.emacs.d/elpa/lv-20190821.947 | /home/jalihal/.emacs.d/elpa/ivy-20190821.1809 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20190814.1056 | /home/jalihal/.emacs.d/elpa/biblio-20190624.1408 | /home/jalihal/.emacs.d/elpa/biblio-core-20190624.1408 | /home/jalihal/.emacs.d/elpa/f-20190109.906 | /home/jalihal/.emacs.d/elpa/helm-20190821.735 | /home/jalihal/.emacs.d/elpa/helm-core-20190820.1142 | /home/jalihal/.emacs.d/elpa/htmlize-20180923.1829 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20190409.1815 | /home/jalihal/.emacs.d/elpa/outshine-20190717.1147 | /home/jalihal/.emacs.d/elpa/outorg-20190720.2002 | /home/jalihal/.emacs.d/elpa/ox-rst-20190813.427 | /home/jalihal/.emacs.d/elpa/org-20190819 | /home/jalihal/.emacs.d/elpa/parsebib-20181219.928 | /home/jalihal/.emacs.d/elpa/pcache-20170105.2214 | /home/jalihal/.emacs.d/elpa/pcre2el-20161120.2103 | /home/jalihal/.emacs.d/elpa/pdf-tools-20190701.202 | /home/jalihal/.emacs.d/elpa/let-alist-1.0.6 | /home/jalihal/.emacs.d/elpa/php-mode-20190818.932 | /home/jalihal/.emacs.d/elpa/poet-theme-20190127.2220 | /home/jalihal/.emacs.d/elpa/popwin-20150315.1300 | /home/jalihal/.emacs.d/elpa/pos-tip-20150318.1513 | /home/jalihal/.emacs.d/elpa/posframe-20190805.956 | /home/jalihal/.emacs.d/elpa/powerline-20190323.213 | /home/jalihal/.emacs.d/elpa/projectile-20190626.1315 | /home/jalihal/.emacs.d/elpa/pkg-info-20150517.1143 | /home/jalihal/.emacs.d/elpa/epl-20180205.2049 | /home/jalihal/.emacs.d/elpa/python-environment-20150310.853 | /home/jalihal/.emacs.d/elpa/deferred-20170901.1330 | /home/jalihal/.emacs.d/elpa/pyvenv-20181228.1722 | /home/jalihal/.emacs.d/elpa/quasi-monochrome-theme-20181213.827 | /home/jalihal/.emacs.d/elpa/rainbow-delimiters-20170929.1132 | /home/jalihal/.emacs.d/elpa/request-20190819.1735 | /home/jalihal/.emacs.d/elpa/restclient-20190502.2214 | /home/jalihal/.emacs.d/elpa/rich-minority-20190419.1136 | /home/jalihal/.emacs.d/elpa/sclang-extensions-20160509.338 | /home/jalihal/.emacs.d/elpa/auto-complete-20170125.245 | /home/jalihal/.emacs.d/elpa/popup-20160709.1429 | /home/jalihal/.emacs.d/elpa/sexy-monochrome-theme-20180526.808 | /home/jalihal/.emacs.d/elpa/slime-20190818.1634 | /home/jalihal/.emacs.d/elpa/macrostep-20161120.2106 | /home/jalihal/.emacs.d/elpa/smartparens-20190728.2037 | /home/jalihal/.emacs.d/elpa/solarized-theme-20190809.1202 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20190820.816 | /home/jalihal/.emacs.d/elpa/sphinx-doc-20160116.1117 | /home/jalihal/.emacs.d/elpa/s-20180406.808 | /home/jalihal/.emacs.d/elpa/ssh-20120904.2042 | /home/jalihal/.emacs.d/elpa/tablist-20190414.643 | /home/jalihal/.emacs.d/elpa/tidal-20190320.2158 | /home/jalihal/.emacs.d/elpa/haskell-mode-20190801.50 | /home/jalihal/.emacs.d/elpa/transient-20190812.1336 | /home/jalihal/.emacs.d/elpa/dash-20190814.2006 | /home/jalihal/.emacs.d/elpa/tree-mode-20151104.1331 | /home/jalihal/.emacs.d/elpa/treepy-20180724.656 | /home/jalihal/.emacs.d/elpa/twittering-mode-20181121.1402 | /home/jalihal/.emacs.d/elpa/typo-20171209.1023 | /home/jalihal/.emacs.d/elpa/undo-tree-20170706.246 | /home/jalihal/.emacs.d/elpa/use-package-20190716.1829 | /home/jalihal/.emacs.d/elpa/bind-key-20180513.430 | /home/jalihal/.emacs.d/elpa/visual-regexp-20190414.814 | /home/jalihal/.emacs.d/elpa/which-key-20190802.240 | /home/jalihal/.emacs.d/elpa/with-editor-20190715.2007 | /home/jalihal/.emacs.d/elpa/async-20190503.656 | /home/jalihal/.emacs.d/elpa/xkcd-20160419.1130 | /home/jalihal/.emacs.d/elpa/yaml-mode-20190625.1740 | /home/jalihal/.emacs.d/elpa/yasnippet-20190724.1204 | /usr/local/share/emacs/26.1/site-lisp | /usr/local/share/emacs/site-lisp | /usr/local/share/emacs/site-lisp/helm | /usr/local/share/emacs/26.1/lisp | /usr/local/share/emacs/26.1/lisp/vc | /usr/local/share/emacs/26.1/lisp/url | /usr/local/share/emacs/26.1/lisp/textmodes | /usr/local/share/emacs/26.1/lisp/progmodes | /usr/local/share/emacs/26.1/lisp/play | /usr/local/share/emacs/26.1/lisp/org | /usr/local/share/emacs/26.1/lisp/nxml | /usr/local/share/emacs/26.1/lisp/net | /usr/local/share/emacs/26.1/lisp/mh-e | /usr/local/share/emacs/26.1/lisp/mail | /usr/local/share/emacs/26.1/lisp/leim | /usr/local/share/emacs/26.1/lisp/language | /usr/local/share/emacs/26.1/lisp/international | /usr/local/share/emacs/26.1/lisp/image | /usr/local/share/emacs/26.1/lisp/gnus | /usr/local/share/emacs/26.1/lisp/eshell | /usr/local/share/emacs/26.1/lisp/erc | /usr/local/share/emacs/26.1/lisp/emulation | /usr/local/share/emacs/26.1/lisp/emacs-lisp | /usr/local/share/emacs/26.1/lisp/cedet | /usr/local/share/emacs/26.1/lisp/calendar | /usr/local/share/emacs/26.1/lisp/calc | /usr/local/share/emacs/26.1/lisp/obsolete |
 
 * Common Lisp
 ** Require
@@ -139,9 +142,9 @@ c 'echo $PATH'"))))
 ** Sphinx-doc
 [2019-06-15 Sat]
 #+begin_src emacs-lisp
- (add-hook 'python-mode-hook (lambda ()
- (require 'sphinx-doc)
- (sphinx-doc-mode t)))
+  ;; (add-hook 'python-mode-hook (lambda ()
+  ;; (require 'sphinx-doc)
+  ;; (sphinx-doc-mode t)))
 #+end_src
 
 #+RESULTS:
@@ -214,7 +217,7 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
 ** Black
 [2019-08-14 Wed]
  #+begin_src emacs-lisp
- (add-hook 'python-mode-hook 'blacken-mode)
+ ;;(add-hook 'python-mode-hook 'blacken-mode)
  #+end_src
 
  #+RESULTS:
@@ -222,9 +225,9 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
 * Outshine
 [2019-06-10 Mon]
 #+begin_src emacs-lisp
-(defvar outline-minor-mode-prefix "\M-#")
-(add-hook 'python-mode-hook 'outshine-mode)
-(add-hook 'python-mode-hook 'outshine-mode)
+  ;; (defvar outline-minor-mode-prefix "\M-#")
+  ;; (add-hook 'python-mode-hook 'outshine-mode)
+  ;; (add-hook 'python-mode-hook 'outshine-mode)
 #+end_src
 
 #+RESULTS:
@@ -391,7 +394,7 @@ This is such a cool idea!!
     :BLOCKER:
     :TRIGGER:
     :END:\n" )
-
+        
           ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
            "** TODO %?  %^g
     :PROPERTIES:
@@ -399,49 +402,59 @@ This is such a cool idea!!
     :BLOCKER:
     :TRIGGER:
     :END:\n" )
-
+          ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
+           "** TODO %?  %^g
+    :PROPERTIES:
+    :CREATED: %U
+    :BLOCKER:
+    :TRIGGER:
+    :END:\n" )
           ("c" "Clock tasks")
           ("cw" "work" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? %^g:work:\n%U\n%a\n" :clock-in t :clock-keep t)
+           "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
           ("cc" "class" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
           ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
            "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
           ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
            "* %?\n%U\n" :clock-in t :clock-keep t)
-
           ("e" "Entry")
           ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
            "* %?
   %U")        
-
-          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
-           "** Meeting -  %U
+                  ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
+           "** Meeting on %U
   ,#+BIND: org-export-use-babel nil
   ,#+STARTUP: beamer
   ,#+OPTIONS: H:1 toc:nil
   ,#+AUTHOR: Amogh Jalihal
-  ,#+TITLE: Meeting on %^u
+  ,#+TITLE: Meeting on %U
   ,#+EXPORT_FILE_NAME: 
   ,#+LATEX_HEADER: \\usetheme{metropolis}
-   #+LATEX_HEADER: \setbeamercolor{background canvas}{bg=white}
+  ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
+  ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
+  ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
+  ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
   %?" :prepend t :empty-lines 1)
-          ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
+  ("em" "Meeting")
+          ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
+           "**  %U
+    :PROPERTIES:
+    :CREATED: %U
+    :END:
+  - %?" :prepend t :empty-lines 1)        
+          ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
            "** Meeting: %? - %U
     :PROPERTIES:
     :CREATED: %U
     :END:
   - " :prepend t :empty-lines 1)        
-          ("eM" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
+          ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
            "** With %?
     :PROPERTIES:
     :CREATED: %U
     :END:
      - "  :empty-lines 1)
-          ;; Hard coded
-          ;; * Classes
-          ;; ** Spring 2019
-          ;; *** Population Genomics
           ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
            "** %U
      - %?"  :empty-lines 1)
@@ -450,6 +463,15 @@ This is such a cool idea!!
     :PROPERTIES:
     :CREATED: %U
     :CONTEXT: %^{CONTEXT}
+    :END:")
+          ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
+           "**  %U\n%?")
+          ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
+           "**  %?
+    :PROPERTIES:
+    :CREATED: %U
+    :CONTEXT: %^{CONTEXT}
+    :LINK: %^{LINK}
     :END:")
           ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
           ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
@@ -1477,6 +1499,10 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 #+BEGIN_SRC emacs-lisp
   ;; installation for pdf-tools
   ;;(pdf-tools-install)
+  (setq mouse-wheel-follow-mouse t)
+  (setq pdf-view-resize-factor 1.10)
+  (setq pdf-view-max-image-width 2000)
+
   (setq-default pdf-view-midnight-colors '("#d4d4d6" . "#000000")) ;;'( "#00E3FF" . "#372963" );;
 (use-package pdf-tools
   :ensure t
@@ -1484,8 +1510,6 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
   :bind ("C-c C-g" . pdf-sync-forward-search)
   :defer t
   :config
-  (setq mouse-wheel-follow-mouse t)
-  (setq pdf-view-resize-factor 1.10)
 
 )  ;; "#313133")) 
 #+END_SRC
@@ -1495,7 +1519,7 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 [2019-02-20 Wed]
 Customizing midnight mode colors
 #+begin_src emacs-lisp
-(setq pdf-view-max-image-width 1000)
+
 #+end_src
 
 #+RESULTS:
@@ -1745,7 +1769,9 @@ relative-compose:  0
  #+BEGIN_SRC emacs-lisp
    (defun aj/generate-org-reports ()
      (interactive)
-     (shell-command "~/src/org-report-processing.sh"))
+     ;;(shell-command "~/src/org-report-processing.sh")
+     (shell-command "python ~/src/generate-org-report.py -p")
+)
  #+END_SRC
 
  #+RESULTS:
@@ -1815,7 +1841,7 @@ relative-compose:  0
   "
                                       Quick Links to various directories
                                       ..................................
-                                      _r_esearch      _d_ownloads      _e_macs     
+                                      _r_esearch      _d_ownloads      _e_macs     _o_rg files
                                       _m_odel         _D_ocuments      e_l_feed
   "
     ("r" (dired "~/jalihal_projects/Research/" ) "research")
@@ -1824,6 +1850,7 @@ relative-compose:  0
     ("m" (dired "~/jalihal_projects/Research/data/ModelAnalysis/" ) "model")
     ("e" (dired "~/.emacs.d" ) "emacs config")
     ("l" (dired "~/orgs/elfeed.org" ) "elfeed config")
+    ("o" (dired "~/orgs/" ) "org files")
     ("q" nil "quit")
 )
 
@@ -1993,6 +2020,46 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 
 #+RESULTS:
 | hydra-posframe-enable | global-company-mode | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
+
+** Deqn mode
+#+begin_src emacs-lisp
+(setq deqn-python-folder-path "/home/jalihal/Documents/experiments/deqn-mode/")
+(require 'deqn-mode)
+#+end_src
+
+#+RESULTS:
+: deqn-mode
+
+** Open report file
+#+begin_src emacs-lisp
+(find-file "~/orgs/reports/export-report.org")
+#+end_src
+** Update timer once every 6 hours
+#+begin_src emacs-lisp
+  (defun my-update-clock-tables ()
+    "Update export-report file."
+    (interactive)
+    (save-excursion
+      (find-file "~/orgs/reports/export-report.org")
+      (switch-to-buffer "export-report.org")
+      (org-update-all-dblocks)
+      (save-buffer)
+      (kill-buffer))
+    )
+
+#+end_src
+
+#+RESULTS:
+: my-update-clock-tables
+
+#+begin_src emacs-lisp
+
+  (run-with-timer 0 (* 60 60) 'my-update-clock-tables)
+
+#+end_src
+
+#+RESULTS:
+: [nil 23928 4002 112050 3600 my-update-clock-tables nil nil 575000]
 
 * Emacs global setttings
 ** Theme
@@ -2357,7 +2424,10 @@ Load dired x
 Found it [[https://superuser.com/a/349997][on stackexhange]]
 #+BEGIN_SRC emacs-lisp
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
 #+END_SRC
+
+#+RESULTS:
 ** Fonts
 [2019-02-20 Wed]
 #+begin_src emacs-lisp
