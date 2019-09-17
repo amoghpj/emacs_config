@@ -382,7 +382,7 @@ This is such a cool idea!!
 ;; Org-capture setup
 (define-key global-map "\C-cc" 'org-capture)
 #+END_SRC
-*** Capture Templates
+*** COMMENT Capture Templates
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
         '(
@@ -394,7 +394,7 @@ This is such a cool idea!!
     :BLOCKER:
     :TRIGGER:
     :END:\n" )
-        
+
           ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
            "** TODO %?  %^g
     :PROPERTIES:
@@ -422,7 +422,7 @@ This is such a cool idea!!
           ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
            "* %?
   %U")        
-                  ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
+          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
            "** Meeting on %U
   ,#+BIND: org-export-use-babel nil
   ,#+STARTUP: beamer
@@ -436,7 +436,7 @@ This is such a cool idea!!
   ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
   ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
   %?" :prepend t :empty-lines 1)
-  ("em" "Meeting")
+          ("em" "Meeting")
           ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
            "**  %U
     :PROPERTIES:
@@ -458,12 +458,15 @@ This is such a cool idea!!
           ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
            "** %U
      - %?"  :empty-lines 1)
-          ("er" "Reading list " entry (file+olp "~/orgs/AllNotes.org" "Reading List")
+          ("er" "Reading lists")
+          ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
            "**  %?
     :PROPERTIES:
     :CREATED: %U
     :CONTEXT: %^{CONTEXT}
     :END:")
+          ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
+           "** %?")
           ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
            "**  %U\n%?")
           ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
