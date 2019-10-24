@@ -44,13 +44,10 @@ I would love to hear your feedback on this setup!
                "~/.emacs.d/plugins/org-alert")
 
   (add-to-list 'load-path
-               "~/Documents/experiments/deqn-mode/")
-
+               "~/Documents/code/deqn-mode/")
 
 #+end_src
 
-#+RESULTS:
-| ~/Documents/experiments/deqn-mode/ | ~/.emacs.d/elpa/hydra-posframe | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327/citeproc | /home/jalihal/.emacs.d/elpa/slime-20190818.1634/contrib | ~/.emacs.d/plugins/org-alert | /usr/share/org-mode/lisp | ~/projects/tidal | ~/.emacs.d/elpa/ox-ipynb/ | ~/.emacs.d/elpa/ob-ipython/ | ~/.emacs.d/lisp/ | ~/.emacs.d/plugins/yasnippet | ~/.emacs.d/elpa/helm-bibtex | ~/.emacs.d/elpa/helm | /home/jalihal/.emacs.d/elpa/ac-math-20141116.2127 | /home/jalihal/.emacs.d/elpa/ace-link-20190716.920 | /home/jalihal/.emacs.d/elpa/all-the-icons-20190320.1809 | /home/jalihal/.emacs.d/elpa/annotate-20190519.706 | /home/jalihal/.emacs.d/elpa/arjen-grey-theme-20170522.2047 | /home/jalihal/.emacs.d/elpa/auctex-12.1.2/ | /home/jalihal/.emacs.d/elpa/auctex-12.1.2 | /home/jalihal/.emacs.d/elpa/avy-20190630.1538 | /home/jalihal/.emacs.d/elpa/blacken-20190521.841 | /home/jalihal/.emacs.d/elpa/calfw-20180118.45 | /home/jalihal/.emacs.d/elpa/calfw-org-20160303.258 | /home/jalihal/.emacs.d/elpa/cdlatex-20190130.1419 | /home/jalihal/.emacs.d/elpa/chronos-20150602.1529 | /home/jalihal/.emacs.d/elpa/code-library-20160426.1218 | /home/jalihal/.emacs.d/elpa/column-enforce-mode-20171030.1900 | /home/jalihal/.emacs.d/elpa/company-box-20190311.1745 | /home/jalihal/.emacs.d/elpa/company-jedi-20151217.321 | /home/jalihal/.emacs.d/elpa/company-math-20190507.2006 | /home/jalihal/.emacs.d/elpa/company-quickhelp-20180525.1003 | /home/jalihal/.emacs.d/elpa/dash-functional-20180107.1618 | /home/jalihal/.emacs.d/elpa/diminish-20170419.1736 | /home/jalihal/.emacs.d/elpa/diredful-20160529.2017 | /home/jalihal/.emacs.d/elpa/dmenu-20190706.951 | /home/jalihal/.emacs.d/elpa/docker-20190813.1431 | /home/jalihal/.emacs.d/elpa/docker-tramp-20170207.325 | /home/jalihal/.emacs.d/elpa/elfeed-org-20181015.1100 | /home/jalihal/.emacs.d/elpa/elfeed-20190809.1358 | /home/jalihal/.emacs.d/elpa/elpy-20190725.2259 | /home/jalihal/.emacs.d/elpa/company-20190821.658 | /home/jalihal/.emacs.d/elpa/emms-mode-line-cycle-20160221.1120 | /home/jalihal/.emacs.d/elpa/emms-20190620.1526 | /home/jalihal/.emacs.d/elpa/esup-20180727.342 | /home/jalihal/.emacs.d/elpa/evil-20190729.704 | /home/jalihal/.emacs.d/elpa/find-file-in-project-20190720.313 | /home/jalihal/.emacs.d/elpa/flucui-themes-20190321.2313 | /home/jalihal/.emacs.d/elpa/flycheck-posframe-20190712.515 | /home/jalihal/.emacs.d/elpa/flycheck-20190821.1725 | /home/jalihal/.emacs.d/elpa/forest-blue-theme-20160627.842 | /home/jalihal/.emacs.d/elpa/forge-20190820.826 | /home/jalihal/.emacs.d/elpa/closql-20190731.1450 | /home/jalihal/.emacs.d/elpa/emacsql-sqlite-20190727.1710 | /home/jalihal/.emacs.d/elpa/emacsql-20190625.1859 | /home/jalihal/.emacs.d/elpa/gist-20171128.406 | /home/jalihal/.emacs.d/elpa/gh-20180308.2138 | /home/jalihal/.emacs.d/elpa/git-gutter-20161105.1356 | /home/jalihal/.emacs.d/elpa/git-timemachine-20190730.849 | /home/jalihal/.emacs.d/elpa/gnome-calendar-20161110.1256 | /home/jalihal/.emacs.d/elpa/goto-chg-20190110.2114 | /home/jalihal/.emacs.d/elpa/graphql-20180912.31 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20190720.337 | /home/jalihal/.emacs.d/elpa/autothemer-20180920.923 | /home/jalihal/.emacs.d/elpa/helm-cmd-t-20170125.1459 | /home/jalihal/.emacs.d/elpa/helm-projectile-20190731.1538 | /home/jalihal/.emacs.d/elpa/helm-spotify-20160905.2147 | /home/jalihal/.emacs.d/elpa/helm-spotify-plus-20190807.2115 | /home/jalihal/.emacs.d/elpa/helm-swoop-20190814.1234 | /home/jalihal/.emacs.d/elpa/highlight-indentation-20181204.839 | /home/jalihal/.emacs.d/elpa/hyperspace-20190702.2331 | /home/jalihal/.emacs.d/elpa/jedi-20160426.456 | /home/jalihal/.emacs.d/elpa/jedi-core-20190620.1820 | /home/jalihal/.emacs.d/elpa/epc-20140610.534 | /home/jalihal/.emacs.d/elpa/ctable-20171006.11 | /home/jalihal/.emacs.d/elpa/concurrent-20161229.330 | /home/jalihal/.emacs.d/elpa/json-mode-20190123.422 | /home/jalihal/.emacs.d/elpa/json-reformat-20160212.853 | /home/jalihal/.emacs.d/elpa/json-snatcher-20150512.347 | /home/jalihal/.emacs.d/elpa/julia-mode-20190813.1326 | /home/jalihal/.emacs.d/elpa/logito-20120225.2055 | /home/jalihal/.emacs.d/elpa/magit-popup-20190223.2234 | /home/jalihal/.emacs.d/elpa/magit-todos-20190805.552 | /home/jalihal/.emacs.d/elpa/hl-todo-20190807.1831 | /home/jalihal/.emacs.d/elpa/magithub-20190512.2316 | /home/jalihal/.emacs.d/elpa/ghub+-20181113.32 | /home/jalihal/.emacs.d/elpa/apiwrap-20180602.2231 | /home/jalihal/.emacs.d/elpa/ghub-20190806.959 | /home/jalihal/.emacs.d/elpa/magit-20190819.1414 | /home/jalihal/.emacs.d/elpa/git-commit-20190717.29 | /home/jalihal/.emacs.d/elpa/markdown-mode-20190802.2215 | /home/jalihal/.emacs.d/elpa/marshal-20180124.1239 | /home/jalihal/.emacs.d/elpa/ht-20190611.2131 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20190605.2058 | /home/jalihal/.emacs.d/elpa/matlab-mode-20180928.1526 | /home/jalihal/.emacs.d/elpa/md4rd-20190313.240 | /home/jalihal/.emacs.d/elpa/hierarchy-20190425.842 | /home/jalihal/.emacs.d/elpa/memoize-20180614.1930 | /home/jalihal/.emacs.d/elpa/minimap-1.2 | /home/jalihal/.emacs.d/elpa/monochrome-theme-20140326.1050 | /home/jalihal/.emacs.d/elpa/multi-20131013.1544 | /home/jalihal/.emacs.d/elpa/notify-2010.8.20 | /home/jalihal/.emacs.d/elpa/notmuch-20190525.1602 | /home/jalihal/.emacs.d/elpa/nswbuff-20190320.740 | /home/jalihal/.emacs.d/elpa/ob-translate-20170720.1919 | /home/jalihal/.emacs.d/elpa/google-translate-20190620.1416 | /home/jalihal/.emacs.d/elpa/olivetti-20190519.1316 | /home/jalihal/.emacs.d/elpa/openwith-20120531.2136 | /home/jalihal/.emacs.d/elpa/org-alert-20180524.133 | /home/jalihal/.emacs.d/elpa/org-brain-20190813.1155 | /home/jalihal/.emacs.d/elpa/org-bullets-20190802.927 | /home/jalihal/.emacs.d/elpa/org-dashboard-20171223.1924 | /home/jalihal/.emacs.d/elpa/org-download-20190821.501 | /home/jalihal/.emacs.d/elpa/org-drill-table-20180115.1009 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.2 | /home/jalihal/.emacs.d/elpa/org-emms-20181010.1114 | /home/jalihal/.emacs.d/elpa/alert-20190816.2205 | /home/jalihal/.emacs.d/elpa/log4e-20170401.1304 | /home/jalihal/.emacs.d/elpa/gntp-20141025.250 | /home/jalihal/.emacs.d/elpa/org-noter-20190819.1842 | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20190819 | /home/jalihal/.emacs.d/elpa/org-present-20180303.2330 | /home/jalihal/.emacs.d/elpa/org-ref-20190802.1327 | /home/jalihal/.emacs.d/elpa/key-chord-20160227.1238 | /home/jalihal/.emacs.d/elpa/hydra-20190821.939 | /home/jalihal/.emacs.d/elpa/lv-20190821.947 | /home/jalihal/.emacs.d/elpa/ivy-20190821.1809 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20190814.1056 | /home/jalihal/.emacs.d/elpa/biblio-20190624.1408 | /home/jalihal/.emacs.d/elpa/biblio-core-20190624.1408 | /home/jalihal/.emacs.d/elpa/f-20190109.906 | /home/jalihal/.emacs.d/elpa/helm-20190821.735 | /home/jalihal/.emacs.d/elpa/helm-core-20190820.1142 | /home/jalihal/.emacs.d/elpa/htmlize-20180923.1829 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20190409.1815 | /home/jalihal/.emacs.d/elpa/outshine-20190717.1147 | /home/jalihal/.emacs.d/elpa/outorg-20190720.2002 | /home/jalihal/.emacs.d/elpa/ox-rst-20190813.427 | /home/jalihal/.emacs.d/elpa/org-20190819 | /home/jalihal/.emacs.d/elpa/parsebib-20181219.928 | /home/jalihal/.emacs.d/elpa/pcache-20170105.2214 | /home/jalihal/.emacs.d/elpa/pcre2el-20161120.2103 | /home/jalihal/.emacs.d/elpa/pdf-tools-20190701.202 | /home/jalihal/.emacs.d/elpa/let-alist-1.0.6 | /home/jalihal/.emacs.d/elpa/php-mode-20190818.932 | /home/jalihal/.emacs.d/elpa/poet-theme-20190127.2220 | /home/jalihal/.emacs.d/elpa/popwin-20150315.1300 | /home/jalihal/.emacs.d/elpa/pos-tip-20150318.1513 | /home/jalihal/.emacs.d/elpa/posframe-20190805.956 | /home/jalihal/.emacs.d/elpa/powerline-20190323.213 | /home/jalihal/.emacs.d/elpa/projectile-20190626.1315 | /home/jalihal/.emacs.d/elpa/pkg-info-20150517.1143 | /home/jalihal/.emacs.d/elpa/epl-20180205.2049 | /home/jalihal/.emacs.d/elpa/python-environment-20150310.853 | /home/jalihal/.emacs.d/elpa/deferred-20170901.1330 | /home/jalihal/.emacs.d/elpa/pyvenv-20181228.1722 | /home/jalihal/.emacs.d/elpa/quasi-monochrome-theme-20181213.827 | /home/jalihal/.emacs.d/elpa/rainbow-delimiters-20170929.1132 | /home/jalihal/.emacs.d/elpa/request-20190819.1735 | /home/jalihal/.emacs.d/elpa/restclient-20190502.2214 | /home/jalihal/.emacs.d/elpa/rich-minority-20190419.1136 | /home/jalihal/.emacs.d/elpa/sclang-extensions-20160509.338 | /home/jalihal/.emacs.d/elpa/auto-complete-20170125.245 | /home/jalihal/.emacs.d/elpa/popup-20160709.1429 | /home/jalihal/.emacs.d/elpa/sexy-monochrome-theme-20180526.808 | /home/jalihal/.emacs.d/elpa/slime-20190818.1634 | /home/jalihal/.emacs.d/elpa/macrostep-20161120.2106 | /home/jalihal/.emacs.d/elpa/smartparens-20190728.2037 | /home/jalihal/.emacs.d/elpa/solarized-theme-20190809.1202 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20190820.816 | /home/jalihal/.emacs.d/elpa/sphinx-doc-20160116.1117 | /home/jalihal/.emacs.d/elpa/s-20180406.808 | /home/jalihal/.emacs.d/elpa/ssh-20120904.2042 | /home/jalihal/.emacs.d/elpa/tablist-20190414.643 | /home/jalihal/.emacs.d/elpa/tidal-20190320.2158 | /home/jalihal/.emacs.d/elpa/haskell-mode-20190801.50 | /home/jalihal/.emacs.d/elpa/transient-20190812.1336 | /home/jalihal/.emacs.d/elpa/dash-20190814.2006 | /home/jalihal/.emacs.d/elpa/tree-mode-20151104.1331 | /home/jalihal/.emacs.d/elpa/treepy-20180724.656 | /home/jalihal/.emacs.d/elpa/twittering-mode-20181121.1402 | /home/jalihal/.emacs.d/elpa/typo-20171209.1023 | /home/jalihal/.emacs.d/elpa/undo-tree-20170706.246 | /home/jalihal/.emacs.d/elpa/use-package-20190716.1829 | /home/jalihal/.emacs.d/elpa/bind-key-20180513.430 | /home/jalihal/.emacs.d/elpa/visual-regexp-20190414.814 | /home/jalihal/.emacs.d/elpa/which-key-20190802.240 | /home/jalihal/.emacs.d/elpa/with-editor-20190715.2007 | /home/jalihal/.emacs.d/elpa/async-20190503.656 | /home/jalihal/.emacs.d/elpa/xkcd-20160419.1130 | /home/jalihal/.emacs.d/elpa/yaml-mode-20190625.1740 | /home/jalihal/.emacs.d/elpa/yasnippet-20190724.1204 | /usr/local/share/emacs/26.1/site-lisp | /usr/local/share/emacs/site-lisp | /usr/local/share/emacs/site-lisp/helm | /usr/local/share/emacs/26.1/lisp | /usr/local/share/emacs/26.1/lisp/vc | /usr/local/share/emacs/26.1/lisp/url | /usr/local/share/emacs/26.1/lisp/textmodes | /usr/local/share/emacs/26.1/lisp/progmodes | /usr/local/share/emacs/26.1/lisp/play | /usr/local/share/emacs/26.1/lisp/org | /usr/local/share/emacs/26.1/lisp/nxml | /usr/local/share/emacs/26.1/lisp/net | /usr/local/share/emacs/26.1/lisp/mh-e | /usr/local/share/emacs/26.1/lisp/mail | /usr/local/share/emacs/26.1/lisp/leim | /usr/local/share/emacs/26.1/lisp/language | /usr/local/share/emacs/26.1/lisp/international | /usr/local/share/emacs/26.1/lisp/image | /usr/local/share/emacs/26.1/lisp/gnus | /usr/local/share/emacs/26.1/lisp/eshell | /usr/local/share/emacs/26.1/lisp/erc | /usr/local/share/emacs/26.1/lisp/emulation | /usr/local/share/emacs/26.1/lisp/emacs-lisp | /usr/local/share/emacs/26.1/lisp/cedet | /usr/local/share/emacs/26.1/lisp/calendar | /usr/local/share/emacs/26.1/lisp/calc | /usr/local/share/emacs/26.1/lisp/obsolete |
 
 * Common Lisp
 ** Require
@@ -98,6 +95,13 @@ I would love to hear your feedback on this setup!
 
 #+RESULTS:
 | company-box-mode | company-mode-set-explicitly |
+
+* KeyFreq
+#+begin_src emacs-lisp
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+#+end_src
 
 * Python
 ** Setting to use shell arguments?
@@ -270,6 +274,19 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
 #+RESULTS:
 | ^ .* | ^\*.*\* |
 
+* Deft
+[2019-10-11 Fri]
+#+begin_src emacs-lisp
+(use-package deft
+  :commands (deft)
+  :config (setq deft-directory "~/orgs/"
+                deft-extensions '("md" "org")
+                deft-use-filename-as-title t))
+#+end_src
+
+#+RESULTS:
+: t
+
 * Julia
 ** Emacs Speaks Statistics
 <2018-04-09 Mon>
@@ -324,6 +341,9 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
  (C . t)
 (julia . t)
 (screen . t)
+(gnuplot . t)
+(lilypond . t)
+(ledger . t)
 ))
 #+END_SRC
 
@@ -382,144 +402,289 @@ This is such a cool idea!!
 ;; Org-capture setup
 (define-key global-map "\C-cc" 'org-capture)
 #+END_SRC
-*** COMMENT Capture Templates
+*** Capture Templates
 #+BEGIN_SRC emacs-lisp
-  (setq org-capture-templates
-        '(
-          ("t" "Tasks")
-          ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-           "** TODO %?  %^g
-    :PROPERTIES:
-    :CREATED: %U
-    :BLOCKER:
-    :TRIGGER:
-    :END:\n" )
+  (defun my/expense-template ()
+    (format "Hello world %s" (plist-get org-capture-plist :account)))
+    (setq org-capture-templates
+          '(
+            ("t" "Tasks")
+            ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
 
-          ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-           "** TODO %?  %^g
-    :PROPERTIES:
-    :CREATED: %U
-    :BLOCKER:
-    :TRIGGER:
-    :END:\n" )
-          ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
-           "** TODO %?  %^g
-    :PROPERTIES:
-    :CREATED: %U
-    :BLOCKER:
-    :TRIGGER:
-    :END:\n" )
-          ("c" "Clock tasks")
-          ("cw" "work" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
-          ("cc" "class" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
-          ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
-          ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
-           "* %?\n%U\n" :clock-in t :clock-keep t)
-          ("e" "Entry")
-          ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
-           "* %?
-  %U")        
-          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
-           "** Meeting on %U
-  ,#+BIND: org-export-use-babel nil
-  ,#+STARTUP: beamer
-  ,#+OPTIONS: H:1 toc:nil
-  ,#+AUTHOR: Amogh Jalihal
-  ,#+TITLE: Meeting on %U
-  ,#+EXPORT_FILE_NAME: 
-  ,#+LATEX_HEADER: \\usetheme{metropolis}
-  ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
-  ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
-  ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
-  ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
-  %?" :prepend t :empty-lines 1)
-          ("em" "Meeting")
-          ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
-           "**  %U
-    :PROPERTIES:
-    :CREATED: %U
-    :END:
-  - %?" :prepend t :empty-lines 1)        
-          ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
-           "** Meeting: %? - %U
-    :PROPERTIES:
-    :CREATED: %U
-    :END:
-  - " :prepend t :empty-lines 1)        
-          ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
-           "** With %?
-    :PROPERTIES:
-    :CREATED: %U
-    :END:
-     - "  :empty-lines 1)
-          ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
-           "** %U
-     - %?"  :empty-lines 1)
-          ("er" "Reading lists")
-          ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
-           "**  %?
-    :PROPERTIES:
-    :CREATED: %U
-    :CONTEXT: %^{CONTEXT}
-    :END:")
-          ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
-           "** %?")
-          ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
-           "**  %U\n%?")
-          ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
-           "**  %?
-    :PROPERTIES:
-    :CREATED: %U
-    :CONTEXT: %^{CONTEXT}
-    :LINK: %^{LINK}
-    :END:")
-          ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-          ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-           ("d" "dump org capture" entry
-           (file+headline "~/orgs/dump.org" "Unsorted")
-           "* %?%:description Added %U
-    ,#+BEGIN_QUOTE
-    %x
-    ,#+END_QUOTE" :immediate-finish t)
+            ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
+            ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
+            ("c" "Clock tasks")
+            ("cw" "work" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
+            ("cc" "class" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
+            ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
+            ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
+             "* %?\n%U\n" :clock-in t :clock-keep t)
+            ("e" "Entry")
+            ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
+             "* %?
+    %U")        
+            ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
+             "** Meeting on %U
+    ,#+BIND: org-export-use-babel nil
+    ,#+STARTUP: beamer
+    ,#+OPTIONS: H:1 toc:nil
+    ,#+AUTHOR: Amogh Jalihal
+    ,#+TITLE: Meeting on %U
+    ,#+EXPORT_FILE_NAME: 
+    ,#+LATEX_HEADER: \\usetheme{metropolis}
+    ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
+    ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
+    ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
+    ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
+    %?" :prepend t :empty-lines 1)
+            ("em" "Meeting")
+            ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
+             "**  %U
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+    - %?" :prepend t :empty-lines 1)        
+            ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
+             "** Meeting: %? - %U
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+    - " :prepend t :empty-lines 1)        
+            ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
+             "** With %?
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+       - "  :empty-lines 1)
+            ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
+             "** %U
+       - %?"  :empty-lines 1)
+            ("er" "Reading lists")
+            ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
+             "**  %?
+      :PROPERTIES:
+      :CREATED: %U
+      :CONTEXT: %^{CONTEXT}
+      :END:")
+            ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
+             "** %?")
+            ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
+             "**  %U\n%?")
+            ("eL" "Ledger " entry (file+olp "~/orgs/ledger.org" "Credit Card Expenses")
+"** %U\n
+\#+BEGIN_SRC ledger :tangle 2019.ledger
+%(org-read-date) %^{Description}
+    %^{Payee}                          %^{Amount}
+    Liabilities:CreditCard
+\#+END_SRC"
+)
+            ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
+             "**  %?
+      :PROPERTIES:
+      :CREATED: %U
+      :CONTEXT: %^{CONTEXT}
+      :LINK: %^{LINK}
+      :END:")
+            ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+            ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+             ("d" "dump org capture" entry
+             (file+headline "~/orgs/dump.org" "Unsorted")
+             "* %?%:description Added %U
+      ,#+BEGIN_QUOTE
+      %x
+      ,#+END_QUOTE" :immediate-finish t)
 
-          ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
-           "* \n
-    ,#+BEGIN_EXPORT html
-    <div class=\"container\">
-    ,#+END_EXPORT\n
-    %U\n\n%?\n
-    ,#+BEGIN_EXPORT html
-    </div>
-    ,#+END_EXPORT" :prepend t :empty-lines 1)
+             ("b" "Quantified self")
+             ("bt" "Tracking Times")
+             ("btw" "Woke up at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :wake: %^U
+             :END:"
+             :immediate-finish t)
+             ("bts" "Slept at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :sleep: %^U
+             :END:"
+             :immediate-finish t)
+             ("btc" "Drank Coffee" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :coffee: %U
+             :END:"
+             :immediate-finish t)
+             ("btt" "Toilet" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :toilet: %U
+             :END:"
+             :immediate-finish t)
+             ("btp" "Temperature" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :temperature: %?
+             :END:")
+             ("btr" "Got Ready at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :ready: %^U
+             :END:"
+             :immediate-finish t)
+             ("btb" "Ate breakfast at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :breakfast: %^U
+             :END:"
+             :immediate-finish t)
+             ("btl" "Ate lunch at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :lunch: %^U
+             :END:"
+             :immediate-finish t)
+             ("btd" "Ate dinner at" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :dinner: %^U
+             :END:"
+             :immediate-finish t)
+             ("bm" "Meta")
 
-          ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-          ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
-          ;;("i" "Idea" entry (file org-default-notes-file)
-          ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-          ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-           "* %U
-           :PROPERTIES:
-           :immediate-finish:
-           :Water:    %^{Drank?(y/n)|Y|N}
-           :Attention: %^{_f_ocussed/_d_istracted|F|D}
-           :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-           :END:")
-          ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-          ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-          ;;     ")
-          ))
+             ("bmf" "Feeling" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :feeling: %^{How are you feeling?|Fine|Off|Stiff|Aching|Headache|Feverish}
+             :feelingtime: %^U
+             :note: %?
+             :END:"
+             :immediate-finish t)
 
-  ;;(setq org-capture-templates
-  ;;             '("w" "Web site" entry 
-  ;;              "* %?\n%c\n%:initial" :clock-in t))
+             ("bmm" "Tracker" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :track: %^{?|n|y|n|s}
+             :tracktime: %^U
+             :END:"
+             :immediate-finish t)
 
-  ;; Allow creation of new parent nodes
-  (setq org-refile-allow-creating-parent-nodes `confirm)
-  ;; Look up to three levels deep
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+             ("bmp" "Productive" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :productive: %^{Productive?|ok|very|ok|no}
+             :productivetime: %^U
+             :note: %?
+             :END:"
+             :immediate-finish t)
+
+             ("bmw" "Workout" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :workout: %^{Worked out?|n|y|n}
+             :END:"
+             :immediate-finish t)
+
+             ("bmb" "Blurb" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :time: %U
+             :note: 
+             :END:"
+             :immediate-finish t)
+
+             ("bh" "Weight" entry
+             (file+headline "~/orgs/qself.org" "Capture")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :weight: %?
+             :END:"
+             :immediate-finish t)
+
+            ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
+             "* \n
+      ,#+BEGIN_EXPORT html
+      <div class=\"container\">
+      ,#+END_EXPORT\n
+      %U\n\n%?\n
+      ,#+BEGIN_EXPORT html
+      </div>
+      ,#+END_EXPORT" :prepend t :empty-lines 1)
+
+            ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+            ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+            ;;("i" "Idea" entry (file org-default-notes-file)
+            ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+            ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+             "* %U
+             :PROPERTIES:
+             :immediate-finish:
+             :Water:    %^{Drank?(y/n)|Y|N}
+             :Attention: %^{_f_ocussed/_d_istracted|F|D}
+             :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+             :END:")
+            ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+            ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+            ;;     ")
+            ))
+
+    ;;(setq org-capture-templates
+    ;;             '("w" "Web site" entry 
+    ;;              "* %?\n%c\n%:initial" :clock-in t))
+
+    ;; Allow creation of new parent nodes
+    (setq org-refile-allow-creating-parent-nodes `confirm)
+    ;; Look up to three levels deep
+    (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
 
 #+RESULTS:
@@ -682,14 +847,18 @@ Does this do anything?
 #+END_SRC
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
-  ;;(add-to-list 'load-path "~/.emacs.d/org-ref/") 
   (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
 
-  (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
-	org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
-  ;;      org-ref-default-bibliography '("~/Unison/YeastNutBib.bib")
-	org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
-(require 'org-ref)
+  (use-package org-ref
+    :ensure t
+    :after org
+    :config
+    (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
+          org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
+          org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
+    ;; (define-key org-mode-map (kbd "\C-c]") 'org-ref-helm-insert-cite-link)
+    )
+
 #+END_SRC
 *** Some shortcuts
 **** Crossref-add-bib-entry
@@ -769,24 +938,23 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 #+END_SRC
 ** Org-brain
 #+BEGIN_SRC emacs-lisp
+  (use-package org-expiry)
   (use-package org-brain :ensure t
     :init
     (setq org-brain-path "~/orgs/brain/")
-    ;; For Evil users
-    ;  (eval-after-load 'evil
-  ;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+    :hook (org-brain-new-entry . org-expiry-insert-created)
     :config
     (setq org-id-track-globally t)
     (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-    (push '("b" "Brain" plain (function org-brain-goto-end)
-            "* %i%?" :empty-lines 1)
-          org-capture-templates)
+    ;; (push '("b" "Brain" plain (function org-brain-goto-end)
+    ;;         "* %i%?" :empty-lines 1)
+    ;;       org-capture-templates)
     (setq org-brain-visualize-default-choices 'all)
     (setq org-brain-title-max-length 75))
 #+END_SRC
 
 #+RESULTS:
-: t
+| org-expiry-insert-created |
 
 ** Org-dashboard
 <2018-01-06 Sat>
@@ -1938,7 +2106,75 @@ relative-compose:  0
 
 #+RESULTS:
 : aj/create-new-experiment
+** Create Art templates
+#+begin_src emacs-lisp
+    (defun aj/create-art-template ()
+      "Prompts user for key words and creates a folder and org file using this name"
+      (interactive)
+      (setq analysisfolder "~/Documents/experiments/")
+      (setq analysisname  (concat
+                           (format-time-string "%F")
+                           "-"
+                           ;; This line prompts user for some keywords and replaces
+                           ;; the spaces with hyphens
+                           (replace-regexp-in-string "\\( \\)" "-" (read-string "Key words: "))))
+  
+      (make-directory (concat analysisfolder analysisname))
+      (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
+      (message (concat "creating" fpath))
+      (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
+       (write-region (concat 
+                      "#+PROPERTY: header-args:python :session "
+                      sessionname
+                      " :tangle yes :comments link \n"
+                      "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
+                      "#+LATEX_HEADER: \\usepackage{xcolor}\n"
+                      "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                      "#+LATEX_HEADER: \\setminted{linenos=True,bgcolor=bg}\n"
+                      "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}\n"
+                      "#+BEGIN_SRC python\n"
+                      "import numpy as np\n"
+                      "import cairo\n"
+                      "import sys\n"
+                      "from  numpy import sin, cos\n"
+                      "from numpy.random import random, choice\n"
+                      "#+END_SRC\n"
+                      "#+begin_src python\n"
+                      "  class CairoBind:\n"
+                      "      def __init__(self, W=300, H=300):\n"
+                      "          self.WIDTH = W\n"
+                      "          self.HEIGHT = H\n"
+                      "          self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.WIDTH, self.HEIGHT)\n"
+                      "          self.ctx = cairo.Context(self.surface)\n"
+                      "      def move_to(self,x, y):\n"
+                      "          self.ctx.move_to(x,y)\n"
+                      "      def line_to(self,x, y):\n"
+                      "          self.ctx.line_to(x,y)\n"
+                      "      def close_path(self):\n"
+                      "          self.ctx.close_path()\n"
+                      "      def set_line_width(self, lw):\n"
+                      "          self.ctx.set_line_width(lw)\n"
+                      "      def fill(self):\n"
+                      "          self.ctx.fill()\n"
+                      "      def stroke(self):\n"
+                      "          self.ctx.stroke()\n"
+                      "      def rectangle(self,x0,y0,x1,y1):\n"
+                      "          self.ctx.rectangle(x0,y0,x1,y1)\n"
+                      "      def arc(self,x0,y0,r,starttheta,endtheta):\n"
+                      "          self.ctx.arc(x0, y0, r, starttheta, endtheta)\n"
+                      "      def set_source_rgba(self, r=0, g=0, b=0, a=1):\n"
+                      "          self.ctx.set_source_rgba(r,g,b,a)\n"
+                      "      def write_to_png(self, fname='./img/test.png'):\n"
+                      "          self.surface.write_to_png(fname)\n"
+                      "#+end_src")
+                                        nil fpath)
+       (switch-to-buffer (find-file fpath)))
+#+END_SRC 
 
+#+RESULTS:
+: aj/create-art-template
+
+#+end_src
 ** Enable devanagari mode
 [2019-02-03 Sun]
 #+begin_src emacs-lisp
@@ -1963,12 +2199,14 @@ relative-compose:  0
                                                                        _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
                                                                        _A_nalysis            _R_eload init                          _s_ecrets            
                                                                        _E_xperiment          _h_perspace
+                                                                       _a_rt
 "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
      ("v" org-brain-visualize "visualize")
      ("A" aj/create-new-analysis "Analyis")
      ("E" aj/create-new-experiment "Experiment")
+     ("a" aj/create-art-template "art")
      ("l" aj/when-was-my-last-coffee "last?")
      ("s" aj/secrets/body "secrets")
      ("m" hidden-mode-line-mode "modeline?")
@@ -2038,6 +2276,8 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 (find-file "~/orgs/reports/export-report.org")
 #+end_src
 ** Update timer once every 6 hours
+This is now moved to a [[file:~/src/my-update-org-tables.el][file:~/src/my-update-org-tables.el]], and is called by [[file:~/src/org-report-processing.sh][file:~/src/org-report-processing.sh]],
+so it does not interrupt the emacs process.
 #+begin_src emacs-lisp
   (defun my-update-clock-tables ()
     "Update export-report file."
@@ -2050,19 +2290,21 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
       (kill-buffer))
     )
 
+  (run-with-timer 600 (* 60 60) 'my-update-clock-tables)
+
 #+end_src
 
 #+RESULTS:
-: my-update-clock-tables
+: [nil 23944 52804 903497 3600 my-update-clock-tables nil nil 442000]
 
+** Export quant table 
 #+begin_src emacs-lisp
-
-  (run-with-timer 0 (* 60 60) 'my-update-clock-tables)
-
+  (fset 'export-quant-table
+     [?\M-x ?o ?r ?g ?  ?t ?a ?b ?l ?  ?e ?x tab ?o ?r ?t tab return ?q ?u ?a ?n ?t ?. ?c ?s ?v return ?y return])
 #+end_src
 
 #+RESULTS:
-: [nil 23928 4002 112050 3600 my-update-clock-tables nil nil 575000]
+: [134217848 111 114 103 32 116 97 98 108 32 101 120 tab 111 114 116 tab return 113 117 97 110 116 46 99 115 118 return 121 return]
 
 * Emacs global setttings
 ** Theme
@@ -2163,7 +2405,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 #+end_src
 
 #+RESULTS:
-| variable-pitch-mode | (lambda nil (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | org-ref-org-menu | ob-ipython-auto-configure-kernels | (lambda nil (progn (parenthesis-register-keys [($~ org-mode-map))) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
 
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
@@ -2344,13 +2585,12 @@ Load dired x
 
 #+END_SRC
 
-#+RESULTS:
-: dired-omit-mode
+Do the right thing
+#+begin_src emacs-lisp
+(setq dired-dwim-target t)
+#+end_src
 
-| lambda | nil | (dired-hide-details-mode) |
-#+BEGIN_EXAMPLE
-^\.?#\|^\.$\|^\.\.$
-#+END_EXAMPLE
+
 ** Theme Changer
    <2018-01-07 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -2365,6 +2605,12 @@ Load dired x
 #+BEGIN_SRC emacs-lisp
 (display-battery-mode 1) 
 #+END_SRC
+** Hl todo mode
+[2019-10-24 Thu]
+#+begin_src emacs-lisp
+(global-hl-todo-mode 1)
+#+end_src
+
 ** Helm
 *** Load helm
  <2018-02-25 Sun>
