@@ -302,11 +302,15 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 * Org-mode
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
-;;;;org-mode configuration
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(require 'org)
-(define-key global-map "\C-ca" 'org-agenda)
+    (use-package org
+      :bind (:map org-mode-map
+            ("C-c a" . org-agenda)))
+
 #+END_SRC
+
+#+RESULTS:
+
+
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -319,7 +323,7 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
   ;;          (delete '("\\.pdf\\'" . default) org-file-apps)
   ;;          (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
 #+END_SRC
-** Org-PDF-Tools
+** Org-PDF-Tools                                                    :ARCHIVE:
 As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package because it is causing problems in simmons
 #+BEGIN_SRC emacs-lisp
   ;; ;; pdf-tools-org
@@ -847,17 +851,16 @@ Does this do anything?
 #+END_SRC
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
-  (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
+    (use-package org-ref
+      :ensure t
+      :after org
+      :config
+      (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
+            org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
+            org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
+      (unbind-key "<tab>" org-ref-cite-keymap)
 
-  (use-package org-ref
-    :ensure t
-    :after org
-    :config
-    (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
-          org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
-          org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
-    ;; (define-key org-mode-map (kbd "\C-c]") 'org-ref-helm-insert-cite-link)
-    )
+      )
 
 #+END_SRC
 *** Some shortcuts
@@ -874,7 +877,7 @@ Does this do anything?
 #+BEGIN_SRC emacs-lisp
 (org-edna-load)
 #+END_SRC
-** COMMENT Org-Notify
+** Org-Notify
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
@@ -1078,7 +1081,7 @@ graph working
 #+BEGIN_SRC emacs-lisp
 (require 'org-habit)
 #+END_SRC
-** Org-gnome
+** Org-gnome                                                        :ARCHIVE:
 #+BEGIN_SRC emacs-lisp
   ;; (require 'org-gnome) 
   ;; (setq org-gnome-integrate-with-calendar t)
@@ -1086,8 +1089,7 @@ graph working
 #+END_SRC
 
 #+RESULTS:
-
-** Org-mode Tufte theme
+** Org-mode Tufte theme                                             :ARCHIVE:
 #+BEGIN_SRC elisp
   ;; (use-package org
   ;;   :ensure org-plus-contrib
@@ -1602,6 +1604,10 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 #+END_SRC
 
 #+RESULTS:
+** Reftex
+#+begin_src emacs-lisp
+(setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
+#+end_src
 ** Auctex latex export style
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
@@ -1664,6 +1670,62 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 #+RESULTS:
 | TeX-revert-document-buffer |
 
+* Ledger mode
+<2019-09-25 Wed>
+#+begin_src emacs-lisp
+  ;; (use-package ledger
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
+
+#+end_src
+
+#+RESULTS:
+: t
+** Company autocomplete
+#+begin_src emacs-lisp
+  ;; (use-package company-ledger-acct
+  ;;       :straight (company-ledger-acct :type git :host github :repo "sid-kurias/company-ledger-acct")
+  ;;       :after (ledger-mode)
+  ;;       :hook  ((ledger-mode . (lambda ()
+  ;;                                (set (make-local-variable 'company-backends)
+  ;;                                     (list '(company-ledger-acct company-yasnippet))))))
+  ;;       :custom (company-ledger-acct-master-file "~/wf.ledger")
+  ;;       ;;(company-ledger-acct-currency-symbol "₹")
+  ;; )
+#+end_src
+
+#+RESULTS:
+
+* Shells
+#+begin_src emacs-lisp
+  ;; Defaults
+  ;; (setq shell-pop-default-directory "/home/jalihal")
+  ;; (setq
+  ;; shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda
+  ;; nil (ansi-term shell-pop-term-shell)))))
+  ;; (setq shell-pop-term-shell "/bin/bash")
+  ;; (setq shell-pop-universal-key "C-c M-t")
+  ;; (setq shell-pop-window-size 30)
+  ;; (setq shell-pop-full-span t)
+  ;; (setq shell-pop-window-position "bottom")
+  (require 'shell-pop)
+  ;; My customizations
+  (setq shell-pop-default-directory "/home/jalihal")
+  (setq
+  shell-pop-shell-type (quote ("xonsh" "*xonsh*" (lambda
+  nil (ansi-term shell-pop-term-shell)))))
+  (setq shell-pop-term-shell "/home/jalihal/base/bin/xonsh")
+  (setq shell-pop-universal-key "C-c M-t")
+  (setq shell-pop-window-size 30)
+  (setq shell-pop-full-span t)
+  (setq shell-pop-window-position "bottom")
+  (require 'shell-pop)
+#+end_src
+
+#+RESULTS:
+: shell-pop
+
 * PDF-tools
 +Deleted package on <2018-01-02 Tue>+
 Reinstalling on cerevisaj on <2018-01-02 Tue>
@@ -1720,9 +1782,6 @@ Customizing midnight mode colors
   ;; (use-package forge
   ;;   :after magit)
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
@@ -1895,6 +1954,10 @@ relative-compose:  0
 - Start the server using SuperDirt.start
 - Start a tidal repl using C-c C-s
 - Algorave!
+* Lilypond
+#+begin_src emacs-lisp
+;(load "~/.emacs.d/lisp/lilypond-mode.el")
+#+end_src
 * Flycheck mode
 
 ** flycheck
@@ -2643,6 +2706,13 @@ Do the right thing
 
 (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+END_SRC
+*** Helm firefox
+#+begin_src emacs-lisp
+(autoload 'helm-firefox-bookmarks "helm-firefox" nil t)
+#+end_src
+
+#+RESULTS:
+
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
