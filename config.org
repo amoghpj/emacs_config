@@ -55,18 +55,11 @@ I would love to hear your feedback on this setup!
   (setq inferior-lisp-program (executable-find "sbcl"))
   (slime-setup '(slime-fancy slime-quicklisp slime-asdf))
 #+END_SRC
-
-#+RESULTS:
-
 * All the icons
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
   (require 'all-the-icons)
 #+end_src
-
-#+RESULTS:
-: all-the-icons
-
 * Company
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook 'global-company-mode)
@@ -76,10 +69,6 @@ I would love to hear your feedback on this setup!
   ;; (add-to-list 'company-backends 'company-ob-ipython) ;
 
 #+END_SRC
-
-#+RESULTS:
-| company-bbdb | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev | company-jedi |
-
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
   (eval-after-load 'company
@@ -91,10 +80,6 @@ I would love to hear your feedback on this setup!
 (require 'company-box)
 (add-hook 'company-mode-hook 'company-box-mode)
 #+end_src
-
-#+RESULTS:
-| company-box-mode | company-mode-set-explicitly |
-
 * KeyFreq
 #+begin_src emacs-lisp
 (require 'keyfreq)
@@ -126,10 +111,6 @@ c 'echo $PATH'"))))
 #+begin_src emacs-lisp
 ;;(add-hook 'python-mode-hook 'jedi:setup)
 #+end_src
-
-#+RESULTS:
-| jedi:setup | my/python-mode-hook |
-
 ** Company jedi
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
@@ -138,10 +119,6 @@ c 'echo $PATH'"))))
 
   ;;   (add-hook 'python-mode-hook 'my/python-mode-hook)
 #+end_src
-
-#+RESULTS:
-| my/python-mode-hook |
-
 ** Sphinx-doc
 [2019-06-15 Sat]
 #+begin_src emacs-lisp
@@ -149,10 +126,6 @@ c 'echo $PATH'"))))
   ;; (require 'sphinx-doc)
   ;; (sphinx-doc-mode t)))
 #+end_src
-
-#+RESULTS:
-| (lambda nil (require (quote sphinx-doc)) (sphinx-doc-mode t)) | outshine-mode | jedi:setup |
-
 ** OB-Ipython
 *** Basic setup
  <2018-04-05 Thu>
@@ -222,9 +195,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
  #+begin_src emacs-lisp
  ;;(add-hook 'python-mode-hook 'blacken-mode)
  #+end_src
-
- #+RESULTS:
-
 * Outshine
 [2019-06-10 Mon]
 #+begin_src emacs-lisp
@@ -232,9 +202,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
   ;; (add-hook 'python-mode-hook 'outshine-mode)
   ;; (add-hook 'python-mode-hook 'outshine-mode)
 #+end_src
-
-#+RESULTS:
-
 * Projectile
   [2019-03-14 Thu]
 #+begin_src emacs-lisp
@@ -252,8 +219,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
   (setq projectile-indexing-method 'native) ;; otherwise it doesn't respect .projectile
 #+end_src
 
-#+RESULTS:
-: native
 * Nswbuff
 [2019-03-14 Thu 04:30]
 #+begin_src emacs-lisp
@@ -267,12 +232,7 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
     (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
     (setq nswbuff-display-intermediate-buffers t)
     (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
-
 #+end_src
-
-#+RESULTS:
-| ^ .* | ^\*.*\* |
-
 * Deft
 [2019-10-11 Fri]
 #+begin_src emacs-lisp
@@ -282,10 +242,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                 deft-extensions '("md" "org")
                 deft-use-filename-as-title t))
 #+end_src
-
-#+RESULTS:
-: t
-
 * Julia
 ** Emacs Speaks Statistics
 <2018-04-09 Mon>
@@ -306,10 +262,6 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
             ("C-c a" . org-agenda)))
 
 #+END_SRC
-
-#+RESULTS:
-
-
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -349,9 +301,6 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
 (ledger . t)
 ))
 #+END_SRC
-
-#+RESULTS:
-
 ** Export
 *** Org-beamer
 #+BEGIN_SRC emacs-lisp
@@ -395,10 +344,6 @@ This is such a cool idea!!
                 title=\"RSS feed for amoghjalihal.org\">")))
 
 #+END_SRC
-
-#+RESULTS:
-| blog | :base-directory | ~/public_html/ | :html-extension | html | :base-extension | org | :publishing-directory | ~/public_html/ | :publishing-function | (org-html-publish-to-html) | :html-preamble | nil | :html-postamble | nil | :html-head-extra | <link rel="alternate" type="application/rss+xml" |
-
 ** Org-capture
 *** Setup
 #+BEGIN_SRC emacs-lisp
@@ -689,10 +634,6 @@ This is such a cool idea!!
     ;; Look up to three levels deep
     (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
-
-#+RESULTS:
-: ((org-agenda-files :maxlevel . 4))
-
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp
 ;; Commented the following 4 lines because I don't use them anymore
@@ -749,10 +690,6 @@ This is such a cool idea!!
             )
             )
 #+END_SRC
-
-#+RESULTS:
-|   | Agenda | ((agenda  nil) (tags-todo paper ((org-agenda-overriding-header Paper))) (tags-todo presentation ((org-agenda-overriding-header Presentations))) (tags-todo NutSig ((org-agenda-overriding-header Model building))) (tags-todo scripting ((org-agenda-overriding-header Scripting))) (tags-todo literature ((org-agenda-overriding-header Literature))) (tags-todo personal ((org-agenda-overriding-header All personal tasks))) (tags-todo work ((org-agenda-overriding-header All Research))) (todo TODO ((org-agenda-overriding-header Task list) (org-agenda-sorting-strategy (quote (time-up priority-down effort-up))))) (todo WAITING ((org-agenda-overriding-header Future Tasks)))) |
-
 *** Org agenda column view
 [2018-12-02 Sun]
 #+BEGIN_SRC elisp
@@ -761,14 +698,6 @@ This is such a cool idea!!
 (setq org-time-clocksum-format
       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 #+END_SRC
-
-#+RESULTS:
-| :hours | %d | :require-hours | t | :minutes | :%02d | :require-minutes | t |
-
-  
-#+RESULTS:
-| ((org-agenda-overriding-columns-format %50ITEM %EFFORT %CLOCKSUM)) |
-
 ** Org Publishing
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -806,10 +735,6 @@ Refresh inline display
 #+BEGIN_SRC elisp
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 #+END_SRC
-
-#+RESULTS:
-| org-display-inline-images |
-
 ** Org-git-link
 #+BEGIN_SRC emacs-lisp
 (load-file "~/.emacs.d/org-git-link.el")
@@ -878,9 +803,6 @@ Does this do anything?
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
-
-#+RESULTS:
-: org-notify
 ** Org-alert
 [2019-02-07 Thu]
 - Shows TODO items for the day every 5 minutes.
@@ -890,10 +812,6 @@ Does this do anything?
   ;; (setq org-alert-interval 3600)
   ;; (org-alert-enable)
 #+end_src
-
-#+RESULTS:
-: [nil 23647 12124 168786 3600 org-alert-check nil nil 241000]
-
 ** Calfw: Calender Framework
 #+BEGIN_SRC emacs-lisp
   ;; (require 'calfw)
@@ -952,10 +870,6 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
     (setq org-brain-visualize-default-choices 'all)
     (setq org-brain-title-max-length 75))
 #+END_SRC
-
-#+RESULTS:
-| org-expiry-insert-created |
-
 ** Org-dashboard
 <2018-01-06 Sat>
 - Configured to stop displaying completed projects
@@ -982,10 +896,6 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ;; Changed in Org 9
 (global-set-key (kbd "C-c j") 'org-clock-goto)
 #+END_SRC
-
-#+RESULTS:
-: org-clock-goto
-
 ** Inline latex highlighting
 <2018-02-14 Wed>
 #+BEGIN_SRC emacs-lisp
@@ -1053,10 +963,6 @@ From John Kitchin's blog
       ;; AJ: Ignore the description, format the link part inline
       (format "%% %s\n" keyword)))))
 #+end_src
-
-#+RESULTS:
-: Created comment link.
-
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
 
@@ -1067,10 +973,6 @@ From John Kitchin's blog
 #+BEGIN_SRC emacs-lisp
   (require 'org-notmuch)
 #+END_SRC
-
-#+RESULTS:
-: org-notmuch
-
 ** Org-habit
 <2018-06-11 Mon>
 Playing around with org-habit to help Sumanth get the consistency
@@ -1084,8 +986,6 @@ graph working
   ;; (setq org-gnome-integrate-with-calendar t)
   ;; (org-gnome-turn-on)
 #+END_SRC
-
-#+RESULTS:
 ** Org-mode Tufte theme                                             :ARCHIVE:
 #+BEGIN_SRC elisp
   ;; (use-package org
@@ -1348,10 +1248,6 @@ graph working
   ;;              :foreground ,comment
   ;; :height 0.9))
 #+END_SRC
-
-#+RESULTS:
-| (lambda nil (setq line-spacing 0.2) (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-verbatim) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | org-ref-org-menu | (lambda nil (delete (quote (\.pdf\' . default)) org-file-apps) (add-to-list (quote org-file-apps) (quote (\.pdf\' . evince %s)))) | ob-ipython-auto-configure-kernels | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-block-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
-
 ** Org-babel-screen
 #+BEGIN_SRC elisp
 (require 'org-babel-screen) 
@@ -1382,24 +1278,16 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 (add-hook 'ediff-select-hook 'f-ediff-org-unfold-tree-element)
 (add-hook 'ediff-unselect-hook 'f-ediff-org-fold-tree)
 #+END_SRC
-
-#+RESULTS:
-| f-ediff-org-fold-tree |
 ** Org download
 <2018-11-28 Wed>
 #+begin_src elisp
     (setq-default org-download-image-dir "~/orgs/downloads/")
 (add-hook 'dired-mode-hook 'org-download-enable)
 #+end_src  
-
-#+RESULTS:
-| org-download-enable | (lambda nil (dired-hide-details-mode)) |
 ** Save all org buffers after refile
 #+BEGIN_SRC elisp
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 #+END_SRC
-
-#+RESULTS:
 ** Customizing org-todo keywords
 #+BEGIN_SRC elisp
   (setq org-todo-keyword-faces
@@ -1407,9 +1295,6 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
           ("CANCELED" . "yellow")
           ("IN-PROGRESS" . (:foreground "blue"))))
 #+END_SRC
-
-#+RESULTS:
-: ((TODO . org-warning) (FAILED . yellow) (CANCELED . yellow) (IN-PROGRESS :foreground blue))
 ** Ox-rst
 [2018-12-16 Sun]
 #+BEGIN_SRC emac-lisp
@@ -1424,36 +1309,20 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
         org-noter-notes-search-path '("~/orgs/org-noter-notes/")
 )
 #+end_src
-
-#+RESULTS:
-| ~/orgs/org-noter-notes/ |
-
 ** Org-emms
 [2019-02-10 Sun]
 #+begin_src emacs-lisp
 (require 'org-emms)
 #+end_src
-
-#+RESULTS:
-: org-emms
-
 ** Labels in org-latex
 <2019-08-15 Thu>
 #+begin_src emacs-lisp
 (setq org-latex-prefer-user-labels t)
 #+end_src
-
-#+RESULTS:
-: t
-
 ** Save code blocks
 #+begin_src emacs-lisp
 (require 'code-library)
 #+end_src
-
-#+RESULTS:
-: code-library
-
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1564,10 +1433,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 (eval-after-load 'elfeed-search
   '(define-key elfeed-search-mode-map (kbd "8") 'bjm/elfeed-unstar))
 #+end_src
-
-#+RESULTS:
-: bjm/elfeed-unstar
-
 * EIN setup
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1599,8 +1464,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   ;; (load "~/.emacs.d/lisp/ox-synctex.el")
   ;; (ox-synctex-activate)
 #+END_SRC
-
-#+RESULTS:
 ** Reftex
 #+begin_src emacs-lisp
 (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
@@ -1610,9 +1473,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 #+begin_src emacs-lisp
 (setq LaTeX-command-style '(("" "%(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout)")))
 #+end_src
-
-#+RESULTS:
-|   | %(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout) |
 ** Synctex
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
@@ -1627,10 +1487,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
    ;;(setq TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
    ;;(setq TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
 #+end_src
-
-#+RESULTS:
-| Okular | okular --unique %o#src:%n%b |
-
 ** My customizations
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
@@ -1663,10 +1519,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
      ;;'(TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
      ;;'(TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
 #+end_src
-
-#+RESULTS:
-| TeX-revert-document-buffer |
-
 * Ledger mode
 <2019-09-25 Wed>
 #+begin_src emacs-lisp
@@ -1676,9 +1528,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   ;;   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
 
 #+end_src
-
-#+RESULTS:
-: t
 ** Company autocomplete
 #+begin_src emacs-lisp
   ;; (use-package company-ledger-acct
@@ -1691,9 +1540,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   ;;       ;;(company-ledger-acct-currency-symbol "₹")
   ;; )
 #+end_src
-
-#+RESULTS:
-
 * Shells
 #+begin_src emacs-lisp
   ;; Defaults
@@ -1719,10 +1565,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   (setq shell-pop-window-position "bottom")
   (require 'shell-pop)
 #+end_src
-
-#+RESULTS:
-: shell-pop
-
 * PDF-tools
 +Deleted package on <2018-01-02 Tue>+
 Reinstalling on cerevisaj on <2018-01-02 Tue>
@@ -1743,18 +1585,6 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
 
 )  ;; "#313133")) 
 #+END_SRC
-
-#+RESULTS:
-: pdf-sync-forward-search
-[2019-02-20 Wed]
-Customizing midnight mode colors
-#+begin_src emacs-lisp
-
-#+end_src
-
-#+RESULTS:
-: 1000
-
 * Utilities
 ** Neotree
 #+BEGIN_SRC emacs-lisp
@@ -1963,9 +1793,6 @@ relative-compose:  0
       :ensure t
       :init (global-flycheck-mode))
 #+end_src
-
-#+RESULTS:
-
 ** Flycheck pos
 #+begin_src emacs-lisp
 (use-package flycheck-posframe
@@ -1973,10 +1800,6 @@ relative-compose:  0
   :after flycheck
   :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 #+end_src
-
-#+RESULTS:
-: t
-
 * Hyperspace
 #+begin_src emacs-lisp
     ;; (eval-after-load "hyperspace"
@@ -1991,10 +1814,6 @@ relative-compose:  0
   ;; (lf . hyperspace-action->elfeed)
 
 #+end_src
-
-#+RESULTS:
-: hyperspace-action->elfeed
-
 * Playground
 ** Generate report
  #+BEGIN_SRC emacs-lisp
@@ -2004,10 +1823,6 @@ relative-compose:  0
      (shell-command "python ~/src/generate-org-report.py -p")
 )
  #+END_SRC
-
- #+RESULTS:
- : aj/generate-org-reports
-
 ** Keyboard shortcuts related to website
  <2018-11-25 Sun>
  #+BEGIN_SRC emacs-lisp
@@ -2016,9 +1831,6 @@ relative-compose:  0
      (shell-command "~/src/updatecups.sh"))
   ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
  #+END_SRC
-
- #+RESULTS:
- : aj/update-coffee-cups
 ** When was the last time I had coffee?
  #+BEGIN_SRC emacs-lisp
    (defun aj/when-was-my-last-coffee ()
@@ -2026,9 +1838,6 @@ relative-compose:  0
      (shell-command "~/src/when-was-my-last-coffee.sh"))
   ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
  #+END_SRC
-
- #+RESULTS:
- : aj/when-was-my-last-coffee
 ** Recording secrets
    [2018-12-21 Fri]
 #+BEGIN_SRC emacs-lisp
@@ -2045,8 +1854,6 @@ relative-compose:  0
 
 #+END_SRC
 
-#+RESULTS:
-: aj/secrets/body
 ** Readable regex
 #+begin_src emacs-lisp
   (defun aj/regexp ()
@@ -2061,10 +1868,6 @@ relative-compose:  0
       (setq i (incf i)))))
 
 #+end_src
-
-#+RESULTS:
-: aj/regexp
-
 ** Dired quicklinks
 [2018-12-26 Wed]
 #+BEGIN_SRC emacs-lisp
@@ -2084,11 +1887,7 @@ relative-compose:  0
     ("o" (dired "~/orgs/" ) "org files")
     ("q" nil "quit")
 )
-
 #+END_SRC
-
-#+RESULTS:
-: aj/dired-links/body
 
 ** Create Analysis
 [2019-01-14 Mon]
@@ -2124,9 +1923,6 @@ relative-compose:  0
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
-
-#+RESULTS:
-: aj/create-new-analysis
 ** Create analysis template for personal experiments
 #+begin_src emacs-lisp
   (defun aj/create-new-experiment ()
@@ -2163,9 +1959,6 @@ relative-compose:  0
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
-
-#+RESULTS:
-: aj/create-new-experiment
 ** Create Art templates
 #+begin_src emacs-lisp
     (defun aj/create-art-template ()
@@ -2229,20 +2022,12 @@ relative-compose:  0
                       "#+end_src")
                                         nil fpath)
        (switch-to-buffer (find-file fpath)))
-#+END_SRC 
-
-#+RESULTS:
-: aj/create-art-template
-
 #+end_src
 ** Enable devanagari mode
 [2019-02-03 Sun]
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/lisp/devanagari-mode.el")
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Hydras
  <2018-11-25 Sun>
@@ -2283,9 +2068,6 @@ relative-compose:  0
 
  #+END_SRC
 
- #+RESULTS:
- : aj/hydra-interface/body
-
  [2018-12-14 Fri]
 From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 #+BEGIN_SRC emacs-lisp
@@ -2308,9 +2090,6 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 (define-key elfeed-search-mode-map (kbd "C-c h") 'aj/hydra-elfeed/body)
 #+END_SRC
 
-#+RESULTS:
-: aj/hydra-elfeed/body
-
 ** Pos frame for hydra
 [2019-05-22 Wed]
 #+begin_src emacs-lisp
@@ -2318,19 +2097,11 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
   :load-path "~/.emacs.d/elpa/hydra-posframe"
   :hook (after-init . hydra-posframe-enable))
 #+end_src
-
-#+RESULTS:
-| hydra-posframe-enable | global-company-mode | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
-
 ** Deqn mode
 #+begin_src emacs-lisp
 (setq deqn-python-folder-path "/home/jalihal/Documents/experiments/deqn-mode/")
 (require 'deqn-mode)
 #+end_src
-
-#+RESULTS:
-: deqn-mode
-
 ** Open report file
 #+begin_src emacs-lisp
 (find-file "~/orgs/reports/export-report.org")
@@ -2353,19 +2124,11 @@ so it does not interrupt the emacs process.
   (run-with-timer 600 (* 60 60) 'my-update-clock-tables)
 
 #+end_src
-
-#+RESULTS:
-: [nil 23944 52804 903497 3600 my-update-clock-tables nil nil 442000]
-
 ** Export quant table 
 #+begin_src emacs-lisp
   (fset 'export-quant-table
      [?\M-x ?o ?r ?g ?  ?t ?a ?b ?l ?  ?e ?x tab ?o ?r ?t tab return ?q ?u ?a ?n ?t ?. ?c ?s ?v return ?y return])
 #+end_src
-
-#+RESULTS:
-: [134217848 111 114 103 32 116 97 98 108 32 101 120 tab 111 114 116 tab return 113 117 97 110 116 46 99 115 118 return 121 return]
-
 * Emacs global setttings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
@@ -2385,9 +2148,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 
 #+END_SRC
 
-#+RESULTS:
-: load-theme
-
 [2019-02-21 Thu 20:42]
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
@@ -2396,10 +2156,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
   ;; (require 'powerline)
   ;; (powerline-default-theme)
 #+end_src
-
-#+RESULTS:
-| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line-buffer-id (if active (quote mode-line-buffer-id) (quote mode-line-buffer-id-inactive))) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face0 (if active (quote powerline-active0) (quote powerline-inactive0))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s (powerline-current-separator) (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s (powerline-current-separator) (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* face0 (quote l)) (when powerline-display-buffer-size (powerline-buffer-size face0 (quote l))) (when powerline-display-mule-info (powerline-raw mode-line-mule-info face0 (quote l))) (powerline-buffer-id (` (mode-line-buffer-id (, face0))) (quote l)) (when (and (boundp (quote which-func-mode)) which-func-mode) (powerline-raw which-func-format face0 (quote l))) (powerline-raw   face0) (funcall separator-left face0 face1) (when (and (boundp (quote erc-track-minor-mode)) erc-track-minor-mode) (powerline-raw erc-modified-channels-object face1 (quote l))) (powerline-major-mode face1 (quote l)) (powerline-process face1) (powerline-minor-modes face1 (quote l)) (powerline-narrow face1 (quote l)) (powerline-raw   face1) (funcall separator-left face1 face2) (powerline-vc face2 (quote r)) (when (bound-and-true-p nyan-mode) (powerline-raw (list (nyan-create)) face2 (quote l))))) (rhs (list (powerline-raw global-mode-string face2 (quote r)) (funcall separator-right face2 face1) (unless window-system (powerline-raw (char-to-string 57505) face1 (quote l))) (powerline-raw %4l face1 (quote l)) (powerline-raw : face1 (quote l)) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 face0) (powerline-raw   face0) (powerline-raw %6p face0 (quote r)) (when powerline-display-hud (powerline-hud face0 face2)) (powerline-fill face0 0)))) (concat (powerline-render lhs) (powerline-fill face2 (powerline-width rhs)) (powerline-render rhs)))) |
-
 ** Poet Theme customizations
 [2019-01-02 Wed]
 #+begin_src emacs-lisp
@@ -2463,9 +2219,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
         ;;       '("◉" "○"))
         ;;   (org-bullets 1)
 #+end_src
-
-#+RESULTS:
-
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
@@ -2522,10 +2275,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
    (set-window-buffer nil (current-buffer)))
 ;; (hidden-mode-line-mode 1)
 #+end_src
-
-#+RESULTS:
-: t
-
 ** Window Transparency
 #+BEGIN_SRC emacs-lisp
   ;; set transparency
@@ -2707,9 +2456,6 @@ Do the right thing
 #+begin_src emacs-lisp
 (autoload 'helm-firefox-bookmarks "helm-firefox" nil t)
 #+end_src
-
-#+RESULTS:
-
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -2731,10 +2477,6 @@ Do the right thing
         ))
 (yas-global-mode 1)
 #+END_SRC
-
-#+RESULTS:
-: t
-
 ** Annoying C-z
 <2018-04-27 Fri>
 Found it [[https://superuser.com/a/349997][on stackexhange]]
@@ -2742,8 +2484,6 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 #+END_SRC
-
-#+RESULTS:
 ** Fonts
 [2019-02-20 Wed]
 #+begin_src emacs-lisp
@@ -2753,7 +2493,6 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
   (set-face-attribute 'default nil :font "Iosevka"  )
 #+end_src
 
-#+RESULTS:
 
 #+BEGIN_SRC emacs-lisp
   ;; (when (window-system)
@@ -3028,11 +2767,6 @@ Set autofill mode by default for all major modes
 (setq dired-listing-switches "-lt")
 #+END_SRC
 
-#+RESULTS:
-: -lt
-
-#+RESULTS:
-|   |
 ** Olivetti mode - turn on C-c ] binding
 <2018-11-24 Sat>
 #+BEGIN_SRC elisp
@@ -3040,15 +2774,11 @@ Set autofill mode by default for all major modes
   '(define-key olivetti-mode-map (kbd "C-c ]") nil))
 #+END_SRC
 
-#+RESULTS:
 ** Get Shell-Command to recognize bash aliases
 #+BEGIN_SRC elisp
 (setq shell-file-name "bash")
 (setq shell-command-switch "-ic")
 #+END_SRC
-
-#+RESULTS:
-: -ic
 
 ** Ace links
 [2018-12-14 Fri]
@@ -3057,9 +2787,6 @@ Set autofill mode by default for all major modes
 (define-key org-mode-map (kbd "M-o") 'ace-link-org)
 ;;(define-key help-mode-map (kbd "M-o") 'ace-link-help)
 #+END_SRC
-
-#+RESULTS:
-: ace-link-org
 
 ** Parenthesis and autocomplete
 [2018-12-21 Fri]
@@ -3079,12 +2806,6 @@ Set autofill mode by default for all major modes
 
 [2019-01-25 Fri]
 Update: This is proving to be very annoying
-#+RESULTS:
-| lambda | nil | (progn (parenthesis-register-keys [('"{ python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({" python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({'" python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
 
 ** Open with external programs
 [2019-01-14 Mon]
@@ -3093,9 +2814,6 @@ Update: This is proving to be very annoying
   ;; (openwith-mode t)
   ;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
 #+end_src
-
-#+RESULTS:
-| \.pdf\' | evince | (file) |
 
 ** Visible Bell
 #+BEGIN_SRC emacs-lisp
@@ -3116,16 +2834,11 @@ Update: This is proving to be very annoying
 
 #+end_src
 
-#+RESULTS:
-| %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
-
 ** Shorten yes-no
 #+begin_src emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
-#+RESULTS:
-: yes-or-no-p
 ** Clean up modeline
 <2018-11-21 Wed>
 #+BEGIN_SRC emacs-lisp
