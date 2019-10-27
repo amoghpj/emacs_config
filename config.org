@@ -48,7 +48,6 @@ I would love to hear your feedback on this setup!
 
 #+end_src
 
-
 * Common Lisp
 ** Require
 #+BEGIN_SRC emacs-lisp
@@ -858,10 +857,8 @@ Does this do anything?
       (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
             org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
             org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
-      (unbind-key "<tab>" org-ref-cite-keymap)
-
-      )
-
+      (setq org-ref-completion-library 'org-ref-helm-bibtex)
+      (unbind-key "<tab>" org-ref-cite-keymap))
 #+END_SRC
 *** Some shortcuts
 **** Crossref-add-bib-entry
