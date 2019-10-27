@@ -1293,7 +1293,7 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
   (setq org-todo-keyword-faces
         '(("TODO" . org-warning) ("FAILED" . "yellow")
           ("CANCELED" . "yellow")
-          ("IN-PROGRESS" . (:foreground "blue"))))
+          ("IN-PROGRESS" . (:foreground "green"))))
 #+END_SRC
 ** Ox-rst
 [2018-12-16 Sun]
