@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cleveref \cref
+# key: rf
+# --
+\Cref{${1:label$(unless yas/modified-p (reftex-reference nil 'dont-insert))}}$0
