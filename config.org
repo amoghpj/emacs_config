@@ -257,11 +257,16 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 * Org-mode
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
-    (use-package org
-      :bind (:map org-mode-map
-            ("C-c a" . org-agenda)))
-
+      (use-package org
+        :bind (:map org-mode-map
+                    ("C-c a" . org-agenda))
+        :config
+        (setq org-log-done t)
+        (setq org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE" "FUTURE")))
+        )
 #+END_SRC
+
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -575,9 +580,9 @@ This is such a cool idea!!
              "* %U           
              :PROPERTIES:
              :immediate-finish:
-             :workout: %^{Worked out?|n|y|n}
-             :END:"
-             :immediate-finish t)
+             :workouttime: %U
+             :distance: ^??
+             :END:")
 
              ("bmb" "Blurb" entry
              (file+headline "~/orgs/qself.org" "Capture")
@@ -634,6 +639,10 @@ This is such a cool idea!!
     ;; Look up to three levels deep
     (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
+
+#+RESULTS:
+: ((org-agenda-files :maxlevel . 4))
+
 *** Capture from browser
 #+BEGIN_SRC emacs-lisp
 ;; Commented the following 4 lines because I don't use them anymore
@@ -1291,9 +1300,9 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** Customizing org-todo keywords
 #+BEGIN_SRC elisp
   (setq org-todo-keyword-faces
-        '(("TODO" . org-warning) ("FAILED" . "yellow")
+        '(("TODO" . org-warning) ("FUTURE" . "orange")("FAILED" . "yellow")
           ("CANCELED" . "yellow")
-          ("IN-PROGRESS" . (:foreground "green"))))
+          ("IN-PROGRESS" . (:foreground "orange"))))
 #+END_SRC
 ** Ox-rst
 [2018-12-16 Sun]
@@ -1552,7 +1561,7 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   ;; (setq shell-pop-window-size 30)
   ;; (setq shell-pop-full-span t)
   ;; (setq shell-pop-window-position "bottom")
-  (require 'shell-pop)
+  ;; (require 'shell-pop)
   ;; My customizations
   (setq shell-pop-default-directory "/home/jalihal")
   (setq
@@ -1592,17 +1601,19 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
   ;;(require 'neotree)
   ;; (global-set-key [f8] 'neotree-toggle)
 #+END_SRC
+** Magit todos   
+<2018-09-10 Mon>
+#+BEGIN_SRC emacs-lisp
+  (use-package magit-todos
+    :ensure t
+    :config
+    (magit-todos-mode 1))
+#+END_SRC
 ** Magit
 <2018-04-04 Wed>
 #+BEGIN_SRC emacs-lisp
    (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
-#+END_SRC
-** Magit todos   
-<2018-09-10 Mon>
-#+BEGIN_SRC elisp
-(require 'magit-todos)
-
 #+END_SRC
 ** Forge
 #+begin_src emacs-lisp
@@ -2129,7 +2140,7 @@ so it does not interrupt the emacs process.
   (fset 'export-quant-table
      [?\M-x ?o ?r ?g ?  ?t ?a ?b ?l ?  ?e ?x tab ?o ?r ?t tab return ?q ?u ?a ?n ?t ?. ?c ?s ?v return ?y return])
 #+end_src
-* Emacs global setttings
+* Emacs global settings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
 +Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
@@ -2292,6 +2303,11 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 #+BEGIN_SRC emacs-lisp
   (setq-default truncate-lines t)
 #+END_SRC
+** Highlight current line
+[2019-10-31 Thu]
+#+begin_src emacs-lisp
+(hl-line-mode 1)
+#+end_src
 ** Display time
 #+BEGIN_SRC emacs-lisp
 (setq display-time-day-and-date t
@@ -2314,20 +2330,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
     (with-current-buffer buf
       (narrow-to-region start end))
       (switch-to-buffer buf)))
-#+END_SRC
-** Miscellaneous Keybindings
-#+BEGIN_SRC emacs-lisp
-(setq toggle-frame-fullscreen t)
-(global-set-key (kbd "C-x o") 'other-window)
-;;(global-set-key (kbd "C-c l") 
-;;                (lambda () (interactive) (find-file "~/orgs/research/LabNoteBook.org")))
-;; Other org mode mappings
-(global-set-key (kbd "C-c l") 'org-store-link)
-;;(define-key global-map "\C-c l" 'org-store-link)
-(setq org-log-done t)
-
-(setq org-todo-keywords
-  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 #+END_SRC
 ** Downloaded themes
 #+BEGIN_SRC elisp
@@ -2399,7 +2401,18 @@ Do the right thing
 (setq dired-dwim-target t)
 #+end_src
 
-
+[2019-10-30 Wed]
+Git status in dired
+#+begin_src emacs-lisp
+(with-eval-after-load 'dired
+  (define-key dired-mode-map ")" 'dired-git-info-mode))
+#+end_src
+** Some global keybindings
+#+begin_src emacs-lisp
+(setq toggle-frame-fullscreen t)
+(global-set-key (kbd "C-x o") 'other-window)
+(global-set-key (kbd "C-c l") 'org-store-link)
+#+end_src
 ** Theme Changer
    <2018-01-07 Sun>
 #+BEGIN_SRC emacs-lisp
