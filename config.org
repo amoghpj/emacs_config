@@ -258,15 +258,14 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
       (use-package org
-        :bind (:map org-mode-map
-                    ("C-c a" . org-agenda))
+        :bind 
+        ("C-c a" . org-agenda)
         :config
         (setq org-log-done t)
         (setq org-todo-keywords
-        '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE" "FUTURE")))
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "FUTURE")))
         )
 #+END_SRC
-
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -575,14 +574,6 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
 
-             ("bmw" "Workout" entry
-             (file+headline "~/orgs/qself.org" "Capture")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :workouttime: %U
-             :distance: ^??
-             :END:")
 
              ("bmb" "Blurb" entry
              (file+headline "~/orgs/qself.org" "Capture")
@@ -602,6 +593,18 @@ This is such a cool idea!!
              :weight: %?
              :END:"
              :immediate-finish t)
+
+             ("bw" "Workout" entry
+             (file+headline "~/orgs/workout.org" "Logs")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :time: %U
+             :suryanamaskar: %^{}
+             :crunches: %^{}
+             :pushups: %^{}
+             :run_miles: %^{}
+             :END:")
 
             ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
              "* \n
@@ -709,28 +712,33 @@ This is such a cool idea!!
 #+END_SRC
 ** Org Publishing
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;; Publishing with org-mode
-;; (require 'ox-publish)
-;; (setq org-publish-project-alist
-;;       '(("org-notes"
-;;  :base-directory "~/public_html_generator/"
-;;  :base-extension "org"
-;;  :publishing-directory "~/public_html/"
-;;  :recursive t
-;;  :publishing-function org-html-publish-to-html
-;;  :headline-levels 4             ; Just the default for this project.
-;;  :auto-preamble t
-;;  )
-;; 	("org-static"
-;;  :base-directory "~/public_html_generator/"
-;;  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-;;  :publishing-directory "~/public_html/"
-;;  :recursive t
-;;  :publishing-function org-publish-attachment
-;;  )
-;; 	("org" :components ("org-notes" "org-static"))))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;; Publishing with org-mode
+  (require 'ox-publish)
+  (setq org-publish-project-alist
+        '(("org-notes"
+   :base-directory "~/public_org/"
+   :base-extension "org"
+   :publishing-directory "~/public_html_1/"
+   :recursive t
+   :publishing-function org-html-publish-to-html
+   :headline-levels 4             ; Just the default for this project.
+   :auto-preamble t
+   )
+          ("org-static"
+   :base-directory "~/public_org/"
+   :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+   :publishing-directory "~/public_html_1/"
+   :recursive t
+   :publishing-function org-publish-attachment
+   )
+          ("org" :components ("org-notes" "org-static"))))
 #+END_SRC
+
+#+RESULTS:
+| org-notes  | :base-directory | ~/public_org/          | :base-extension | org  | :publishing-directory | ~/public_html_1/ | :recursive | t    | :publishing-function | org-html-publish-to-html | :headline-levels |   4 | :auto-preamble        | t                |            |   |                      |                        |
+| org-static | :base-directory | ~/public_org/          | :base-extension | css\ | js\                   | png\             | jpg\       | gif\ | pdf\                 | mp3\                     | ogg\             | swf | :publishing-directory | ~/public_html_1/ | :recursive | t | :publishing-function | org-publish-attachment |
+| org        | :components     | (org-notes org-static) |                 |      |                       |                  |            |      |                      |                          |                  |     |                       |                  |            |   |                      |                        |
 
 ** Inline Image setting for Org-mode
 #+BEGIN_SRC emacs-lisp
@@ -1331,6 +1339,13 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** Save code blocks
 #+begin_src emacs-lisp
 (require 'code-library)
+#+end_src
+** Ox Jekyll Lite
+[2019-11-02 Sat]
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/lisp/ox-jekyll-lite/")
+(require 'ox-jekyll-lite)
+(setq org-jekyll-project-root "~/Documents/website/amoghpj.github.io/")
 #+end_src
 * Autocomplete
 ** Require auto-complete
@@ -2132,9 +2147,15 @@ so it does not interrupt the emacs process.
       (kill-buffer))
     )
 
-  (run-with-timer 600 (* 60 60) 'my-update-clock-tables)
+  (defun start-my-update-clock-tables ()
+    (interactive)
+    (run-with-timer 600 (* 60 60) 'my-update-clock-tables))
 
+  (defun stop-my-update-clock-tables ()
+    (interactive)
+    (cancel-function-timers 'my-update-clock-tables))
 #+end_src
+
 ** Export quant table 
 #+begin_src emacs-lisp
   (fset 'export-quant-table
@@ -2306,7 +2327,7 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 ** Highlight current line
 [2019-10-31 Thu]
 #+begin_src emacs-lisp
-(hl-line-mode 1)
+(global-hl-line-mode 1)
 #+end_src
 ** Display time
 #+BEGIN_SRC emacs-lisp
@@ -2383,16 +2404,16 @@ Load dired x
                 ;; (setq dired-x-hands-off-my-keys nil)
                 ))
 
-  (with-eval-after-load 'dired
-    (require 'dired-x)
-    (setq-default dired-omit-files-p t)
-    ;;(setq dired-listing-switches "-alhv")
-    ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
-    (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
-    ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
-    )
+  ;; (with-eval-after-load 'dired
+  ;;   (require 'dired-x)
+  ;;   (setq-default dired-omit-files-p t)
+  ;;   ;;(setq dired-listing-switches "-alhv")
+  ;;   ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+  ;;   (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+  ;;   ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
+  ;;   (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
+  ;;   ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
+  ;;   )
 
 #+END_SRC
 
@@ -2407,6 +2428,13 @@ Git status in dired
 (with-eval-after-load 'dired
   (define-key dired-mode-map ")" 'dired-git-info-mode))
 #+end_src
+
+[2019-11-03 Sun]
+Dired listing chronological instead of alphabetical
+#+BEGIN_SRC emacs-lisp
+(setq dired-listing-switches "-lta")
+#+END_SRC
+
 ** Some global keybindings
 #+begin_src emacs-lisp
 (setq toggle-frame-fullscreen t)
