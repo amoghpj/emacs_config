@@ -36,7 +36,7 @@ I would love to hear your feedback on this setup!
                 "~/.emacs.d/elpa/ox-ipynb/")
 
   (add-to-list 'load-path
-               "~/projects/tidal")
+               "~/Documents/Software/tidal")
 
   (add-to-list 'load-path "/usr/share/org-mode/lisp")
 
@@ -46,7 +46,13 @@ I would love to hear your feedback on this setup!
   (add-to-list 'load-path
                "~/Documents/code/deqn-mode/")
 
+  (add-to-list 'load-path
+               "~/Documents/lisp/lilypond")
+
+  (add-to-list 'load-path "~/.emacs.d/lisp/ox-jekyll-lite/")
+
 #+end_src
+
 
 * Common Lisp
 ** Require
@@ -470,7 +476,7 @@ This is such a cool idea!!
              ("b" "Quantified self")
              ("bt" "Tracking Times")
              ("btw" "Woke up at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+headline "~/orgs/qself.org" "Capture" "2019")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -478,7 +484,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("bts" "Slept at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -486,7 +492,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btc" "Drank Coffee" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -494,7 +500,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btt" "Toilet" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -502,14 +508,14 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btp" "Temperature" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
              :temperature: %?
              :END:")
              ("btr" "Got Ready at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -517,7 +523,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btb" "Ate breakfast at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -525,7 +531,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btl" "Ate lunch at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -533,7 +539,7 @@ This is such a cool idea!!
              :END:"
              :immediate-finish t)
              ("btd" "Ate dinner at" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -543,7 +549,7 @@ This is such a cool idea!!
              ("bm" "Meta")
 
              ("bmf" "Feeling" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -554,7 +560,7 @@ This is such a cool idea!!
              :immediate-finish t)
 
              ("bmm" "Tracker" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -564,19 +570,19 @@ This is such a cool idea!!
              :immediate-finish t)
 
              ("bmp" "Productive" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
              :productive: %^{Productive?|ok|very|ok|no}
-             :productivetime: %^U
+             :productivetime: %U
              :note: %?
              :END:"
              :immediate-finish t)
 
 
              ("bmb" "Blurb" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
              :immediate-finish:
@@ -586,13 +592,12 @@ This is such a cool idea!!
              :immediate-finish t)
 
              ("bh" "Weight" entry
-             (file+headline "~/orgs/qself.org" "Capture")
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
              "* %U           
              :PROPERTIES:
-             :immediate-finish:
              :weight: %?
-             :END:"
-             :immediate-finish t)
+             :weighttime: %U
+             :END:" )
 
              ("bw" "Workout" entry
              (file+headline "~/orgs/workout.org" "Logs")
@@ -1343,7 +1348,7 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 ** Ox Jekyll Lite
 [2019-11-02 Sat]
 #+begin_src emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/lisp/ox-jekyll-lite/")
+
 (require 'ox-jekyll-lite)
 (setq org-jekyll-project-root "~/Documents/website/amoghpj.github.io/")
 #+end_src
@@ -1809,8 +1814,12 @@ relative-compose:  0
 - Algorave!
 * Lilypond
 #+begin_src emacs-lisp
-;(load "~/.emacs.d/lisp/lilypond-mode.el")
+(use-package lilypond-mode
+  :load-path "~/.emacs.d/lisp/lilypond")
 #+end_src
+
+#+RESULTS:
+
 * Flycheck mode
 
 ** flycheck
