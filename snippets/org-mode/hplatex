@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: hplatex
+# key: hpl
+# --
+#+latex:

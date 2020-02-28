@@ -51,8 +51,9 @@ I would love to hear your feedback on this setup!
 
   (add-to-list 'load-path "~/.emacs.d/lisp/ox-jekyll-lite/")
 
-#+end_src
+  (add-to-list 'load-path "~/.emacs.d/lisp/org-graph-view/")
 
+#+end_src
 
 * Common Lisp
 ** Require
@@ -2798,10 +2799,12 @@ Set autofill mode by default for all major modes
 ;; This becomes annoying in shell and org buffers
 ;;(setq-default auto-fill-function 'do-autoill)
 #+END_SRC
-** Auto reload files
-#+BEGIN_SRC emacs-lisp
-(global-auto-revert-mode t)
-#+END_SRC
+** Expand region
+<2020-02-28 Fri>
+#+begin_src emacs-lisp
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+#+end_src
 ** Auto reload files
 #+BEGIN_SRC emacs-lisp
 (global-auto-revert-mode t)

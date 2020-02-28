@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: atlat
+# key: atlat
+# --
+#+ATTR_LATEX: :width \textwidth
