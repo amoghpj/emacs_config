@@ -1472,7 +1472,7 @@ From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/2
 #+RESULTS:
 : magit-insert-ignored-files
 
-** Forge
+** COMMENT Forge
 [2019-04-20 Sat]
 #+begin_src emacs-lisp
   (use-package forge
@@ -1493,6 +1493,12 @@ From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/2
 #+RESULTS:
 : t
 
+** Expand region
+<2020-02-28 Fri>
+#+begin_src emacs-lisp
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+#+end_src
 * Unsorted
 #+BEGIN_SRC emacs-lisp
   ;; (use-package ox-latex-subfigure
@@ -1657,3 +1663,18 @@ Latex helpers
 
 #+RESULTS:
 : aj/tex-interface/body
+** Clean up modeline
+<2018-11-21 Wed>
+#+BEGIN_SRC emacs-lisp
+(require 'diminish)
+(diminish 'company-mode)
+(diminish 'company-box-mode)
+(diminish 'yas-minor-mode)
+(diminish 'eldoc-mode)
+(diminish 'helm-mode)
+(diminish 'org-mode)
+(diminish 'org-agenda-mode)
+(diminish 'projectile-mode)
+(diminish 'flycheck-mode)
+(diminish 'dired-mode)
+#+END_SRC
