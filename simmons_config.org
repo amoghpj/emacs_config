@@ -903,9 +903,6 @@ Hydra-posframe
   (global-set-key (kbd "C-c ]") 'org-ref-helm-insert-cite-link)
 #+END_SRC
 
-#+RESULTS:
-: org-ref-helm-insert-cite-link
-
 *** Customizing bibkeys
 <2018-11-30 Fri>
 #+BEGIN_SRC elisp
@@ -1523,6 +1520,11 @@ From: https://emacs.stackexchange.com/questions/28502/magit-show-ignored-files/2
   (add-to-list 'load-path "~/.emacs.d/lisp/")
 #+END_SRC
 * Personal lisp code
+** Tags selection in bibtex files
+#+begin_src emacs-lisp
+(load-file "~/.emacs.d/lisp/aj-bibtex-tags.el")
+#+end_src
+
 ** Create Analysis
 [2019-01-21 Mon]
  #+begin_src emacs-lisp
