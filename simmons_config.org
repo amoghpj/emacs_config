@@ -32,15 +32,16 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 [2019-02-21 Thu]
 New cyberpunk theme!
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
-;;(use-package cyberpunk-2019-theme
-;;:ensure t
-;;:config
-(load-theme 'cyberpunk-2019 t)
-(use-package powerline
-:config
-(powerline-default-theme)
-:ensure t)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
+  ;;(use-package cyberpunk-2019-theme
+  ;;:ensure t
+  ;;:config
+  ;;(load-theme 'cyberpunk-2019 t)
+  (load-theme 'gruvbox t)
+  ;; (use-package powerline
+  ;; :config
+  ;; (powerline-default-theme)
+  ;; :ensure t)
 #+end_src
 
 #+RESULTS:
@@ -63,36 +64,40 @@ New cyberpunk theme!
 [[https://emacs-doctor.com/emacs-strip-tease.html][Naked emacs!]]
 
 #+begin_src emacs-lisp
-  ;; (defvar-local hidden-mode-line-mode nil)
-  ;; (defvar-local hide-mode-line nil)
+  (defvar-local hidden-mode-line-mode nil)
+  (defvar-local hide-mode-line nil)
 
-  ;; (define-minor-mode hidden-mode-line-mode
-  ;;   "Minor mode to hide the mode-line in the current buffer."
-  ;;   :init-value nil
-  ;;   :global nil
-  ;;   :variable hidden-mode-line-mode
-  ;;   :group 'editing-basics
-  ;;   (if hidden-mode-line-mode
-  ;;       (setq hide-mode-line mode-line-format
-  ;;             mode-line-format nil)
-  ;;     (setq mode-line-format hide-mode-line
-  ;;           hide-mode-line nil))
-  ;;   (force-mode-line-update)
-  ;;   ;; Apparently force-mode-line-update is not always enough to
-  ;;   ;; redisplay the mode-line
-  ;;   (redraw-display)
-  ;;   (when (and (called-interactively-p 'interactive)
-  ;;              hidden-mode-line-mode)
-  ;;     (run-with-idle-timer
-  ;;      0 nil 'message
-  ;;      (concat "Hidden Mode Line Mode enabled.  "
-  ;;              "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+  (define-minor-mode hidden-mode-line-mode
+    "Minor mode to hide the mode-line in the current buffer."
+    :init-value nil
+    :global nil
+    :variable hidden-mode-line-mode
+    :group 'editing-basics
+    (if hidden-mode-line-mode
+        (setq hide-mode-line mode-line-format
+              mode-line-format nil)
+      (setq mode-line-format hide-mode-line
+            hide-mode-line nil))
+    (force-mode-line-update)
+    ;; Apparently force-mode-line-update is not always enough to
+    ;; redisplay the mode-line
+    (redraw-display)
+    (when (and (called-interactively-p 'interactive)
+               hidden-mode-line-mode)
+      (run-with-idle-timer
+       0 nil 'message
+       (concat "Hidden Mode Line Mode enabled.  "
+               "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
 
-  ;; ;; Activate hidden-mode-line-mode
-  ;; (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+  ;; Activate hidden-mode-line-mode
+  ;;(add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
 
   ;; (hidden-mode-line-mode 1)
 #+end_src
+
+#+RESULTS:
+| hidden-mode-line-mode | magit-auto-revert-mode-enable-in-buffers | global-magit-file-mode-enable-in-buffers | git-commit-setup-font-lock-in-buffer | global-company-mode-enable-in-buffers | yas-global-mode-enable-in-buffers | global-font-lock-mode-enable-in-buffers |
+
 ** Window Transparency
 #+BEGIN_SRC emacs-lisp
   ;; set transparency
@@ -193,9 +198,9 @@ If the new path's directories does not exist, create them."
    <2018-01-07 Sun>
    Answer [[https://emacs.stackexchange.com/a/27913][from SE]]
    #+BEGIN_SRC emacs-lisp
-(add-hook 'dired-mode-hook
-      (lambda ()
-        (dired-hide-details-mode)))
+     ;; (add-hook 'dired-mode-hook
+     ;;       (lambda ()
+     ;;         (dired-hide-details-mode)))
 #+END_SRC
 ** Theme Changer
    <2018-01-07 Sun>
@@ -615,19 +620,22 @@ c 'echo $PATH'"))))
 #+END_SRC
 ** Virtual environments
 #+begin_src emacs-lisp
-(use-package virtualenvwrapper
-:ensure t)
+  (use-package virtualenvwrapper
+  :ensure t)
 
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-;;(venv-initialize-eshell) ;; if you want eshell support
-;; note that setting `venv-location` is not necessary if you
-;; use the default location (`~/.virtualenvs`), or if the
-;; the environment variable `WORKON_HOME` points to the right place
-(setq venv-location "~/jalihal_projects/Research/data/ModelAnalysis/nutsig")
-(venv-workon "local")
+  (venv-initialize-interactive-shells) ;; if you want interactive shell support
+  ;;(venv-initialize-eshell) ;; if you want eshell support
+  ;; note that setting `venv-location` is not necessary if you
+  ;; use the default location (`~/.virtualenvs`), or if the
+  ;; the environment variable `WORKON_HOME` points to the right place
+  (setq venv-location '("~/jalihal_projects/Research/data/ModelAnalysis/nutsig"
+                        "~/aj")
+                        )
+  ;;(venv-workon "local")
 #+end_src
 
 #+RESULTS:
+| ~/jalihal_projects/Research/data/ModelAnalysis/nutsig | ~/aj |
 
 To activate the venv, type =M-x venv-workon= and select a venv
 
@@ -867,7 +875,6 @@ Hydra-posframe
 #+end_src
 
 #+RESULTS:
-| hydra-posframe-enable | debian-ispell-set-default-dictionary | debian-ispell-set-startup-menu | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
 
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
@@ -1420,17 +1427,18 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 
 * Utilities
 ** Magit todos   
+** COMMENT Magit todos   
 <2018-09-10 Mon>
 #+BEGIN_SRC elisp
-(use-package magit-todos
-:ensure t)
+      (use-package magit-todos
+      :ensure t
+      :init (magit-todos-mode 1))
 
-;;  (require 'magit-todos)
-  ;; (magit-todos-mode 1)
+      ;;(require 'magit-todos)
+
+      ;;  (require 'magit-todos)
+        ;; (magit-todos-mode 1)
 #+END_SRC
-
-#+RESULTS:
-: t
 
 ** Magit
 <2018-04-04 Wed>
