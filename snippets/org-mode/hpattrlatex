@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: hpattrlatex
+# key: hpal
+# --
+#+attr_latex: 

@@ -36,18 +36,24 @@ I would love to hear your feedback on this setup!
                 "~/.emacs.d/elpa/ox-ipynb/")
 
   (add-to-list 'load-path
-               "~/projects/tidal")
+               "~/Documents/Software/tidal")
 
   (add-to-list 'load-path "/usr/share/org-mode/lisp")
 
   (add-to-list 'load-path
                "~/.emacs.d/plugins/org-alert")
 
+  (add-to-list 'load-path
+               "~/Documents/code/deqn-mode/")
+
+  (add-to-list 'load-path
+               "~/Documents/lisp/lilypond")
+
+  (add-to-list 'load-path "~/.emacs.d/lisp/ox-jekyll-lite/")
+
+  (add-to-list 'load-path "~/.emacs.d/lisp/org-graph-view/")
 
 #+end_src
-
-#+RESULTS:
-| ~/.emacs.d/plugins/org-alert | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20190204 | /home/jalihal/.emacs.d/elpa/ace-link-20190127.1654 | /home/jalihal/.emacs.d/elpa/avy-20190204.1201 | /home/jalihal/.emacs.d/elpa/cdlatex-20190130.1419 | /home/jalihal/.emacs.d/elpa/company-20190205.1900 | /home/jalihal/.emacs.d/elpa/dash-20190128.1920 | /home/jalihal/.emacs.d/elpa/docker-20190104.1004 | /home/jalihal/.emacs.d/elpa/elpy-20190130.2109 | /home/jalihal/.emacs.d/elpa/emms-20190206.1537 | /home/jalihal/.emacs.d/elpa/evil-20190104.1026 | /home/jalihal/.emacs.d/elpa/f-20190109.906 | /home/jalihal/.emacs.d/elpa/ghub-20190127.2354 | /home/jalihal/.emacs.d/elpa/google-translate-20190206.1229 | /home/jalihal/.emacs.d/elpa/goto-chg-20190110.2114 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20190128.838 | /home/jalihal/.emacs.d/elpa/helm-20190206.659 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20190113.1845 | /home/jalihal/.emacs.d/elpa/helm-core-20190205.1337 | /home/jalihal/.emacs.d/elpa/hydra-20190206.1051 | /home/jalihal/.emacs.d/elpa/ivy-20190207.1146 | /home/jalihal/.emacs.d/elpa/json-mode-20190123.422 | /home/jalihal/.emacs.d/elpa/julia-mode-20190111.2044 | /home/jalihal/.emacs.d/elpa/magit-20190202.1535 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20190102.1831 | /home/jalihal/.emacs.d/elpa/org-20190204 | /home/jalihal/.emacs.d/elpa/org-brain-20190111.1227 | /home/jalihal/.emacs.d/elpa/org-download-20190114.1600 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.2 | /home/jalihal/.emacs.d/elpa/org-noter-20190121.2140 | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502/citeproc | /home/jalihal/.emacs.d/elpa/org-ref-20190118.1502 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20190128.2051 | /home/jalihal/.emacs.d/elpa/pdf-tools-20190129.1822 | /home/jalihal/.emacs.d/elpa/php-mode-20190109.1320 | /home/jalihal/.emacs.d/elpa/poet-theme-20190127.2220 | /home/jalihal/.emacs.d/elpa/smartparens-20190128.1747 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20190116.2107 | /home/jalihal/.emacs.d/elpa/tablist-20190129.1813 | /home/jalihal/.emacs.d/elpa/tidal-20190108.1748 | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716/citeproc/csl | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716/citeproc | /usr/share/org-mode/lisp | ~/projects/tidal | ~/.emacs.d/elpa/ox-ipynb/ | ~/.emacs.d/elpa/ob-ipython/ | ~/.emacs.d/lisp/ | ~/.emacs.d/plugins/yasnippet | ~/.emacs.d/elpa/helm-bibtex | ~/.emacs.d/elpa/helm | /home/jalihal/.emacs.d/elpa/ac-math-20141116.2127 | /home/jalihal/.emacs.d/elpa/ace-link-20181210.1454 | /home/jalihal/.emacs.d/elpa/auctex-12.1.1/ | /home/jalihal/.emacs.d/elpa/auctex-12.1.1 | /home/jalihal/.emacs.d/elpa/avy-20181126.1705 | /home/jalihal/.emacs.d/elpa/calfw-20180118.45 | /home/jalihal/.emacs.d/elpa/calfw-org-20160303.258 | /home/jalihal/.emacs.d/elpa/captain-1.0.3 | /home/jalihal/.emacs.d/elpa/cdlatex-20140707.1126 | /home/jalihal/.emacs.d/elpa/chronos-20150602.1529 | /home/jalihal/.emacs.d/elpa/column-enforce-mode-20171030.1900 | /home/jalihal/.emacs.d/elpa/dash-functional-20180107.1618 | /home/jalihal/.emacs.d/elpa/diminish-20170419.1736 | /home/jalihal/.emacs.d/elpa/docker-20181215.1826 | /home/jalihal/.emacs.d/elpa/docker-tramp-20170207.325 | /home/jalihal/.emacs.d/elpa/elfeed-org-20181015.1100 | /home/jalihal/.emacs.d/elpa/elfeed-20181127.1943 | /home/jalihal/.emacs.d/elpa/elpy-20181228.1721 | /home/jalihal/.emacs.d/elpa/company-20181221.1538 | /home/jalihal/.emacs.d/elpa/emms-20181122.1932 | /home/jalihal/.emacs.d/elpa/esup-20180727.342 | /home/jalihal/.emacs.d/elpa/evil-20181206.1209 | /home/jalihal/.emacs.d/elpa/find-file-in-project-20181217.246 | /home/jalihal/.emacs.d/elpa/ghub-20190102.109 | /home/jalihal/.emacs.d/elpa/git-gutter-20161105.1356 | /home/jalihal/.emacs.d/elpa/git-timemachine-20181204.1546 | /home/jalihal/.emacs.d/elpa/goto-chg-20181228.1303 | /home/jalihal/.emacs.d/elpa/graphql-20180912.31 | /home/jalihal/.emacs.d/elpa/gruvbox-theme-20181013.1144 | /home/jalihal/.emacs.d/elpa/autothemer-20180920.923 | /home/jalihal/.emacs.d/elpa/helm-cmd-t-20170125.1459 | /home/jalihal/.emacs.d/elpa/helm-swoop-20180215.1154 | /home/jalihal/.emacs.d/elpa/highlight-indentation-20181204.839 | /home/jalihal/.emacs.d/elpa/json-mode-20180718.809 | /home/jalihal/.emacs.d/elpa/json-reformat-20160212.853 | /home/jalihal/.emacs.d/elpa/json-snatcher-20150512.347 | /home/jalihal/.emacs.d/elpa/julia-mode-20180816.2117 | /home/jalihal/.emacs.d/elpa/kanban-20170418.810 | /home/jalihal/.emacs.d/elpa/magit-20190102.107 | /home/jalihal/.emacs.d/elpa/git-commit-20190102.107 | /home/jalihal/.emacs.d/elpa/magit-popup-20181204.2031 | /home/jalihal/.emacs.d/elpa/math-symbol-lists-20170221.1353 | /home/jalihal/.emacs.d/elpa/matlab-mode-20180928.1526 | /home/jalihal/.emacs.d/elpa/md4rd-20181209.512 | /home/jalihal/.emacs.d/elpa/hierarchy-20171221.1151 | /home/jalihal/.emacs.d/elpa/minimap-1.2 | /home/jalihal/.emacs.d/elpa/notify-2010.8.20 | /home/jalihal/.emacs.d/elpa/notmuch-20181208.1245 | /home/jalihal/.emacs.d/elpa/ob-translate-20170720.1919 | /home/jalihal/.emacs.d/elpa/google-translate-20181202.56 | /home/jalihal/.emacs.d/elpa/olivetti-20180531.737 | /home/jalihal/.emacs.d/elpa/openwith-20120531.2136 | /home/jalihal/.emacs.d/elpa/org-alert-20180524.133 | /home/jalihal/.emacs.d/elpa/org-brain-20181228.4 | /home/jalihal/.emacs.d/elpa/org-bullets-20180208.2343 | /home/jalihal/.emacs.d/elpa/org-dashboard-20171223.1924 | /home/jalihal/.emacs.d/elpa/org-download-20180925.1528 | /home/jalihal/.emacs.d/elpa/org-drill-table-20180115.1009 | /home/jalihal/.emacs.d/elpa/org-edna-1.0.1 | /home/jalihal/.emacs.d/elpa/org-gnome-20150614.1457 | /home/jalihal/.emacs.d/elpa/gnome-calendar-20161110.1256 | /home/jalihal/.emacs.d/elpa/alert-20181022.1742 | /home/jalihal/.emacs.d/elpa/log4e-20170401.1304 | /home/jalihal/.emacs.d/elpa/gntp-20141025.250 | /home/jalihal/.emacs.d/elpa/org-noter-20181106.2341 | /home/jalihal/.emacs.d/elpa/org-plus-contrib-20181230 | /home/jalihal/.emacs.d/elpa/org-present-20180303.2330 | /home/jalihal/.emacs.d/elpa/org-ref-20181221.1716 | /home/jalihal/.emacs.d/elpa/key-chord-20160227.1238 | /home/jalihal/.emacs.d/elpa/hydra-20181128.1716 | /home/jalihal/.emacs.d/elpa/ivy-20181223.2002 | /home/jalihal/.emacs.d/elpa/helm-bibtex-20181030.2142 | /home/jalihal/.emacs.d/elpa/biblio-20161014.2304 | /home/jalihal/.emacs.d/elpa/biblio-core-20160901.1815 | /home/jalihal/.emacs.d/elpa/f-20180106.922 | /home/jalihal/.emacs.d/elpa/helm-20181222.848 | /home/jalihal/.emacs.d/elpa/helm-core-20181225.639 | /home/jalihal/.emacs.d/elpa/htmlize-20180923.1829 | /home/jalihal/.emacs.d/elpa/org-variable-pitch-20181206.1451 | /home/jalihal/.emacs.d/elpa/ox-rst-20180315.13 | /home/jalihal/.emacs.d/elpa/org-20181230 | /home/jalihal/.emacs.d/elpa/parsebib-20181219.928 | /home/jalihal/.emacs.d/elpa/pdf-tools-20181221.1913 | /home/jalihal/.emacs.d/elpa/php-mode-20181228.207 | /home/jalihal/.emacs.d/elpa/poet-theme-20190101.2245 | /home/jalihal/.emacs.d/elpa/popwin-20150315.1300 | /home/jalihal/.emacs.d/elpa/pretty-mode-20160614.1846 | /home/jalihal/.emacs.d/elpa/pyvenv-20181228.1722 | /home/jalihal/.emacs.d/elpa/request-20181129.1138 | /home/jalihal/.emacs.d/elpa/sclang-extensions-20160509.338 | /home/jalihal/.emacs.d/elpa/s-20180406.808 | /home/jalihal/.emacs.d/elpa/auto-complete-20170125.245 | /home/jalihal/.emacs.d/elpa/popup-20160709.1429 | /home/jalihal/.emacs.d/elpa/sexy-monochrome-theme-20180526.808 | /home/jalihal/.emacs.d/elpa/smart-mode-line-20180926.1036 | /home/jalihal/.emacs.d/elpa/rich-minority-20170813.1322 | /home/jalihal/.emacs.d/elpa/smartparens-20190112.1318 | /home/jalihal/.emacs.d/elpa/dash-20180910.1856 | /home/jalihal/.emacs.d/elpa/spacemacs-theme-20181107.1725 | /home/jalihal/.emacs.d/elpa/ssh-20120904.2042 | /home/jalihal/.emacs.d/elpa/tablist-20170220.335 | /home/jalihal/.emacs.d/elpa/telepathy-20131209.1258 | /home/jalihal/.emacs.d/elpa/tidal-20181219.900 | /home/jalihal/.emacs.d/elpa/haskell-mode-20181122.823 | /home/jalihal/.emacs.d/elpa/tree-mode-20151104.1331 | /home/jalihal/.emacs.d/elpa/treepy-20180724.656 | /home/jalihal/.emacs.d/elpa/twittering-mode-20181121.1402 | /home/jalihal/.emacs.d/elpa/typo-20171209.1023 | /home/jalihal/.emacs.d/elpa/undo-tree-20170706.246 | /home/jalihal/.emacs.d/elpa/use-package-20181119.2350 | /home/jalihal/.emacs.d/elpa/bind-key-20180513.430 | /home/jalihal/.emacs.d/elpa/visual-regexp-20170301.116 | /home/jalihal/.emacs.d/elpa/which-key-20181114.1432 | /home/jalihal/.emacs.d/elpa/with-editor-20181113.1845 | /home/jalihal/.emacs.d/elpa/async-20181224.454 | /home/jalihal/.emacs.d/elpa/yasnippet-20181015.1212 | /usr/local/share/emacs/26.1/site-lisp | /usr/local/share/emacs/site-lisp | /usr/local/share/emacs/site-lisp/helm | /usr/local/share/emacs/26.1/lisp | /usr/local/share/emacs/26.1/lisp/vc | /usr/local/share/emacs/26.1/lisp/url | /usr/local/share/emacs/26.1/lisp/textmodes | /usr/local/share/emacs/26.1/lisp/progmodes | /usr/local/share/emacs/26.1/lisp/play | /usr/local/share/emacs/26.1/lisp/org | /usr/local/share/emacs/26.1/lisp/nxml | /usr/local/share/emacs/26.1/lisp/net | /usr/local/share/emacs/26.1/lisp/mh-e | /usr/local/share/emacs/26.1/lisp/mail | /usr/local/share/emacs/26.1/lisp/leim | /usr/local/share/emacs/26.1/lisp/language | /usr/local/share/emacs/26.1/lisp/international | /usr/local/share/emacs/26.1/lisp/image | /usr/local/share/emacs/26.1/lisp/gnus | /usr/local/share/emacs/26.1/lisp/eshell | /usr/local/share/emacs/26.1/lisp/erc | /usr/local/share/emacs/26.1/lisp/emulation | /usr/local/share/emacs/26.1/lisp/emacs-lisp | /usr/local/share/emacs/26.1/lisp/cedet | /usr/local/share/emacs/26.1/lisp/calendar | /usr/local/share/emacs/26.1/lisp/calc | /usr/local/share/emacs/26.1/lisp/obsolete |
 
 * Common Lisp
 ** Require
@@ -56,18 +62,11 @@ I would love to hear your feedback on this setup!
   (setq inferior-lisp-program (executable-find "sbcl"))
   (slime-setup '(slime-fancy slime-quicklisp slime-asdf))
 #+END_SRC
-
-#+RESULTS:
-
 * All the icons
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
   (require 'all-the-icons)
 #+end_src
-
-#+RESULTS:
-: all-the-icons
-
 * Company
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook 'global-company-mode)
@@ -77,10 +76,6 @@ I would love to hear your feedback on this setup!
   ;; (add-to-list 'company-backends 'company-ob-ipython) ;
 
 #+END_SRC
-
-#+RESULTS:
-| company-bbdb | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | company-files | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-dabbrev | company-jedi |
-
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
   (eval-after-load 'company
@@ -92,9 +87,12 @@ I would love to hear your feedback on this setup!
 (require 'company-box)
 (add-hook 'company-mode-hook 'company-box-mode)
 #+end_src
-
-#+RESULTS:
-| company-box-mode | company-mode-set-explicitly |
+* KeyFreq
+#+begin_src emacs-lisp
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+#+end_src
 
 * Python
 ** Setting to use shell arguments?
@@ -118,12 +116,8 @@ c 'echo $PATH'"))))
 #+END_SRC
 ** Jedi
 #+begin_src emacs-lisp
-(add-hook 'python-mode-hook 'jedi:setup)
+;;(add-hook 'python-mode-hook 'jedi:setup)
 #+end_src
-
-#+RESULTS:
-| jedi:setup | my/python-mode-hook |
-
 ** Company jedi
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
@@ -132,21 +126,13 @@ c 'echo $PATH'"))))
 
   ;;   (add-hook 'python-mode-hook 'my/python-mode-hook)
 #+end_src
-
-#+RESULTS:
-| my/python-mode-hook |
-
 ** Sphinx-doc
 [2019-06-15 Sat]
 #+begin_src emacs-lisp
- (add-hook 'python-mode-hook (lambda ()
- (require 'sphinx-doc)
- (sphinx-doc-mode t)))
+  ;; (add-hook 'python-mode-hook (lambda ()
+  ;; (require 'sphinx-doc)
+  ;; (sphinx-doc-mode t)))
 #+end_src
-
-#+RESULTS:
-| (lambda nil (require (quote sphinx-doc)) (sphinx-doc-mode t)) | outshine-mode | jedi:setup |
-
 ** OB-Ipython
 *** Basic setup
  <2018-04-05 Thu>
@@ -211,17 +197,18 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
                    '("ob-ipython-traceback". ((display-buffer-pop-up-window) .
                                           ((inhibit-same-window . t)))))
 #+END_SRC
+** Black
+[2019-08-14 Wed]
+ #+begin_src emacs-lisp
+ ;;(add-hook 'python-mode-hook 'blacken-mode)
+ #+end_src
 * Outshine
 [2019-06-10 Mon]
 #+begin_src emacs-lisp
-(defvar outline-minor-mode-prefix "\M-#")
-(add-hook 'python-mode-hook 'outshine-mode)
-(add-hook 'python-mode-hook 'outshine-mode)
+  ;; (defvar outline-minor-mode-prefix "\M-#")
+  ;; (add-hook 'python-mode-hook 'outshine-mode)
+  ;; (add-hook 'python-mode-hook 'outshine-mode)
 #+end_src
-
-#+RESULTS:
-| outshine-mode | jedi:setup |
-
 * Projectile
   [2019-03-14 Thu]
 #+begin_src emacs-lisp
@@ -239,8 +226,6 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
   (setq projectile-indexing-method 'native) ;; otherwise it doesn't respect .projectile
 #+end_src
 
-#+RESULTS:
-: native
 * Nswbuff
 [2019-03-14 Thu 04:30]
 #+begin_src emacs-lisp
@@ -254,12 +239,16 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
     (setq nswbuff-buffer-list-function 'nswbuff-projectile-buffer-list)
     (setq nswbuff-display-intermediate-buffers t)
     (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
-
 #+end_src
-
-#+RESULTS:
-| ^ .* | ^\*.*\* |
-
+* Deft
+[2019-10-11 Fri]
+#+begin_src emacs-lisp
+(use-package deft
+  :commands (deft)
+  :config (setq deft-directory "~/orgs/"
+                deft-extensions '("md" "org")
+                deft-use-filename-as-title t))
+#+end_src
 * Julia
 ** Emacs Speaks Statistics
 <2018-04-09 Mon>
@@ -275,10 +264,14 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 * Org-mode
 ** Enable org-mode
 #+BEGIN_SRC emacs-lisp
-;;;;org-mode configuration
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(require 'org)
-(define-key global-map "\C-ca" 'org-agenda)
+      (use-package org
+        :bind 
+        ("C-c a" . org-agenda)
+        :config
+        (setq org-log-done t)
+        (setq org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "FUTURE")))
+        )
 #+END_SRC
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
@@ -292,7 +285,7 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
   ;;          (delete '("\\.pdf\\'" . default) org-file-apps)
   ;;          (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
 #+END_SRC
-** Org-PDF-Tools
+** Org-PDF-Tools                                                    :ARCHIVE:
 As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package because it is causing problems in simmons
 #+BEGIN_SRC emacs-lisp
   ;; ;; pdf-tools-org
@@ -314,11 +307,11 @@ As on <2018-01-02 Tue> I have disabled pdf-tools and have deleted the package be
  (C . t)
 (julia . t)
 (screen . t)
+(gnuplot . t)
+(lilypond . t)
+(ledger . t)
 ))
 #+END_SRC
-
-#+RESULTS:
-
 ** Export
 *** Org-beamer
 #+BEGIN_SRC emacs-lisp
@@ -362,10 +355,6 @@ This is such a cool idea!!
                 title=\"RSS feed for amoghjalihal.org\">")))
 
 #+END_SRC
-
-#+RESULTS:
-| blog | :base-directory | ~/public_html/ | :html-extension | html | :base-extension | org | :publishing-directory | ~/public_html/ | :publishing-function | (org-html-publish-to-html) | :html-preamble | nil | :html-postamble | nil | :html-head-extra | <link rel="alternate" type="application/rss+xml" |
-
 ** Org-capture
 *** Setup
 #+BEGIN_SRC emacs-lisp
@@ -374,120 +363,290 @@ This is such a cool idea!!
 #+END_SRC
 *** Capture Templates
 #+BEGIN_SRC emacs-lisp
-  (setq org-capture-templates
-        '(
-          ("t" "Tasks")
-          ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-           "** TODO %?  %^g
-    :PROPERTIES:
-    :CREATED: %U
-    :BLOCKER:
-    :TRIGGER:
-    :END:\n" )
+  (defun my/expense-template ()
+    (format "Hello world %s" (plist-get org-capture-plist :account)))
+    (setq org-capture-templates
+          '(
+            ("t" "Tasks")
+            ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
 
-          ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-           "** TODO %?  %^g
-    :PROPERTIES:
-    :CREATED: %U
-    :BLOCKER:
-    :TRIGGER:
-    :END:\n" )
+            ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
+            ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
+             "** TODO %?  %^g
+      :PROPERTIES:
+      :CREATED: %U
+      :BLOCKER:
+      :TRIGGER:
+      :END:\n" )
+            ("c" "Clock tasks")
+            ("cw" "work" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
+            ("cc" "class" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
+            ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
+             "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
+            ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
+             "* %?\n%U\n" :clock-in t :clock-keep t)
+            ("e" "Entry")
+            ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
+             "* %?
+    %U")        
+            ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
+             "** Meeting on %U
+    ,#+BIND: org-export-use-babel nil
+    ,#+STARTUP: beamer
+    ,#+OPTIONS: H:1 toc:nil
+    ,#+AUTHOR: Amogh Jalihal
+    ,#+TITLE: Meeting on %U
+    ,#+EXPORT_FILE_NAME: 
+    ,#+LATEX_HEADER: \\usetheme{metropolis}
+    ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
+    ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
+    ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
+    ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
+    %?" :prepend t :empty-lines 1)
+            ("em" "Meeting")
+            ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
+             "**  %U
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+    - %?" :prepend t :empty-lines 1)        
+            ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
+             "** Meeting: %? - %U
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+    - " :prepend t :empty-lines 1)        
+            ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
+             "** With %?
+      :PROPERTIES:
+      :CREATED: %U
+      :END:
+       - "  :empty-lines 1)
+            ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
+             "** %U
+       - %?"  :empty-lines 1)
+            ("er" "Reading lists")
+            ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
+             "**  %?
+      :PROPERTIES:
+      :CREATED: %U
+      :CONTEXT: %^{CONTEXT}
+      :END:")
+            ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
+             "** %?")
+            ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
+             "**  %U\n%?")
+            ("eL" "Ledger " entry (file+olp "~/orgs/ledger.org" "Credit Card Expenses")
+"** %U\n
+\#+BEGIN_SRC ledger :tangle 2019.ledger
+%(org-read-date) %^{Description}
+    %^{Payee}                          %^{Amount}
+    Liabilities:CreditCard
+\#+END_SRC"
+)
+            ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
+             "**  %?
+      :PROPERTIES:
+      :CREATED: %U
+      :CONTEXT: %^{CONTEXT}
+      :LINK: %^{LINK}
+      :END:")
+            ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+            ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+             ("d" "dump org capture" entry
+             (file+headline "~/orgs/dump.org" "Unsorted")
+             "* %?%:description Added %U
+      ,#+BEGIN_QUOTE
+      %x
+      ,#+END_QUOTE" :immediate-finish t)
 
-          ("c" "Clock tasks")
-          ("cw" "work" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? %^g:work:\n%U\n%a\n" :clock-in t :clock-keep t)
-          ("cc" "class" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
-          ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
-           "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
-          ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
-           "* %?\n%U\n" :clock-in t :clock-keep t)
+             ("b" "Quantified self")
+             ("bt" "Tracking Times")
+             ("btw" "Woke up at" entry
+             (file+headline "~/orgs/qself.org" "Capture" "2019")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :wake: %^U
+             :END:"
+             :immediate-finish t)
+             ("bts" "Slept at" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :sleep: %^U
+             :END:"
+             :immediate-finish t)
+             ("btc" "Drank Coffee" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :coffee: %U
+             :END:"
+             :immediate-finish t)
+             ("btt" "Toilet" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :toilet: %U
+             :END:"
+             :immediate-finish t)
+             ("btp" "Temperature" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :temperature: %?
+             :END:")
+             ("btr" "Got Ready at" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :ready: %^U
+             :END:"
+             :immediate-finish t)
+             ("btb" "Ate breakfast at" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :breakfast: %^U
+             :END:"
+             :immediate-finish t)
+             ("btl" "Ate lunch at" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :lunch: %^U
+             :END:"
+             :immediate-finish t)
+             ("btd" "Ate dinner at" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :dinner: %^U
+             :END:"
+             :immediate-finish t)
+             ("bm" "Meta")
 
-          ("e" "Entry")
-          ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
-           "* %?
-  %U")        
+             ("bmf" "Feeling" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :feeling: %^{How are you feeling?|Fine|Off|Stiff|Aching|Headache|Feverish}
+             :feelingtime: %^U
+             :note: %?
+             :END:"
+             :immediate-finish t)
 
-          ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/LabNoteBook.org" "Presentations")
-           "** Meeting -  %U
-  ,#+BIND: org-export-use-babel nil
-  ,#+STARTUP: beamer
-  ,#+OPTIONS: H:1 toc:nil
-  ,#+AUTHOR: Amogh Jalihal
-  ,#+TITLE: Meeting on %^u
-  ,#+EXPORT_FILE_NAME: 
-  ,#+LATEX_HEADER: \\usetheme{metropolis}
-   #+LATEX_HEADER: \setbeamercolor{background canvas}{bg=white}
-  %?" :prepend t :empty-lines 1)
-          ("em" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
-           "** Meeting: %? - %U
-    :PROPERTIES:
-    :CREATED: %U
-    :END:
-  - " :prepend t :empty-lines 1)        
-          ("eM" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
-           "** With %?
-    :PROPERTIES:
-    :CREATED: %U
-    :END:
-     - "  :empty-lines 1)
-          ;; Hard coded
-          ;; * Classes
-          ;; ** Spring 2019
-          ;; *** Population Genomics
-          ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
-           "** %U
-     - %?"  :empty-lines 1)
-          ("er" "Reading list " entry (file+olp "~/orgs/AllNotes.org" "Reading List")
-           "**  %?
-    :PROPERTIES:
-    :CREATED: %U
-    :CONTEXT: %^{CONTEXT}
-    :END:")
-          ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-          ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-           ("d" "dump org capture" entry
-           (file+headline "~/orgs/dump.org" "Unsorted")
-           "* %?%:description Added %U
-    ,#+BEGIN_QUOTE
-    %x
-    ,#+END_QUOTE" :immediate-finish t)
+             ("bmm" "Tracker" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :track: %^{?|n|y|n|s}
+             :tracktime: %^U
+             :END:"
+             :immediate-finish t)
 
-          ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
-           "* \n
-    ,#+BEGIN_EXPORT html
-    <div class=\"container\">
-    ,#+END_EXPORT\n
-    %U\n\n%?\n
-    ,#+BEGIN_EXPORT html
-    </div>
-    ,#+END_EXPORT" :prepend t :empty-lines 1)
+             ("bmp" "Productive" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :productive: %^{Productive?|ok|very|ok|no}
+             :productivetime: %U
+             :note: %?
+             :END:"
+             :immediate-finish t)
 
-          ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-          ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
-          ;;("i" "Idea" entry (file org-default-notes-file)
-          ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-          ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-           "* %U
-           :PROPERTIES:
-           :immediate-finish:
-           :Water:    %^{Drank?(y/n)|Y|N}
-           :Attention: %^{_f_ocussed/_d_istracted|F|D}
-           :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-           :END:")
-          ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-          ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-          ;;     ")
-          ))
 
-  ;;(setq org-capture-templates
-  ;;             '("w" "Web site" entry 
-  ;;              "* %?\n%c\n%:initial" :clock-in t))
+             ("bmb" "Blurb" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :time: %U
+             :note: 
+             :END:"
+             :immediate-finish t)
 
-  ;; Allow creation of new parent nodes
-  (setq org-refile-allow-creating-parent-nodes `confirm)
-  ;; Look up to three levels deep
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+             ("bh" "Weight" entry
+             (file+olp "~/orgs/qself.org" "Capture" "2020")
+             "* %U           
+             :PROPERTIES:
+             :weight: %?
+             :weighttime: %U
+             :END:" )
+
+             ("bw" "Workout" entry
+             (file+headline "~/orgs/workout.org" "Logs")
+             "* %U           
+             :PROPERTIES:
+             :immediate-finish:
+             :time: %U
+             :suryanamaskar: %^{}
+             :crunches: %^{}
+             :pushups: %^{}
+             :run_miles: %^{}
+             :END:")
+
+            ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
+             "* \n
+      ,#+BEGIN_EXPORT html
+      <div class=\"container\">
+      ,#+END_EXPORT\n
+      %U\n\n%?\n
+      ,#+BEGIN_EXPORT html
+      </div>
+      ,#+END_EXPORT" :prepend t :empty-lines 1)
+
+            ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+            ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+            ;;("i" "Idea" entry (file org-default-notes-file)
+            ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+            ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+             "* %U
+             :PROPERTIES:
+             :immediate-finish:
+             :Water:    %^{Drank?(y/n)|Y|N}
+             :Attention: %^{_f_ocussed/_d_istracted|F|D}
+             :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+             :END:")
+            ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+            ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+            ;;     ")
+            ))
+
+    ;;(setq org-capture-templates
+    ;;             '("w" "Web site" entry 
+    ;;              "* %?\n%c\n%:initial" :clock-in t))
+
+    ;; Allow creation of new parent nodes
+    (setq org-refile-allow-creating-parent-nodes `confirm)
+    ;; Look up to three levels deep
+    (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
 
 #+RESULTS:
@@ -549,10 +708,6 @@ This is such a cool idea!!
             )
             )
 #+END_SRC
-
-#+RESULTS:
-|   | Agenda | ((agenda  nil) (tags-todo paper ((org-agenda-overriding-header Paper))) (tags-todo presentation ((org-agenda-overriding-header Presentations))) (tags-todo NutSig ((org-agenda-overriding-header Model building))) (tags-todo scripting ((org-agenda-overriding-header Scripting))) (tags-todo literature ((org-agenda-overriding-header Literature))) (tags-todo personal ((org-agenda-overriding-header All personal tasks))) (tags-todo work ((org-agenda-overriding-header All Research))) (todo TODO ((org-agenda-overriding-header Task list) (org-agenda-sorting-strategy (quote (time-up priority-down effort-up))))) (todo WAITING ((org-agenda-overriding-header Future Tasks)))) |
-
 *** Org agenda column view
 [2018-12-02 Sun]
 #+BEGIN_SRC elisp
@@ -561,38 +716,35 @@ This is such a cool idea!!
 (setq org-time-clocksum-format
       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 #+END_SRC
-
-#+RESULTS:
-| :hours | %d | :require-hours | t | :minutes | :%02d | :require-minutes | t |
-
-  
-#+RESULTS:
-| ((org-agenda-overriding-columns-format %50ITEM %EFFORT %CLOCKSUM)) |
-
 ** Org Publishing
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;; Publishing with org-mode
-;; (require 'ox-publish)
-;; (setq org-publish-project-alist
-;;       '(("org-notes"
-;;  :base-directory "~/public_html_generator/"
-;;  :base-extension "org"
-;;  :publishing-directory "~/public_html/"
-;;  :recursive t
-;;  :publishing-function org-html-publish-to-html
-;;  :headline-levels 4             ; Just the default for this project.
-;;  :auto-preamble t
-;;  )
-;; 	("org-static"
-;;  :base-directory "~/public_html_generator/"
-;;  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-;;  :publishing-directory "~/public_html/"
-;;  :recursive t
-;;  :publishing-function org-publish-attachment
-;;  )
-;; 	("org" :components ("org-notes" "org-static"))))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;; Publishing with org-mode
+  (require 'ox-publish)
+  (setq org-publish-project-alist
+        '(("org-notes"
+   :base-directory "~/public_org/"
+   :base-extension "org"
+   :publishing-directory "~/public_html_1/"
+   :recursive t
+   :publishing-function org-html-publish-to-html
+   :headline-levels 4             ; Just the default for this project.
+   :auto-preamble t
+   )
+          ("org-static"
+   :base-directory "~/public_org/"
+   :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+   :publishing-directory "~/public_html_1/"
+   :recursive t
+   :publishing-function org-publish-attachment
+   )
+          ("org" :components ("org-notes" "org-static"))))
 #+END_SRC
+
+#+RESULTS:
+| org-notes  | :base-directory | ~/public_org/          | :base-extension | org  | :publishing-directory | ~/public_html_1/ | :recursive | t    | :publishing-function | org-html-publish-to-html | :headline-levels |   4 | :auto-preamble        | t                |            |   |                      |                        |
+| org-static | :base-directory | ~/public_org/          | :base-extension | css\ | js\                   | png\             | jpg\       | gif\ | pdf\                 | mp3\                     | ogg\             | swf | :publishing-directory | ~/public_html_1/ | :recursive | t | :publishing-function | org-publish-attachment |
+| org        | :components     | (org-notes org-static) |                 |      |                       |                  |            |      |                      |                          |                  |     |                       |                  |            |   |                      |                        |
 
 ** Inline Image setting for Org-mode
 #+BEGIN_SRC emacs-lisp
@@ -606,10 +758,6 @@ Refresh inline display
 #+BEGIN_SRC elisp
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 #+END_SRC
-
-#+RESULTS:
-| org-display-inline-images |
-
 ** Org-git-link
 #+BEGIN_SRC emacs-lisp
 (load-file "~/.emacs.d/org-git-link.el")
@@ -650,14 +798,15 @@ Does this do anything?
 #+END_SRC
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
-  ;;(add-to-list 'load-path "~/.emacs.d/org-ref/") 
-  (setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
-
-  (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
-	org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
-  ;;      org-ref-default-bibliography '("~/Unison/YeastNutBib.bib")
-	org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
-(require 'org-ref)
+    (use-package org-ref
+      :ensure t
+      :after org
+      :config
+      (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
+            org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
+            org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
+      (setq org-ref-completion-library 'org-ref-helm-bibtex)
+      (unbind-key "<tab>" org-ref-cite-keymap))
 #+END_SRC
 *** Some shortcuts
 **** Crossref-add-bib-entry
@@ -673,13 +822,10 @@ Does this do anything?
 #+BEGIN_SRC emacs-lisp
 (org-edna-load)
 #+END_SRC
-** COMMENT Org-Notify
+** Org-Notify
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
-
-#+RESULTS:
-: org-notify
 ** Org-alert
 [2019-02-07 Thu]
 - Shows TODO items for the day every 5 minutes.
@@ -689,10 +835,6 @@ Does this do anything?
   ;; (setq org-alert-interval 3600)
   ;; (org-alert-enable)
 #+end_src
-
-#+RESULTS:
-: [nil 23647 12124 168786 3600 org-alert-check nil nil 241000]
-
 ** Calfw: Calender Framework
 #+BEGIN_SRC emacs-lisp
   ;; (require 'calfw)
@@ -737,25 +879,20 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 #+END_SRC
 ** Org-brain
 #+BEGIN_SRC emacs-lisp
+  (use-package org-expiry)
   (use-package org-brain :ensure t
     :init
     (setq org-brain-path "~/orgs/brain/")
-    ;; For Evil users
-    ;  (eval-after-load 'evil
-  ;    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+    :hook (org-brain-new-entry . org-expiry-insert-created)
     :config
     (setq org-id-track-globally t)
     (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-    (push '("b" "Brain" plain (function org-brain-goto-end)
-            "* %i%?" :empty-lines 1)
-          org-capture-templates)
+    ;; (push '("b" "Brain" plain (function org-brain-goto-end)
+    ;;         "* %i%?" :empty-lines 1)
+    ;;       org-capture-templates)
     (setq org-brain-visualize-default-choices 'all)
     (setq org-brain-title-max-length 75))
 #+END_SRC
-
-#+RESULTS:
-: t
-
 ** Org-dashboard
 <2018-01-06 Sat>
 - Configured to stop displaying completed projects
@@ -782,10 +919,6 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
 ;; Changed in Org 9
 (global-set-key (kbd "C-c j") 'org-clock-goto)
 #+END_SRC
-
-#+RESULTS:
-: org-clock-goto
-
 ** Inline latex highlighting
 <2018-02-14 Wed>
 #+BEGIN_SRC emacs-lisp
@@ -853,10 +986,6 @@ From John Kitchin's blog
       ;; AJ: Ignore the description, format the link part inline
       (format "%% %s\n" keyword)))))
 #+end_src
-
-#+RESULTS:
-: Created comment link.
-
 ** Ox-ipynb
 #+BEGIN_SRC emacs-lisp
 
@@ -867,10 +996,6 @@ From John Kitchin's blog
 #+BEGIN_SRC emacs-lisp
   (require 'org-notmuch)
 #+END_SRC
-
-#+RESULTS:
-: org-notmuch
-
 ** Org-habit
 <2018-06-11 Mon>
 Playing around with org-habit to help Sumanth get the consistency
@@ -878,16 +1003,13 @@ graph working
 #+BEGIN_SRC emacs-lisp
 (require 'org-habit)
 #+END_SRC
-** Org-gnome
+** Org-gnome                                                        :ARCHIVE:
 #+BEGIN_SRC emacs-lisp
   ;; (require 'org-gnome) 
   ;; (setq org-gnome-integrate-with-calendar t)
   ;; (org-gnome-turn-on)
 #+END_SRC
-
-#+RESULTS:
-
-** Org-mode Tufte theme
+** Org-mode Tufte theme                                             :ARCHIVE:
 #+BEGIN_SRC elisp
   ;; (use-package org
   ;;   :ensure org-plus-contrib
@@ -1149,10 +1271,6 @@ graph working
   ;;              :foreground ,comment
   ;; :height 0.9))
 #+END_SRC
-
-#+RESULTS:
-| (lambda nil (setq line-spacing 0.2) (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-verbatim) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | org-ref-org-menu | (lambda nil (delete (quote (\.pdf\' . default)) org-file-apps) (add-to-list (quote org-file-apps) (quote (\.pdf\' . evince %s)))) | ob-ipython-auto-configure-kernels | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-block-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
-
 ** Org-babel-screen
 #+BEGIN_SRC elisp
 (require 'org-babel-screen) 
@@ -1183,34 +1301,23 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 (add-hook 'ediff-select-hook 'f-ediff-org-unfold-tree-element)
 (add-hook 'ediff-unselect-hook 'f-ediff-org-fold-tree)
 #+END_SRC
-
-#+RESULTS:
-| f-ediff-org-fold-tree |
 ** Org download
 <2018-11-28 Wed>
 #+begin_src elisp
     (setq-default org-download-image-dir "~/orgs/downloads/")
 (add-hook 'dired-mode-hook 'org-download-enable)
 #+end_src  
-
-#+RESULTS:
-| org-download-enable | (lambda nil (dired-hide-details-mode)) |
 ** Save all org buffers after refile
 #+BEGIN_SRC elisp
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 #+END_SRC
-
-#+RESULTS:
 ** Customizing org-todo keywords
 #+BEGIN_SRC elisp
   (setq org-todo-keyword-faces
-        '(("TODO" . org-warning) ("FAILED" . "yellow")
+        '(("TODO" . org-warning) ("FUTURE" . "orange")("FAILED" . "yellow")
           ("CANCELED" . "yellow")
-          ("IN-PROGRESS" . (:foreground "blue"))))
+          ("IN-PROGRESS" . (:foreground "orange"))))
 #+END_SRC
-
-#+RESULTS:
-: ((TODO . org-warning) (FAILED . yellow) (CANCELED . yellow) (IN-PROGRESS :foreground blue))
 ** Ox-rst
 [2018-12-16 Sun]
 #+BEGIN_SRC emac-lisp
@@ -1225,19 +1332,27 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
         org-noter-notes-search-path '("~/orgs/org-noter-notes/")
 )
 #+end_src
-
-#+RESULTS:
-| ~/orgs/org-noter-notes/ |
-
 ** Org-emms
 [2019-02-10 Sun]
 #+begin_src emacs-lisp
 (require 'org-emms)
 #+end_src
+** Labels in org-latex
+<2019-08-15 Thu>
+#+begin_src emacs-lisp
+(setq org-latex-prefer-user-labels t)
+#+end_src
+** Save code blocks
+#+begin_src emacs-lisp
+(require 'code-library)
+#+end_src
+** Ox Jekyll Lite
+[2019-11-02 Sat]
+#+begin_src emacs-lisp
 
-#+RESULTS:
-: org-emms
-
+(require 'ox-jekyll-lite)
+(setq org-jekyll-project-root "~/Documents/website/amoghpj.github.io/")
+#+end_src
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1348,10 +1463,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 (eval-after-load 'elfeed-search
   '(define-key elfeed-search-mode-map (kbd "8") 'bjm/elfeed-unstar))
 #+end_src
-
-#+RESULTS:
-: bjm/elfeed-unstar
-
 * EIN setup
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1383,16 +1494,15 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
   ;; (load "~/.emacs.d/lisp/ox-synctex.el")
   ;; (ox-synctex-activate)
 #+END_SRC
-
-#+RESULTS:
+** Reftex
+#+begin_src emacs-lisp
+(setq reftex-default-bibliography '("~/jalihal_projects/Research/references.bib"))
+#+end_src
 ** Auctex latex export style
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
 (setq LaTeX-command-style '(("" "%(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout)")))
 #+end_src
-
-#+RESULTS:
-|   | %(PDF)%(latex) %(file-line-error) %(extraopts) -shell-escape %S%(PDFout) |
 ** Synctex
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
@@ -1407,10 +1517,6 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
    ;;(setq TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
    ;;(setq TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
 #+end_src
-
-#+RESULTS:
-| Okular | okular --unique %o#src:%n%b |
-
 ** My customizations
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
@@ -1443,16 +1549,62 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
      ;;'(TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
      ;;'(TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
 #+end_src
+* Ledger mode
+<2019-09-25 Wed>
+#+begin_src emacs-lisp
+  ;; (use-package ledger
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode)))
 
-#+RESULTS:
-| TeX-revert-document-buffer |
-
+#+end_src
+** Company autocomplete
+#+begin_src emacs-lisp
+  ;; (use-package company-ledger-acct
+  ;;       :straight (company-ledger-acct :type git :host github :repo "sid-kurias/company-ledger-acct")
+  ;;       :after (ledger-mode)
+  ;;       :hook  ((ledger-mode . (lambda ()
+  ;;                                (set (make-local-variable 'company-backends)
+  ;;                                     (list '(company-ledger-acct company-yasnippet))))))
+  ;;       :custom (company-ledger-acct-master-file "~/wf.ledger")
+  ;;       ;;(company-ledger-acct-currency-symbol "₹")
+  ;; )
+#+end_src
+* Shells
+#+begin_src emacs-lisp
+  ;; Defaults
+  ;; (setq shell-pop-default-directory "/home/jalihal")
+  ;; (setq
+  ;; shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda
+  ;; nil (ansi-term shell-pop-term-shell)))))
+  ;; (setq shell-pop-term-shell "/bin/bash")
+  ;; (setq shell-pop-universal-key "C-c M-t")
+  ;; (setq shell-pop-window-size 30)
+  ;; (setq shell-pop-full-span t)
+  ;; (setq shell-pop-window-position "bottom")
+  ;; (require 'shell-pop)
+  ;; My customizations
+  (setq shell-pop-default-directory "/home/jalihal")
+  (setq
+  shell-pop-shell-type (quote ("xonsh" "*xonsh*" (lambda
+  nil (ansi-term shell-pop-term-shell)))))
+  (setq shell-pop-term-shell "/home/jalihal/base/bin/xonsh")
+  (setq shell-pop-universal-key "C-c M-t")
+  (setq shell-pop-window-size 30)
+  (setq shell-pop-full-span t)
+  (setq shell-pop-window-position "bottom")
+  (require 'shell-pop)
+#+end_src
 * PDF-tools
 +Deleted package on <2018-01-02 Tue>+
 Reinstalling on cerevisaj on <2018-01-02 Tue>
 #+BEGIN_SRC emacs-lisp
   ;; installation for pdf-tools
   ;;(pdf-tools-install)
+  (setq mouse-wheel-follow-mouse t)
+  (setq pdf-view-resize-factor 1.10)
+  (setq pdf-view-max-image-width 2000)
+
   (setq-default pdf-view-midnight-colors '("#d4d4d6" . "#000000")) ;;'( "#00E3FF" . "#372963" );;
 (use-package pdf-tools
   :ensure t
@@ -1460,23 +1612,9 @@ Reinstalling on cerevisaj on <2018-01-02 Tue>
   :bind ("C-c C-g" . pdf-sync-forward-search)
   :defer t
   :config
-  (setq mouse-wheel-follow-mouse t)
-  (setq pdf-view-resize-factor 1.10)
 
 )  ;; "#313133")) 
 #+END_SRC
-
-#+RESULTS:
-: pdf-sync-forward-search
-[2019-02-20 Wed]
-Customizing midnight mode colors
-#+begin_src emacs-lisp
-
-#+end_src
-
-#+RESULTS:
-: (#d4d4d6 . #000000)
-
 * Utilities
 ** Neotree
 #+BEGIN_SRC emacs-lisp
@@ -1484,26 +1622,25 @@ Customizing midnight mode colors
   ;;(require 'neotree)
   ;; (global-set-key [f8] 'neotree-toggle)
 #+END_SRC
+** Magit todos   
+<2018-09-10 Mon>
+#+BEGIN_SRC emacs-lisp
+  (use-package magit-todos
+    :ensure t
+    :config
+    (magit-todos-mode 1))
+#+END_SRC
 ** Magit
 <2018-04-04 Wed>
 #+BEGIN_SRC emacs-lisp
    (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC
-** Magit todos   
-<2018-09-10 Mon>
-#+BEGIN_SRC elisp
-(require 'magit-todos)
-
-#+END_SRC
 ** Forge
 #+begin_src emacs-lisp
   ;; (use-package forge
   ;;   :after magit)
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Pomodoro
 #+BEGIN_SRC emacs-lisp
@@ -1668,7 +1805,6 @@ relative-compose:  0
 * TidalCycles
 <2018-05-24 Thu>
 #+BEGIN_SRC emacs-lisp
-
 (require 'haskell-mode)
 (require 'tidal)
 #+END_SRC
@@ -1677,6 +1813,14 @@ relative-compose:  0
 - Start the server using SuperDirt.start
 - Start a tidal repl using C-c C-s
 - Algorave!
+* Lilypond
+#+begin_src emacs-lisp
+(use-package lilypond-mode
+  :load-path "~/.emacs.d/lisp/lilypond")
+#+end_src
+
+#+RESULTS:
+
 * Flycheck mode
 
 ** flycheck
@@ -1685,9 +1829,6 @@ relative-compose:  0
       :ensure t
       :init (global-flycheck-mode))
 #+end_src
-
-#+RESULTS:
-
 ** Flycheck pos
 #+begin_src emacs-lisp
 (use-package flycheck-posframe
@@ -1695,10 +1836,6 @@ relative-compose:  0
   :after flycheck
   :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 #+end_src
-
-#+RESULTS:
-: t
-
 * Hyperspace
 #+begin_src emacs-lisp
     ;; (eval-after-load "hyperspace"
@@ -1713,22 +1850,15 @@ relative-compose:  0
   ;; (lf . hyperspace-action->elfeed)
 
 #+end_src
-
-#+RESULTS:
-: hyperspace-action->elfeed
-
 * Playground
 ** Generate report
  #+BEGIN_SRC emacs-lisp
    (defun aj/generate-org-reports ()
      (interactive)
-     (shell-command "~/src/org-report-processing.sh"))
-
+     ;;(shell-command "~/src/org-report-processing.sh")
+     (shell-command "python ~/src/generate-org-report.py -p")
+)
  #+END_SRC
-
- #+RESULTS:
- : aj/generate-org-reports
-
 ** Keyboard shortcuts related to website
  <2018-11-25 Sun>
  #+BEGIN_SRC emacs-lisp
@@ -1737,9 +1867,6 @@ relative-compose:  0
      (shell-command "~/src/updatecups.sh"))
   ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
  #+END_SRC
-
- #+RESULTS:
- : aj/update-coffee-cups
 ** When was the last time I had coffee?
  #+BEGIN_SRC emacs-lisp
    (defun aj/when-was-my-last-coffee ()
@@ -1747,9 +1874,6 @@ relative-compose:  0
      (shell-command "~/src/when-was-my-last-coffee.sh"))
   ;; (global-set-key (kbd "C-c u") 'aj/update-coffee-cups)
  #+END_SRC
-
- #+RESULTS:
- : aj/when-was-my-last-coffee
 ** Recording secrets
    [2018-12-21 Fri]
 #+BEGIN_SRC emacs-lisp
@@ -1766,8 +1890,6 @@ relative-compose:  0
 
 #+END_SRC
 
-#+RESULTS:
-: aj/secrets/body
 ** Readable regex
 #+begin_src emacs-lisp
   (defun aj/regexp ()
@@ -1782,10 +1904,6 @@ relative-compose:  0
       (setq i (incf i)))))
 
 #+end_src
-
-#+RESULTS:
-: aj/regexp
-
 ** Dired quicklinks
 [2018-12-26 Wed]
 #+BEGIN_SRC emacs-lisp
@@ -1793,7 +1911,7 @@ relative-compose:  0
   "
                                       Quick Links to various directories
                                       ..................................
-                                      _r_esearch      _d_ownloads      _e_macs     
+                                      _r_esearch      _d_ownloads      _e_macs     _o_rg files
                                       _m_odel         _D_ocuments      e_l_feed
   "
     ("r" (dired "~/jalihal_projects/Research/" ) "research")
@@ -1802,13 +1920,10 @@ relative-compose:  0
     ("m" (dired "~/jalihal_projects/Research/data/ModelAnalysis/" ) "model")
     ("e" (dired "~/.emacs.d" ) "emacs config")
     ("l" (dired "~/orgs/elfeed.org" ) "elfeed config")
+    ("o" (dired "~/orgs/" ) "org files")
     ("q" nil "quit")
 )
-
 #+END_SRC
-
-#+RESULTS:
-: aj/dired-links/body
 
 ** Create Analysis
 [2019-01-14 Mon]
@@ -1844,9 +1959,6 @@ relative-compose:  0
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
-
-#+RESULTS:
-: aj/create-new-analysis
 ** Create analysis template for personal experiments
 #+begin_src emacs-lisp
   (defun aj/create-new-experiment ()
@@ -1876,22 +1988,82 @@ relative-compose:  0
                            "import numpy as np\n"
                            "import matplotlib.pyplot as plt\n"
                            "import pandas as pd\n"
+                           "plt.rcParams['axes.facecolor'] = 'black'\n"
+                           "f, ax = plt.subplots(1,1, figsize=(8,8))\n"
+                           "f.patch.set_facecolor('k')\n"
                            "#+END_SRC ")
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
-
-#+RESULTS:
-: aj/create-new-experiment
-
+** Create Art templates
+#+begin_src emacs-lisp
+    (defun aj/create-art-template ()
+      "Prompts user for key words and creates a folder and org file using this name"
+      (interactive)
+      (setq analysisfolder "~/Documents/experiments/")
+      (setq analysisname  (concat
+                           (format-time-string "%F")
+                           "-"
+                           ;; This line prompts user for some keywords and replaces
+                           ;; the spaces with hyphens
+                           (replace-regexp-in-string "\\( \\)" "-" (read-string "Key words: "))))
+  
+      (make-directory (concat analysisfolder analysisname))
+      (setq fpath (concat analysisfolder analysisname "/" analysisname ".org"))
+      (message (concat "creating" fpath))
+      (setq sessionname (read-string "Session name? [pythonsession] " nil nil "pythonsession"))
+       (write-region (concat 
+                      "#+PROPERTY: header-args:python :session "
+                      sessionname
+                      " :tangle yes :comments link \n"
+                      "#+LATEX_HEADER: \\usemintedstyle{tango}%colorful\n"
+                      "#+LATEX_HEADER: \\usepackage{xcolor}\n"
+                      "#+LATEX_HEADER: \\definecolor{bg}{rgb}{0.9,0.9,0.9}\n"
+                      "#+LATEX_HEADER: \\setminted{linenos=True,bgcolor=bg}\n"
+                      "#+LATEX_HEADER: \\usepackage[bottom=0.5in,margin=1in]{geometry}\n"
+                      "#+BEGIN_SRC python\n"
+                      "import numpy as np\n"
+                      "import cairo\n"
+                      "import sys\n"
+                      "from  numpy import sin, cos\n"
+                      "from numpy.random import random, choice\n"
+                      "#+END_SRC\n"
+                      "#+begin_src python\n"
+                      "  class CairoBind:\n"
+                      "      def __init__(self, W=300, H=300):\n"
+                      "          self.WIDTH = W\n"
+                      "          self.HEIGHT = H\n"
+                      "          self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, self.WIDTH, self.HEIGHT)\n"
+                      "          self.ctx = cairo.Context(self.surface)\n"
+                      "      def move_to(self,x, y):\n"
+                      "          self.ctx.move_to(x,y)\n"
+                      "      def line_to(self,x, y):\n"
+                      "          self.ctx.line_to(x,y)\n"
+                      "      def close_path(self):\n"
+                      "          self.ctx.close_path()\n"
+                      "      def set_line_width(self, lw):\n"
+                      "          self.ctx.set_line_width(lw)\n"
+                      "      def fill(self):\n"
+                      "          self.ctx.fill()\n"
+                      "      def stroke(self):\n"
+                      "          self.ctx.stroke()\n"
+                      "      def rectangle(self,x0,y0,x1,y1):\n"
+                      "          self.ctx.rectangle(x0,y0,x1,y1)\n"
+                      "      def arc(self,x0,y0,r,starttheta,endtheta):\n"
+                      "          self.ctx.arc(x0, y0, r, starttheta, endtheta)\n"
+                      "      def set_source_rgba(self, r=0, g=0, b=0, a=1):\n"
+                      "          self.ctx.set_source_rgba(r,g,b,a)\n"
+                      "      def write_to_png(self, fname='./img/test.png'):\n"
+                      "          self.surface.write_to_png(fname)\n"
+                      "#+end_src")
+                                        nil fpath)
+       (switch-to-buffer (find-file fpath)))
+#+end_src
 ** Enable devanagari mode
 [2019-02-03 Sun]
 #+begin_src emacs-lisp
   (load-file "~/.emacs.d/lisp/devanagari-mode.el")
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Hydras
  <2018-11-25 Sun>
@@ -1908,12 +2080,14 @@ relative-compose:  0
                                                                        _g_enerate reports    _d_ired links          _L_abnotebook     c_u_p of coffee?     
                                                                        _A_nalysis            _R_eload init                          _s_ecrets            
                                                                        _E_xperiment          _h_perspace
+                                                                       _a_rt
 "
      ("g" aj/generate-org-reports "generate" )
      ("u" aj/update-coffee-cups "coffee")
      ("v" org-brain-visualize "visualize")
      ("A" aj/create-new-analysis "Analyis")
      ("E" aj/create-new-experiment "Experiment")
+     ("a" aj/create-art-template "art")
      ("l" aj/when-was-my-last-coffee "last?")
      ("s" aj/secrets/body "secrets")
      ("m" hidden-mode-line-mode "modeline?")
@@ -1929,9 +2103,6 @@ relative-compose:  0
      ;; h for hydra!!
 
  #+END_SRC
-
- #+RESULTS:
- : aj/hydra-interface/body
 
  [2018-12-14 Fri]
 From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
@@ -1955,9 +2126,6 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 (define-key elfeed-search-mode-map (kbd "C-c h") 'aj/hydra-elfeed/body)
 #+END_SRC
 
-#+RESULTS:
-: aj/hydra-elfeed/body
-
 ** Pos frame for hydra
 [2019-05-22 Wed]
 #+begin_src emacs-lisp
@@ -1965,11 +2133,45 @@ From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
   :load-path "~/.emacs.d/elpa/hydra-posframe"
   :hook (after-init . hydra-posframe-enable))
 #+end_src
+** Deqn mode
+#+begin_src emacs-lisp
+(setq deqn-python-folder-path "/home/jalihal/Documents/experiments/deqn-mode/")
+(require 'deqn-mode)
+#+end_src
+** Open report file
+#+begin_src emacs-lisp
+(find-file "~/orgs/reports/export-report.org")
+#+end_src
+** Update timer once every 6 hours
+This is now moved to a [[file:~/src/my-update-org-tables.el][file:~/src/my-update-org-tables.el]], and is called by [[file:~/src/org-report-processing.sh][file:~/src/org-report-processing.sh]],
+so it does not interrupt the emacs process.
+#+begin_src emacs-lisp
+  (defun my-update-clock-tables ()
+    "Update export-report file."
+    (interactive)
+    (save-excursion
+      (find-file "~/orgs/reports/export-report.org")
+      (switch-to-buffer "export-report.org")
+      (org-update-all-dblocks)
+      (save-buffer)
+      (kill-buffer))
+    )
 
-#+RESULTS:
-| hydra-posframe-enable | global-company-mode | x-wm-set-size-hint | table--make-cell-map | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
+  (defun start-my-update-clock-tables ()
+    (interactive)
+    (run-with-timer 600 (* 60 60) 'my-update-clock-tables))
 
-* Emacs global setttings
+  (defun stop-my-update-clock-tables ()
+    (interactive)
+    (cancel-function-timers 'my-update-clock-tables))
+#+end_src
+
+** Export quant table 
+#+begin_src emacs-lisp
+  (fset 'export-quant-table
+     [?\M-x ?o ?r ?g ?  ?t ?a ?b ?l ?  ?e ?x tab ?o ?r ?t tab return ?q ?u ?a ?n ?t ?. ?c ?s ?v return ?y return])
+#+end_src
+* Emacs global settings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
 +Disable theme changer by commenting out lines in the [[*Theme Changer][Theme Changer]] entry.+
@@ -1988,9 +2190,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 
 #+END_SRC
 
-#+RESULTS:
-: load-theme
-
 [2019-02-21 Thu 20:42]
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/")
@@ -1999,10 +2198,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
   ;; (require 'powerline)
   ;; (powerline-default-theme)
 #+end_src
-
-#+RESULTS:
-| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line-buffer-id (if active (quote mode-line-buffer-id) (quote mode-line-buffer-id-inactive))) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face0 (if active (quote powerline-active0) (quote powerline-inactive0))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s (powerline-current-separator) (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s (powerline-current-separator) (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* face0 (quote l)) (when powerline-display-buffer-size (powerline-buffer-size face0 (quote l))) (when powerline-display-mule-info (powerline-raw mode-line-mule-info face0 (quote l))) (powerline-buffer-id (` (mode-line-buffer-id (, face0))) (quote l)) (when (and (boundp (quote which-func-mode)) which-func-mode) (powerline-raw which-func-format face0 (quote l))) (powerline-raw   face0) (funcall separator-left face0 face1) (when (and (boundp (quote erc-track-minor-mode)) erc-track-minor-mode) (powerline-raw erc-modified-channels-object face1 (quote l))) (powerline-major-mode face1 (quote l)) (powerline-process face1) (powerline-minor-modes face1 (quote l)) (powerline-narrow face1 (quote l)) (powerline-raw   face1) (funcall separator-left face1 face2) (powerline-vc face2 (quote r)) (when (bound-and-true-p nyan-mode) (powerline-raw (list (nyan-create)) face2 (quote l))))) (rhs (list (powerline-raw global-mode-string face2 (quote r)) (funcall separator-right face2 face1) (unless window-system (powerline-raw (char-to-string 57505) face1 (quote l))) (powerline-raw %4l face1 (quote l)) (powerline-raw : face1 (quote l)) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 face0) (powerline-raw   face0) (powerline-raw %6p face0 (quote r)) (when powerline-display-hud (powerline-hud face0 face2)) (powerline-fill face0 0)))) (concat (powerline-render lhs) (powerline-fill face2 (powerline-width rhs)) (powerline-render rhs)))) |
-
 ** Poet Theme customizations
 [2019-01-02 Wed]
 #+begin_src emacs-lisp
@@ -2066,10 +2261,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
         ;;       '("◉" "○"))
         ;;   (org-bullets 1)
 #+end_src
-
-#+RESULTS:
-| variable-pitch-mode | (lambda nil (variable-pitch-mode 1) (mapc (lambda (face) (set-face-attribute face nil :inherit (quote fixed-pitch))) (list (quote org-code) (quote org-link) (quote org-block) (quote org-table) (quote org-block-begin-line) (quote org-block-end-line) (quote org-meta-line) (quote org-document-info-keyword)))) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | org-ref-org-menu | ob-ipython-auto-configure-kernels | (lambda nil (progn (parenthesis-register-keys [($~ org-mode-map))) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
-
 ** Window defaults
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)    ; Turn off scrollbars.
@@ -2126,10 +2317,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
    (set-window-buffer nil (current-buffer)))
 ;; (hidden-mode-line-mode 1)
 #+end_src
-
-#+RESULTS:
-: t
-
 ** Window Transparency
 #+BEGIN_SRC emacs-lisp
   ;; set transparency
@@ -2147,6 +2334,11 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 #+BEGIN_SRC emacs-lisp
   (setq-default truncate-lines t)
 #+END_SRC
+** Highlight current line
+[2019-10-31 Thu]
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+#+end_src
 ** Display time
 #+BEGIN_SRC emacs-lisp
 (setq display-time-day-and-date t
@@ -2169,20 +2361,6 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
     (with-current-buffer buf
       (narrow-to-region start end))
       (switch-to-buffer buf)))
-#+END_SRC
-** Miscellaneous Keybindings
-#+BEGIN_SRC emacs-lisp
-(setq toggle-frame-fullscreen t)
-(global-set-key (kbd "C-x o") 'other-window)
-;;(global-set-key (kbd "C-c l") 
-;;                (lambda () (interactive) (find-file "~/orgs/research/LabNoteBook.org")))
-;; Other org mode mappings
-(global-set-key (kbd "C-c l") 'org-store-link)
-;;(define-key global-map "\C-c l" 'org-store-link)
-(setq org-log-done t)
-
-(setq org-todo-keywords
-  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 #+END_SRC
 ** Downloaded themes
 #+BEGIN_SRC elisp
@@ -2236,26 +2414,43 @@ Load dired x
                 ;; (setq dired-x-hands-off-my-keys nil)
                 ))
 
-  (with-eval-after-load 'dired
-    (require 'dired-x)
-    (setq-default dired-omit-files-p t)
-    ;;(setq dired-listing-switches "-alhv")
-    ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
-    ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
-    (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
-    ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
-    )
+  ;; (with-eval-after-load 'dired
+  ;;   (require 'dired-x)
+  ;;   (setq-default dired-omit-files-p t)
+  ;;   ;;(setq dired-listing-switches "-alhv")
+  ;;   ;; (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+  ;;   (setq dired-omit-files "^\\.\\|^#.#$\\|.~$")
+  ;;   ;;(define-key dired-mode-map (kbd "/") #'dired-narrow-fuzzy)
+  ;;   (define-key dired-mode-map (kbd "h") #'dired-omit-mode)
+  ;;   ;;(define-key dired-mode-map (kbd "e") #'read-only-mode)
+  ;;   )
 
 #+END_SRC
 
-#+RESULTS:
-: dired-omit-mode
+Do the right thing
+#+begin_src emacs-lisp
+(setq dired-dwim-target t)
+#+end_src
 
-| lambda | nil | (dired-hide-details-mode) |
-#+BEGIN_EXAMPLE
-^\.?#\|^\.$\|^\.\.$
-#+END_EXAMPLE
+[2019-10-30 Wed]
+Git status in dired
+#+begin_src emacs-lisp
+(with-eval-after-load 'dired
+  (define-key dired-mode-map ")" 'dired-git-info-mode))
+#+end_src
+
+[2019-11-03 Sun]
+Dired listing chronological instead of alphabetical
+#+BEGIN_SRC emacs-lisp
+(setq dired-listing-switches "-lta")
+#+END_SRC
+
+** Some global keybindings
+#+begin_src emacs-lisp
+(setq toggle-frame-fullscreen t)
+(global-set-key (kbd "C-x o") 'other-window)
+(global-set-key (kbd "C-c l") 'org-store-link)
+#+end_src
 ** Theme Changer
    <2018-01-07 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -2270,6 +2465,12 @@ Load dired x
 #+BEGIN_SRC emacs-lisp
 (display-battery-mode 1) 
 #+END_SRC
+** Hl todo mode
+[2019-10-24 Thu]
+#+begin_src emacs-lisp
+(global-hl-todo-mode 1)
+#+end_src
+
 ** Helm
 *** Load helm
  <2018-02-25 Sun>
@@ -2302,6 +2503,10 @@ Load dired x
 
 (autoload 'helm-bibtex "helm-bibtex" "" t)
 #+END_SRC
+*** Helm firefox
+#+begin_src emacs-lisp
+(autoload 'helm-firefox-bookmarks "helm-firefox" nil t)
+#+end_src
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -2323,15 +2528,12 @@ Load dired x
         ))
 (yas-global-mode 1)
 #+END_SRC
-
-#+RESULTS:
-: t
-
 ** Annoying C-z
 <2018-04-27 Fri>
 Found it [[https://superuser.com/a/349997][on stackexhange]]
 #+BEGIN_SRC emacs-lisp
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
 #+END_SRC
 ** Fonts
 [2019-02-20 Wed]
@@ -2342,7 +2544,6 @@ Found it [[https://superuser.com/a/349997][on stackexhange]]
   (set-face-attribute 'default nil :font "Iosevka"  )
 #+end_src
 
-#+RESULTS:
 
 #+BEGIN_SRC emacs-lisp
   ;; (when (window-system)
@@ -2598,10 +2799,12 @@ Set autofill mode by default for all major modes
 ;; This becomes annoying in shell and org buffers
 ;;(setq-default auto-fill-function 'do-autoill)
 #+END_SRC
-** Auto reload files
-#+BEGIN_SRC emacs-lisp
-(global-auto-revert-mode t)
-#+END_SRC
+** Expand region
+<2020-02-28 Fri>
+#+begin_src emacs-lisp
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+#+end_src
 ** Auto reload files
 #+BEGIN_SRC emacs-lisp
 (global-auto-revert-mode t)
@@ -2615,14 +2818,8 @@ Set autofill mode by default for all major modes
 ** Dired listing chronological instead of alphabetical
 #+BEGIN_SRC emacs-lisp
 (setq dired-listing-switches "-lt")
-
 #+END_SRC
 
-#+RESULTS:
-: -lt
-
-#+RESULTS:
-|   |
 ** Olivetti mode - turn on C-c ] binding
 <2018-11-24 Sat>
 #+BEGIN_SRC elisp
@@ -2630,15 +2827,11 @@ Set autofill mode by default for all major modes
   '(define-key olivetti-mode-map (kbd "C-c ]") nil))
 #+END_SRC
 
-#+RESULTS:
 ** Get Shell-Command to recognize bash aliases
 #+BEGIN_SRC elisp
 (setq shell-file-name "bash")
 (setq shell-command-switch "-ic")
 #+END_SRC
-
-#+RESULTS:
-: -ic
 
 ** Ace links
 [2018-12-14 Fri]
@@ -2647,9 +2840,6 @@ Set autofill mode by default for all major modes
 (define-key org-mode-map (kbd "M-o") 'ace-link-org)
 ;;(define-key help-mode-map (kbd "M-o") 'ace-link-help)
 #+END_SRC
-
-#+RESULTS:
-: ace-link-org
 
 ** Parenthesis and autocomplete
 [2018-12-21 Fri]
@@ -2669,12 +2859,6 @@ Set autofill mode by default for all major modes
 
 [2019-01-25 Fri]
 Update: This is proving to be very annoying
-#+RESULTS:
-| lambda | nil | (progn (parenthesis-register-keys [('"{ python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({" python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({'" python-mode-map)) |
-| lambda | nil | (progn (parenthesis-register-keys [({' python-mode-map))  |
-| lambda | nil | (progn (parenthesis-register-keys [({ python-mode-map))   |
 
 ** Open with external programs
 [2019-01-14 Mon]
@@ -2683,9 +2867,6 @@ Update: This is proving to be very annoying
   ;; (openwith-mode t)
   ;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
 #+end_src
-
-#+RESULTS:
-| \.pdf\' | evince | (file) |
 
 ** Visible Bell
 #+BEGIN_SRC emacs-lisp
@@ -2706,8 +2887,10 @@ Update: This is proving to be very annoying
 
 #+end_src
 
-#+RESULTS:
-| %e | mode-line-front-space | mode-line-mule-info | mode-line-client | mode-line-modified | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-misc-info | mode-line-end-spaces | << | (quote aj-sec) | >> | << | (quote aj-sec) | >> |
+** Shorten yes-no
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
 ** Clean up modeline
 <2018-11-21 Wed>

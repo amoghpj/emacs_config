@@ -2,6 +2,6 @@
 # name: pysrc
 # key: pysrc
 # --
-#+BEGIN_SRC python :results output :session :async t
+#+BEGIN_SRC python :results output :async t
 $0
 #+END_SRC
