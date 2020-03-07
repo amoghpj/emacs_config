@@ -2265,6 +2265,13 @@ so it does not interrupt the emacs process.
 #+begin_src emacs-lisp
 (require 'org-graph-view)
 #+end_src
+** Select bibtex tags from pre existing entries
+<2020-03-05 Thu>
+#+begin_src emacs-lisp
+(require 'org-graph-view)
+;; Introduces "C-c t" as the keybinding by default
+(load-file "~/.emacs.d/lisp/aj-bibtex-tags.el")
+#+end_src
 * Emacs global settings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
