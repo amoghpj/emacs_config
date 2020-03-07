@@ -67,6 +67,71 @@ I would love to hear your feedback on this setup!
 #+begin_src emacs-lisp
   (require 'all-the-icons)
 #+end_src
+* Helm
+** Load helm
+ <2018-02-25 Sun>
+ #+BEGIN_SRC emacs-lisp
+   (require 'helm)
+
+(require 'helm-config)
+   (global-set-key (kbd "M-x") 'helm-M-x)
+
+   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+   (helm-mode 1)
+ #+END_SRC
+** Jeff's fix for the annoying TAB completion problem
+#+BEGIN_SRC emacs-lisp
+  ;; modify help so tab is autocomplete
+  ;; (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
+  ;; (define-key helm-map (kbd "C-z") #'helm-select-action)
+#+END_SRC
+** Helm-swoop configurations
+<2018-02-25 Sun>
+#+BEGIN_SRC emacs-lisp
+(require 'helm-swoop)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+** Helm-bibtex
+*** Configure bibtex file
+#+begin_src emacs-lisp
+(setq bibtex-completion-bibliography
+      '("~/jalihal_projects/Research/references.bib"))
+#+end_src
+*** Fancy symbols for pdf
+#+begin_src emacs-lisp
+(setq bibtex-completion-pdf-symbol "⌘")
+#+end_src
+*** Configure pdf library path
+#+begin_src emacs-lisp
+(setq bibtex-completion-library-path '("~/jalihal_projects/bibtex-pdfs/"))
+#+end_src
+*** Configure Notes path
+#+BEGIN_SRC emacs-lisp
+(setq bibtex-completion-notes-path "~/jalihal_projects/Research/notes.org")
+#+END_SRC
+*** Make helm-bibtex aware of tags
+#+begin_src emacs-lisp
+(setq bibtex-completion-additional-search-fields '(tags))
+#+end_src
+*** Default action in helm-bibtex
+#+begin_src emacs-lisp
+;(setq bibtex-completion)
+#+end_src
+*** Tell helm-bibtex how to display info
+#+begin_src emacs-lisp
+(setq bibtex-completion-display-formats '((t . "${author:36} ${title:*} ${year:4} ${=has-pdf=:1}${=has-note=:1} ${=type=:7} ${=has-tags=:1}")))
+#+end_src
+*** Load helm-bibtex
+#+BEGIN_SRC emacs-lisp
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+#+END_SRC
+** Helm firefox
+#+begin_src emacs-lisp
+(autoload 'helm-firefox-bookmarks "helm-firefox" nil t)
+#+end_src
 * Company
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook 'global-company-mode)
@@ -121,10 +186,7 @@ c 'echo $PATH'"))))
 ** Company jedi
 [2019-03-14 Thu]
 #+begin_src emacs-lisp
-  ;; (defun my/python-mode-hook ()
-  ;; )
-
-  ;;   (add-hook 'python-mode-hook 'my/python-mode-hook)
+ (add-to-list 'company-backends 'company-jedi)
 #+end_src
 ** Sphinx-doc
 [2019-06-15 Sat]
@@ -277,6 +339,14 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
 #+END_SRC   
+** Define keybinding for org timestamp inactive
+#+begin_src emacs-lisp
+(define-key org-mode-map (kbd "C-x !") 'org-time-stamp-inactive)
+#+end_src
+
+#+RESULTS:
+: org-time-stamp-inactive
+
 ** Open PDFs in evince
 #+BEGIN_SRC emacs-lisp
   ;; PDFs visited in Org-mode are opened in Evince (and not in the default choice) http://stackoverflow.com/a/8836108/789593
@@ -363,290 +433,290 @@ This is such a cool idea!!
 #+END_SRC
 *** Capture Templates
 #+BEGIN_SRC emacs-lisp
-  (defun my/expense-template ()
-    (format "Hello world %s" (plist-get org-capture-plist :account)))
-    (setq org-capture-templates
-          '(
-            ("t" "Tasks")
-            ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
-             "** TODO %?  %^g
-      :PROPERTIES:
-      :CREATED: %U
-      :BLOCKER:
-      :TRIGGER:
-      :END:\n" )
+    (defun my/expense-template ()
+      (format "Hello world %s" (plist-get org-capture-plist :account)))
+      (setq org-capture-templates
+            '(
+              ("t" "Tasks")
+              ("tw" "(work) Task/Idea" entry (file+headline "~/jalihal_projects/Research/LabNoteBook.org" "Tasks")
+               "** TODO %?  %^g
+        :PROPERTIES:
+        :CREATED: %U
+        :BLOCKER:
+        :TRIGGER:
+        :END:\n" )
 
-            ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
-             "** TODO %?  %^g
-      :PROPERTIES:
-      :CREATED: %U
-      :BLOCKER:
-      :TRIGGER:
-      :END:\n" )
-            ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
-             "** TODO %?  %^g
-      :PROPERTIES:
-      :CREATED: %U
-      :BLOCKER:
-      :TRIGGER:
-      :END:\n" )
-            ("c" "Clock tasks")
-            ("cw" "work" entry (file+datetree "~/orgs/diary.org")
-             "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
-            ("cc" "class" entry (file+datetree "~/orgs/diary.org")
-             "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
-            ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
-             "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
-            ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
-             "* %?\n%U\n" :clock-in t :clock-keep t)
-            ("e" "Entry")
-            ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
-             "* %?
-    %U")        
-            ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
-             "** Meeting on %U
-    ,#+BIND: org-export-use-babel nil
-    ,#+STARTUP: beamer
-    ,#+OPTIONS: H:1 toc:nil
-    ,#+AUTHOR: Amogh Jalihal
-    ,#+TITLE: Meeting on %U
-    ,#+EXPORT_FILE_NAME: 
-    ,#+LATEX_HEADER: \\usetheme{metropolis}
-    ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
-    ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
-    ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
-    ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
-    %?" :prepend t :empty-lines 1)
-            ("em" "Meeting")
-            ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
-             "**  %U
-      :PROPERTIES:
-      :CREATED: %U
-      :END:
-    - %?" :prepend t :empty-lines 1)        
-            ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
-             "** Meeting: %? - %U
-      :PROPERTIES:
-      :CREATED: %U
-      :END:
-    - " :prepend t :empty-lines 1)        
-            ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
-             "** With %?
-      :PROPERTIES:
-      :CREATED: %U
-      :END:
-       - "  :empty-lines 1)
-            ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
-             "** %U
-       - %?"  :empty-lines 1)
-            ("er" "Reading lists")
-            ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
-             "**  %?
-      :PROPERTIES:
-      :CREATED: %U
-      :CONTEXT: %^{CONTEXT}
-      :END:")
-            ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
-             "** %?")
-            ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
-             "**  %U\n%?")
-            ("eL" "Ledger " entry (file+olp "~/orgs/ledger.org" "Credit Card Expenses")
-"** %U\n
-\#+BEGIN_SRC ledger :tangle 2019.ledger
-%(org-read-date) %^{Description}
-    %^{Payee}                          %^{Amount}
-    Liabilities:CreditCard
-\#+END_SRC"
-)
-            ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
-             "**  %?
-      :PROPERTIES:
-      :CREATED: %U
-      :CONTEXT: %^{CONTEXT}
-      :LINK: %^{LINK}
-      :END:")
-            ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
-            ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
-             ("d" "dump org capture" entry
-             (file+headline "~/orgs/dump.org" "Unsorted")
-             "* %?%:description Added %U
-      ,#+BEGIN_QUOTE
-      %x
-      ,#+END_QUOTE" :immediate-finish t)
+              ("tp" "(personal) Task/Idea" entry (file+headline "~/orgs/PersonalAgenda.org" "Personal Tasks")
+               "** TODO %?  %^g
+        :PROPERTIES:
+        :CREATED: %U
+        :BLOCKER:
+        :TRIGGER:
+        :END:\n" )
+              ("ts" "(service) Task" entry (file+headline "~/jalihal_projects/service/sys-bio-search-2019.org" "Tasks")
+               "** TODO %?  %^g
+        :PROPERTIES:
+        :CREATED: %U
+        :BLOCKER:
+        :TRIGGER:
+        :END:\n" )
+              ("c" "Clock tasks")
+              ("cw" "work" entry (file+datetree "~/orgs/diary.org")
+               "* IN-PROGRESS %? %^g\n%U\n%a\n" :clock-in t :clock-keep t)
+              ("cc" "class" entry (file+datetree "~/orgs/diary.org")
+               "* IN-PROGRESS %? :class:\n%U\n%a\n" :clock-in t :clock-keep t)
+              ("cm" "meeting" entry (file+datetree "~/orgs/diary.org")
+               "* IN-PROGRESS Meeting %? :MEETING:\n%U\n" :clock-in t :clock-keep t)
+              ("cp" "personal" entry (file+datetree "~/orgs/diary.org")
+               "* %?\n%U\n" :clock-in t :clock-keep t)
+              ("e" "Entry")
+              ("el" "labnotebook" entry (file+datetree "~/jalihal_projects/Research/LabNoteBook.org")
+               "* %?
+      %U")        
+              ("ep" "presentation" entry (file+olp "~/jalihal_projects/Research/presentations.org" "Presentations")
+               "** Meeting on %U
+      ,#+BIND: org-export-use-babel nil
+      ,#+STARTUP: beamer
+      ,#+OPTIONS: H:1 toc:nil
+      ,#+AUTHOR: Amogh Jalihal
+      ,#+TITLE: Meeting on %U
+      ,#+EXPORT_FILE_NAME: 
+      ,#+LATEX_HEADER: \\usetheme{metropolis}
+      ,#+LATEX_HEADER: \\newcommand{\\todo}{{\\color{red}\\textbf{TODO} }}
+      ,#+LATEX_HEADER: \\newcommand{\\inprogress}{{\\color{orange}\\textbf{IN PROGRESS} }}
+      ,#+LATEX_HEADER: \\newcommand{\\done}{{\\color{ForestGreen} \\textbf{DONE} }}
+      ,#+LATEX_HEADER: \\setbeamercolor{background canvas}{bg=white}
+      %?" :prepend t :empty-lines 1)
+              ("em" "Meeting")
+              ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
+               "**  %U
+        :PROPERTIES:
+        :CREATED: %U
+        :END:
+      - %?" :prepend t :empty-lines 1)        
+              ("ems" "meeting - service" entry (file+olp "~/jalihal_projects/service/sys-bio-search-2019.org" "Meeting minutes")
+               "** Meeting: %? - %U
+        :PROPERTIES:
+        :CREATED: %U
+        :END:
+      - " :prepend t :empty-lines 1)        
+              ("emp" "meeting - personal" entry (file+olp "~/orgs/meetings-and-discussions.org" "Notes")
+               "** With %?
+        :PROPERTIES:
+        :CREATED: %U
+        :END:
+         - "  :empty-lines 1)
+              ("ec" "Class notes" entry (file+olp "~/orgs/AllNotes.org" "Classes" "Spring 2019" "Population Genomics")
+               "** %U
+         - %?"  :empty-lines 1)
+              ("er" "Reading lists")
+              ("erp" "Personal list" entry (file+olp "~/orgs/AllNotes.org" "Reading List")
+               "**  %?
+        :PROPERTIES:
+        :CREATED: %U
+        :CONTEXT: %^{CONTEXT}
+        :END:")
+              ("ers" "Science list" entry (file+olp "~/orgs/readinglist.org" "Unclassified")
+               "** %?")
+              ("ej" "Journal " entry (file+datetree "~/orgs/journal.org")
+               "**  %U\n%?")
+              ("eL" "Ledger " entry (file+olp "~/orgs/ledger.org" "Credit Card Expenses")
+  "** %U\n
+  \#+BEGIN_SRC ledger :tangle 2019.ledger
+  %(org-read-date) %^{Description}
+      %^{Payee}                          %^{Amount}
+      Liabilities:CreditCard
+  \#+END_SRC"
+  )
+              ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
+               "**  %?
+        :PROPERTIES:
+        :CREATED: %U
+        :CONTEXT: %^{CONTEXT}
+        :LINK: %^{LINK}
+        :END:")
+              ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
+              ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+               ("d" "dump org capture" entry
+               (file+headline "~/orgs/dump.org" "Unsorted")
+               "* %?%:description Added %U
+        ,#+BEGIN_QUOTE
+        %x
+        ,#+END_QUOTE" :immediate-finish t)
 
-             ("b" "Quantified self")
-             ("bt" "Tracking Times")
-             ("btw" "Woke up at" entry
-             (file+headline "~/orgs/qself.org" "Capture" "2019")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :wake: %^U
-             :END:"
-             :immediate-finish t)
-             ("bts" "Slept at" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :sleep: %^U
-             :END:"
-             :immediate-finish t)
-             ("btc" "Drank Coffee" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :coffee: %U
-             :END:"
-             :immediate-finish t)
-             ("btt" "Toilet" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :toilet: %U
-             :END:"
-             :immediate-finish t)
-             ("btp" "Temperature" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :temperature: %?
-             :END:")
-             ("btr" "Got Ready at" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :ready: %^U
-             :END:"
-             :immediate-finish t)
-             ("btb" "Ate breakfast at" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :breakfast: %^U
-             :END:"
-             :immediate-finish t)
-             ("btl" "Ate lunch at" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :lunch: %^U
-             :END:"
-             :immediate-finish t)
-             ("btd" "Ate dinner at" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :dinner: %^U
-             :END:"
-             :immediate-finish t)
-             ("bm" "Meta")
+               ("b" "Quantified self")
+               ("bt" "Tracking Times")
+               ("btw" "Woke up at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Wake
+               :PROPERTIES:
+               :immediate-finish:
+               :wake: %^U
+               :END:"
+               :immediate-finish t)
+               ("bts" "Slept at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Sleep         
+               :PROPERTIES:
+               :immediate-finish:
+               :sleep: %^U
+               :END:"
+               :immediate-finish t)
+               ("btc" "Drank Coffee" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Coffee
+               :PROPERTIES:
+               :immediate-finish:
+               :coffee: %U
+               :END:"
+               :immediate-finish t)
+               ("btt" "Toilet" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Toilet
+               :PROPERTIES:
+               :immediate-finish:
+               :toilet: %U
+               :END:"
+               :immediate-finish t)
+               ("btp" "Temperature" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Temp
+               :PROPERTIES:
+               :immediate-finish:
+               :temperature: %?
+               :END:")
+               ("btr" "Got Ready at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Get Ready
+               :PROPERTIES:
+               :immediate-finish:
+               :ready: %^U
+               :END:"
+               :immediate-finish t)
+               ("btb" "Ate breakfast at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Breakfast
+               :PROPERTIES:
+               :immediate-finish:
+               :breakfast: %^U
+               :END:"
+               :immediate-finish t)
+               ("btl" "Ate lunch at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Lunch    
+               :PROPERTIES:
+               :immediate-finish:
+               :lunch: %^U
+               :END:"
+               :immediante-finish t)
+               ("btd" "Ate dinner at" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Dinner
+               :PROPERTIES:
+               :immediate-finish:
+               :dinner: %^U
+               :END:"
+               :immediate-finish t)
+               ("bm" "Meta")
 
-             ("bmf" "Feeling" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :feeling: %^{How are you feeling?|Fine|Off|Stiff|Aching|Headache|Feverish}
-             :feelingtime: %^U
-             :note: %?
-             :END:"
-             :immediate-finish t)
+               ("bmf" "Feeling" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* State
+               :PROPERTIES:
+               :immediate-finish:
+               :feeling: %^{How are you feeling?|Fine|Off|Stiff|Aching|Headache|Feverish}
+               :feelingtime: %^U
+               :note: %?
+               :END:"
+               :immediate-finish t)
 
-             ("bmm" "Tracker" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :track: %^{?|n|y|n|s}
-             :tracktime: %^U
-             :END:"
-             :immediate-finish t)
+               ("bmm" "Tracker" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Track
+               :PROPERTIES:
+               :immediate-finish:
+               :track: %^{?|n|y|n|s}
+               :tracktime: %^U
+               :END:"
+               :immediate-finish t)
 
-             ("bmp" "Productive" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :productive: %^{Productive?|ok|very|ok|no}
-             :productivetime: %U
-             :note: %?
-             :END:"
-             :immediate-finish t)
+               ("bmp" "Productive" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Productivity
+               :PROPERTIES:
+               :immediate-finish:
+               :productive: %^{Productive?|ok|very|ok|no}
+               :productivetime: %U
+               :note: %?
+               :END:"
+               :immediate-finish t)
 
 
-             ("bmb" "Blurb" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :time: %U
-             :note: 
-             :END:"
-             :immediate-finish t)
+               ("bmb" "Blurb" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Blurb
+               :PROPERTIES:
+               :immediate-finish:
+               :time: %U
+               :note: 
+               :END:"
+               :immediate-finish t)
 
-             ("bh" "Weight" entry
-             (file+olp "~/orgs/qself.org" "Capture" "2020")
-             "* %U           
-             :PROPERTIES:
-             :weight: %?
-             :weighttime: %U
-             :END:" )
+               ("bh" "Weight" entry
+               (file+datetree "~/orgs/qself.org" "Capture" )
+               "* Weight
+               :PROPERTIES:
+               :weight: %?
+               :weighttime: %U
+               :END:" )
 
-             ("bw" "Workout" entry
-             (file+headline "~/orgs/workout.org" "Logs")
-             "* %U           
-             :PROPERTIES:
-             :immediate-finish:
-             :time: %U
-             :suryanamaskar: %^{}
-             :crunches: %^{}
-             :pushups: %^{}
-             :run_miles: %^{}
-             :END:")
+               ("bw" "Workout" entry
+               (file+headline "~/orgs/workout.org" "Logs")
+               "* %U           
+               :PROPERTIES:
+               :immediate-finish:
+               :time: %U
+               :suryanamaskar: %^{suryanamaskar:}
+               :crunches: %^{crunches:}
+               :pushups: %^{pushups:}
+               :run_miles: %^{ran:}
+               :END:")
 
-            ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
-             "* \n
-      ,#+BEGIN_EXPORT html
-      <div class=\"container\">
-      ,#+END_EXPORT\n
-      %U\n\n%?\n
-      ,#+BEGIN_EXPORT html
-      </div>
-      ,#+END_EXPORT" :prepend t :empty-lines 1)
+              ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
+               "* \n
+        ,#+BEGIN_EXPORT html
+        <div class=\"container\">
+        ,#+END_EXPORT\n
+        %U\n\n%?\n
+        ,#+BEGIN_EXPORT html
+        </div>
+        ,#+END_EXPORT" :prepend t :empty-lines 1)
 
-            ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
-            ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
-            ;;("i" "Idea" entry (file org-default-notes-file)
-            ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-            ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
-             "* %U
-             :PROPERTIES:
-             :immediate-finish:
-             :Water:    %^{Drank?(y/n)|Y|N}
-             :Attention: %^{_f_ocussed/_d_istracted|F|D}
-             :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
-             :END:")
-            ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
-            ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
-            ;;     ")
-            ))
+              ;;("o" "Software and Upkeep" entry (file+datetree "~/orgs/diary.org")
+              ;;"* %?:software:\n%t" :clock-in t :clock-resume t)
+              ;;("i" "Idea" entry (file org-default-notes-file)
+              ;; "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+              ("B" "Behavior" entry (file+datetree "~/orgs/behaviour.org")
+               "* %U
+               :PROPERTIES:
+               :immediate-finish:
+               :Water:    %^{Drank?(y/n)|Y|N}
+               :Attention: %^{_f_ocussed/_d_istracted|F|D}
+               :State:    %^{Feeling _a_ctive/_t_ired?|A|T}
+               :END:")
+              ;; ("d" "Org-Drill" entry (file+headline "~/orgs/german.org" "Words")
+              ;;  "*** %^{Please specify type of word} :drill:\nWhat is the meaning of %^{word}?\n**** Definition\n%^{definition}
+              ;;     ")
+              ))
 
-    ;;(setq org-capture-templates
-    ;;             '("w" "Web site" entry 
-    ;;              "* %?\n%c\n%:initial" :clock-in t))
+      ;;(setq org-capture-templates
+      ;;             '("w" "Web site" entry 
+      ;;              "* %?\n%c\n%:initial" :clock-in t))
 
-    ;; Allow creation of new parent nodes
-    (setq org-refile-allow-creating-parent-nodes `confirm)
-    ;; Look up to three levels deep
-    (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
+      ;; Allow creation of new parent nodes
+      (setq org-refile-allow-creating-parent-nodes `confirm)
+      ;; Look up to three levels deep
+      (setq org-refile-targets '((org-agenda-files :maxlevel . 4)))
 #+END_SRC
 
 #+RESULTS:
@@ -820,7 +890,7 @@ Does this do anything?
 #+END_SRC
 ** Org-Edna
 #+BEGIN_SRC emacs-lisp
-(org-edna-load)
+;; (org-edna)
 #+END_SRC
 ** Org-Notify
 #+BEGIN_SRC emacs-lisp
@@ -1353,6 +1423,14 @@ From [[https://emacs.stackexchange.com/questions/21335/prevent-folding-org-files
 (require 'ox-jekyll-lite)
 (setq org-jekyll-project-root "~/Documents/website/amoghpj.github.io/")
 #+end_src
+** Pop org
+<2020-03-01 Sun>
+Use org mode to edit code comments
+#+begin_src emacs-lisp
+  (use-package poporg
+    :ensure t
+    :bind (("C-c /" . poporg-dwim)))
+#+end_src
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
@@ -1859,6 +1937,17 @@ relative-compose:  0
      (shell-command "python ~/src/generate-org-report.py -p")
 )
  #+END_SRC
+** My custom theme switcher function
+#+begin_src emacs-lisp
+(defun aj/switch-theme ()
+  "disable current theme and open load-theme option"
+  (interactive)
+  (disable-theme (car custom-enabled-themes))
+  (load-theme 
+ (intern (completing-read "Load custom theme: "
+			     (mapcar 'symbol-name
+				     (custom-available-themes))))))
+#+end_src
 ** Keyboard shortcuts related to website
  <2018-11-25 Sun>
  #+BEGIN_SRC emacs-lisp
@@ -2171,6 +2260,11 @@ so it does not interrupt the emacs process.
   (fset 'export-quant-table
      [?\M-x ?o ?r ?g ?  ?t ?a ?b ?l ?  ?e ?x tab ?o ?r ?t tab return ?q ?u ?a ?n ?t ?. ?c ?s ?v return ?y return])
 #+end_src
+** Org graph from alphapapa
+<2020-02-04 Tue>
+#+begin_src emacs-lisp
+(require 'org-graph-view)
+#+end_src
 * Emacs global settings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
@@ -2471,42 +2565,6 @@ Dired listing chronological instead of alphabetical
 (global-hl-todo-mode 1)
 #+end_src
 
-** Helm
-*** Load helm
- <2018-02-25 Sun>
- #+BEGIN_SRC emacs-lisp
-   (require 'helm)
-
-(require 'helm-config)
-   (global-set-key (kbd "M-x") 'helm-M-x)
-
-   ;; ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-   (helm-mode 1)
- #+END_SRC
-*** Jeff's fix for the annoying TAB completion problem
-#+BEGIN_SRC emacs-lisp
-  ;; modify help so tab is autocomplete
-  ;; (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
-  ;; (define-key helm-map (kbd "<tab>") #'helm-execute-persistent-action)
-  ;; (define-key helm-map (kbd "C-z") #'helm-select-action)
-#+END_SRC
-*** Helm-swoop configurations
-<2018-02-25 Sun>
-#+BEGIN_SRC emacs-lisp
-(require 'helm-swoop)
-(global-set-key (kbd "M-i") 'helm-swoop)
-(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-#+END_SRC
-*** Reconfiguring helm-bibtex
-#+BEGIN_SRC emacs-lisp
-
-(autoload 'helm-bibtex "helm-bibtex" "" t)
-#+END_SRC
-*** Helm firefox
-#+begin_src emacs-lisp
-(autoload 'helm-firefox-bookmarks "helm-firefox" nil t)
-#+end_src
 ** Abbrev
 <2018-02-25 Sun>
 #+BEGIN_SRC emacs-lisp
@@ -2522,10 +2580,11 @@ Dired listing chronological instead of alphabetical
 ** YASnippet
 <2018-04-05 Thu>
 #+BEGIN_SRC emacs-lisp
-(require 'yasnippet)
+
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
         ))
+(require 'yasnippet)
 (yas-global-mode 1)
 #+END_SRC
 ** Annoying C-z
