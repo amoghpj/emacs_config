@@ -2268,9 +2268,14 @@ so it does not interrupt the emacs process.
 ** Select bibtex tags from pre existing entries
 <2020-03-05 Thu>
 #+begin_src emacs-lisp
-(require 'org-graph-view)
 ;; Introduces "C-c t" as the keybinding by default
 (load-file "~/.emacs.d/lisp/aj-bibtex-tags.el")
+#+end_src
+** Make nicer bib keys automatically
+[2020-03-08 Sun]
+#+begin_src emacs-lisp
+;; Introduces "C-c k" as the keybinding by default
+(load-file "~/.emacs.d/lisp/aj-bibtex-custom-key.el")
 #+end_src
 * Emacs global settings
 ** Theme
@@ -2870,6 +2875,7 @@ Set autofill mode by default for all major modes
 #+begin_src emacs-lisp
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C--") 'er/contract-region)
 #+end_src
 ** Auto reload files
 #+BEGIN_SRC emacs-lisp

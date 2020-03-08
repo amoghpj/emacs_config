@@ -1,6 +1,6 @@
 ;; Author: Amogh Jalihal
 ;; Date: 5th March 2020
-;; Commentary: 
+;; Commentary:
 ;; Utility function to presenting a prompt to pick
 ;; preexisting tags from bib file
 
