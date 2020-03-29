@@ -13,7 +13,7 @@
 
 
 
-(define-derived-mode devanagari-mode fundamental-mode "devanagari"
+(define-derived-mode devanagari-mode tex-mode "devanagari"
   "Devanagari mode is for editing latex files to be compiled with devnag."
   ;;(latex-mode t)
   (defun devanagari-compile ()
@@ -43,7 +43,7 @@
 (defvar devanagari-mode-map nil "keymap for `devanagari-mode'")
 
 (setq devanagari-mode-map (make-sparse-keymap))
-
+(setq-local comment-start "%")
 (define-key devanagari-mode-map (kbd "C-c C-c") 'devanagari-compile)
 
 ;; (defvar devanagari-mode-shared-map
