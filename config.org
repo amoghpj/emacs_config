@@ -1012,6 +1012,11 @@ From [[http://sachachua.com/blog/2007/11/setting-up-appointment-reminders-in-org
     (setq org-brain-visualize-default-choices 'all)
     (setq org-brain-title-max-length 75))
 #+END_SRC
+*** Org-brain-export
+[2020-05-04 Mon]
+#+begin_src emacs-lisp
+(require 'org-brain-export)
+#+end_src
 ** Org-dashboard
 <2018-01-06 Sat>
 - Configured to stop displaying completed projects
