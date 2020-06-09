@@ -2567,6 +2567,13 @@ From https://emacs.stackexchange.com/questions/3112/how-to-reset-color-theme
 (dolist (elt ae-keywords:tex-mode:list)
   (font-lock-add-keywords nil (list (list (nth 1 elt) 1 (nth 2 elt) 'append)))
   )
+** Navigation
+[2020-06-03 Wed]
+#+begin_src emacs-lisp
+(use-package avy
+  :bind ("M-g f" . avy-goto-line)
+)
+#+end_src
 ** Make indirect buffer 
 #+BEGIN_SRC emacs-lisp
 (defun narrow-to-region-indirect (start end)
