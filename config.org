@@ -1652,6 +1652,14 @@ fail on poorly-designed websites."
    ;;(setq TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b"))))
    ;;(setq TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
 #+end_src
+** Add =makeindex= option for compilation
+[2020-05-23 Sat]
+From https://tex.stackexchange.com/questions/296156/auctex-calls-makeindex-without-file-extension
+#+begin_src emacs-lisp
+(eval-after-load "tex"
+  '(add-to-list 'TeX-command-list '("Index" "makeindex %s.nlo -s nomencl.ist -o %s.nls" TeX-run-index nil t
+                    :help "Run makeindex to create index file")))
+#+end_src
 ** My customizations
 [2019-01-28 Mon]
 #+begin_src emacs-lisp
