@@ -2268,23 +2268,35 @@ relative-compose:  0
  [2018-12-14 Fri]
 From [[https://cestlaz.github.io/posts/using-emacs-30-elfeed-2/]]
 #+BEGIN_SRC emacs-lisp
-(defhydra aj/hydra-elfeed ()
-"filter"
-("b" (elfeed-search-set-filter "@6-months-ago +biology") "biology")
-("h" (elfeed-search-set-filter "@6-months-ago +philosophy") "philosophy")
-("p" (elfeed-search-set-filter "@6-months-ago +politics") "politics")
-("y" (elfeed-search-set-filter "@6-months-ago +physics") "physics")
-("j" (elfeed-search-set-filter "@6-months-ago +journals") "journals")
-("s" (elfeed-search-set-filter "@6-months-ago +software") "software")
-("i" (elfeed-search-set-filter "@6-months-ago +indic") "indic")
-("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-("M" elfeed-toggle-star "Mark")
-("A" (elfeed-search-set-filter "@6-months-ago") "All")
-("T" (elfeed-search-set-filter "@1-day-ago") "Today")
-("Q" bjm/elfeed-save-db-and-bury "Quit Elfeed" :color blue)
-("q" nil "quit" :color blue)
-)
-(define-key elfeed-search-mode-map (kbd "C-c h") 'aj/hydra-elfeed/body)
+        (defhydra aj/hydra-elfeed ()
+    "
+  -------------------   
+  ^Filter^   ^Options^
+  ^------------------^
+  _b_:biology     _q_:quit
+  _j_:journals    _Q_:Quit Elfeed
+  _h_:philosophy  _e_:EWW
+  _y_:physics     _T_:Today
+  _s_:software    _A_:All
+  _i_:indic       _*_:Star
+  _p_:politics    _M_:Mark
+  "
+        ("b" (elfeed-search-set-filter "@6-months-ago +biology") nil)
+        ("h" (elfeed-search-set-filter "@6-months-ago +philosophy") nil)
+        ("p" (elfeed-search-set-filter "@6-months-ago +politics") nil)
+        ("y" (elfeed-search-set-filter "@6-months-ago +physics") nil)
+        ("j" (elfeed-search-set-filter "@6-months-ago +journals") nil)
+        ("s" (elfeed-search-set-filter "@6-months-ago +software") nil)
+        ("i" (elfeed-search-set-filter "@6-months-ago +indic") nil)
+        ("*" (elfeed-search-set-filter "@6-months-ago +star") nil)
+        ("M" elfeed-toggle-star nil)
+        ("e" prot/elfeed-show-eww "Open in eww")
+        ("A" (elfeed-search-set-filter "@6-months-ago") nil)
+        ("T" (elfeed-search-set-filter "@1-day-ago") nil)
+        ("Q" bjm/elfeed-save-db-and-bury "Quit Elfeed" :color blue)
+        ("q" nil "quit" :color blue)
+        )
+        (define-key elfeed-search-mode-map (kbd "C-c h") 'aj/hydra-elfeed/body)
 #+END_SRC
 
 ** Pos frame for hydra
