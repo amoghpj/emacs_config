@@ -2668,6 +2668,44 @@ Dired listing chronological instead of alphabetical
 (setq dired-listing-switches "-lta")
 #+END_SRC
 
+[2020-04-13 Mon]
+Use dired-narrow to narrow dired listing
+#+begin_src emacs-lisp
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
+#+end_src
+
+[2020-04-22 Wed]
+Quick function to show number of lines in file from dired. Press =I=
+#+begin_src emacs-lisp
+(defun aj/show-file-summary ()
+"Show output from wc run on file at point"
+(interactive)
+(setq aj/file (dired-get-filename 'no-dir))
+(setq aj/stats (shell-command-to-string (concat "wc -l " aj/file " | cut -f1")))
+(message "File: %s has %s lines" aj/file  (nth 0 (split-string aj/stats "\n"))))
+
+(define-key dired-mode-map (kbd "I") #'aj/show-file-summary)
+#+end_src
+** Unfill paragraph
+[2020-04-01 Wed]
+
+From : https://www.emacswiki.org/emacs/UnfillParagraph
+#+begin_src emacs-lisp
+    ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+    (defun unfill-paragraph (&optional region)
+      "Takes a multi-line paragraph and makes it into a single line of text."
+      (interactive (progn (barf-if-buffer-read-only) '(t)))
+      (let ((fill-column (point-max))
+            ;; This would override `fill-column' if it's an integer.
+            (emacs-lisp-docstring-fill-column t))
+        (fill-paragraph nil region)))
+
+    ;; Handy key definition
+    (define-key global-map "\M-Q" 'unfill-paragraph)
+#+end_src
 ** Some global keybindings
 #+begin_src emacs-lisp
 (setq toggle-frame-fullscreen t)
@@ -3062,6 +3100,19 @@ Update: This is proving to be very annoying
 (setq visible-bell 1)
 #+END_SRC
 
+** Ibuffer 
+[2020-04-03 Fri]
+Introduced to ibuffer after watching Prot's video on youtube
+#+begin_src emacs-lisp
+   (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(use-package ibuffer-vc
+  :ensure t
+  :after (ibuffer vc)
+  :bind (:map ibuffer-mode-map
+              ("/ V" . ibuffer-vc-set-filter-groups-by-vc-root)
+              ("/ <deletechar>" . ibuffer-clear-filter-groups)))
+#+end_src
 ** Customizing modeline
 #+begin_src emacs-lisp
   ;; (setq aj-sec (with-temp-buffer
