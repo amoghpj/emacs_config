@@ -2376,6 +2376,17 @@ so it does not interrupt the emacs process.
 ;; Introduces "C-c k" as the keybinding by default
 (load-file "~/.emacs.d/lisp/aj-bibtex-custom-key.el")
 #+end_src
+** Search university libraries from emacs
+[2020-06-09 Tue]
+#+begin_src emacs-lisp
+  (defun aj/lib-search ()
+    "Prompt user for string and search using VT library"
+    (interactive)
+    (let ((query (read-string "Search for: ")))
+      (browse-url (concat "https://virginiatech.on.worldcat.org/external-search?queryString="
+                          query
+                          "&clusterResults=on&stickyFacetsChecked=on&baseScope=wz%3A1752"))))
+#+end_src
 * Emacs global settings
 ** Theme
 +As of <2018-01-07 Sun>, I am using theme-changer.el to use a light theme during the day and dark theme at night.+
