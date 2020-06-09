@@ -1472,6 +1472,20 @@ Use org mode to edit code comments
     :ensure t
     :bind (("C-c /" . poporg-dwim)))
 #+end_src
+** Org-collector
+[2020-04-14 Tue]
+#+begin_src emacs-lisp
+(require 'org-collector)
+#+end_src
+** Subfigures in org export
+[2020-06-03 Wed]
+#+begin_src emacs-lisp
+  (use-package ox-latex-subfigure
+    :init  (setq org-latex-caption-above nil
+                 org-latex-prefer-user-labels t)
+    :load-path "~/.emacs.d/lisp/ox-latex-subfigure"
+    :config (require 'ox-latex-subfigure))
+#+end_src
 * Autocomplete
 ** Require auto-complete
 #+BEGIN_SRC emacs-lisp
