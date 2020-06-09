@@ -501,7 +501,7 @@ This is such a cool idea!!
       %?" :prepend t :empty-lines 1)
               ("em" "Meeting")
               ("emw" "meeting - work" entry (file+olp "~/jalihal_projects/Research/meeting-notes.org" "Meeting Notes")
-               "**  %U
+               "**  %?
         :PROPERTIES:
         :CREATED: %U
         :END:
@@ -540,13 +540,23 @@ This is such a cool idea!!
       Liabilities:CreditCard
   \#+END_SRC"
   )
-              ("eu" "Music " entry (file+olp "~/orgs/AllNotes.org" "Music")
+              ("eu" "Music")
+              ("euf" "Music - found " entry (file+olp "~/orgs/AllNotes.org" "Music")
                "**  %?
         :PROPERTIES:
         :CREATED: %U
         :CONTEXT: %^{CONTEXT}
         :LINK: %^{LINK}
         :END:")
+        ("euc" "Capture" entry (file+olp "~/orgs/AllNotes.org" "Music ideas")
+        "** %U
+        \#+BEGIN_SRC devanagari
+        %U
+
+        {\\dn %?}
+        \#+END_SRC
+        "
+        )
               ;;("e" "Event" entry (file+datetree "~/orgs/diary.org")
               ;;"* IN-PROGRESS EVENT with %? :MEETING:\n%t" :clock-in t :clock-resume t)
                ("d" "dump org capture" entry
@@ -647,7 +657,7 @@ This is such a cool idea!!
                "* Track
                :PROPERTIES:
                :immediate-finish:
-               :track: %^{?|n|y|n|s}
+               :track: %^{?|n|y|n|s|h}
                :tracktime: %^U
                :END:"
                :immediate-finish t)
@@ -693,6 +703,16 @@ This is such a cool idea!!
                :pushups: %^{pushups:}
                :run_miles: %^{ran:}
                :END:")
+               ("bf" "Food" entry
+               (file+datetree "~/orgs/food.org")
+               "* %U           
+               :PROPERTIES:
+               :immediate-finish:
+               :time: %U
+               :meal: %^{Meal:|breakfast|lunch|dinner|brunch}
+               :source: %^{Cooked(c)/Bought(b):|c|b|}
+               :food: %^{Ate:}
+               :END:")
 
               ("s" "Social" entry (file+olp "~/public_html/social.org" "Social")
                "* \n
@@ -735,60 +755,69 @@ This is such a cool idea!!
 : ((org-agenda-files :maxlevel . 4))
 
 *** Capture from browser
+[2020-05-29 Fri]
 #+BEGIN_SRC emacs-lisp
-;; Commented the following 4 lines because I don't use them anymore
-;; (server-start)
-;; (require 'org-protocol) 
-;; (add-to-list 'load-path "~/.emacs.d/org-protocol-capture-html/")
-;; (require 'org-protocol-capture-html)
-;; SOURCE: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
+  ;; Commented the following 4 lines because I don't use them anymore
+  ;; (server-start)
+  (require 'org-protocol) 
+  ;; (add-to-list 'load-path "~/.emacs.d/org-protocol-capture-html/")
+  ;; (require 'org-protocol-capture-html)
+  ;; SOURCE: http://cachestocaches.com/2016/9/my-workflow-org-agenda/
 #+END_SRC
 ** Org-Agenda
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-custom-commands
-        ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
-        '((" " "Agenda"
-           ((agenda "" nil)
-           ;;
+    (setq org-agenda-custom-commands
+          ;; The " " here is the shortcut for this agenda, so `C-c a SPC`
 
-           ;;
-            (tags-todo "paper"
-                       ((org-agenda-overriding-header "Paper")))
-            (tags-todo "presentation"
-                       ((org-agenda-overriding-header "Presentations")))
+          '(
+            ("P" "Projects"
+             (
+  ;; (agenda "" nil)
+              (tags-todo "NutSig"
+                         ((org-agenda-overriding-header "Nutrient Signaling")))
+               )
+             )
+            (" " "Agenda"
+             ((agenda "" nil)
+              (tags-todo "paper"
+                         ((org-agenda-overriding-header "Paper")))
+              (tags-todo "presentation"
+                         ((org-agenda-overriding-header "Presentations")))
 
-            (tags-todo "NutSig"
-                       ((org-agenda-overriding-header "Model building")))
-            (tags-todo "scripting"
-                       ((org-agenda-overriding-header "Scripting")))
+              (tags-todo "scripting"
+                         ((org-agenda-overriding-header "Scripting")))
 
-            (tags-todo "literature"
-                       ((org-agenda-overriding-header "Literature")))
-            (tags-todo "personal"
-                       ((org-agenda-overriding-header "All personal tasks")))
+              (tags-todo "literature"
+                         ((org-agenda-overriding-header "Literature")))
 
-            (tags-todo "work"
-                       ((org-agenda-overriding-header "All Research")))
-            ;; (tags-todo ""
-            ;;            ((org-agenda-overriding-header "Seminar Organization Tasks")))
-            ;; (tags-todo "personal"
-            ;;            ((org-agenda-overriding-header "Personal Tasks")))
-            (todo "TODO"
-                  ((org-agenda-overriding-header "Task list")
-                   ;; sort by time, priority, and category
-                   (org-agenda-sorting-strategy
-                    '(time-up priority-down effort-up)))) ;; category-keepx
-            ;; Everything on hold
-            ;; All "WAITING" items
-            (todo "WAITING"
-                  ((org-agenda-overriding-header "Future Tasks")))
-            )
-            )
+              (tags-todo "personal"
+                         ((org-agenda-overriding-header "All personal tasks")))
+
+              (tags-todo "work"
+                         ((org-agenda-overriding-header "All Research")))
+              ;; (tags-todo ""
+              ;;            ((org-agenda-overriding-header "Seminar Organization Tasks")))
+              ;; (tags-todo "personal"
+              ;;            ((org-agenda-overriding-header "Personal Tasks")))
+              (todo "TODO"
+                    ((org-agenda-overriding-header "Task list")
+                     ;; sort by time, priority, and category
+                     (org-agenda-sorting-strategy
+                      '(time-up priority-down effort-up)))) ;; category-keepx
+              ;; Everything on hold
+              ;; All "WAITING" items
+              (todo "WAITING"
+                    ((org-agenda-overriding-header "Future Tasks")))
+              )
+             )
             ;; ("x" "With deadline columns" agenda* ""
             ;; ((org-agenda-overriding-columns-format "%45ITEM %EFFORT %CLOCKSUM")
             ;; (org-agenda-view-columns-initially t)))
+            ("d" "Filtered Todo View"
+             ((todo "MAYBE"
+                    ((org-agenda-overriding-header "MAYBE")))))
             )
-            )
+          )
 #+END_SRC
 *** Org agenda column view
 [2018-12-02 Sun]
