@@ -335,6 +335,18 @@ I installed emacs-ess on Fedora using sudo dnf install emacs-ess
         '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "FUTURE")))
         )
 #+END_SRC
+** Unset global flycheck  mode
+[2020-06-09 Tue]
+Adapted from https://stackoverflow.com/a/6839968
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'my-inhibit-global-flycheck-mode)
+
+(defun my-inhibit-global-flycheck-mode ()
+  "Counter-act `global-flycheck-mode'."
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (global-flycheck-mode 0))
+            :append :local))
+#+end_src
 ** Setting timestamp when TODO state changes to DONE
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
