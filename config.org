@@ -1582,6 +1582,22 @@ From [[http://pragmaticemacs.com/emacs/star-and-unstar-articles-in-elfeed/][Prag
 (eval-after-load 'elfeed-search
   '(define-key elfeed-search-mode-map (kbd "8") 'bjm/elfeed-unstar))
 #+end_src
+** Open browser links using eww
+[2020-06-09 Tue]
+From [[https://protesilaos.com/dotemacs/][Prot's blog]]
+#+begin_src emacs-lisp
+  (defun prot/elfeed-show-eww (&optional link)
+    "Browse current `elfeed' entry link in `eww'.
+Only show the readable part once the website loads.  This can
+fail on poorly-designed websites."
+    (interactive)
+    (let* ((entry (if (eq major-mode 'elfeed-show-mode)
+                      elfeed-show-entry
+                    (elfeed-search-selected :ignore-region)))
+           (link (if link link (elfeed-entry-link entry))))
+      (eww link)
+      (add-hook 'eww-after-render-hook 'eww-readable nil t)))
+#+end_src
 * EIN setup
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
