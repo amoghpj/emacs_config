@@ -2145,7 +2145,11 @@ relative-compose:  0
                            "plt.rcParams['axes.facecolor'] = 'black'\n"
                            "f, ax = plt.subplots(1,1, figsize=(8,8))\n"
                            "f.patch.set_facecolor('k')\n"
-                           "#+END_SRC ")
+                           "#+END_SRC\n\n"
+                           "# Local Variables:\n"
+                      "# eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle) (call-process-shell-command \"python " analysisname ".py\" nil \"*" analysisname " compilation*\" t)) nil t)\n"
+                      "# End:"
+)
                    nil fpath)
     (switch-to-buffer (find-file fpath)))
 #+end_src
@@ -2209,7 +2213,10 @@ relative-compose:  0
                       "          self.ctx.set_source_rgba(r,g,b,a)\n"
                       "      def write_to_png(self, fname='./img/test.png'):\n"
                       "          self.surface.write_to_png(fname)\n"
-                      "#+end_src")
+                      "#+end_src\n\n"
+                      "# Local Variables:\n"
+                      "# eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle) (call-process-shell-command \"python " analysisname ".py\" nil \"*" analysisname " compilation*\" t)) nil t)\n"
+                      "# End:")
                                         nil fpath)
        (switch-to-buffer (find-file fpath)))
 #+end_src
