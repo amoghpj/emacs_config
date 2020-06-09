@@ -274,20 +274,27 @@ From [[https://emacs.stackexchange.com/questions/2194/how-do-i-force-a-specific-
 * Projectile
   [2019-03-14 Thu]
 #+begin_src emacs-lisp
-  (use-package projectile
-    :ensure t
-    :config
-    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-    (projectile-mode +1))
-
   (setq projectile-project-search-path
         '("~/jalihal_projects/Research/data/ModelAnalysis/"
           "~/group/amogh-jalihal/"
           "~/group/amogh-jalihal/proposals/2019-Prelims/"
           "~/orgs/"))
   (setq projectile-indexing-method 'native) ;; otherwise it doesn't respect .projectile
-#+end_src
+  (setq projectile-enable-caching t)
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    (projectile-mode +1))
 
+
+#+end_src
+* ag
+[2020-03-29 Sun]
+#+begin_src emacs-lisp
+  (use-package ag
+    :ensure t)
+#+end_src
 * Nswbuff
 [2019-03-14 Thu 04:30]
 #+begin_src emacs-lisp
