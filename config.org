@@ -909,15 +909,16 @@ Does this do anything?
 #+END_SRC
 ** Org-ref
 #+BEGIN_SRC emacs-lisp
-    (use-package org-ref
-      :ensure t
-      :after org
-      :config
-      (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
-            org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib")
-            org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
-      (setq org-ref-completion-library 'org-ref-helm-bibtex)
-      (unbind-key "<tab>" org-ref-cite-keymap))
+  (use-package org-ref
+    :ensure t
+    :after org
+    :config
+    (setq org-ref-bibliography-notes "~/jalihal_projects/Research/notes.org"
+          org-ref-default-bibliography '("~/jalihal_projects/Research/references.bib"
+                                         "~/orgs/personal.bib")
+          org-ref-pdf-directory "~/jalihal_projects/bibtex-pdfs/")
+    (setq org-ref-completion-library 'org-ref-helm-bibtex)
+    (unbind-key "<tab>" org-ref-cite-keymap))
 #+END_SRC
 *** Some shortcuts
 **** Crossref-add-bib-entry
